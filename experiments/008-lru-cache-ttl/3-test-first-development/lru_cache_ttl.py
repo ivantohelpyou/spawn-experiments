@@ -3,7 +3,7 @@ class LRUCacheWithTTL:
 
     def __init__(self, capacity):
         self._capacity = capacity
-        self._size = 0
+        self._data = {}
 
     def capacity(self):
         """Return the maximum capacity of the cache"""
@@ -11,4 +11,12 @@ class LRUCacheWithTTL:
 
     def size(self):
         """Return the current size of the cache"""
-        return self._size
+        return len(self._data)
+
+    def put(self, key, value):
+        """Store a key-value pair in the cache"""
+        self._data[key] = value
+
+    def get(self, key):
+        """Retrieve a value by key, return None if not found"""
+        return self._data.get(key)
