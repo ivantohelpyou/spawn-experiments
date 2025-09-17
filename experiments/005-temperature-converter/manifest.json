@@ -1,0 +1,6 @@
+, , , {
+  "trial-A": "method-3-tdd"
+  "trial-B": "method-1-naive"
+  "trial-C": "method-2-spec-first"
+  "trial-D": "method-4-enhanced-tdd"
+}
