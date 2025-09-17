@@ -87,6 +87,77 @@ class TestLRUCacheWithTTL(unittest.TestCase):
         time.sleep(0.2)
         self.assertIsNone(cache.get("key1"))
 
+    def test_delete_existing_key(self):
+        """Test deleting an existing key"""
+        cache = LRUCacheWithTTL(capacity=5)
+        cache.put("key1", "value1")
+        cache.put("key2", "value2")
+
+        self.assertTrue(cache.delete("key1"))
+        self.assertEqual(cache.size(), 1)
+        self.assertIsNone(cache.get("key1"))
+        self.assertEqual(cache.get("key2"), "value2")
+
+    def test_delete_nonexistent_key(self):
+        """Test deleting a non-existent key returns False"""
+        cache = LRUCacheWithTTL(capacity=5)
+        self.assertFalse(cache.delete("nonexistent"))
+
+    def test_clear_cache(self):
+        """Test clearing all cache contents"""
+        cache = LRUCacheWithTTL(capacity=5)
+        cache.put("key1", "value1")
+        cache.put("key2", "value2")
+        cache.put("key3", "value3")
+
+        self.assertEqual(cache.size(), 3)
+        cache.clear()
+        self.assertEqual(cache.size(), 0)
+        self.assertIsNone(cache.get("key1"))
+        self.assertIsNone(cache.get("key2"))
+        self.assertIsNone(cache.get("key3"))
+
+    def test_invalid_capacity_raises_error(self):
+        """Test that invalid capacity values raise ValueError"""
+        with self.assertRaises(ValueError):
+            LRUCacheWithTTL(capacity=0)
+
+        with self.assertRaises(ValueError):
+            LRUCacheWithTTL(capacity=-1)
+
+    def test_invalid_ttl_raises_error(self):
+        """Test that negative TTL values raise ValueError"""
+        cache = LRUCacheWithTTL(capacity=5)
+
+        with self.assertRaises(ValueError):
+            cache.put("key1", "value1", ttl=-1)
+
+    def test_invalid_key_types_raise_error(self):
+        """Test that non-string keys raise TypeError"""
+        cache = LRUCacheWithTTL(capacity=5)
+
+        with self.assertRaises(TypeError):
+            cache.put(123, "value1")
+
+        with self.assertRaises(TypeError):
+            cache.get(123)
+
+        with self.assertRaises(TypeError):
+            cache.delete(123)
+
+    def test_empty_string_key_raises_error(self):
+        """Test that empty string keys raise ValueError"""
+        cache = LRUCacheWithTTL(capacity=5)
+
+        with self.assertRaises(ValueError):
+            cache.put("", "value1")
+
+        with self.assertRaises(ValueError):
+            cache.get("")
+
+        with self.assertRaises(ValueError):
+            cache.delete("")
+
 
 if __name__ == '__main__':
     unittest.main()
