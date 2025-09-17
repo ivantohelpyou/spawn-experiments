@@ -25,33 +25,28 @@ ANON_DIRS=(
 
 # --- Prompt Templates (as direct, unbiased instructions) ---
 
-read -r -d '' NAIVE_PROMPT_TEMPLATE <<'EOF'
-You are a senior software engineer.
+NAIVE_PROMPT_TEMPLATE='You are a senior software engineer.
 
 Your task is to build the following application. Focus on getting a working version done as quickly as possible.
 
 Here are the specifications:
 ---
-%s
-EOF
+%s'
 
-read -r -d '' SPEC_FIRST_PROMPT_TEMPLATE <<'EOF'
-You are a senior software engineer.
+SPEC_FIRST_PROMPT_TEMPLATE='You are a senior software engineer.
 
 Your task is to build the following application.
 
 Please follow this exact process:
 1.  First, write detailed technical specifications for all components of the application.
-2.  After you have written the specifications, design the application's architecture and interfaces.
+2.  After you have written the specifications, design the architecture and interfaces for the application.
 3.  Finally, implement the application according to your own specifications. Ensure your implementation includes robust validation and error handling.
 
 Here are the high-level requirements:
 ---
-%s
-EOF
+%s'
 
-read -r -d '' TDD_PROMPT_TEMPLATE <<'EOF'
-You are a senior software engineer who is a strict advocate for Test-Driven Development (TDD).
+TDD_PROMPT_TEMPLATE='You are a senior software engineer who is a strict advocate for Test-Driven Development (TDD).
 
 Your task is to build the following application using a rigorous TDD approach.
 
@@ -65,11 +60,9 @@ Do not write any implementation code before you have a failing test that require
 
 Here are the high-level requirements:
 ---
-%s
-EOF
+%s'
 
-read -r -d '' ENHANCED_TDD_PROMPT_TEMPLATE <<'EOF'
-You are a senior software engineer who is an expert in high-assurance systems and Test-Driven Development (TDD).
+ENHANCED_TDD_PROMPT_TEMPLATE='You are a senior software engineer who is an expert in high-assurance systems and Test-Driven Development (TDD).
 
 Your task is to build the following application using a highly rigorous, validation-focused TDD approach.
 
@@ -85,8 +78,7 @@ Your primary focus is on the correctness and quality of your tests.
 
 Here are the high-level requirements:
 ---
-%s
-EOF
+%s'
 
 PROMPT_TEMPLATES=(
     "$NAIVE_PROMPT_TEMPLATE"
@@ -113,9 +105,8 @@ if [ ! -f "$SPECS_FILE" ]; then
 fi
 
 # 2. Create Directories
-# Note: The script is in /gemini, so paths are relative to the project root.
-PROJECT_ROOT=".."
-FULL_EXPERIMENT_DIR="${PROJECT_ROOT}/${EXPERIMENTS_DIR}/${EXPERIMENT_NAME}"
+# Note: The script is designed to be run from the project root.
+FULL_EXPERIMENT_DIR="${EXPERIMENTS_DIR}/${EXPERIMENT_NAME}"
 echo "Creating new experiment directory: ${FULL_EXPERIMENT_DIR}"
 mkdir -p "$FULL_EXPERIMENT_DIR"
 
