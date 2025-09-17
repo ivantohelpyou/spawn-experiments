@@ -1,0 +1,6 @@
+{
+  "trial-A": "tdd",
+  "trial-B": "spec-first",
+  "trial-C": "naive",
+  "trial-D": "enhanced-tdd"
+}
