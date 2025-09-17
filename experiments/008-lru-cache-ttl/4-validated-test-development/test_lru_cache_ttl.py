@@ -23,13 +23,23 @@ class CacheTTLError(CacheError):
     pass
 
 
+class CacheNode:
+    """Node for doubly-linked list used in LRU implementation."""
+
+    def __init__(self, key: str, value: Any, expiry_time: Optional[float] = None):
+        self.key = key
+        self.value = value
+        self.expiry_time = expiry_time
+        self.prev: Optional['CacheNode'] = None
+        self.next: Optional['CacheNode'] = None
+
+
 class LRUCacheWithTTL:
     """
     LRU Cache with TTL - A cache that evicts least recently used items
     and automatically expires items after their time-to-live period.
 
-    This implementation focuses on cache initialization and basic structure.
-    Additional features (put/get/eviction) will be added in subsequent TDD cycles.
+    Complete implementation with LRU eviction and TTL expiration.
     """
 
     def __init__(self, capacity: int, default_ttl: Optional[float] = None):
@@ -52,8 +62,14 @@ class LRUCacheWithTTL:
         self.capacity = capacity
         self.default_ttl = default_ttl
 
-        # Cache storage (will be enhanced for LRU + TTL in later iterations)
-        self._data = {}
+        # LRU data structures
+        self._data = {}  # key -> node mapping
+
+        # Dummy head and tail for doubly-linked list
+        self._head = CacheNode("", "")
+        self._tail = CacheNode("", "")
+        self._head.next = self._tail
+        self._tail.prev = self._head
 
     def _validate_capacity(self, capacity: int) -> None:
         """Validate that capacity is a positive integer."""
@@ -64,6 +80,43 @@ class LRUCacheWithTTL:
         """Validate that TTL is non-negative if provided."""
         if ttl is not None and ttl < 0:
             raise CacheTTLError(f"TTL must be non-negative, got {ttl}")
+
+    def _remove_node(self, node: CacheNode) -> None:
+        """Remove node from doubly-linked list."""
+        node.prev.next = node.next
+        node.next.prev = node.prev
+
+    def _add_to_head(self, node: CacheNode) -> None:
+        """Add node right after head (most recent position)."""
+        node.prev = self._head
+        node.next = self._head.next
+        self._head.next.prev = node
+        self._head.next = node
+
+    def _move_to_head(self, node: CacheNode) -> None:
+        """Move existing node to head (mark as most recent)."""
+        self._remove_node(node)
+        self._add_to_head(node)
+
+    def _pop_tail(self) -> CacheNode:
+        """Remove and return the least recently used node."""
+        lru_node = self._tail.prev
+        self._remove_node(lru_node)
+        return lru_node
+
+    def _is_expired(self, node: CacheNode) -> bool:
+        """Check if a node has expired."""
+        if node.expiry_time is None:
+            return False
+        return time.time() > node.expiry_time
+
+    def _cleanup_expired(self, key: str, node: CacheNode) -> bool:
+        """Remove expired node if expired. Returns True if removed."""
+        if self._is_expired(node):
+            self._remove_node(node)
+            del self._data[key]
+            return True
+        return False
 
     def size(self) -> int:
         """Return the current number of items in cache."""
@@ -81,12 +134,28 @@ class LRUCacheWithTTL:
             key: The key to store
             value: The value to associate with the key
             ttl: Time-to-live for this specific item. If None, uses default_ttl.
-
-        Note: This basic implementation doesn't yet handle LRU eviction or TTL expiration.
-        Those features will be added in subsequent TDD cycles.
         """
-        # Basic storage - will be enhanced for TTL and LRU in later iterations
-        self._data[key] = value
+        # Calculate expiry time
+        effective_ttl = ttl if ttl is not None else self.default_ttl
+        expiry_time = None if effective_ttl is None else time.time() + effective_ttl
+
+        if key in self._data:
+            # Update existing key
+            node = self._data[key]
+            node.value = value
+            node.expiry_time = expiry_time
+            self._move_to_head(node)
+        else:
+            # Add new key
+            new_node = CacheNode(key, value, expiry_time)
+
+            if len(self._data) >= self.capacity:
+                # Remove LRU item
+                lru_node = self._pop_tail()
+                del self._data[lru_node.key]
+
+            self._data[key] = new_node
+            self._add_to_head(new_node)
 
     def get(self, key: str) -> Optional[Any]:
         """
@@ -96,12 +165,20 @@ class LRUCacheWithTTL:
             key: The key to look up
 
         Returns:
-            The value associated with the key, or None if key doesn't exist.
-
-        Note: This basic implementation doesn't yet handle TTL expiration or LRU updates.
-        Those features will be added in subsequent TDD cycles.
+            The value associated with the key, or None if key doesn't exist or expired.
         """
-        return self._data.get(key)
+        if key not in self._data:
+            return None
+
+        node = self._data[key]
+
+        # Check if expired
+        if self._cleanup_expired(key, node):
+            return None
+
+        # Move to head (mark as most recent)
+        self._move_to_head(node)
+        return node.value
 
 
 class TestBasicPutGetOperations(unittest.TestCase):
@@ -238,6 +315,160 @@ class TestBasicPutGetOperations(unittest.TestCase):
         cache.put("key2", "value2")
 
         self.assertEqual(set(cache.keys()), {"key1", "key2"})
+
+
+class TestLRUEviction(unittest.TestCase):
+    """Test LRU eviction logic with comprehensive validation."""
+
+    def test_eviction_when_capacity_exceeded(self):
+        """
+        Test: LRU item is evicted when capacity is exceeded.
+
+        Purpose: Verify core LRU eviction functionality.
+        What could go wrong: Wrong item evicted, no eviction, or crash.
+        """
+        cache = LRUCacheWithTTL(capacity=2, default_ttl=60.0)
+
+        cache.put("key1", "value1")
+        cache.put("key2", "value2")
+        cache.put("key3", "value3")  # Should evict key1
+
+        self.assertIsNone(cache.get("key1"))  # Should be evicted
+        self.assertEqual(cache.get("key2"), "value2")
+        self.assertEqual(cache.get("key3"), "value3")
+        self.assertEqual(cache.size(), 2)
+
+    def test_get_updates_lru_order(self):
+        """
+        Test: Getting an item makes it most recently used.
+
+        Purpose: Verify LRU order updates on access.
+        What could go wrong: Access doesn't update order.
+        """
+        cache = LRUCacheWithTTL(capacity=2, default_ttl=60.0)
+
+        cache.put("key1", "value1")
+        cache.put("key2", "value2")
+        cache.get("key1")  # Make key1 most recent
+        cache.put("key3", "value3")  # Should evict key2, not key1
+
+        self.assertEqual(cache.get("key1"), "value1")  # Should still exist
+        self.assertIsNone(cache.get("key2"))  # Should be evicted
+        self.assertEqual(cache.get("key3"), "value3")
+
+    def test_put_updates_lru_order(self):
+        """
+        Test: Updating existing key makes it most recently used.
+
+        Purpose: Verify put on existing key updates LRU order.
+        What could go wrong: Update doesn't change LRU position.
+        """
+        cache = LRUCacheWithTTL(capacity=2, default_ttl=60.0)
+
+        cache.put("key1", "value1")
+        cache.put("key2", "value2")
+        cache.put("key1", "new_value1")  # Update key1, make it most recent
+        cache.put("key3", "value3")  # Should evict key2
+
+        self.assertEqual(cache.get("key1"), "new_value1")  # Should still exist
+        self.assertIsNone(cache.get("key2"))  # Should be evicted
+        self.assertEqual(cache.get("key3"), "value3")
+
+
+class TestTTLExpiration(unittest.TestCase):
+    """Test TTL expiration logic with comprehensive validation."""
+
+    def test_item_expires_after_ttl(self):
+        """
+        Test: Item expires and returns None after TTL elapses.
+
+        Purpose: Verify TTL expiration works.
+        What could go wrong: Item doesn't expire or expires too early.
+        """
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=0.1)  # 100ms TTL
+
+        cache.put("key1", "value1")
+        self.assertEqual(cache.get("key1"), "value1")  # Should exist
+
+        time.sleep(0.15)  # Wait for expiration
+
+        self.assertIsNone(cache.get("key1"))  # Should be expired
+        self.assertEqual(cache.size(), 0)  # Should be removed
+
+    def test_custom_ttl_overrides_default(self):
+        """
+        Test: Custom TTL takes precedence over default TTL.
+
+        Purpose: Verify per-item TTL customization.
+        What could go wrong: Default TTL used instead of custom.
+        """
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=60.0)
+
+        cache.put("key1", "value1", ttl=0.1)  # Short TTL
+        cache.put("key2", "value2")  # Uses default TTL
+
+        time.sleep(0.15)
+
+        self.assertIsNone(cache.get("key1"))  # Should be expired
+        self.assertEqual(cache.get("key2"), "value2")  # Should still exist
+
+
+class TestEdgeCasesAndIntegration(unittest.TestCase):
+    """Test edge cases and integration scenarios."""
+
+    def test_capacity_one_cache(self):
+        """Test: Cache with capacity 1 works correctly."""
+        cache = LRUCacheWithTTL(capacity=1, default_ttl=60.0)
+
+        cache.put("key1", "value1")
+        self.assertEqual(cache.get("key1"), "value1")
+
+        cache.put("key2", "value2")  # Should evict key1
+        self.assertIsNone(cache.get("key1"))
+        self.assertEqual(cache.get("key2"), "value2")
+        self.assertEqual(cache.size(), 1)
+
+    def test_lru_and_ttl_interaction(self):
+        """Test: LRU and TTL work together correctly."""
+        cache = LRUCacheWithTTL(capacity=2, default_ttl=0.1)
+
+        cache.put("key1", "value1")
+        cache.put("key2", "value2")
+
+        # Access key1 to make it most recent
+        cache.get("key1")
+
+        # Add key3, should evict key2 (not key1)
+        cache.put("key3", "value3")
+        self.assertEqual(cache.get("key1"), "value1")
+        self.assertIsNone(cache.get("key2"))
+        self.assertEqual(cache.get("key3"), "value3")
+
+        # Wait for TTL expiration
+        time.sleep(0.15)
+
+        # Both remaining items should be expired
+        self.assertIsNone(cache.get("key1"))
+        self.assertIsNone(cache.get("key3"))
+        self.assertEqual(cache.size(), 0)
+
+    def test_zero_ttl_immediate_expiration(self):
+        """Test: TTL of 0 causes immediate expiration."""
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=60.0)
+
+        cache.put("key1", "value1", ttl=0.0)
+        # Item should expire immediately or very quickly
+        time.sleep(0.01)
+        self.assertIsNone(cache.get("key1"))
+
+    def test_none_ttl_never_expires(self):
+        """Test: TTL of None means items never expire."""
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=None)
+
+        cache.put("key1", "value1")
+        # Even after a reasonable wait, item should still exist
+        time.sleep(0.1)
+        self.assertEqual(cache.get("key1"), "value1")
 
 
 class TestCacheInitialization(unittest.TestCase):
