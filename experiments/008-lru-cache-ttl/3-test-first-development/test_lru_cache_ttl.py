@@ -56,6 +56,37 @@ class TestLRUCacheWithTTL(unittest.TestCase):
         self.assertIsNone(cache.get("key2"))  # key2 should be evicted
         self.assertEqual(cache.get("key3"), "value3")
 
+    def test_put_with_ttl(self):
+        """Test storing items with TTL"""
+        cache = LRUCacheWithTTL(capacity=5)
+        cache.put("key1", "value1", ttl=1.0)  # 1 second TTL
+        self.assertEqual(cache.get("key1"), "value1")
+        self.assertEqual(cache.size(), 1)
+
+    def test_ttl_expiration(self):
+        """Test that items expire after TTL seconds"""
+        cache = LRUCacheWithTTL(capacity=5)
+        cache.put("key1", "value1", ttl=0.1)  # 0.1 second TTL
+
+        # Item should exist immediately
+        self.assertEqual(cache.get("key1"), "value1")
+
+        # Wait for expiration
+        time.sleep(0.2)
+
+        # Item should be expired and return None
+        self.assertIsNone(cache.get("key1"))
+        self.assertEqual(cache.size(), 0)  # Should be removed from cache
+
+    def test_ttl_with_default_ttl(self):
+        """Test using default TTL from constructor"""
+        cache = LRUCacheWithTTL(capacity=5, default_ttl=0.1)
+        cache.put("key1", "value1")  # Should use default TTL
+
+        self.assertEqual(cache.get("key1"), "value1")
+        time.sleep(0.2)
+        self.assertIsNone(cache.get("key1"))
+
 
 if __name__ == '__main__':
     unittest.main()
