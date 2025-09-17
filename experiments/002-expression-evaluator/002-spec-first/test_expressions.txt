@@ -1,0 +1,8 @@
+# Test expressions for batch processing
+2 + 3
+sin(pi/2)
+sqrt(16)
+log(e)
+abs(-5)
+pi * 2
+e ** 2
