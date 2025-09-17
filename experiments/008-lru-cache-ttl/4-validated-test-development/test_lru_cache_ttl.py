@@ -73,6 +73,172 @@ class LRUCacheWithTTL:
         """Return list of all keys currently in cache."""
         return list(self._data.keys())
 
+    def put(self, key: str, value: Any, ttl: Optional[float] = None) -> None:
+        """
+        Store a key-value pair in the cache.
+
+        Args:
+            key: The key to store
+            value: The value to associate with the key
+            ttl: Time-to-live for this specific item. If None, uses default_ttl.
+
+        Note: This basic implementation doesn't yet handle LRU eviction or TTL expiration.
+        Those features will be added in subsequent TDD cycles.
+        """
+        # Basic storage - will be enhanced for TTL and LRU in later iterations
+        self._data[key] = value
+
+    def get(self, key: str) -> Optional[Any]:
+        """
+        Retrieve a value by key from the cache.
+
+        Args:
+            key: The key to look up
+
+        Returns:
+            The value associated with the key, or None if key doesn't exist.
+
+        Note: This basic implementation doesn't yet handle TTL expiration or LRU updates.
+        Those features will be added in subsequent TDD cycles.
+        """
+        return self._data.get(key)
+
+
+class TestBasicPutGetOperations(unittest.TestCase):
+    """Test basic put and get operations with comprehensive validation."""
+
+    def test_put_and_get_single_item(self):
+        """
+        Test: Store and retrieve a single item.
+
+        Purpose: Verify basic put/get functionality works.
+        What could go wrong: Item might not be stored, or wrong value returned.
+        """
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=60.0)
+
+        cache.put("key1", "value1")
+        result = cache.get("key1")
+
+        self.assertEqual(result, "value1")
+        self.assertEqual(cache.size(), 1)
+
+    def test_put_multiple_items_and_get_each(self):
+        """
+        Test: Store multiple items and retrieve each one.
+
+        Purpose: Verify cache handles multiple items correctly.
+        What could go wrong: Items might overwrite each other or be lost.
+        """
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=60.0)
+
+        cache.put("key1", "value1")
+        cache.put("key2", "value2")
+        cache.put("key3", "value3")
+
+        self.assertEqual(cache.get("key1"), "value1")
+        self.assertEqual(cache.get("key2"), "value2")
+        self.assertEqual(cache.get("key3"), "value3")
+        self.assertEqual(cache.size(), 3)
+
+    def test_put_overwrites_existing_key(self):
+        """
+        Test: Putting same key twice overwrites the value.
+
+        Purpose: Verify put operations update existing keys.
+        What could go wrong: Duplicate keys might create multiple entries.
+        """
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=60.0)
+
+        cache.put("key1", "value1")
+        cache.put("key1", "new_value")
+
+        self.assertEqual(cache.get("key1"), "new_value")
+        self.assertEqual(cache.size(), 1)  # Should still be 1 item
+
+    def test_get_nonexistent_key_returns_none(self):
+        """
+        Test: Getting non-existent key returns None.
+
+        Purpose: Verify proper handling of missing keys.
+        What could go wrong: Might raise exception or return wrong value.
+        """
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=60.0)
+
+        result = cache.get("nonexistent")
+
+        self.assertIsNone(result)
+
+    def test_get_from_empty_cache_returns_none(self):
+        """
+        Test: Getting from empty cache returns None.
+
+        Purpose: Verify empty cache handling.
+        What could go wrong: Might raise exception or return wrong value.
+        """
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=60.0)
+
+        result = cache.get("any_key")
+
+        self.assertIsNone(result)
+
+    def test_put_with_custom_ttl(self):
+        """
+        Test: Put item with custom TTL different from default.
+
+        Purpose: Verify per-item TTL customization works.
+        What could go wrong: Custom TTL might be ignored or applied incorrectly.
+        """
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=60.0)
+
+        cache.put("key1", "value1", ttl=30.0)
+        result = cache.get("key1")
+
+        self.assertEqual(result, "value1")
+
+    def test_put_various_value_types(self):
+        """
+        Test: Put and get various data types as values.
+
+        Purpose: Verify cache handles different Python objects.
+        What could go wrong: Certain types might not be stored correctly.
+        """
+        cache = LRUCacheWithTTL(capacity=5, default_ttl=60.0)
+
+        test_values = {
+            "string": "hello",
+            "integer": 42,
+            "float": 3.14,
+            "list": [1, 2, 3],
+            "dict": {"nested": "value"}
+        }
+
+        # Put all values
+        for key, value in test_values.items():
+            cache.put(key, value)
+
+        # Get and verify all values
+        for key, expected_value in test_values.items():
+            result = cache.get(key)
+            self.assertEqual(result, expected_value)
+
+    def test_keys_method_reflects_put_operations(self):
+        """
+        Test: keys() method returns correct keys after put operations.
+
+        Purpose: Verify keys() stays synchronized with put operations.
+        What could go wrong: keys() might not update or return wrong keys.
+        """
+        cache = LRUCacheWithTTL(capacity=3, default_ttl=60.0)
+
+        # Initially empty
+        self.assertEqual(set(cache.keys()), set())
+
+        # After adding items
+        cache.put("key1", "value1")
+        cache.put("key2", "value2")
+
+        self.assertEqual(set(cache.keys()), {"key1", "key2"})
+
 
 class TestCacheInitialization(unittest.TestCase):
     """Test cache initialization with comprehensive validation."""
