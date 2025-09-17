@@ -1,6 +1,8 @@
-# TDD in the AI Era: Meta-Prompt Generator
+# TDD in the AI Era: Meta-Prompt Generator v2.0
 
 **Purpose**: Generate four distinct prompting strategies to compare different software development approaches. Use this artifact to generate prompts for separate remote agents working in parallel repositories.
+
+**Version 2.0 Changes**: Updated terminology to avoid biasing AI agents with quality expectations. Uses neutral, professional language throughout.
 
 **Important**: This framework tests the hypothesis that more sophisticated methodologies produce better results, but we must remain unbiased and open to results that may challenge this assumption. Future AI models may incorporate advanced practices into simpler approaches, or simpler methods may prove more effective in certain contexts.
 
@@ -27,7 +29,7 @@ echo "$(date): Implementation complete" >> TIMING_LOG.txt
 
 ---
 
-## Method 1: Naive Direct Approach
+## Method 1: Direct Implementation Approach
 
 ### Generate this prompt:
 ```
@@ -40,7 +42,7 @@ Make it fully functional with all the features you think it should have. Include
 
 ---
 
-## Method 2: Specification-First Approach
+## Method 2: Specification-First Implementation
 
 ### Generate this prompt:
 ```
@@ -66,7 +68,7 @@ Provide both the specifications document and the complete implementation."
 
 ---
 
-## Method 3: Specification + TDD Approach
+## Method 3: Test-Driven Implementation
 
 ### Generate this prompt:
 ```
@@ -115,20 +117,18 @@ Show your work: display tests, show them failing, then show implementation."
 
 ---
 
-## Method 4: Enhanced TDD with Test Validation
-**v1.0 (Experiments 001-002)**: Used "Enhanced TDD" - potentially leading term
-**v2.0 (Experiment 003+)**: Use "Test-Driven Implementation with Validation" - more neutral
+## Method 4: Test-Driven Implementation with Validation
 
-### Generate this prompt (v1.0 - used in 001-002):
+### Generate this prompt:
 ```
-"Create a [APPLICATION_TYPE] using Enhanced Test-Driven Development with test validation. Follow this rigorous process:
+"Create a [APPLICATION_TYPE] using Test-Driven Development with comprehensive test validation. Follow this rigorous process:
 
 PHASE 1 - SPECIFICATIONS:
 [Same as Method 3 - copy specification requirements]
 
-PHASE 2 - ENHANCED TDD WITH TEST VALIDATION:
+PHASE 2 - TEST-DRIVEN DEVELOPMENT WITH VALIDATION:
 
-FOR EACH FEATURE, FOLLOW THIS ENHANCED CYCLE:
+FOR EACH FEATURE, FOLLOW THIS COMPREHENSIVE CYCLE:
 
 1. **RED**: Write failing tests
    - Write comprehensive test cases first
