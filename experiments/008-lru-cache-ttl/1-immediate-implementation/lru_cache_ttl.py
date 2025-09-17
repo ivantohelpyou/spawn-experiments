@@ -27,7 +27,7 @@ class CacheEntry:
         self.value = value
         self.created_at = time.time()
         self.last_accessed = self.created_at
-        self.expires_at = self.created_at + ttl_seconds if ttl_seconds else None
+        self.expires_at = self.created_at + ttl_seconds if ttl_seconds is not None else None
         self.access_count = 1
 
     def is_expired(self) -> bool:
