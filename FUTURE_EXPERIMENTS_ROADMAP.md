@@ -20,7 +20,8 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 
 ### **Tier 1: Functions (010-019) - CRAWL**
 **Scope**: Pure algorithmic problems, single functions, stdlib only
-**Duration**: 5-15 minutes per approach
+**Duration**: 5-15 minutes per approach (30-60 min total parallel)
+**Claude Code Usage**: ✅ **Safe for any usage window**
 **Purpose**: Isolate methodology differences without architectural complexity
 
 #### Next Experiments
@@ -32,7 +33,8 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 
 ### **Tier 2: CLI Tools (020-029) - WALK**
 **Scope**: Command-line utilities, file I/O, composable tools
-**Duration**: 15-30 minutes per approach
+**Duration**: 15-30 minutes per approach (60-120 min total parallel)
+**Claude Code Usage**: ⚠️ **Requires >2 hours remaining**
 **Purpose**: Study interface design and component composition
 **Components Available**: Discoverable functions from Tier 1
 
@@ -45,7 +47,8 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 
 ### **Tier 3: Applications (030-039) - RUN**
 **Scope**: Full applications with GUIs, APIs, persistence
-**Duration**: 45-90 minutes per approach
+**Duration**: 45-90 minutes per approach (180-360 min total parallel)
+**Claude Code Usage**: ❌ **Requires >4 hours remaining**
 **Purpose**: Study complex system architecture and integration
 **Components Available**: Functions (Tier 1) + Tools (Tier 2) discoverable
 

@@ -14,20 +14,30 @@ Experiment 009 violated bias prevention protocols despite having a meta prompt, 
 
 The meta prompt must include these **mandatory confirmation steps**:
 
-#### Single Consolidated Confirmation
+#### Usage Assessment and Consolidated Confirmation
 ```
 "I understand the objective is to [restate project].
+
+CLAUDE CODE USAGE CHECK:
+Before proceeding, please confirm:
+- How much time remains in your current 5-hour Claude Code usage window?
+- This experiment requires approximately [X] hours for parallel execution
 
 EXPERIMENTAL SETUP CONFIRMATION:
 I will create 4 parallel agents using these EXACT protocols:
 
 ✓ Neutral naming: 1-immediate-implementation, 2-specification-driven, 3-test-first-development, 4-validated-test-development
 ✓ No bias language: No quality indicators (naive/advanced/optimal) or expectation statements
-✓ Parallel execution: All 4 methodologies launched simultaneously
+✓ Parallel execution: All 4 methodologies launched simultaneously (if sufficient usage)
+✓ Serial fallback: Available if usage constraints require it
 ✓ Equal conditions: Identical starting prompts and timing mechanisms
 ✓ No explicit component guidance: Agents discover existing codebase components naturally
+✓ Session logging: Complete development process capture
 
-Proceed with bias-neutral parallel experiment? (Y/N)"
+Execution plan based on usage:
+- [✅/⚠️/❌] Parallel execution recommended/possible/not recommended
+
+Proceed with bias-neutral experiment? (Y/N)"
 ```
 
 ### User Confirmation Requirements
