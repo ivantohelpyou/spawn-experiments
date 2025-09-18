@@ -1,5 +1,18 @@
 # Experiment 009: Multilingual Word Counter - Methodology Comparison Report
 
+## ⚠️ EXPERIMENTAL VALIDITY WARNING
+
+**BIAS PROTOCOL VIOLATION DETECTED**: This experiment violates the established bias prevention protocols (design/10_BIAS_PREVENTION_PROTOCOLS.md):
+
+- **Critical Issue**: Used biased naming `1-naive-approach` instead of required neutral `1-immediate-implementation`
+- **Impact**: Embedded quality expectations that may have influenced agent behavior and results interpretation
+- **Scope**: 23+ files contain prohibited bias language patterns
+- **Validity**: Results cannot be directly compared with compliant experiments (e.g., 008) due to methodological inconsistency
+
+**Recommendation**: Rerun experiment using automated bias prevention protocols before drawing methodology conclusions.
+
+---
+
 ## Experiment Overview
 
 **Objective**: Compare four software development methodologies for implementing a multilingual word counter with language detection
