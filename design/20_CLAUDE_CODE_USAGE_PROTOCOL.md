@@ -13,12 +13,21 @@ Claude Code Pro has **5-hour usage windows** that reset periodically. TDD method
 #### **Check Available Usage**
 Before launching any experiment:
 ```markdown
-"Before we begin, please confirm your current Claude Code usage status:
+"Before we begin, please check your current Claude Code usage status.
+
+TO CHECK USAGE:
+- Look for usage indicator in Claude Code interface (if available)
+- Check settings/account page for usage information
+- Note any recent usage-intensive activities in this session
+
+Please confirm:
 - How much time remains in your current 5-hour window?
 - When does your next usage window reset?
 
 This experiment will involve parallel execution of 4 methodologies, which is usage-intensive."
 ```
+
+**Note**: If you're unsure how to check usage, start conservatively and monitor for usage warnings during execution.
 
 #### **Usage Estimation Guidelines**
 Based on experiment 009 data:
