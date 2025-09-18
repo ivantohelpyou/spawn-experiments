@@ -216,10 +216,10 @@ Each prompt should be copy-paste ready for launching separate development sessio
 Each experiment run creates a new folder in `/experiments` with sequential numbering in `nnn-<experiment-name>` format (e.g., `001-todo-app`, `002-expression-evaluator`, `003-calculator`, etc.). Use the next available number in sequence.
 
 Within each experiment folder, create separate method directories:
-- **1-naive-approach/**: Method 1 implementation
-- **2-spec-first/**: Method 2 implementation
-- **3-tdd-approach/**: Method 3 implementation
-- **4-enhanced-tdd/**: Method 4 implementation
+- **1-immediate-implementation/**: Method 1 implementation
+- **2-specification-driven/**: Method 2 implementation
+- **3-test-first-development/**: Method 3 implementation
+- **4-validated-test-development/**: Method 4 implementation
 
 Each method directory contains:
 - **README.md**: Method description and approach
@@ -259,13 +259,13 @@ mkdir -p experiments/002-expression-evaluator
 cd experiments/002-expression-evaluator
 
 # Create four separate method directories
-mkdir 1-naive-approach 2-spec-first 3-tdd-approach 4-enhanced-tdd
+mkdir 1-immediate-implementation 2-specification-driven 3-test-first-development 4-validated-test-development
 
 # Initialize each method directory
-cd 1-naive-approach && git init
-cd ../2-spec-first && git init
-cd ../3-tdd-approach && git init
-cd ../4-enhanced-tdd && git init
+cd 1-immediate-implementation && git init
+cd ../2-specification-driven && git init
+cd ../3-test-first-development && git init
+cd ../4-validated-test-development && git init
 
 # Launch each with its generated prompt
 # Then compare results across all four methods
@@ -309,16 +309,16 @@ This framework provides empirical data about different development approaches in
 ```bash
 # Example parallel launch command structure
 Task(subagent_type="general-purpose", description="Method 1 Direct Implementation",
-     prompt="[Method 1 prompt] Important: Work in directory /path/to/experiment/1-naive-approach/")
+     prompt="[Method 1 prompt] Important: Work in directory /path/to/experiment/1-immediate-implementation/")
 
 Task(subagent_type="general-purpose", description="Method 2 Specification-First",
-     prompt="[Method 2 prompt] Important: Work in directory /path/to/experiment/2-spec-first/")
+     prompt="[Method 2 prompt] Important: Work in directory /path/to/experiment/2-specification-driven/")
 
 Task(subagent_type="general-purpose", description="Method 3 TDD Approach",
-     prompt="[Method 3 prompt] Important: Work in directory /path/to/experiment/3-tdd-approach/")
+     prompt="[Method 3 prompt] Important: Work in directory /path/to/experiment/3-test-first-development/")
 
 Task(subagent_type="general-purpose", description="Method 4 Enhanced TDD",
-     prompt="[Method 4 prompt] Important: Work in directory /path/to/experiment/4-enhanced-tdd/")
+     prompt="[Method 4 prompt] Important: Work in directory /path/to/experiment/4-validated-test-development/")
 ```
 
 ### Benefits of Parallel Launch
