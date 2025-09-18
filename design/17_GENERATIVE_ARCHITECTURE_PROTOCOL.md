@@ -36,24 +36,43 @@ Real software development involves:
 **Output**: Complete systems that can integrate Tier 1 functions and Tier 2 tools
 **Examples**: Knowledge manager, project dashboard, finance tracker
 
-## Discovered Components Rules
+## Isolated Component Environments
 
-### Component Placement Strategy
-- **Tier 1 outputs** → `./utils/functions/` (e.g., `word_counter.py`, `palindrome_checker.py`)
-- **Tier 2 outputs** → `./utils/tools/` (e.g., `textstats.py`, `logparse.py`)
-- **No explicit mention** in experiment prompts
-- **Natural discovery** through codebase exploration
+### Component Curation Strategy
+- **Tier 1 outputs** → `component_library/functions/` (centralized storage)
+- **Tier 2 outputs** → `component_library/tools/` (centralized storage)
+- **Per-experiment curation** → Select relevant components only
+- **Physical isolation** → Copy components into individual trial directories
+
+### Trial Environment Structure
+```
+experiments/025-log-parser/
+├── 1-immediate-implementation/
+│   └── utils/                    # Physically copied components
+│       ├── README.md            # Neutral documentation
+│       └── functions/
+│           ├── text_processor.py
+│           └── pattern_matcher.py
+├── 2-specification-driven/
+│   └── utils/                    # Identical copy
+│       ├── README.md
+│       └── functions/
+└── ...
+```
 
 ### Organic Discovery Process
 ```python
-# Agents may naturally discover and import:
-from utils.functions.word_counter import count_words
-from utils.tools.textstats import TextStatsEngine
+# Agents discover components through natural exploration:
+# From DEVELOPMENT_SESSION.log:
+[14:23:05] $ ls utils/
+[14:23:06] functions  README.md
+[14:23:07] $ cat utils/functions/text_processor.py
+[14:23:10] $ python -c "from utils.functions.text_processor import normalize; print(normalize('test'))"
 
-# Or they may:
-# - Build their own implementations
-# - Use external libraries
-# - Ignore discovered components entirely
+# Agents may choose to:
+# - Import and use: from utils.functions.text_processor import normalize
+# - Copy and modify: cp utils/functions/text_processor.py my_processor.py
+# - Build from scratch: Ignore discovered components entirely
 ```
 
 ### Authentic Development Environment
@@ -77,17 +96,19 @@ Run 4 methodologies on function-level problems in clean environment:
 - Create component library in `./utils/functions/`
 - No existing components available for discovery
 
-### Phase 2: Tier 2 Discovery (Tools)
-Run 4 methodologies on tool-level problems with Tier 1 components discoverable:
-- **Environment**: `./utils/functions/` populated with proven implementations
-- **Measurement**: Natural discovery and utilization patterns
-- **Analysis**: Organic reuse decisions and integration strategies
+### Phase 2: Tier 2 Composition (Tools)
+Run 4 methodologies on tool-level problems with curated Tier 1 components:
+- **Environment**: Relevant Tier 1 functions copied to each trial's `utils/` directory
+- **Curation**: Select functions relevant to tool development (file I/O, text processing, etc.)
+- **Measurement**: Component discovery, evaluation, and integration patterns
+- **Analysis**: How methodologies leverage existing functions for tool construction
 
-### Phase 3: Tier 3 Ecosystem (Applications)
-Run 4 methodologies on application-level problems with full component ecosystem:
-- **Environment**: Both `./utils/functions/` and `./utils/tools/` populated
-- **Measurement**: Multi-tier component discovery and composition
-- **Analysis**: Complex system architecture with available building blocks
+### Phase 3: Tier 3 Integration (Applications)
+Run 4 methodologies on application-level problems with full curated ecosystem:
+- **Environment**: Relevant Tier 1 functions + Tier 2 tools copied to each trial's `utils/`
+- **Curation**: Select components relevant to application domain
+- **Measurement**: Multi-tier component utilization and system composition
+- **Analysis**: Complex architecture decisions with rich component availability
 
 ## Research Questions
 

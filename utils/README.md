@@ -1,66 +1,43 @@
-# Utils Directory - Discovered Components System
+# Utils Directory
 
 ## Purpose
 
-This directory contains proven components from completed experiments, available for **organic discovery** by future experimental agents.
+Collection of utility functions and tools for general use in development projects.
 
 ## Structure
 
-### `functions/` - Tier 1 Components
-Contains well-tested function implementations from Tier 1 experiments:
-- Single functions with clear interfaces
-- Comprehensive test coverage
-- Standard library dependencies only
-- Ready for import and reuse
+### `functions/`
+Utility functions for common programming tasks:
+- Text processing and string manipulation
+- Data structure operations
+- Mathematical and algorithmic helpers
+- File and I/O utilities
 
-### `tools/` - Tier 2 Components
-Contains CLI tools and utilities from Tier 2 experiments:
-- Command-line interfaces
-- File processing utilities
-- Composable tool components
-- May depend on Tier 1 functions
+### `tools/`
+Command-line utilities and development tools:
+- Text processing tools
+- File manipulation utilities
+- Data formatting helpers
+- Development workflow tools
 
-## Discovered Components Protocol
+## Usage
 
-### **No Explicit Guidance**
-- Components are **not mentioned** in experiment prompts
-- Agents discover them naturally through codebase exploration
-- Research measures organic discovery and utilization patterns
+Import functions directly into your projects:
+```python
+from utils.functions.text_processor import normalize_text
+from utils.functions.data_helper import merge_dictionaries
+```
 
-### **Research Questions**
-1. **Which methodologies naturally explore existing codebases?**
-2. **How do different approaches evaluate found components?**
-3. **What drives reuse vs. rebuild decisions?**
-4. **How does component availability influence system architecture?**
+Use tools from command line:
+```bash
+python utils/tools/formatter.py input.csv --output json
+python utils/tools/analyzer.py --input data.txt --stats
+```
 
-### **Component Quality Standards**
-- **Functional correctness**: All components must work as documented
-- **Clear interfaces**: Obvious usage patterns and parameters
-- **Test coverage**: Comprehensive validation included
-- **Documentation**: Basic docstrings explaining purpose and usage
+## Organization
 
-## Population Process
+Components are organized by functionality and complexity:
+- **functions/**: Reusable function libraries
+- **tools/**: Standalone command-line utilities
 
-### After Tier 1 Completion
-Best function implementations are copied to `functions/` with:
-- Original filename preserved
-- Tests included where applicable
-- Basic documentation maintained
-- Import paths clearly defined
-
-### After Tier 2 Completion
-Best tool implementations are copied to `tools/` with:
-- CLI interfaces documented
-- Usage examples provided
-- Dependencies noted
-- Integration patterns demonstrated
-
-## Research Value
-
-This system enables study of **authentic development behavior** in environments with existing codebases, revealing:
-- Natural component discovery patterns
-- Methodology-specific evaluation criteria
-- Integration strategy differences
-- Architecture emergence with available building blocks
-
-The discovered components approach preserves experimental validity while studying realistic development scenarios where developers must navigate existing project assets.
+Each component includes basic documentation and usage examples.

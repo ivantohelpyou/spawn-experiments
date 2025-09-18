@@ -42,26 +42,36 @@ IMPORTANT: Each experiment directory will auto-generate DEVELOPMENT_SESSION.log 
 ```
 project/
 ├── experiments/
-│   ├── 010-palindrome/
-│   ├── 020-textstats/
-│   └── ...
-├── utils/
-│   ├── functions/           # Tier 1 outputs go here
-│   │   ├── word_counter.py
-│   │   ├── palindrome.py
+│   ├── 010-palindrome/      # Tier 1 completed
+│   ├── 025-log-parser/      # Tier 2 with curated components
+│   │   ├── AVAILABLE_COMPONENTS.md
+│   │   ├── 1-immediate-implementation/
+│   │   │   ├── utils/       # Copied components
+│   │   │   │   ├── README.md
+│   │   │   │   └── functions/
+│   │   │   │       ├── text_processor.py
+│   │   │   │       └── pattern_matcher.py
+│   │   │   └── [trial work area]
+│   │   ├── 2-specification-driven/
+│   │   │   ├── utils/       # Identical copy
+│   │   │   └── [trial work area]
 │   │   └── ...
-│   └── tools/              # Tier 2 outputs go here
-│       ├── textstats.py
-│       ├── logparse.py
-│       └── ...
+│   └── ...
+├── component_library/       # Centralized storage
+│   ├── functions/
+│   │   ├── 010_palindrome/
+│   │   │   ├── solution.py
+│   │   │   └── metadata.json
+│   │   └── ...
+│   └── tools/
 └── design/
 ```
 
-### Component Population Protocol
-1. **After Tier 1**: Copy best implementations to `./utils/functions/`
-2. **After Tier 2**: Copy best tools to `./utils/tools/`
-3. **No documentation**: Let agents discover organically
-4. **No explicit references**: In experiment prompts
+### Component Curation Protocol
+1. **After Tier 1**: Best implementations go to `component_library/functions/`
+2. **Before Tier 2**: Curate relevant functions for each experiment
+3. **Environment Setup**: Copy curated components to each trial's `utils/`
+4. **Isolation**: Each trial gets identical but separate component copies
 
 ## Prompt Specification Format
 
