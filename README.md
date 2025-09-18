@@ -36,6 +36,7 @@ You'll receive four complete prompts following bias prevention protocols, ready 
 - **Three-tier system**: Function → Tool → Application complexity progression
 - **Discovered components research**: Study organic component reuse patterns
 - **Bias prevention protocols**: Comprehensive neutrality enforcement
+- **[SHARING_EXPERIMENTS_GUIDE.md](SHARING_EXPERIMENTS_GUIDE.md)** - How to present your findings to groups/conferences
 
 ## 🧪 Four Development Methodologies
 
