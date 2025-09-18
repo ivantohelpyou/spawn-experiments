@@ -1,0 +1,110 @@
+{
+  "text_length": 686,
+  "language_detection": {
+    "en": 0.9999961407667728
+  },
+  "word_count_standard": 98,
+  "words_by_script": {
+    "chinese": 15,
+    "japanese": 15,
+    "korean": 5,
+    "arabic": 5,
+    "hebrew": 0,
+    "cyrillic": 5,
+    "thai": 0,
+    "devanagari": 0,
+    "latin": 79
+  },
+  "character_analysis": {
+    "total_chars": 686,
+    "letters": 544,
+    "digits": 0,
+    "whitespace": 103,
+    "punctuation": 39
+  },
+  "word_frequency": [
+    [
+      "the",
+      3
+    ],
+    [
+      "characters",
+      3
+    ],
+    [
+      "script",
+      3
+    ],
+    [
+      "this",
+      2
+    ],
+    [
+      "is",
+      2
+    ],
+    [
+      "english",
+      2
+    ],
+    [
+      "text",
+      2
+    ],
+    [
+      "languages",
+      2
+    ],
+    [
+      "and",
+      2
+    ],
+    [
+      "scripts",
+      2
+    ],
+    [
+      "counter",
+      2
+    ],
+    [
+      "chinese",
+      2
+    ],
+    [
+      "hello",
+      1
+    ],
+    [
+      "world",
+      1
+    ],
+    [
+      "hola",
+      1
+    ],
+    [
+      "mundo",
+      1
+    ],
+    [
+      "este",
+      1
+    ],
+    [
+      "es",
+      1
+    ],
+    [
+      "texto",
+      1
+    ],
+    [
+      "en",
+      1
+    ]
+  ],
+  "sentences": 14,
+  "paragraphs": 3,
+  "lines": 19
+}

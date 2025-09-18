@@ -1,0 +1,19 @@
+Hello world! This is English text.
+Hola mundo! Este es texto en español.
+Bonjour le monde! Ceci est du texte français.
+你好世界！这是中文文本。
+こんにちは世界！これは日本語のテキストです。
+안녕하세요 세계! 이것은 한국어 텍스트입니다.
+مرحبا بالعالم! هذا نص عربي.
+Привет мир! Это русский текст.
+
+This is a multilingual document that contains text in various languages and scripts.
+It demonstrates the capability of the word counter to handle:
+- Latin scripts (English, Spanish, French)
+- Chinese characters (Simplified Chinese)
+- Japanese characters (Hiragana, Katakana, Kanji)
+- Korean characters (Hangul)
+- Arabic script
+- Cyrillic script (Russian)
+
+The counter should detect multiple languages and provide statistics for each script type.

@@ -1,14 +1,20 @@
-# TDD in the AI Era: Meta-Prompt Generator v2.0
+# TDD in the AI Era: Spawn-Experiments System v2.0
 
-**Purpose**: Generate four distinct prompting strategies to compare different software development approaches. Use this artifact to generate prompts for separate remote agents working in parallel repositories.
+**Purpose**: Generate four distinct prompting strategies to compare different software development approaches. Use this system to spawn experiments with prompts for separate remote agents working in parallel repositories.
+
+**Quick Start**: Say "spawn-experiments" to generate prompts for a new methodology comparison study.
+
+**Standard Approach**: Use parallel launch with Task tool for simultaneous execution of all four methods, followed by comprehensive experiment report generation.
 
 **Version 2.0 Changes**: Updated terminology to avoid biasing AI agents with quality expectations. Uses neutral, professional language throughout.
 
 **Important**: This framework tests the hypothesis that more sophisticated methodologies produce better results, but we must remain unbiased and open to results that may challenge this assumption. Future AI models may incorporate advanced practices into simpler approaches, or simpler methods may prove more effective in certain contexts.
 
-## Instructions for Prompt Generation
+## Instructions for Spawning Experiments
 
 Generate four complete prompt sets for building a **[APPLICATION_TYPE]** using **[TECH_STACK]**.
+
+**Usage**: When someone says "spawn-experiments", ask for APPLICATION_TYPE and TECH_STACK, then generate all four prompts below.
 
 ### IMPORTANT: Timing Measurement Requirements
 
@@ -187,7 +193,7 @@ Show all work: failing tests, test validation, correct implementation, passing t
 
 ## Meta-Prompt Usage Instructions
 
-### For the Coding Agent:
+### For the Spawn-Experiments Command:
 ```
 "Generate four separate, complete prompts based on the methods above for building a [APPLICATION_TYPE] using [TECH_STACK].
 
@@ -265,14 +271,23 @@ cd ../4-enhanced-tdd && git init
 # Then compare results across all four methods
 ```
 
-**Demo Flow**:
-1. Create new sequentially numbered experiment folder (e.g., `/experiments/002-expression-evaluator`)
+**Standard Experiment Flow** (Parallel Launch Method):
+1. Create new sequentially numbered experiment folder (e.g., `/experiments/010-new-project`)
 2. Generate all four prompts using this meta-prompt
 3. Set up four method directories within the experiment folder
-4. Launch four parallel development sessions in their respective directories
-5. Compare results in real-time during presentation
-6. Create comprehensive experiment report with findings analysis
+4. **Launch all four methods in parallel using Task tool** (recommended approach)
+   - Use single message with four Task tool calls for simultaneous execution
+   - Each agent works independently in its designated directory
+   - Monitor progress across all four methods in real-time
+5. Wait for all four agents to complete their implementations
+6. **Generate comprehensive EXPERIMENT_REPORT.md** comparing all results
 7. Analyze results objectively, noting both expected and unexpected outcomes
+
+**Alternative Manual Flow** (Sequential Launch):
+- Steps 1-3 same as above
+- Launch four separate Claude Code sessions manually
+- Navigate each to respective directories and paste corresponding prompts
+- Compare results after all complete
 
 This framework provides empirical data about different development approaches in the AI era, allowing for objective comparison of methodologies.
 
@@ -285,13 +300,53 @@ This framework provides empirical data about different development approaches in
 **Experimental Bias Warning**:
 ⚠️ **Critical**: Avoid confirmation bias when interpreting results. While this framework tests whether sophisticated methodologies produce better outcomes, remain open to findings that challenge this assumption. Advanced AI models may naturally incorporate best practices into simpler approaches, making methodology distinctions less relevant. Document all results objectively, especially unexpected outcomes.
 
-**Post-Experiment Analysis**:
-After completing all four methods, create a comprehensive experiment report (`EXPERIMENT_REPORT.md`) in the main experiment folder that includes:
-- Development time comparison and analysis
-- Code quality metrics across all methods
-- Feature implementation comparison
-- Software engineering insights and findings
-- Risk analysis and business impact assessment
-- Recommendations for different project types
-- Categorized glossary of technical terms for generalist programmers
-- Objective documentation of any unexpected or contradictory results
+## Parallel Launch Implementation
+
+### Using Task Tool for Simultaneous Execution
+
+**Recommended Approach**: Use a single message with four Task tool calls to launch all methods simultaneously:
+
+```bash
+# Example parallel launch command structure
+Task(subagent_type="general-purpose", description="Method 1 Direct Implementation",
+     prompt="[Method 1 prompt] Important: Work in directory /path/to/experiment/1-naive-approach/")
+
+Task(subagent_type="general-purpose", description="Method 2 Specification-First",
+     prompt="[Method 2 prompt] Important: Work in directory /path/to/experiment/2-spec-first/")
+
+Task(subagent_type="general-purpose", description="Method 3 TDD Approach",
+     prompt="[Method 3 prompt] Important: Work in directory /path/to/experiment/3-tdd-approach/")
+
+Task(subagent_type="general-purpose", description="Method 4 Enhanced TDD",
+     prompt="[Method 4 prompt] Important: Work in directory /path/to/experiment/4-enhanced-tdd/")
+```
+
+### Benefits of Parallel Launch
+- **Fair comparison**: All methods start simultaneously under identical conditions
+- **Real-time monitoring**: Observe different approaches progressing in parallel
+- **Time accuracy**: Precise timing comparison without scheduling variations
+- **Resource utilization**: Maximum efficiency using available AI agent capacity
+- **Presentation value**: Dramatic demonstration of methodology differences
+
+## Post-Experiment Analysis
+
+**REQUIRED**: After completing all four methods, create a comprehensive experiment report (`EXPERIMENT_REPORT.md`) in the main experiment folder that includes:
+
+### Required Report Sections
+- **Experiment Overview**: Objective, duration, technology stack, application type
+- **Methodology Results**: Detailed analysis of each method's performance
+- **Quantitative Analysis**: Development speed, feature completeness, code organization
+- **Qualitative Insights**: Methodology-specific strengths and characteristics
+- **Business Impact Analysis**: Time-to-market, maintainability, user experience
+- **Unexpected Findings**: Document surprising or contradictory results
+- **Context-Dependent Recommendations**: When to use each methodology
+- **Risk Analysis**: Technical debt, requirements creep, over-engineering risks
+- **Glossary**: Technical terms accessible to generalist programmers
+- **Conclusion**: Key findings and implications for AI-assisted development
+
+### Report Quality Standards
+- Objective analysis avoiding confirmation bias
+- Data-driven conclusions with specific metrics
+- Practical recommendations for different contexts
+- Documentation of methodological innovations discovered
+- Clear language suitable for both technical and business audiences
