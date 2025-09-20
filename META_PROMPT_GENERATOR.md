@@ -18,16 +18,32 @@ Generate four complete prompt sets for building a **[APPLICATION_TYPE]** using *
 
 ### IMPORTANT: Timing Measurement Requirements
 
-**Automated Timing**: The controlling agent will automatically record timestamps when launching each method agent and upon completion. No manual timestamp commands are required in the method prompts.
+**Automated Timing via File Timestamps** (Recommended): Use file creation timestamps to calculate precise development times:
 
-**Implementation**: Use the Task tool's natural timing capabilities combined with bash commands to capture:
-- Method start time: Recorded when Task tool is invoked
-- Method end time: Recorded when Task tool completes
-- Phase transitions: Can be captured through intermediate agent reports
+**Implementation**:
+- **Start Time**: First file created across all method directories
+- **End Time**: Last file created in each method directory
+- **Calculation**: `find [method-dir] -type f -exec stat -c "%y %n" {} \; | sort | tail -1`
 
-**Timing Data Storage**: All timing data will be automatically written to a `TIMING_LOG.txt` file in each method directory.
+**Commands for Timing Analysis**:
+```bash
+# Get experiment start time (earliest file across all methods)
+find experiments/[experiment-name]/ -type f -exec stat -c "%y %n" {} \; | sort | head -1
 
-**Manual Backup** (if needed): Each method prompt may optionally include simple timing commands, but automation should be the primary approach:
+# Get method completion times
+find experiments/[experiment-name]/1-immediate-implementation/ -type f -exec stat -c "%y %n" {} \; | sort | tail -1
+find experiments/[experiment-name]/2-specification-driven/ -type f -exec stat -c "%y %n" {} \; | sort | tail -1
+find experiments/[experiment-name]/3-test-first-development/ -type f -exec stat -c "%y %n" {} \; | sort | tail -1
+find experiments/[experiment-name]/4-validated-test-development/ -type f -exec stat -c "%y %n" {} \; | sort | tail -1
+```
+
+**Advantages**:
+- Objective, reproducible timing without manual intervention
+- No timing measurement overhead affecting development flow
+- Precise to the second across all methods
+- Eliminates human error in timing capture
+
+**Legacy Manual Backup** (if file timestamps unavailable):
 ```bash
 echo "$(date): Starting implementation" >> TIMING_LOG.txt
 echo "$(date): Implementation complete" >> TIMING_LOG.txt
