@@ -2,9 +2,23 @@
 
 **Evidence-based comparison of AI-assisted development approaches through rigorous experimentation**
 
+---
+
+## 📰 LATEST: TDD Wins Big on Simple Problems - 3X Less Code Than Specs!
+
+**[Experiment 012: Anagram Grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
+
+In our latest head-to-head methodology showdown, Test-Driven Development crushed it with just **401 lines** of clean, tested code while Specification-Driven Development bloated to **1,440 lines** for the same simple algorithm. Method 1 (cowboy coding) finished in 1 minute flat but Method 3's TDD approach delivered the best overall value. [Read the full report →](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)
+
+**The Verdict**: For Tier 1 algorithmic problems, lighter approaches win. Save the heavy specs for complex systems!
+
+📊 **[See All Experiment Results →](EXPERIMENT_INDEX.md)**
+
+---
+
 ## 🔬 Research Overview
 
-This repository contains a **mature experimental framework** for studying AI-assisted development methodologies, with **4 completed experiments** and a comprehensive **three-tier research system** (crawl-walk-run). The research provides quantitative evidence that **methodology guidance significantly impacts AI development patterns and outcomes**.
+This repository contains a **mature experimental framework** for studying AI-assisted development methodologies, with **5 completed experiments** and a comprehensive **three-tier research system** (crawl-walk-run). The research provides quantitative evidence that **methodology guidance significantly impacts AI development patterns and outcomes**.
 
 **Key Finding**: Different methodologies produce measurably different approaches to problem-solving, component discovery, and system architecture across complexity levels.
 
@@ -24,12 +38,17 @@ You'll receive four complete prompts following bias prevention protocols, ready 
 ## 📊 Completed Experiments
 
 ### ✅ **Valid Methodology Comparisons**
+- **[012-anagram-grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)** - Anagram Grouper (Hash Strategy/Algorithms) - ✅ **NEW: Sept 20, 2025**
+- **[011-prime-number-generator](experiments/011-prime-number-generator/)** - Prime Number Generator (Algorithm Optimization) - ✅ **Bias-compliant**
+- **[010-password-generator](experiments/010-password-generator/)** - Password Generator (Security/Randomness) - ✅ **Bias-compliant**
 - **[008-lru-cache-ttl](experiments/008-lru-cache-ttl/)** - LRU Cache with TTL (Data Structures/Performance) - ✅ **Bias-compliant**
 - **[006-simple-interest-calculator](experiments/006-simple-interest-calculator/)** - Financial calculation tool - ✅ **Smoke test**
 - **[002-expression-evaluator](experiments/002-expression-evaluator/)** - Mathematical expression parser - ✅ **Valid results**
 
 ### ⚠️ **Experiments Requiring Attention**
 - **[009-multilingual-word-counter](experiments/009-multilingual-word-counter/)** - Text processing with language detection - ⚠️ **BIAS VIOLATION** (used "naive-approach", needs rerun)
+
+📊 **[View Complete Experiment Index with Detailed Results →](EXPERIMENT_INDEX.md)**
 
 ### 📚 **Research Framework Development**
 - **[design/](design/)** - Complete experimental methodology (18 design documents)

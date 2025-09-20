@@ -366,3 +366,70 @@ Task(subagent_type="general-purpose", description="Method 4 Enhanced TDD",
 - Practical recommendations for different contexts
 - Documentation of methodological innovations discovered
 - Clear language suitable for both technical and business audiences
+
+## Publication Steps (Final Phase)
+
+After completing the experiment report, perform these critical publication steps to maximize research impact:
+
+### 1. Update Main README
+Update the main `README.md` with a newspaper-style headline section featuring the latest experiment:
+
+```markdown
+## 📰 LATEST: [Catchy Headline About Key Finding]
+
+**[Experiment XXX: Name](experiments/XXX-name/EXPERIMENT_REPORT.md)** *(Date)*
+
+Brief, engaging summary of the most surprising or impactful finding. Include key metrics (e.g., "Method X achieved Y with 3X less code"). End with a clear verdict or takeaway. [Read the full report →](link)
+
+📊 **[See All Experiment Results →](EXPERIMENT_INDEX.md)**
+```
+
+**Headline Writing Tips**:
+- Lead with the surprising finding or winner
+- Include concrete metrics (3X faster, 75% less code, etc.)
+- Make it newsworthy and attention-grabbing
+- Keep it factual but engaging
+
+### 2. Update or Create Experiment Index
+Maintain `EXPERIMENT_INDEX.md` as the central hub for all experiments:
+
+**Required Sections**:
+- **Latest Experiment** (prominently featured at top)
+- **All Completed Experiments** (organized by tier)
+- **Methodology Performance Summary** (aggregate metrics)
+- **Trends and Insights** (emerging patterns)
+- **Methodology Selection Guide** (practical recommendations)
+- **Next Experiments** (roadmap)
+
+### 3. Update Experiment Count
+Update the total experiment count in README's Research Overview section.
+
+### 4. Git Commit Message Format
+When committing the experiment, use this format:
+```
+Experiment XXX: [Name] - [Key Finding]
+
+- Method X: [result]
+- Method Y: [result]
+- Method Z: [result]
+- Method W: [result]
+
+Key insight: [main takeaway]
+```
+
+### 5. Social Sharing Preparation
+If sharing results externally, prepare:
+- **One-line summary**: The headline finding
+- **Three bullet points**: Key methodology differences
+- **Visual comparison**: Table or metrics summary
+- **Link to full report**: For detailed analysis
+
+### Why Publication Matters
+These publication steps ensure:
+- **Discoverability**: Visitors immediately see latest findings
+- **Continuity**: Research builds on previous experiments
+- **Accessibility**: Results are easy to navigate and understand
+- **Impact**: Findings reach and influence the community
+- **Scientific Record**: Proper documentation for replication
+
+**Remember**: The goal is to make the research immediately valuable to practitioners while maintaining scientific rigor. A great experiment hidden in a directory helps no one!

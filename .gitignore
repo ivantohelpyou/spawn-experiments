@@ -183,3 +183,7 @@ passwords.json
 
 # Claude AI assistant files
 .claude/
+
+# Private notes and documentation
+/notes/
+notes/
