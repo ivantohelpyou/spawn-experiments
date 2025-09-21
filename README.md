@@ -6,11 +6,13 @@
 
 ## 📰 LATEST: TDD Wins Big on Simple Problems - 3X Less Code Than Specs!
 
-**[Experiment 012: Anagram Grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
+**[Experiment 1.101: Anagram Grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
 
 In our latest head-to-head methodology showdown, Test-Driven Development crushed it with just **401 lines** of clean, tested code while Specification-Driven Development bloated to **1,440 lines** for the same simple algorithm. Method 1 (cowboy coding) finished in 1 minute flat but Method 3's TDD approach delivered the best overall value. [Read the full report →](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)
 
 **The Verdict**: For Tier 1 algorithmic problems, lighter approaches win. Save the heavy specs for complex systems!
+
+> **NEW**: Reorganized with hierarchical numbering (T.DCC format) - see [numbering system guide](EXPERIMENT_NUMBERING_SYSTEM.md)
 
 📊 **[See All Experiment Results →](EXPERIMENT_INDEX.md)**
 
@@ -37,16 +39,19 @@ You'll receive four complete prompts following bias prevention protocols, ready 
 
 ## 📊 Completed Experiments
 
-### ✅ **Valid Methodology Comparisons**
-- **[012-anagram-grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)** - Anagram Grouper (Hash Strategy/Algorithms) - ✅ **NEW: Sept 20, 2025**
-- **[011-prime-number-generator](experiments/011-prime-number-generator/)** - Prime Number Generator (Algorithm Optimization) - ✅ **Bias-compliant**
-- **[010-password-generator](experiments/010-password-generator/)** - Password Generator (Security/Randomness) - ✅ **Bias-compliant**
-- **[008-lru-cache-ttl](experiments/008-lru-cache-ttl/)** - LRU Cache with TTL (Data Structures/Performance) - ✅ **Bias-compliant**
-- **[006-simple-interest-calculator](experiments/006-simple-interest-calculator/)** - Financial calculation tool - ✅ **Smoke test**
-- **[002-expression-evaluator](experiments/002-expression-evaluator/)** - Mathematical expression parser - ✅ **Valid results**
+### ✅ **Valid Methodology Comparisons (New Numbering)**
+- **[1.101 - Anagram Grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)** *(012)* - Hash Strategy/String Processing - ✅ **NEW: Sept 20, 2025**
+- **[1.204 - Prime Number Generator](experiments/011-prime-number-generator/)** *(011)* - Algorithm Optimization/Mathematical - ✅ **Bias-compliant**
+- **[1.401 - Password Generator](experiments/010-password-generator/)** *(010)* - Security/Cryptography - ✅ **Bias-compliant**
+- **[1.302 - LRU Cache with TTL](experiments/008-lru-cache-ttl/)** *(008)* - Data Structures/Performance - ✅ **Bias-compliant**
+- **[1.203 - Simple Interest Calculator](experiments/006-simple-interest-calculator/)** *(006)* - Mathematical Operations - ✅ **Smoke test**
+- **[1.201 - Expression Evaluator](experiments/002-expression-evaluator/)** *(002)* - Mathematical Operations - ✅ **Valid results**
+- **[1.205 - Roman Numeral Converter](experiments/013-roman-numeral-converter/)** *(013)* - Mathematical Operations - ✅ **Fastest TDD**
+- **[1.102 - Balanced Parentheses](experiments/014-balanced-parentheses/)** *(014)* - String Processing - ✅ **Complete**
 
 ### ⚠️ **Experiments Requiring Attention**
-- **[009-multilingual-word-counter](experiments/009-multilingual-word-counter/)** - Text processing with language detection - ⚠️ **BIAS VIOLATION** (used "naive-approach", needs rerun)
+- **[2.101 - Multilingual Word Counter](experiments/009-multilingual-word-counter/)** *(009)* - Text Processing CLI - ⚠️ **BIAS VIOLATION** (used "naive-approach", needs rerun)
+- **[1.301 - LRU Cache with TTL (STOPPED)](experiments/007-lru-cache-ttl-STOPPED/)** *(007)* - Data Structures - 🔄 **Resource constraints**
 
 📊 **[View Complete Experiment Index with Detailed Results →](EXPERIMENT_INDEX.md)**
 
@@ -85,7 +90,7 @@ You'll receive four complete prompts following bias prevention protocols, ready 
 
 ## 📈 Quantitative Results
 
-### Example: LRU Cache with TTL (Experiment 008)
+### Example: LRU Cache with TTL (Experiment 1.302)
 - **Method 1**: 7m 11s, 23 tests, ~800+ lines (feature-rich but unfocused)
 - **Method 2**: 6m 35s, 8 test suites, ~300-400 lines ⚡ **fastest with quality**
 - **Method 3**: 13m, 15 tests, ~200-300 lines (systematic but slower)
