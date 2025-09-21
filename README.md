@@ -4,21 +4,15 @@
 
 ---
 
-## 🔬 LATEST RESEARCH FINDING: Methodology-Complexity Matching Principle
-
-**[Finding 001: Match Methodology to Problem Complexity](findings/001-methodology-complexity-matching.md)** *(September 21, 2025)*
-
-**Production Insight**: For simple problems like password generation, immediate implementation delivers **87% faster development** (1m17s vs 9m20s) with identical functionality. Method 2's 74 requirements for a basic CLI utility demonstrates methodology overhead exceeding problem complexity. [Read full finding →](findings/001-methodology-complexity-matching.md)
-
-**Actionable Principle**: Choose lightweight methodologies for well-understood problems, comprehensive approaches for complex domains.
-
----
-
-## 📰 LATEST EXPERIMENT: Methodology → Architecture Mapping
+## 📰 LATEST EXPERIMENT: Password Generator - Methodology-Complexity Matching Validated
 
 **[Experiment 1.401.0: Password Generator](experiments/1.401-password-generator.0/EXPERIMENT_REPORT.md)** *(September 21, 2025)*
 
-Same requirements, radically different code! All four methodologies delivered identical functionality with dramatically different approaches - from single-file pragmatism to 74-requirement specifications. [Read the full report →](experiments/1.401-password-generator.0/EXPERIMENT_REPORT.md)
+**Key Finding**: For simple problems like password generation, immediate implementation delivers **87% faster development** (1m17s vs 9m20s) with identical functionality. Method 2's 74 requirements for a basic CLI utility demonstrates methodology overhead exceeding problem complexity.
+
+**Actionable Principle**: Choose lightweight methodologies for well-understood problems, comprehensive approaches for complex domains.
+
+Same requirements, radically different code! All four methodologies delivered identical functionality with dramatically different approaches - from single-file pragmatism to comprehensive specifications. [Read the full report →](experiments/1.401-password-generator.0/EXPERIMENT_REPORT.md)
 
 ---
 
