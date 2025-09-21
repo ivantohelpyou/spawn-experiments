@@ -191,7 +191,6 @@ notes/
 # Internal research methodology (keep private)
 /design/
 design/
-EXPERIMENT_NUMBERING_SYSTEM.md
 
 # Advanced framework docs (for private development)
 # META_PROMPT_GENERATOR.md - Keep this public as it's valuable for replication

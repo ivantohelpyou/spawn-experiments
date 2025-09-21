@@ -12,7 +12,7 @@ In our latest head-to-head methodology showdown, Test-Driven Development crushed
 
 **The Verdict**: For Tier 1 algorithmic problems, lighter approaches win. Save the heavy specs for complex systems!
 
-> **NEW**: Reorganized with hierarchical numbering (T.DCC format) - see [numbering system guide](EXPERIMENT_NUMBERING_SYSTEM.md)
+> **NEW**: Organized with hierarchical numbering (T.DCC format) - see [numbering system guide](EXPERIMENT_NUMBERING_SYSTEM.md)
 
 📊 **[See All Experiment Results →](EXPERIMENT_INDEX.md)**
 
