@@ -56,7 +56,7 @@ You'll receive four complete prompts following bias prevention protocols, ready 
 📊 **[View Complete Experiment Index with Detailed Results →](EXPERIMENT_INDEX.md)**
 
 ### 📚 **Research Framework Development**
-- **[design/](design/)** - Complete experimental methodology (18 design documents)
+- **[DESIGN_OVERVIEW.md](DESIGN_OVERVIEW.md)** - Complete research methodology overview
 - **Three-tier system**: Function → Tool → Application complexity progression
 - **Discovered components research**: Study organic component reuse patterns
 - **Bias prevention protocols**: Comprehensive neutrality enforcement
