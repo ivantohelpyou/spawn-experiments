@@ -60,10 +60,10 @@ Each version should document:
 - **Comparison**: Results compared to base version
 
 ### Examples
-- `1.401.0` - Original password generator experiment
+- `1.401` - Original password generator experiment
 - `1.401.1` - Re-run with improved timing measurement protocol
 - `1.401.2` - Validation study with different AI model
-- `4.201.0` - Replication study of 1.401.0 results
+- `4.201` - Replication study of 1.401 results
 - **4.4XX - Modification Matrix**: Studies of code evolution patterns
 - **4.9XX - Miscellaneous Research**: Other research initiatives
 

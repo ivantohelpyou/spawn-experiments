@@ -4,23 +4,23 @@
 
 ---
 
-## 📰 LATEST EXPERIMENT: Password Generator - Methodology-Complexity Matching Validated
+## 📰 LATEST EXPERIMENT: TDD Wins Big on Simple Problems - 3X Less Code Than Specs!
 
-**[Experiment 1.401.0: Password Generator](experiments/1.401-password-generator.0/EXPERIMENT_REPORT.md)** *(September 21, 2025)*
+**[Experiment 1.101: Anagram Grouper](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
 
-**Key Finding**: For simple problems like password generation, immediate implementation delivers **87% faster development** (1m17s vs 9m20s) with identical functionality. Method 2's 74 requirements for a basic CLI utility demonstrates methodology overhead exceeding problem complexity.
+**Key Finding**: Test-Driven Development crushed it with just **401 lines** of clean, tested code while Specification-Driven Development bloated to **1,440 lines** for the same simple algorithm. Method 1 (immediate implementation) finished in 1 minute flat but Method 3's TDD approach delivered the best overall value.
 
-**Actionable Principle**: Choose lightweight methodologies for well-understood problems, comprehensive approaches for complex domains.
+**Actionable Principle**: For Tier 1 algorithmic problems, lighter approaches win. Save the heavy specs for complex systems.
 
-Same requirements, radically different code! All four methodologies delivered identical functionality with dramatically different approaches - from single-file pragmatism to comprehensive specifications. [Read the full report →](experiments/1.401-password-generator.0/EXPERIMENT_REPORT.md)
+Same requirements, radically different code! All four methodologies delivered identical functionality with dramatically different approaches - from single-file pragmatism to comprehensive specifications. [Read the full report →](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)
 
 ---
 
-## 📰 PREVIOUS: TDD Wins Big on Simple Problems - 3X Less Code Than Specs!
+## 📰 PREVIOUS: String Processing Domain Complete
 
-**[Experiment 1.101.0: Anagram Grouper](experiments/1.101-anagram-grouper.0/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
+**[Experiment 1.103: Roman Numeral Converter](experiments/1.103-roman-numeral-converter/EXPERIMENT_REPORT.md)** *(September 2025)*
 
-In our latest head-to-head methodology showdown, Test-Driven Development crushed it with just **401 lines** of clean, tested code while Specification-Driven Development bloated to **1,440 lines** for the same simple algorithm. Method 1 (cowboy coding) finished in 1 minute flat but Method 3's TDD approach delivered the best overall value. [Read the full report →](experiments/1.101-anagram-grouper.0/EXPERIMENT_REPORT.md)
+Fastest TDD implementation at 3m 37s! All four methodologies delivered working converters with different architectural approaches to the classic algorithm problem. TDD proved optimal for well-defined algorithmic challenges. [Read the full report →](experiments/1.103-roman-numeral-converter/EXPERIMENT_REPORT.md)
 
 **The Verdict**: For Tier 1 algorithmic problems, lighter approaches win. Save the heavy specs for complex systems!
 
