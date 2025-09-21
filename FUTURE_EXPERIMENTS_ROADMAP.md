@@ -1,5 +1,8 @@
 # Future Experiments Roadmap - Hierarchical System (T.DCC)
 
+> **LATEST**: Experiment 010-password-generator completed with 4-method comparison
+> **Results**: Method timing validated - 1m17s (immediate) to 9m20s (validated TDD)
+
 > **NEW**: Reorganized with hierarchical numbering system (T.DCC format)
 > See [EXPERIMENT_NUMBERING_SYSTEM.md](EXPERIMENT_NUMBERING_SYSTEM.md) for complete mapping
 

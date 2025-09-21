@@ -4,11 +4,29 @@
 
 ---
 
-## 📰 LATEST: TDD Wins Big on Simple Problems - 3X Less Code Than Specs!
+## 🔬 LATEST RESEARCH FINDING: Methodology-Complexity Matching Principle
 
-**[Experiment 1.101: Anagram Grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
+**[Finding 001: Match Methodology to Problem Complexity](findings/001-methodology-complexity-matching.md)** *(September 21, 2025)*
 
-In our latest head-to-head methodology showdown, Test-Driven Development crushed it with just **401 lines** of clean, tested code while Specification-Driven Development bloated to **1,440 lines** for the same simple algorithm. Method 1 (cowboy coding) finished in 1 minute flat but Method 3's TDD approach delivered the best overall value. [Read the full report →](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)
+**Production Insight**: For simple problems like password generation, immediate implementation delivers **87% faster development** (1m17s vs 9m20s) with identical functionality. Method 2's 74 requirements for a basic CLI utility demonstrates methodology overhead exceeding problem complexity. [Read full finding →](findings/001-methodology-complexity-matching.md)
+
+**Actionable Principle**: Choose lightweight methodologies for well-understood problems, comprehensive approaches for complex domains.
+
+---
+
+## 📰 LATEST EXPERIMENT: Methodology → Architecture Mapping
+
+**[Experiment 1.401: Password Generator](experiments/1.401-password-generator/EXPERIMENT_REPORT.md)** *(September 21, 2025)*
+
+Same requirements, radically different code! All four methodologies delivered identical functionality with dramatically different approaches - from single-file pragmatism to 74-requirement specifications. [Read the full report →](experiments/1.401-password-generator/EXPERIMENT_REPORT.md)
+
+---
+
+## 📰 PREVIOUS: TDD Wins Big on Simple Problems - 3X Less Code Than Specs!
+
+**[Experiment 1.101: Anagram Grouper](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
+
+In our latest head-to-head methodology showdown, Test-Driven Development crushed it with just **401 lines** of clean, tested code while Specification-Driven Development bloated to **1,440 lines** for the same simple algorithm. Method 1 (cowboy coding) finished in 1 minute flat but Method 3's TDD approach delivered the best overall value. [Read the full report →](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)
 
 **The Verdict**: For Tier 1 algorithmic problems, lighter approaches win. Save the heavy specs for complex systems!
 
