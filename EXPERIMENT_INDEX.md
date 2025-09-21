@@ -5,18 +5,7 @@
 
 ## Latest Experiment
 
-### 🆕 **[1.401.0 - Password Generator](experiments/1.401-password-generator.0/EXPERIMENT_REPORT.md)** (September 21, 2025)
-**Tier 1 Function** | Security/Cryptography Domain | Python | 9m 20s parallel execution
-
-**Key Findings:**
-- **Method 1 (Immediate)** achieved fastest delivery: 1m17s for production-ready solution
-- **Method 2 (Specification)** created 74 requirements for simple CLI utility - methodology overhead
-- **All methods** delivered identical security implementation with `secrets` module
-- **Methodology → Architecture**: Same requirements produced radically different code structures
-
-**Winner**: Method 1 (Immediate) - Optimal for well-understood problems with clear requirements
-
-### 🔄 **[1.101.0 - Anagram Grouper](experiments/1.101-anagram-grouper.0/EXPERIMENT_REPORT.md)** (September 20, 2025)
+### 🆕 **[1.101 - Anagram Grouper](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)** (September 20, 2025)
 **Tier 1 Function** | String Processing Domain | Python | 8 minutes parallel execution
 
 **Key Findings:**
@@ -35,74 +24,74 @@
 
 ### Tier 1: Functions (Pure Algorithms)
 
-#### [1.101 - Anagram Grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md) *(Legacy: 012)*
+#### [1.101 - Anagram Grouper](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md) *(Legacy: 012)*
 *September 20, 2025 | String Processing*
 - **Problem**: Group words that are anagrams of each other
 - **Focus**: Hash key strategy and grouping logic
 - **Best Method**: Method 3 (TDD) - Clean, efficient, well-tested
 - **Surprising Finding**: Method 2 produced 3x more code than necessary
 
-#### [1.204 - Prime Number Generator](experiments/011-prime-number-generator/EXPERIMENT_REPORT.md) *(Legacy: 011)*
-*September 2025 | Mathematical Operations*
-- **Problem**: Generate prime numbers efficiently
-- **Focus**: Algorithm optimization and performance
+#### [1.102 - Multilingual Word Counter](experiments/1.102-multilingual-word-counter/EXPERIMENT_REPORT.md) *(Legacy: 009)*
+*September 2025 | String Processing*
+- **Problem**: Count words with language detection
+- **Focus**: Text processing and I18N
 - **Status**: ✅ Completed
 
-#### [1.401 - Password Generator](experiments/010-password-generator/) *(Legacy: 010)*
-*September 2025 | Security & Cryptography*
-- **Problem**: Generate secure passwords with requirements
-- **Focus**: Security and randomness
-- **Status**: ✅ Completed
-
-#### [1.205 - Roman Numeral Converter](experiments/013-roman-numeral-converter/) *(Legacy: 013)*
-*September 2025 | Mathematical Operations*
+#### [1.103 - Roman Numeral Converter](experiments/1.103-roman-numeral-converter/EXPERIMENT_REPORT.md) *(Legacy: 013)*
+*September 2025 | String Processing*
 - **Problem**: Bidirectional Roman numeral conversion
 - **Focus**: Mapping strategies and edge cases
 - **Status**: ✅ Completed - Fastest TDD at 3m 37s
 
-#### [1.102 - Balanced Parentheses](experiments/014-balanced-parentheses/) *(Legacy: 014)*
+#### [1.104 - Balanced Parentheses](experiments/1.104-balanced-parentheses/EXPERIMENT_REPORT.md) *(Legacy: 014)*
 *September 2025 | String Processing*
 - **Problem**: Validate balanced parentheses in text
 - **Focus**: Stack operations and character matching
 - **Status**: ✅ Completed
 
-### Tier 2: CLI Tools
+#### [1.201 - Expression Evaluator](experiments/1.201-expression-evaluator/EXPERIMENT_REPORT.md) *(Legacy: 002)*
+*June 2025 | Mathematical Operations*
+- **Problem**: Mathematical expression parser
+- **Duration**: 35 minutes total
+- **Status**: ✅ Valid results
 
-#### [2.101 - Multilingual Word Counter](experiments/009-multilingual-word-counter/) *(Legacy: 009)*
-*Date TBD | Text Processing Tools*
-- **Problem**: Count words with language detection
-- **Status**: ⚠️ BIAS VIOLATION - Needs rerun
+#### [1.203 - Temperature Converter](experiments/1.203-temperature-converter/) *(Legacy: 005)*
+*July 2025 | Mathematical Operations*
+- **Problem**: Convert between temperature scales
+- **Type**: Smoke test for methodology validation
+- **Status**: ✅ Valid baseline
 
-#### [1.302 - LRU Cache with TTL](experiments/008-lru-cache-ttl/) *(Legacy: 008)*
+#### [1.204 - Simple Interest Calculator](experiments/1.204-simple-interest-calculator/EXPERIMENT_REPORT.md) *(Legacy: 006)*
+*July 2025 | Mathematical Operations*
+- **Problem**: Financial calculation tool
+- **Type**: Smoke test for methodology validation
+- **Status**: ✅ Valid baseline
+
+#### [1.205 - Prime Number Generator](experiments/1.205-prime-number-generator/EXPERIMENT_REPORT.md) *(Legacy: 011)*
+*September 2025 | Mathematical Operations*
+- **Problem**: Generate prime numbers efficiently
+- **Focus**: Algorithm optimization and performance
+- **Status**: ✅ Completed
+
+#### [1.302 - LRU Cache with TTL](experiments/1.302-lru-cache-ttl/EXPERIMENT_REPORT.md) *(Legacy: 008)*
 *August 2025 | Data Structures*
 - **Problem**: Implement cache with time-to-live
 - **Focus**: Data structures and performance
 - **Best Method**: Method 2 - Fastest with quality (6m 35s)
 - **Key Finding**: Methods converged on similar implementations
 
-#### [1.301 - LRU Cache with TTL (STOPPED)](experiments/007-lru-cache-ttl-STOPPED/) *(Legacy: 007)*
-*September 2025 | Data Structures*
-- **Problem**: Same as 1.302 but hit resource constraints
-- **Status**: ❌ STOPPED - Methods 3&4 hit token limits
-
-### Tier 3: Applications
-
-#### [1.203 - Simple Interest Calculator](experiments/006-simple-interest-calculator/) *(Legacy: 006)*
-*July 2025 | Mathematical Operations*
-- **Problem**: Financial calculation tool
-- **Type**: Smoke test for methodology validation
-- **Status**: ✅ Valid baseline
-
-#### [1.201 - Expression Evaluator](experiments/002-expression-evaluator/) *(Legacy: 002)*
-*June 2025 | Mathematical Operations*
-- **Problem**: Mathematical expression parser
-- **Duration**: 35 minutes total
-- **Status**: ✅ Valid results
-
-#### [3.501 - Unicode Password Manager](experiments/001-unicode-password-manager/) *(Legacy: 001)*
+#### [1.402 - Unicode Password Manager](experiments/1.402-unicode-password-manager/) *(Legacy: 001)*
 *Early 2025 | Security Applications*
 - **Problem**: Full password management application
 - **Status**: ✅ Completed (pre-methodology framework)
+
+### Summary
+
+**Total Completed Experiments**: 10
+- **String Processing (1.1XX)**: 4 experiments
+- **Mathematical Operations (1.2XX)**: 4 experiments
+- **Data Structures (1.3XX)**: 1 experiment
+- **Security/Cryptography (1.4XX)**: 1 experiment
 
 ---
 
@@ -172,10 +161,10 @@
 - **1.505** - Phone Number Validator
 
 #### Tier 2 - CLI Tools (2.XXX)
-- **2.501** - Password Manager CLI (reuses 1.401)
+- **2.501** - Password Manager CLI (reuses 1.4XX components)
 - **2.201** - Number Theory Calculator (reuses 1.204, 1.205)
 - **2.102** - Text Analysis Tool (reuses 1.101, 1.102)
-- **2.202** - Code Structure Validator (reuses 1.102)
+- **2.202** - Code Structure Validator (reuses 1.104)
 - **2.401** - File Statistics Tool (baseline - minimal reuse)
 
 #### Tier 3 - Applications (3.XXX)
