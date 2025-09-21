@@ -32,7 +32,7 @@ Fastest TDD implementation at 3m 37s! All four methodologies delivered working c
 
 ## 🔬 Research Overview
 
-This repository contains a **mature experimental framework** for studying AI-assisted development methodologies, with **5 completed experiments** and a comprehensive **three-tier research system** (crawl-walk-run). The research provides quantitative evidence that **methodology guidance significantly impacts AI development patterns and outcomes**.
+This repository contains a **mature experimental framework** for studying AI-assisted development methodologies, with **10 completed experiments** and a comprehensive **three-tier research system** (crawl-walk-run). The research provides quantitative evidence that **methodology guidance significantly impacts AI development patterns and outcomes**.
 
 **Key Finding**: Different methodologies produce measurably different approaches to problem-solving, component discovery, and system architecture across complexity levels.
 
@@ -51,19 +51,18 @@ You'll receive four complete prompts following bias prevention protocols, ready 
 
 ## 📊 Completed Experiments
 
-### ✅ **Valid Methodology Comparisons (New Numbering)**
-- **[1.101 - Anagram Grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)** *(012)* - Hash Strategy/String Processing - ✅ **NEW: Sept 20, 2025**
-- **[1.204 - Prime Number Generator](experiments/011-prime-number-generator/)** *(011)* - Algorithm Optimization/Mathematical - ✅ **Bias-compliant**
-- **[1.401 - Password Generator](experiments/010-password-generator/)** *(010)* - Security/Cryptography - ✅ **Bias-compliant**
-- **[1.302 - LRU Cache with TTL](experiments/008-lru-cache-ttl/)** *(008)* - Data Structures/Performance - ✅ **Bias-compliant**
-- **[1.203 - Simple Interest Calculator](experiments/006-simple-interest-calculator/)** *(006)* - Mathematical Operations - ✅ **Smoke test**
-- **[1.201 - Expression Evaluator](experiments/002-expression-evaluator/)** *(002)* - Mathematical Operations - ✅ **Valid results**
-- **[1.205 - Roman Numeral Converter](experiments/013-roman-numeral-converter/)** *(013)* - Mathematical Operations - ✅ **Fastest TDD**
-- **[1.102 - Balanced Parentheses](experiments/014-balanced-parentheses/)** *(014)* - String Processing - ✅ **Complete**
+### ✅ **Valid Methodology Comparisons (Hierarchical Numbering)**
+- **[1.101 - Anagram Grouper](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)** - String Processing/Hash Strategy - ✅ **TDD Winner: 3X less code**
+- **[1.102 - Multilingual Word Counter](experiments/1.102-multilingual-word-counter/EXPERIMENT_REPORT.md)** - String Processing/I18N - ✅ **Complete**
+- **[1.103 - Roman Numeral Converter](experiments/1.103-roman-numeral-converter/EXPERIMENT_REPORT.md)** - String Processing/Algorithms - ✅ **Fastest TDD: 3m37s**
+- **[1.104 - Balanced Parentheses](experiments/1.104-balanced-parentheses/EXPERIMENT_REPORT.md)** - String Processing/Stack Operations - ✅ **Complete**
+- **[1.201 - Expression Evaluator](experiments/1.201-expression-evaluator/EXPERIMENT_REPORT.md)** - Math Operations/Parsing - ✅ **Valid results**
+- **[1.203 - Temperature Converter](experiments/1.203-temperature-converter/)** - Math Operations/Conversion - ✅ **Smoke test**
+- **[1.204 - Simple Interest Calculator](experiments/1.204-simple-interest-calculator/EXPERIMENT_REPORT.md)** - Math Operations/Financial - ✅ **Complete**
+- **[1.205 - Prime Number Generator](experiments/1.205-prime-number-generator/EXPERIMENT_REPORT.md)** - Math Operations/Algorithms - ✅ **Complete**
+- **[1.302 - LRU Cache with TTL](experiments/1.302-lru-cache-ttl/EXPERIMENT_REPORT.md)** - Data Structures/Performance - ✅ **Method 2 fastest**
+- **[1.402 - Unicode Password Manager](experiments/1.402-unicode-password-manager/)** - Security/Unicode - ✅ **Complete**
 
-### ⚠️ **Experiments Requiring Attention**
-- **[2.101 - Multilingual Word Counter](experiments/009-multilingual-word-counter/)** *(009)* - Text Processing CLI - ⚠️ **BIAS VIOLATION** (used "naive-approach", needs rerun)
-- **[1.301 - LRU Cache with TTL (STOPPED)](experiments/007-lru-cache-ttl-STOPPED/)** *(007)* - Data Structures - 🔄 **Resource constraints**
 
 📊 **[View Complete Experiment Index with Detailed Results →](EXPERIMENT_INDEX.md)**
 
@@ -155,7 +154,7 @@ This research framework is **fully open** for independent replication and extens
 ### Spawn Experiments - Parallel Launch Method (Recommended)
 
 **Standard Protocol:**
-1. **Start in this directory**: `cd /home/ivanadamin/tdd-demo`
+1. **Start in this directory**: `cd /home/ivan/projects/spawn-experiments`
 2. **Launch Claude**: Say "spawn-experiments" to activate META_PROMPT_GENERATOR
 3. **Provide details**: Give your APPLICATION_TYPE and TECH_STACK
 4. **Get four prompts**: Receive complete prompts ready for parallel execution
@@ -164,7 +163,7 @@ This research framework is **fully open** for independent replication and extens
 
 ### Example Session with Parallel Launch
 ```bash
-cd /home/ivanadamin/tdd-demo
+cd /home/ivan/projects/spawn-experiments
 claude
 
 # In Claude Code:
