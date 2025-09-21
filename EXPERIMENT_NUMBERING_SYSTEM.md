@@ -2,10 +2,11 @@
 
 ## System Overview
 
-**Format**: `T.DCC` where:
+**Format**: `T.DCC.V` where:
 - **T** = Tier (1=Functions, 2=CLI Tools, 3=Applications, 4=Special Studies)
 - **D** = Domain (see categories below)
 - **CC** = Sequential number within domain (01, 02, 03...)
+- **V** = Version (0=original, 1=first re-run, 2=second re-run, etc.)
 
 ## Research Domain Categories
 
@@ -37,6 +38,32 @@
 - **4.1XX - Methodology Comparisons**: Cross-tier analysis studies
 - **4.2XX - Replication Studies**: Validation of previous experiments
 - **4.3XX - Meta-Research**: Studies about the research process itself
+
+## Versioning System
+
+### Base Version (T.DCC.0)
+The original implementation of an experiment using the current methodology framework.
+
+### Re-run Versions (T.DCC.1, T.DCC.2, ...)
+Subsequent versions for:
+- **Methodology Evolution**: Testing improved prompts or frameworks
+- **Validation Studies**: Confirming results with different conditions
+- **Environmental Changes**: Re-running as AI capabilities improve
+- **Bias Detection**: Multiple runs to check consistency
+- **Replication Research**: Independent validation of findings
+
+### Version Documentation
+Each version should document:
+- **Purpose**: Why this version was created
+- **Changes**: What differs from previous version
+- **Conditions**: Any environmental or methodological changes
+- **Comparison**: Results compared to base version
+
+### Examples
+- `1.401.0` - Original password generator experiment
+- `1.401.1` - Re-run with improved timing measurement protocol
+- `1.401.2` - Validation study with different AI model
+- `4.201.0` - Replication study of 1.401.0 results
 - **4.4XX - Modification Matrix**: Studies of code evolution patterns
 - **4.9XX - Miscellaneous Research**: Other research initiatives
 

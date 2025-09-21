@@ -16,21 +16,21 @@
 
 ## 📰 LATEST EXPERIMENT: Methodology → Architecture Mapping
 
-**[Experiment 1.401: Password Generator](experiments/1.401-password-generator/EXPERIMENT_REPORT.md)** *(September 21, 2025)*
+**[Experiment 1.401.0: Password Generator](experiments/1.401-password-generator.0/EXPERIMENT_REPORT.md)** *(September 21, 2025)*
 
-Same requirements, radically different code! All four methodologies delivered identical functionality with dramatically different approaches - from single-file pragmatism to 74-requirement specifications. [Read the full report →](experiments/1.401-password-generator/EXPERIMENT_REPORT.md)
+Same requirements, radically different code! All four methodologies delivered identical functionality with dramatically different approaches - from single-file pragmatism to 74-requirement specifications. [Read the full report →](experiments/1.401-password-generator.0/EXPERIMENT_REPORT.md)
 
 ---
 
 ## 📰 PREVIOUS: TDD Wins Big on Simple Problems - 3X Less Code Than Specs!
 
-**[Experiment 1.101: Anagram Grouper](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
+**[Experiment 1.101.0: Anagram Grouper](experiments/1.101-anagram-grouper.0/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
 
-In our latest head-to-head methodology showdown, Test-Driven Development crushed it with just **401 lines** of clean, tested code while Specification-Driven Development bloated to **1,440 lines** for the same simple algorithm. Method 1 (cowboy coding) finished in 1 minute flat but Method 3's TDD approach delivered the best overall value. [Read the full report →](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)
+In our latest head-to-head methodology showdown, Test-Driven Development crushed it with just **401 lines** of clean, tested code while Specification-Driven Development bloated to **1,440 lines** for the same simple algorithm. Method 1 (cowboy coding) finished in 1 minute flat but Method 3's TDD approach delivered the best overall value. [Read the full report →](experiments/1.101-anagram-grouper.0/EXPERIMENT_REPORT.md)
 
 **The Verdict**: For Tier 1 algorithmic problems, lighter approaches win. Save the heavy specs for complex systems!
 
-> **NEW**: Organized with hierarchical numbering (T.DCC format) - see [numbering system guide](EXPERIMENT_NUMBERING_SYSTEM.md)
+> **NEW**: Organized with hierarchical numbering (T.DCC.V format) - see [numbering system guide](EXPERIMENT_NUMBERING_SYSTEM.md)
 
 📊 **[See All Experiment Results →](EXPERIMENT_INDEX.md)**
 

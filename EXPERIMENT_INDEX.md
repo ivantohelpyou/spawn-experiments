@@ -1,11 +1,22 @@
 # Experiment Index - Complete Reports (Hierarchical Numbering)
 
-> **NEW**: Reorganized with hierarchical numbering system (T.DCC format)
+> **NEW**: Reorganized with hierarchical numbering system (T.DCC.V format)
 > See [EXPERIMENT_NUMBERING_SYSTEM.md](EXPERIMENT_NUMBERING_SYSTEM.md) for complete mapping
 
 ## Latest Experiment
 
-### 🆕 **[1.101 - Anagram Grouper](experiments/012-anagram-grouper/EXPERIMENT_REPORT.md)** (September 20, 2025)
+### 🆕 **[1.401.0 - Password Generator](experiments/1.401-password-generator.0/EXPERIMENT_REPORT.md)** (September 21, 2025)
+**Tier 1 Function** | Security/Cryptography Domain | Python | 9m 20s parallel execution
+
+**Key Findings:**
+- **Method 1 (Immediate)** achieved fastest delivery: 1m17s for production-ready solution
+- **Method 2 (Specification)** created 74 requirements for simple CLI utility - methodology overhead
+- **All methods** delivered identical security implementation with `secrets` module
+- **Methodology → Architecture**: Same requirements produced radically different code structures
+
+**Winner**: Method 1 (Immediate) - Optimal for well-understood problems with clear requirements
+
+### 🔄 **[1.101.0 - Anagram Grouper](experiments/1.101-anagram-grouper.0/EXPERIMENT_REPORT.md)** (September 20, 2025)
 **Tier 1 Function** | String Processing Domain | Python | 8 minutes parallel execution
 
 **Key Findings:**

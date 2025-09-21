@@ -8,19 +8,19 @@
 
 ## Current Status
 
-### Completed Experiments (New Numbering)
-1. **1.201** - Expression Evaluator (Math/Parsing) - 35 min total
-2. **1.203** - Simple Interest Calculator (Basic Math/CLI) - Smoke test
+### Completed Experiments (Versioned Numbering)
+1. **1.201.0** - Expression Evaluator (Math/Parsing) - 35 min total
+2. **1.203.0** - Simple Interest Calculator (Basic Math/CLI) - Smoke test
 3. **1.301** - LRU Cache with TTL (Data Structures) - ❌ **STOPPED** - Methods 3&4 hit token limits, incomplete
-4. **1.302** - LRU Cache with TTL (Data Structures/Performance) - ✅ **COMPLETE** - 6-13 min per method, successful parallel execution
-5. **2.101** - Multilingual Word Counter (Text Processing/I18N) - ⚠️ **BIAS VIOLATION** - needs rerun per protocols
-6. **1.401** - Password Generator (Security/Crypto) - ✅ **COMPLETE** - Tier 1 validation
-7. **1.204** - Prime Number Generator (Mathematical) - ✅ **COMPLETE** - methodology comparison successful
-8. **1.101** - Anagram Grouper (String Processing) - ✅ **COMPLETE** - TDD won with 3X less code
-9. **1.205** - Roman Numeral Converter (Mathematical) - ✅ **COMPLETE** - fastest TDD at 3m 37s
-10. **1.102** - Balanced Parentheses (String Processing) - ✅ **COMPLETE** - Tier 1 series concluded
+4. **1.302.0** - LRU Cache with TTL (Data Structures/Performance) - ✅ **COMPLETE** - 6-13 min per method, successful parallel execution
+5. **1.102.0** - Multilingual Word Counter (String Processing) - ✅ **COMPLETE** - validation methodology successful
+6. **1.401.0** - Password Generator (Security/Crypto) - ✅ **COMPLETE** - Tier 1 validation
+7. **1.205.0** - Prime Number Generator (Mathematical) - ✅ **COMPLETE** - methodology comparison successful
+8. **1.101.0** - Anagram Grouper (String Processing) - ✅ **COMPLETE** - TDD won with 3X less code
+9. **1.103.0** - Roman Numeral Converter (String Processing) - ✅ **COMPLETE** - fastest TDD at 3m 37s
+10. **1.104.0** - Balanced Parentheses (String Processing) - ✅ **COMPLETE** - Tier 1 series concluded
 
-*Legacy numbers: 002→1.201, 006→1.203, 007→1.301, 008→1.302, 009→2.101, 010→1.401, 011→1.204, 012→1.101, 013→1.205, 014→1.102*
+*Legacy numbers: 002→1.201.0, 006→1.203.0, 007→1.301(STOPPED), 008→1.302.0, 009→1.102.0, 010→1.401.0, 011→1.205.0, 012→1.101.0, 013→1.103.0, 014→1.104.0*
 
 ### Key Insights Discovered
 - **Time Convergence**: Most methods complete in 8-14 minutes regardless of approach
@@ -44,11 +44,11 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 **Status**: ✅ **COMPLETE** - Series 010-014 finished
 
 #### Completed Tier 1 Experiments
-- **1.401 - Password Generator**: ✅ Cryptographic randomness, character set manipulation
-- **1.204 - Prime Number Generator**: ✅ Algorithm choice and optimization
-- **1.101 - Anagram Grouper**: ✅ Hash key strategy and grouping logic - **TDD Winner**
-- **1.205 - Roman Numeral Converter**: ✅ Mapping strategy and edge cases - **Fastest TDD**
-- **1.102 - Balanced Parentheses**: ✅ Stack management and character matching
+- **1.401.0 - Password Generator**: ✅ Cryptographic randomness, character set manipulation
+- **1.205.0 - Prime Number Generator**: ✅ Algorithm choice and optimization
+- **1.101.0 - Anagram Grouper**: ✅ Hash key strategy and grouping logic - **TDD Winner**
+- **1.103.0 - Roman Numeral Converter**: ✅ Mapping strategy and edge cases - **Fastest TDD**
+- **1.104.0 - Balanced Parentheses**: ✅ Stack management and character matching
 
 #### Planned Tier 1 Extensions - Input Validation Domain (1.5XX)
 **Purpose**: Bridge gap between pure algorithms and CLI tools for better composability
@@ -67,10 +67,10 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 **Innovation**: Component discovery research - natural reuse vs. rebuild patterns
 
 #### Planned Tier 2 Experiments (Strategic Component Alignment)
-- **2.501 - Password Manager CLI**: Natural reuse of 1.401 password generation
-- **2.201 - Number Theory Calculator**: Strategic reuse of 1.204 primes, 1.205 numerals
-- **2.102 - Text Analysis Tool**: Natural reuse of 1.101 anagram grouping
-- **2.202 - Code Structure Validator**: Strategic reuse of 1.102 parentheses matching
+- **2.501 - Password Manager CLI**: Natural reuse of 1.401.0 password generation
+- **2.201 - Number Theory Calculator**: Strategic reuse of 1.205.0 primes, 1.103.0 numerals
+- **2.102 - Text Analysis Tool**: Natural reuse of 1.101.0 anagram grouping
+- **2.202 - Code Structure Validator**: Strategic reuse of 1.104.0 parentheses matching
 - **2.401 - File Statistics Tool**: Pure CLI tool with minimal component dependencies (baseline)
 
 #### Component Discovery Research Framework
@@ -189,6 +189,6 @@ This tiered approach addresses the scope ambiguity problem while providing unpre
 
 **Quick Reference Card:**
 ```
-002 → 1.201 | 006 → 1.203 | 007 → 1.301 | 008 → 1.302 | 009 → 2.101
-010 → 1.401 | 011 → 1.204 | 012 → 1.101 | 013 → 1.205 | 014 → 1.102
+002 → 1.201.0 | 006 → 1.203.0 | 007 → 1.301(STOPPED) | 008 → 1.302.0 | 009 → 1.102.0
+010 → 1.401.0 | 011 → 1.205.0 | 012 → 1.101.0 | 013 → 1.103.0 | 014 → 1.104.0
 ```
