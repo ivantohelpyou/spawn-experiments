@@ -1,0 +1,11 @@
+{
+  "name": "",
+  "email": "invalid-email",
+  "age": -5,
+  "website_url": "not-a-url",
+  "preferences": {
+    "notifications": true
+  },
+  "tags": ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9", "tag10", "tag11"],
+  "extra_field": "should not be allowed"
+}

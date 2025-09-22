@@ -1,0 +1,11 @@
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "website_url": "https://johndoe.com",
+  "preferences": {
+    "theme": "dark",
+    "notifications": true
+  },
+  "tags": ["developer", "python", "javascript"]
+}
