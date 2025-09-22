@@ -98,6 +98,22 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertFalse(result.is_valid)
         self.assertIn("Required property 'age' is missing", result.errors[0])
 
+    def test_validate_array_type_valid(self):
+        """Test validating an array against array type schema"""
+        schema = {"type": "array"}
+        data = [1, 2, 3]
+        result = self.validator.validate(data, schema)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.errors, [])
+
+    def test_validate_array_type_invalid(self):
+        """Test validating a non-array against array type schema"""
+        schema = {"type": "array"}
+        data = "not an array"
+        result = self.validator.validate(data, schema)
+        self.assertFalse(result.is_valid)
+        self.assertIn("Expected type 'array'", result.errors[0])
+
 
 if __name__ == '__main__':
     unittest.main()

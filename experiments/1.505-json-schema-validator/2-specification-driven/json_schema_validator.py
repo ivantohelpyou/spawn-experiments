@@ -83,7 +83,10 @@ class JSONSchemaValidator:
 
         # Perform schema validation
         try:
-            validator = self._draft7_validator(schema)
+            # Create validator with format checking enabled
+            import jsonschema.validators
+            validator_class = jsonschema.validators.validator_for(schema)
+            validator = validator_class(schema, format_checker=jsonschema.FormatChecker())
             errors = list(validator.iter_errors(data))
 
             if not errors:

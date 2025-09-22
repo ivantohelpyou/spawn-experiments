@@ -33,7 +33,7 @@ class JSONSchemaValidator:
 
     # Format validators
     EMAIL_PATTERN = re.compile(
-        r'^[a-zA-Z0-9][a-zA-Z0-9._%+-]*[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\.[a-zA-Z]{2,}$|^[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\.[a-zA-Z]{2,}$'
+        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     )
 
     DATE_PATTERN = re.compile(
@@ -198,6 +198,10 @@ class JSONSchemaValidator:
         """Validate email format with strict rules"""
         # Basic pattern check
         if not self.EMAIL_PATTERN.match(email):
+            return False
+
+        # Check if email contains exactly one @
+        if email.count('@') != 1:
             return False
 
         # Additional checks for edge cases
