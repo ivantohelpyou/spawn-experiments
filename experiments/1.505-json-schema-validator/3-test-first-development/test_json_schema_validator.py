@@ -40,6 +40,20 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertFalse(result.is_valid)
         self.assertIn("Expected type 'integer'", result.errors[0])
 
+    def test_validate_object_with_properties_valid(self):
+        """Test validating an object with properties schema"""
+        schema = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer"}
+            }
+        }
+        data = {"name": "John", "age": 30}
+        result = self.validator.validate(data, schema)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.errors, [])
+
 
 if __name__ == '__main__':
     unittest.main()
