@@ -1,0 +1,10 @@
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "preferences": {
+    "theme": "dark",
+    "notifications": true
+  },
+  "tags": ["developer", "python", "json"]
+}

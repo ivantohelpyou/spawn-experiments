@@ -1,0 +1,8 @@
+{
+  "name": "John Doe",
+  "age": 30,
+  "email": "john.doe@example.com",
+  "website": "https://johndoe.com",
+  "birthdate": "1993-05-15",
+  "tags": ["developer", "javascript", "python"]
+}

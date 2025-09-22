@@ -1,0 +1,4 @@
+# No external dependencies required - uses only Python standard library
+# Optional dependencies could include:
+# jsonschema==4.17.3  # For more comprehensive schema validation
+# colorama==0.4.6     # For colored output on Windows

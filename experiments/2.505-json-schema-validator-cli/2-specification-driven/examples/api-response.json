@@ -1,0 +1,11 @@
+{
+  "status": "success",
+  "data": {
+    "users": [
+      {"id": 1, "name": "Alice"},
+      {"id": 2, "name": "Bob"}
+    ]
+  },
+  "message": "Users retrieved successfully",
+  "timestamp": "2023-12-07T10:30:00Z"
+}
