@@ -27,6 +27,9 @@
 *Legacy numbers: 002→1.201.0, 006→1.203.0, 007→1.301(STOPPED), 008→1.302.0, 009→1.102.0, 010→1.401.0, 011→1.205.0, 012→1.101.0, 013→1.103.0, 014→1.104.0*
 
 ### Key Insights Discovered
+- **🚀 LATEST: Component Discovery Breakthrough**: Simple guidance enables 100% discovery vs 0% baseline (2.505/2.505.1)
+- **⚖️ LATEST: External Library Trade-off**: 70% time increase for richer features, challenges speed assumptions (Method 1E)
+- **🎯 LATEST: Integration Pattern Taxonomy**: 4 distinct patterns emerge naturally by methodology (fallback, registry, direct, strategic)
 - **🔮 NEW: V4 Framework Enhancement Success**: Enhanced framework with prediction accountability reveals AI biases
 - **🏆 NEW: Method 4 V4.1 Adaptive TDD Breakthrough**: Optimal balance (4m dev, 1M+ val/sec, strategic validation)
 - **📊 NEW: AI Bias Detection via Predictions**: Systematic underestimation of simple approaches, overestimation of specification complexity
@@ -83,6 +86,8 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 - **1.503 - File Path Validator**: ✅ **COMPLETE** - 7.4X complexity with competition injection breakthrough
 - **1.504 - Date Format Validator**: ✅ **COMPLETE** - 6.4X complexity with V4 framework enhancement
 - **1.505 - JSON Schema Validator**: ✅ **COMPLETE** - 3.1X complexity, V4.1 confirmed optimal
+- **2.505 - JSON Schema Validator CLI**: ✅ **COMPLETE** - 0% component discovery baseline established
+- **2.505.1 - Guided Component Discovery + External Libraries**: ✅ **COMPLETE** - BREAKTHROUGH: 100% discovery success, external library analysis
 
 ##### 📋 **Optional Tier 1A Extensions**
 - **1.506 - IPv4/IPv6 Address Validator**: Network address validation *(OPTIONAL - pattern established)*
@@ -96,6 +101,7 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 **Research Note**: Tier 1A functions are composable and deployable without additional infrastructure. Tier 1B functions require regulatory compliance and external systems for practical deployment, creating 2^n complexity scaling.
 
 **Pattern CONFIRMED**: Consistent over-engineering in Method 2 (avg 12.4X across 4 experiments), V4.1 Adaptive TDD emerges as optimal approach
+**NEW PATTERN**: Component discovery requires explicit guidance (0% → 100% with simple hint), external libraries provide features at 70% time cost
 
 ### **Tier 2: CLI Tools (2.XXX) - WALK**
 **Scope**: Command-line utilities, file I/O, composable tools
@@ -105,8 +111,14 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 **Components Available**: Best-of-breed validators in utils/validation/
 **Innovation**: Component discovery research - natural reuse vs. rebuild patterns
 
-#### 🚀 **Active Tier 2 Experiment**
-- **2.505 - JSON Schema Validator CLI**: Component discovery with utils/validation/ *(READY TO EXECUTE)*
+#### ✅ **Completed Tier 2 Experiments**
+- **2.505 - JSON Schema Validator CLI**: ✅ **COMPLETE** - 0% component discovery across all methods (baseline)
+- **2.505.1 - Guided Component Discovery**: ✅ **COMPLETE** - BREAKTHROUGH: 100% discovery success with simple guidance + Method 1E external library analysis
+
+#### 🚀 **High-Priority Tier 2 Experiments**
+- **2.505.2 - External Library Methodology Study**: Test Methods 2, 3, 4 with external library access (validate Method 4 over-engineering predictions)
+- **2.505.3 - Dependency Constraint Research**: Test methodology behavior under different external library constraints
+- **2.506 - Configuration File Parser**: Validate component discovery across domains (YAML/JSON/INI)
 
 #### Planned Tier 2 Experiments (Strategic Component Alignment)
 - **2.501 - Password Manager CLI**: Natural reuse of 1.401.0 password generation
@@ -114,11 +126,13 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 - **2.102 - Text Analysis Tool**: Natural reuse of 1.101.0 anagram grouping
 - **2.202 - Code Structure Validator**: Strategic reuse of 1.104.0 parentheses matching
 - **2.401 - File Statistics Tool**: Pure CLI tool with minimal component dependencies (baseline)
+- **2.507 - Cross-Domain Component Reuse**: Components across problem domains
 
-#### Component Discovery Research Framework
-**Key Questions**: Which methodologies naturally discover and reuse existing components?
-**Measurement**: Discovery rates, reuse depth, integration strategies by methodology
-**Environment**: Components placed in discoverable locations without explicit guidance
+#### Component Discovery Research Framework ✅ **SOLVED**
+**Key Finding**: Simple guidance ("utils/ contains components you may use") enables 100% discovery vs 0% without guidance
+**Patterns Discovered**: 4 distinct integration patterns (fallback, registry, direct, strategic) emerge naturally by methodology
+**External Library Trade-off**: 70% time increase for richer features (Method 1E: 4m 41.5s vs Method 1: 2m 45.1s)
+**Next Research**: External vs internal component optimization and methodology-specific constraints
 
 ### **Tier 3: Applications (030-039) - RUN**
 **Scope**: Full applications with GUIs, APIs, persistence

@@ -4,31 +4,34 @@
 
 ---
 
-## 🔮 LATEST BREAKTHROUGH: AI Bias Detection Through Prediction Accountability!
+## 🔍 LATEST: Component Discovery Requires Guidance
+
+**[Experiment 2.505.1: Guided Component Discovery](experiments/2.505.1-guided-component-discovery/EXPERIMENT_REPORT.md)** *(September 22, 2025)*
+
+**Key Finding**: AI agents don't naturally explore utils/ folders - but when told components are available, they use them effectively. Also: external libraries aren't always faster (70% time increase for richer features).
+
+### **Component Discovery Results** 📊
+- **Without guidance**: 0% discovery rate (agents don't scan existing codebases)
+- **With simple hint**: 100% discovery rate across all methodologies
+- **Integration patterns**: Each methodology handled components differently (fallback, registry, direct, strategic)
+- **External library trade-off**: 70% time increase but richer features
+
+### **What We Learned**
+| Method | No Hint (2.505) | With Hint (2.505.1) | Pattern |
+|--------|------------------|----------------------|---------|
+| **Method 1** | Built from scratch | Used utils + graceful fallback | Practical approach |
+| **Method 1E** | N/A | Used external libraries | Feature-rich but slower |
+| **Method 2** | Built from scratch | Professional component registry | Architectural approach |
+| **Method 3** | Built from scratch | Direct jsonschema integration | Test-driven approach |
+| **Method 4** | Built from scratch | Comprehensive component analysis | Quality-focused approach |
+
+**Insight**: Agents need awareness of available components (sensible - you wouldn't want them scanning entire codebases by default). Once aware, they integrate components in methodology-consistent ways.
+
+## 🔮 PREVIOUS BREAKTHROUGH: AI Bias Detection Through Prediction Accountability
 
 **[Experiment 1.504: Date Format Validator + V4 Framework Enhancement](experiments/1.504-date-format-validator/EXPERIMENT_REPORT.md)** *(September 21, 2025)*
 
-**🎯 REVOLUTIONARY DISCOVERY**: Pre-experiment predictions reveal **systematic AI biases** in methodology assessment and enable **framework self-improvement**!
-
-### **V4.1 Adaptive TDD Breakthrough** 🏆
-- **4m 1s development time** (optimal balance)
-- **1,008,877 validations/sec** (fastest runtime performance)
-- **Strategic validation** only where complexity warrants
-- **Near-immediate speed with superior performance**
-
-### **AI Bias Detection Results** 📊
-| Method | **AI Predicted** | **Actual Result** | **Bias Revealed** |
-|--------|------------------|-------------------|-------------------|
-| **Method 1** | "Basic with gaps" | **Comprehensive 101-line solution** | ❌ **Underestimates simple approaches** |
-| **Method 2** | 200-300 lines | **646 lines (6.4X over-engineering)** | ❌ **Severely underestimates complexity explosion** |
-| **Method 3** | 150-220 lines | **185 lines** | ✅ **Accurately calibrated** |
-| **Method 4** | 180-250 lines | **V4.0 failed, V4.1 achieved 98 lines** | ❌ **Underestimates efficiency potential** |
-
-**Framework Evolution**: V4.1 Adaptive TDD now serves as the **innovation leader** while Method 3 TDD provides the **constraint-driven baseline** for competitive comparison.
-
-## 🚨 PREVIOUS BREAKTHROUGH: Competition Injection Reverses Over-Engineering
-
-**[Experiment 1.503: File Path Validator](experiments/1.503-file-path-validator/EXPERIMENT_REPORT.md)** - AI over-engineering can be **interrupted and reversed** while maintaining enterprise standards (54.9% complexity reduction with constrained pressure)!
+**V4.1 Adaptive TDD**: 4m 1s development, 1,008,877 validations/sec, optimal balance achieved. AI bias detection through pre-experiment predictions reveals systematic underestimation of simple approaches and severe underestimation of specification complexity explosion.
 
 ---
 
@@ -48,18 +51,25 @@ Fastest TDD implementation at 3m 37s! All four methodologies delivered working c
 
 ## 🔬 Research Overview
 
-This repository contains a **mature experimental framework** for studying AI-assisted development methodologies, with **14 completed experiments** and the enhanced **V4.2 Framework** with prediction accountability. The research provides quantitative evidence that **methodology guidance significantly impacts AI development patterns and outcomes**, and reveals **systematic AI biases** in approach assessment.
+This repository contains a **mature experimental framework** for studying AI-assisted development methodologies, with **16 completed experiments** and the enhanced **V4.2 Framework** with component discovery protocols. The research provides quantitative evidence that **methodology guidance significantly impacts AI development patterns and outcomes**, **component discovery requires explicit awareness**, and reveals **external vs internal component trade-offs**.
 
 ## 🔬 **Key Research Discoveries**
 
-### 1. **V4.1 Adaptive TDD Framework** 🏆 *(Latest)*
+### 1. **Component Discovery Needs Guidance** 🔍 *(Latest)*
+**AI agents require explicit awareness of available components.**
+- **0% → 100% discovery rate** with simple hint about utils/ folder
+- **Methodology characteristics preserved** - each approach integrated components differently
+- **External library insight** - 70% time increase for richer features, not always faster
+- **Enables composition research** - can now study component integration patterns
+
+### 2. **V4.1 Adaptive TDD Framework** 🏆
 **AI judgment-driven methodology achieves optimal balance across all metrics.**
 - **4m 1s development time** (near-immediate speed)
 - **1,008,877 validations/sec** (superior runtime performance)
 - **Strategic validation** only where complexity warrants
 - **Proven winner** across input validation domain experiments
 
-### 2. **AI Bias Detection Through Prediction Accountability** 🔮 *(Latest)*
+### 3. **AI Bias Detection Through Prediction Accountability** 🔮
 **Pre-experiment predictions reveal systematic biases in AI methodology assessment.**
 - **Underestimates simple approaches** - assumes quality gaps that don't exist
 - **Severely underestimates specification complexity** - 116-223% prediction errors

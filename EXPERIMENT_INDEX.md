@@ -3,9 +3,32 @@
 > **NEW**: Reorganized with hierarchical numbering system (T.DCC.V format)
 > See [EXPERIMENT_NUMBERING_SYSTEM.md](EXPERIMENT_NUMBERING_SYSTEM.md) for complete mapping
 
-## Latest Experiment
+## Latest Experiments
 
-### 🆕 **[1.504 - Date Format Validator](experiments/1.504-date-format-validator/EXPERIMENT_REPORT.md)** (September 21, 2025)
+### 🚀 **[2.505.1 - Guided Component Discovery](experiments/2.505.1-guided-component-discovery/EXPERIMENT_REPORT.md)** (September 22, 2025)
+**Tier 2 CLI Tool** | Component Discovery Research | Python | External Library Analysis | 5-method comparison
+
+**🚀 BREAKTHROUGH FINDINGS:**
+- **Component Discovery Solved**: 0% → 100% discovery rate with simple guidance across all methodologies
+- **Integration Pattern Taxonomy**: 4 distinct patterns emerge (fallback, registry, direct, strategic)
+- **External Library Trade-off**: Method 1E took 70% longer (4m 41.5s vs 2m 45.1s) but delivered richer features
+- **Method 4 Testing Overhead**: 143% time increase due to comprehensive component validation approach
+
+**Discovery**: Simple guidance ("utils/ contains components you may use") enables universal component discovery while preserving methodology characteristics
+
+*Framework breakthrough: Component-aware research now enabled, Tier 2+ composition studies unlocked*
+
+### 🆕 **[2.505 - JSON Schema Validator CLI](experiments/2.505-json-schema-validator/EXPERIMENT_REPORT.md)** (September 22, 2025)
+**Tier 2 CLI Tool** | Component Discovery Baseline | Python | 4-method comparison
+
+**🔍 BASELINE FINDINGS:**
+- **Universal Discovery Failure**: 0% component discovery rate across all methodologies
+- **Available Components**: Proven utils/validation validators present but undiscovered
+- **Methodology Isolation**: All methods built from scratch despite existing solutions
+
+**Conclusion**: AI systems require explicit awareness for component discovery - established need for 2.505.1 guided experiment
+
+### 🔮 **[1.504 - Date Format Validator](experiments/1.504-date-format-validator/EXPERIMENT_REPORT.md)** (September 21, 2025)
 **Tier 1 Function** | Input Validation Domain | Python | V4 Framework Enhancement | 4-7 minutes parallel execution
 
 **🔮 BREAKTHROUGH FINDINGS:**
@@ -118,14 +141,22 @@
 - **AI Bias Discovery**: Systematic underestimation of simple approaches revealed
 - **📺 [Interactive Demo](experiments/1.504-date-format-validator/methodology_comparison_demo.py)** - Shows V4 framework enhancement
 
+#### [1.505 - JSON Schema Validator](experiments/1.505-json-schema-validator/EXPERIMENT_REPORT.md)
+*September 21, 2025 | Input Validation*
+- **Problem**: Validate JSON data against JSON Schema specifications
+- **Best Method**: Method 4 V4.1 (Adaptive TDD) - Optimal balance of speed and performance
+- **Key Finding**: V4.1 confirmed as optimal methodology across input validation domain
+- **Pattern**: Method 2 over-engineering (3.1X complexity) continues consistently
+
 ### Summary
 
-**Total Completed Experiments**: 14
+**Total Completed Experiments**: 16
 - **String Processing (1.1XX)**: 4 experiments
 - **Mathematical Operations (1.2XX)**: 4 experiments
 - **Data Structures (1.3XX)**: 1 experiment
 - **Security/Cryptography (1.4XX)**: 1 experiment
-- **Input Validation (1.5XX)**: 4 experiments ✅ **COMPLETE DOMAIN**
+- **Input Validation (1.5XX)**: 5 experiments ✅ **COMPLETE DOMAIN**
+- **CLI Tools (2.5XX)**: 2 experiments ✅ **COMPONENT DISCOVERY BREAKTHROUGH**
 
 ---
 

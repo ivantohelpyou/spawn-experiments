@@ -83,17 +83,26 @@ Examples:
 
 REQUIRED FILE STRUCTURE:
 experiments/[EXPERIMENT_NUMBER]/[METHOD_DIR]/
-├── date_validator.py (or main implementation file)
+├── [main_implementation_file] (place ALL files in method directory)
 ├── test_*.py (if applicable)
+├── requirements.txt (if external libraries used)
 ├── README.md (brief method summary)
 └── [other method-specific files]
 
+CRITICAL: Keep experiments isolated in their designated directories:
+- Place ALL implementation files in experiments/[EXPERIMENT_NUMBER]/[METHOD_DIR]/
+- Do NOT place files in project root or other directories
+- Use relative paths within your method directory
+- Ensure clean separation from other methods
+
 INTEGRATION VERIFICATION:
 Before marking complete, verify your branch contains:
-- Main implementation file with validate_date() function
-- All required dependencies resolved
+- Main implementation file in correct experiments/[NUMBER]/[METHOD]/ directory
+- All files properly placed within your method directory (not project root)
+- All required dependencies resolved (requirements.txt if external libraries)
 - Clean commit history with descriptive messages
 - No references to other methodology implementations
+- No files accidentally placed outside your method directory
 
 This ensures:
 - Perfect methodology isolation during development
