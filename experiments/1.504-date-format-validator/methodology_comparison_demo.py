@@ -31,7 +31,7 @@ def find_experiment_directory():
     return script_dir
 
 def get_line_counts(base_dir):
-    """Get Python line counts for all 4 methodology approaches."""
+    """Get Python line counts for all 5 methodology approaches."""
     counts = {}
     file_counts = {}
 
@@ -39,7 +39,8 @@ def get_line_counts(base_dir):
         "Method 1 (Immediate)": "1-immediate-implementation",
         "Method 2 (Specification-Driven)": "2-specification-driven",
         "Method 3 (Pure TDD)": "3-test-first-development",
-        "Method 4 (Specification-Guided TDD)": "4-specification-guided-tdd"
+        "Method 4 V4.0 (Guided TDD)": "4-specification-guided-tdd",
+        "Method 4 V4.1 (Adaptive TDD)": "4-adaptive-tdd-v41"
     }
 
     for method_name, method_dir in methods.items():
@@ -194,7 +195,7 @@ def test_4_way_functionality_equivalence(base_dir):
         ("not-a-date", "Invalid format")
     ]
 
-    print(f"{'Test Case':<15} {'Method 1':<10} {'Method 2':<10} {'Method 4':<10} {'Description'}")
+    print(f"{'Test Case':<15} {'M1':<6} {'M2':<6} {'M3':<6} {'M4.0':<6} {'M4.1':<6} {'Description'}")
     print("-" * 70)
 
     for test_input, description in test_cases:
@@ -205,7 +206,9 @@ def test_4_way_functionality_equivalence(base_dir):
         methods = [
             ("Method 1", "1-immediate-implementation", "date_validator"),
             ("Method 2", "2-specification-driven", "date_validator"),
-            ("Method 4", "4-specification-guided-tdd", "date_validator")
+            ("Method 3", "3-test-first-development", "date_validator"),
+            ("Method 4.0", "4-specification-guided-tdd", "date_validator"),
+            ("Method 4.1", "4-adaptive-tdd-v41", "date_validator")
         ]
 
         for method_name, method_dir, module_name in methods:
@@ -241,11 +244,13 @@ except Exception as e:
                 results[method_name] = "N/A"
 
         # Print results
-        method1_result = results.get("Method 1", "N/A")
-        method2_result = results.get("Method 2", "N/A")
-        method4_result = results.get("Method 4", "N/A")
+        m1_result = results.get("Method 1", "N/A")
+        m2_result = results.get("Method 2", "N/A")
+        m3_result = results.get("Method 3", "N/A")
+        m40_result = results.get("Method 4.0", "N/A")
+        m41_result = results.get("Method 4.1", "N/A")
 
-        print(f"{display_input:<15} {method1_result:<10} {method2_result:<10} {method4_result:<10} {description}")
+        print(f"{display_input:<15} {m1_result:<6} {m2_result:<6} {m3_result:<6} {m40_result:<6} {m41_result:<6} {description}")
 
     print("\n📊 KEY INSIGHTS:")
     print("   ✅ Available methods provide equivalent core functionality")
