@@ -208,6 +208,12 @@ try:
     # Try different API patterns
     if hasattr(validator, 'is_valid'):
         is_valid = validator.is_valid(test_path)
+    elif hasattr(validator, 'is_valid_path'):
+        result_obj = validator.is_valid_path(test_path)
+        if hasattr(result_obj, 'is_valid'):
+            is_valid = result_obj.is_valid
+        else:
+            is_valid = bool(result_obj)
     elif hasattr(validator, 'validate_path'):
         result_obj = validator.validate_path(test_path)
         if isinstance(result_obj, dict):
