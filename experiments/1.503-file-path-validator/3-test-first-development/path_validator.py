@@ -3,7 +3,22 @@ from pathlib import Path
 
 
 class PathValidator:
-    """A file path validator using os.path and pathlib libraries."""
+    """
+    A comprehensive file path validator using os.path and pathlib libraries.
+
+    This class provides various methods to validate file paths, check their
+    existence, type, and properties using both the traditional os.path module
+    and the modern pathlib library.
+
+    Features:
+    - Basic path validation (empty, None checks)
+    - Path type detection (absolute vs relative)
+    - File system existence checks (file, directory)
+    - Path normalization
+    - pathlib.Path object support
+    - Parent directory and extension extraction
+    - Comprehensive validation with detailed results
+    """
 
     def is_valid(self, path):
         """Check if a path is valid."""
