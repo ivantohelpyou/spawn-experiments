@@ -1,0 +1,11 @@
+{
+  "name": "",
+  "age": -5,
+  "email": "not-an-email",
+  "address": {
+    "street": "123 Main St"
+  },
+  "hobbies": ["reading", "reading"],
+  "isActive": "yes",
+  "extraField": "not allowed"
+}
