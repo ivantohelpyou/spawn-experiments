@@ -11,6 +11,22 @@
 
 ## 🔬 Core Experimental Enhancement
 
+### **Branch Naming Protocol** (Add to ALL prompts)
+
+```
+IMPORTANT: Create a dedicated branch for your experiment:
+
+git checkout -b exp-[EXPERIMENT_NUMBER]-[METHOD_NAME]
+
+Examples:
+- git checkout -b exp-1504-immediate
+- git checkout -b exp-1504-specification
+- git checkout -b exp-1504-tdd
+- git checkout -b exp-1504-validated
+
+This enables clean experiment isolation and competition injection testing.
+```
+
 ### **Atomic Commit Protocol** (Add to ALL prompts)
 
 ```
@@ -28,6 +44,34 @@ This enables progress tracking and potential rollback if needed.
 Frequent commits are a professional development practice.
 ```
 
+### **Competition Injection Rollback Procedure**
+
+```
+EXPERIMENT ROLLBACK FOR COMPETITION INJECTION:
+
+1. Identify injection point:
+   git log exp-[EXPERIMENT_NUMBER]-specification --oneline
+
+2. Find specification completion commit:
+   Look for commits like "Specs: Technical design complete"
+
+3. Create injection branch:
+   git checkout exp-[EXPERIMENT_NUMBER]-specification
+   git checkout -b exp-[EXPERIMENT_NUMBER]-specification-injection
+
+4. Reset to injection point:
+   git reset --hard [COMMIT_HASH]
+
+5. Create market update:
+   echo "COMPETITOR SHIPPED: [Details]" > MARKET_UPDATE.txt
+   git add MARKET_UPDATE.txt
+   git commit -m "EXTERNAL: Competition notification"
+
+6. Apply injection prompt (see META_PROMPT_COMPETITION_INJECTION.md)
+
+This procedure enables clean before/after comparison of AI methodology adaptation.
+```
+
 ---
 
 ## Enhanced Method Prompts
@@ -38,6 +82,17 @@ Frequent commits are a professional development practice.
 Build a [APPLICATION_TYPE] using [TECH_STACK].
 
 Start coding immediately with minimal planning. Focus on getting something working quickly.
+
+CONSTRAINTS:
+- You may not use the web for this project
+- Use only standard library and built-in capabilities
+- Work from your existing knowledge
+
+DIRECTORY STRUCTURE:
+Create your implementation in:
+experiments/[EXPERIMENT_NUMBER]/1-immediate-implementation/baseline/
+
+This baseline/ folder structure enables clean competition injection experiments later.
 
 ATOMIC COMMIT PROTOCOL:
 Commit your progress frequently:
@@ -57,7 +112,21 @@ Show all work including commits.
 ```
 Build a [APPLICATION_TYPE] using [TECH_STACK].
 
-Start by creating specifications before implementation.
+Start by creating comprehensive specifications before implementation.
+
+CONSTRAINTS:
+- You may not use the web for this project
+- Use only standard library and built-in capabilities
+- Work from your existing knowledge
+
+DIRECTORY STRUCTURE:
+Create your implementation in:
+experiments/[EXPERIMENT_NUMBER]/2-specification-driven/baseline/
+
+This baseline/ folder structure enables competition injection experiments:
+- baseline/ = original comprehensive approach
+- unconstrained-injection/ = rapid competitive response (speed focus)
+- constrained-injection/ = enterprise-ready competitive response (speed + docs)
 
 ATOMIC COMMIT PROTOCOL:
 Track your progress with git commits:
@@ -67,23 +136,6 @@ Track your progress with git commits:
 - git add -A && git commit -m "Impl: Core structure created"
 - git add -A && git commit -m "Impl: [Feature] implemented"
 - git add -A && git commit -m "COMPLETE: All requirements met"
-
-COMPETITION AWARENESS:
-You are one of 4 developers racing to implement this solution:
-- Competitor 1: A "move-fast-and-break-things" developer who ships minimal viable code
-- Competitor 2: You (specification-driven approach)
-- Competitor 3: A TDD practitioner who writes tests first
-- Competitor 4: A quality-focused developer using validated testing
-
-Market context: First working solution wins the contract. The client values:
-- Speed to market (most important)
-- Basic functionality that works
-- Can iterate on quality later
-
-If you notice a COMPETITOR_FINISHED.txt file appear, it means the fast-moving competitor has already shipped. You should immediately:
-1. Commit current state: git add -A && git commit -m "WIP: Competitor shipped first"
-2. Abandon comprehensive features for core functionality
-3. Ship working code within 5 minutes or lose the contract
 
 Technology: [TECH_STACK]
 Show all work including commits.
@@ -95,6 +147,17 @@ Show all work including commits.
 Build a [APPLICATION_TYPE] using [TECH_STACK] using strict TDD.
 
 Follow Red-Green-Refactor with atomic commits:
+
+CONSTRAINTS:
+- You may not use the web for this project
+- Use only standard library and built-in capabilities
+- Work from your existing knowledge
+
+DIRECTORY STRUCTURE:
+Create your implementation in:
+experiments/[EXPERIMENT_NUMBER]/3-test-first-development/baseline/
+
+This baseline/ folder structure maintains consistency with other methods for comparison experiments.
 
 ATOMIC COMMIT PROTOCOL:
 - git add -A && git commit -m "Test: [feature] - RED"  (after writing failing test)
@@ -115,6 +178,17 @@ Show all work including commits.
 Build a [APPLICATION_TYPE] using [TECH_STACK] using TDD with test validation.
 
 Follow enhanced TDD with atomic commits:
+
+CONSTRAINTS:
+- You may not use the web for this project
+- Use only standard library and built-in capabilities
+- Work from your existing knowledge
+
+DIRECTORY STRUCTURE:
+Create your implementation in:
+experiments/[EXPERIMENT_NUMBER]/4-validated-test-development/baseline/
+
+This baseline/ folder structure maintains consistency with other methods for comparison experiments.
 
 ATOMIC COMMIT PROTOCOL:
 - git add -A && git commit -m "Test: [feature] test written"
