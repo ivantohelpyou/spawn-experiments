@@ -9,8 +9,10 @@ import sys
 import argparse
 import os
 import glob
-from dataclasses import dataclass
-from typing import List, Dict, Any, Optional
+import csv
+from io import StringIO
+from dataclasses import dataclass, asdict
+from typing import List, Dict, Any, Optional, Tuple
 
 
 @dataclass
@@ -196,6 +198,92 @@ def batch_validate_pattern(pattern: str, schema_file_path: str) -> List[Validati
     # Filter out the schema file itself if it matches the pattern
     file_paths = [fp for fp in file_paths if fp != schema_file_path]
     return batch_validate(file_paths, schema_file_path)
+
+
+def format_text(results: List[ValidationResult]) -> str:
+    """
+    Format validation results as human-readable text.
+
+    Args:
+        results: List of validation results
+
+    Returns:
+        Formatted text string
+    """
+    lines = []
+    for result in results:
+        filename = os.path.basename(result.file_path) if result.file_path else "stdin"
+        status = "VALID" if result.is_valid else "INVALID"
+        lines.append(f"{filename}: {status}")
+
+        if not result.is_valid and result.errors:
+            for error in result.errors:
+                lines.append(f"  - {error}")
+
+    return "\n".join(lines)
+
+
+def format_json(results: List[ValidationResult]) -> str:
+    """
+    Format validation results as JSON.
+
+    Args:
+        results: List of validation results
+
+    Returns:
+        JSON string
+    """
+    serializable_results = []
+    for result in results:
+        data = asdict(result)
+        serializable_results.append(data)
+
+    return json.dumps(serializable_results, indent=2)
+
+
+def format_csv(results: List[ValidationResult]) -> str:
+    """
+    Format validation results as CSV.
+
+    Args:
+        results: List of validation results
+
+    Returns:
+        CSV string
+    """
+    output = StringIO()
+    writer = csv.writer(output)
+
+    # Write header
+    writer.writerow(['file_path', 'is_valid', 'error_count', 'errors'])
+
+    # Write data rows
+    for result in results:
+        filename = os.path.basename(result.file_path) if result.file_path else "stdin"
+        errors_str = "; ".join(result.errors) if result.errors else ""
+        writer.writerow([
+            filename,
+            result.is_valid,
+            len(result.errors),
+            errors_str
+        ])
+
+    return output.getvalue()
+
+
+def format_quiet(results: List[ValidationResult]) -> Tuple[str, int]:
+    """
+    Format validation results for quiet mode (no output, just exit codes).
+
+    Args:
+        results: List of validation results
+
+    Returns:
+        Tuple of (empty string, exit code)
+    """
+    # Exit code 0 if all results are valid, 1 if any are invalid
+    exit_code = 0 if all(result.is_valid for result in results) else 1
+    return "", exit_code
 
 
 def parse_args(args_list: Optional[List[str]] = None) -> argparse.Namespace:
