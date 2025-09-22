@@ -114,6 +114,22 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertFalse(result.is_valid)
         self.assertIn("Expected type 'array'", result.errors[0])
 
+    def test_validate_email_format_valid(self):
+        """Test validating a valid email against email format schema"""
+        schema = {"type": "string", "format": "email"}
+        data = "test@example.com"
+        result = self.validator.validate(data, schema)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.errors, [])
+
+    def test_validate_email_format_invalid(self):
+        """Test validating an invalid email against email format schema"""
+        schema = {"type": "string", "format": "email"}
+        data = "not-an-email"
+        result = self.validator.validate(data, schema)
+        self.assertFalse(result.is_valid)
+        self.assertTrue(len(result.errors) > 0)
+
 
 if __name__ == '__main__':
     unittest.main()
