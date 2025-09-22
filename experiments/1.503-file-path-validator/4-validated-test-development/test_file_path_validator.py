@@ -96,6 +96,18 @@ class TestFilePathValidator(unittest.TestCase):
                 result = self.validator.is_secure_path(path, "/home/user/sandbox")
                 self.assertFalse(result.is_secure, f"Path should be insecure: {path}")
 
+        # Test legitimate paths that should be secure
+        legitimate_paths = [
+            "documents/file.txt",
+            "subdirectory/nested/file.log",
+            "./config.ini"
+        ]
+
+        for path in legitimate_paths:
+            with self.subTest(path=path):
+                result = self.validator.is_secure_path(path, "/home/user/sandbox")
+                self.assertTrue(result.is_secure, f"Path should be secure: {path}")
+
     def test_path_length_limits(self):
         """Test validation of path length limits"""
         # Test extremely long path

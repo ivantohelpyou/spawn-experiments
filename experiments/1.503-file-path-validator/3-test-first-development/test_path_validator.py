@@ -66,6 +66,42 @@ class TestPathValidator(unittest.TestCase):
         result = self.validator.is_directory("test_path_validator.py")
         self.assertFalse(result)
 
+    def test_normalize_path(self):
+        """Test that paths are correctly normalized."""
+        # Test path with redundant separators
+        result = self.validator.normalize("./test/../test_path_validator.py")
+        self.assertEqual(result, "test_path_validator.py")
+
+        # Test path with double dots
+        result = self.validator.normalize("/home/user/../user/file.txt")
+        self.assertEqual(result, "/home/user/file.txt")
+
+    def test_pathlib_integration(self):
+        """Test that pathlib.Path objects are handled correctly."""
+        from pathlib import Path
+
+        # Test with pathlib.Path object
+        path_obj = Path("test_path_validator.py")
+        result = self.validator.is_valid_pathlib(path_obj)
+        self.assertTrue(result)
+
+        # Test pathlib-based existence check
+        result = self.validator.exists_pathlib(path_obj)
+        self.assertTrue(result)
+
+    def test_get_parent_directory(self):
+        """Test getting parent directory using pathlib."""
+        result = self.validator.get_parent("/home/user/documents/file.txt")
+        self.assertEqual(result, "/home/user/documents")
+
+    def test_get_file_extension(self):
+        """Test getting file extension using pathlib."""
+        result = self.validator.get_extension("test_file.py")
+        self.assertEqual(result, ".py")
+
+        result = self.validator.get_extension("file_without_extension")
+        self.assertEqual(result, "")
+
 
 if __name__ == '__main__':
     unittest.main()
