@@ -2,6 +2,9 @@
 """
 JSON Schema Validator CLI tool.
 A command-line tool for validating JSON data against JSON Schema.
+
+Built using strict Test-Driven Development principles with comprehensive test coverage.
+Supports validation, batch processing, multiple output formats, and pipeline operations.
 """
 
 import json
