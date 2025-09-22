@@ -36,6 +36,36 @@ class TestPathValidator(unittest.TestCase):
         result = self.validator.is_relative("/absolute/path.txt")
         self.assertFalse(result)
 
+    def test_file_exists(self):
+        """Test that file existence is correctly checked."""
+        # Test with an existing file (the test file itself)
+        result = self.validator.exists("test_path_validator.py")
+        self.assertTrue(result)
+
+        # Test with a non-existing file
+        result = self.validator.exists("non_existent_file.txt")
+        self.assertFalse(result)
+
+    def test_is_file(self):
+        """Test that files are correctly identified."""
+        # Test with an existing file
+        result = self.validator.is_file("test_path_validator.py")
+        self.assertTrue(result)
+
+        # Test with a directory (current directory)
+        result = self.validator.is_file(".")
+        self.assertFalse(result)
+
+    def test_is_directory(self):
+        """Test that directories are correctly identified."""
+        # Test with current directory
+        result = self.validator.is_directory(".")
+        self.assertTrue(result)
+
+        # Test with a file
+        result = self.validator.is_directory("test_path_validator.py")
+        self.assertFalse(result)
+
 
 if __name__ == '__main__':
     unittest.main()

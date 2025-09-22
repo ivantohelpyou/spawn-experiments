@@ -57,6 +57,9 @@ class FilePathValidator:
     WINDOWS_INVALID_CHARS = set('<>:"|?*')
     UNIX_INVALID_CHARS = set('\x00')  # Null character
 
+    # Control characters (0-31) that should be invalid on all platforms
+    CONTROL_CHARS = set(chr(i) for i in range(0, 32))
+
     def __init__(self, allow_relative=True, allow_path_traversal=True, max_length=4096):
         """Initialize validator with configuration options"""
         self.allow_relative = allow_relative
@@ -234,7 +237,12 @@ class FilePathValidator:
 
     def _get_invalid_characters(self) -> set:
         """Get set of invalid characters for current platform"""
+        # Start with control characters that are invalid on all platforms
+        invalid_chars = self.CONTROL_CHARS.copy()
+
         if os.name == 'nt':  # Windows
-            return self.WINDOWS_INVALID_CHARS
+            invalid_chars.update(self.WINDOWS_INVALID_CHARS)
         else:  # Unix-like systems
-            return self.UNIX_INVALID_CHARS
+            invalid_chars.update(self.UNIX_INVALID_CHARS)
+
+        return invalid_chars
