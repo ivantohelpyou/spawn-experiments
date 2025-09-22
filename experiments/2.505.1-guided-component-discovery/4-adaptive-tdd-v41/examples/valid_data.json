@@ -1,0 +1,13 @@
+{
+  "name": "John Smith",
+  "email": "john.smith@example.com",
+  "age": 30,
+  "website": "https://johnsmith.dev",
+  "birthdate": "12/25/1993",
+  "skills": ["Python", "JavaScript", "Docker"],
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown",
+    "zipcode": "12345"
+  }
+}

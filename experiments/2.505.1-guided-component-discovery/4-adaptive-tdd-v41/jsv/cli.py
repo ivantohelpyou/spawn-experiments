@@ -12,6 +12,7 @@ from typing import List, Dict, Any, Optional
 
 from .validator import JSONSchemaValidator
 from .output import OutputFormatter
+from .batch import BatchValidator
 
 
 class CLIValidator:
@@ -127,20 +128,34 @@ class CLIValidator:
                     'errors': ["Schema must be a JSON object"]
                 }
 
-            # Try to create a validator - this will catch basic schema issues
+            # Basic schema validation - check for known types and structure
+            errors = []
+
+            # Check for valid type if specified
+            if 'type' in schema:
+                valid_types = {'string', 'number', 'integer', 'boolean', 'object', 'array', 'null'}
+                if schema['type'] not in valid_types:
+                    errors.append(f"Unknown type: {schema['type']}")
+
+            # Check for valid format if specified
+            if 'format' in schema:
+                valid_formats = {'email', 'uri', 'date'}
+                if schema['format'] not in valid_formats:
+                    errors.append(f"Unknown format: {schema['format']}")
+
+            # Try to create a validator - this will catch other basic schema issues
             try:
-                JSONSchemaValidator(schema)
-                return {
-                    'valid': True,
-                    'file': schema_file,
-                    'errors': []
-                }
+                validator = JSONSchemaValidator(schema)
+                # Test with a simple value to see if schema works
+                validator.validate("test")
             except Exception as e:
-                return {
-                    'valid': False,
-                    'file': schema_file,
-                    'errors': [f"Invalid schema: {e}"]
-                }
+                errors.append(f"Schema validation error: {e}")
+
+            return {
+                'valid': len(errors) == 0,
+                'file': schema_file,
+                'errors': errors
+            }
 
         except FileNotFoundError:
             return {
@@ -259,7 +274,9 @@ def main() -> int:
                     print(f"No files found matching pattern: {args.pattern}")
                 return 1
 
-            results = cli.batch_validate(files, args.schema)
+            # Use batch validator for better progress tracking
+            batch_validator = BatchValidator()
+            results = batch_validator.validate_batch(files, args.schema, show_progress=not args.quiet)
 
             if not args.quiet:
                 output = output_formatter.format_batch_results(results, args.output)

@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 150
+    },
+    "website": {
+      "type": "string",
+      "format": "uri"
+    },
+    "birthdate": {
+      "type": "string",
+      "format": "date"
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {"type": "string"},
+        "city": {"type": "string"},
+        "zipcode": {"type": "string"}
+      },
+      "required": ["street", "city"]
+    }
+  },
+  "required": ["name", "email", "age"]
+}
