@@ -77,10 +77,19 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 - **1.503 - File Path Validator**: ✅ **COMPLETE** - 7.4X complexity with competition injection breakthrough
 - **1.504 - Date Format Validator**: ✅ **COMPLETE** - 6.4X complexity with V4 framework enhancement
 
-##### 📋 **Optional Input Validation Extensions**
-- **1.505 - Phone Number Validator**: International phone number formats *(optional - pattern established)*
-- **1.506 - IPv4/IPv6 Address Validator**: Network address validation *(optional)*
-- **1.507 - Credit Card Number Validator**: Financial validation patterns *(optional)*
+##### 📋 **Proposed Input Validation Extensions**
+
+**Tier 1A: Deployable Without Infrastructure**
+- **1.505 - JSON Schema Validator**: Structured data validation with format checking *(HIGH PRIORITY - continues bias detection research)*
+- **1.506 - IPv4/IPv6 Address Validator**: Network address validation *(MEDIUM PRIORITY)*
+- **1.507 - Regular Expression Validator**: Pattern validation with safety checking *(MEDIUM PRIORITY)*
+
+**Tier 1B: Regulatory/Infrastructure Dependencies**
+- **1.508 - Phone Number Validator**: International formats *(LOWER PRIORITY - regulatory complexity)*
+- **1.509 - Credit Card Number Validator**: Financial patterns *(LOWER PRIORITY - payment gateway dependency)*
+- **1.510 - Tax ID Validator**: Government ID formats *(LOWER PRIORITY - regulatory complexity)*
+
+**Research Note**: Tier 1A functions are composable and deployable without additional infrastructure. Tier 1B functions require regulatory compliance and external systems for practical deployment, creating 2^n complexity scaling.
 
 **Pattern CONFIRMED**: Consistent over-engineering in Method 2 (avg 12.4X across 4 experiments), V4.1 Adaptive TDD emerges as optimal approach
 
