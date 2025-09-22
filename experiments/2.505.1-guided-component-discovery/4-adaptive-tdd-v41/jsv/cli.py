@@ -204,15 +204,21 @@ def parse_args(args: Optional[List[str]] = None) -> argparse.Namespace:
     validate_parser = subparsers.add_parser('validate', help='Validate JSON data against schema')
     validate_parser.add_argument('data_file', nargs='?', help='JSON data file (omit for stdin)')
     validate_parser.add_argument('--schema', '-s', required=True, help='JSON schema file')
+    validate_parser.add_argument('--output', '-o', choices=['text', 'json', 'csv'], default='text', help='Output format')
+    validate_parser.add_argument('--quiet', '-q', action='store_true', help='Quiet mode - only return exit codes')
 
     # Batch command
     batch_parser = subparsers.add_parser('batch', help='Validate multiple JSON files')
     batch_parser.add_argument('pattern', help='File pattern (e.g., *.json)')
     batch_parser.add_argument('--schema', '-s', required=True, help='JSON schema file')
+    batch_parser.add_argument('--output', '-o', choices=['text', 'json', 'csv'], default='text', help='Output format')
+    batch_parser.add_argument('--quiet', '-q', action='store_true', help='Quiet mode - only return exit codes')
 
     # Check command
     check_parser = subparsers.add_parser('check', help='Check schema validity')
     check_parser.add_argument('schema_file', help='JSON schema file to check')
+    check_parser.add_argument('--output', '-o', choices=['text', 'json', 'csv'], default='text', help='Output format')
+    check_parser.add_argument('--quiet', '-q', action='store_true', help='Quiet mode - only return exit codes')
 
     return parser.parse_args(args)
 
