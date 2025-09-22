@@ -55,17 +55,26 @@ class PathValidator:
                 return result
 
             result['is_valid'] = True
-            result['normalized_path'] = str(path_obj.resolve()) if path_obj.exists() else str(path_obj)
 
-            # Path type checks
+            # Path type checks (these are safe and don't require file system access)
             result['is_absolute'] = path_obj.is_absolute()
             result['is_relative'] = not path_obj.is_absolute()
 
-            # Existence checks
-            result['exists'] = path_obj.exists()
-            if result['exists']:
-                result['is_file'] = path_obj.is_file()
-                result['is_directory'] = path_obj.is_dir()
+            # Check edge cases early (before filesystem operations that might fail)
+            self._check_edge_cases(path, path_obj, result)
+
+            # Existence checks (these might fail for very long paths)
+            try:
+                result['exists'] = path_obj.exists()
+                if result['exists']:
+                    result['is_file'] = path_obj.is_file()
+                    result['is_directory'] = path_obj.is_dir()
+                    result['normalized_path'] = str(path_obj.resolve())
+                else:
+                    result['normalized_path'] = str(path_obj)
+            except OSError as e:
+                result['warnings'].append(f"Cannot check existence: {str(e)}")
+                result['normalized_path'] = str(path_obj)
 
             # Parent directory check
             try:
@@ -73,9 +82,6 @@ class PathValidator:
             except OSError:
                 result['parent_exists'] = False
                 result['warnings'].append("Cannot check parent directory")
-
-            # Additional validations
-            self._check_edge_cases(path, path_obj, result)
 
         except Exception as e:
             result['errors'].append(f"Validation error: {str(e)}")

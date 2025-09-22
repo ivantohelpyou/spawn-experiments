@@ -7,4 +7,14 @@ class PathValidator:
 
     def is_valid(self, path):
         """Check if a path is valid."""
-        return True  # Minimal implementation to pass the first test
+        if path is None or path == "":
+            return False
+        return True
+
+    def is_absolute(self, path):
+        """Check if a path is absolute using os.path."""
+        return os.path.isabs(path)
+
+    def is_relative(self, path):
+        """Check if a path is relative."""
+        return not os.path.isabs(path)
