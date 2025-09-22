@@ -1,0 +1,4 @@
+jsonschema>=4.0.0
+click>=8.0.0
+colorama>=0.4.0
+tqdm>=4.60.0
