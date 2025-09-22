@@ -6,6 +6,7 @@ A command-line tool for validating JSON data against JSON Schema.
 
 import json
 import sys
+import argparse
 from dataclasses import dataclass
 from typing import List, Dict, Any, Optional
 
@@ -89,6 +90,51 @@ def _validate_type(data: Any, expected_type: str) -> bool:
 
     expected_python_type = type_mapping[expected_type]
     return isinstance(data, expected_python_type)
+
+
+def parse_args(args_list: Optional[List[str]] = None) -> argparse.Namespace:
+    """
+    Parse command-line arguments for the JSON Schema Validator.
+
+    Args:
+        args_list: Optional list of arguments (for testing). If None, uses sys.argv.
+
+    Returns:
+        Parsed arguments namespace
+    """
+    parser = argparse.ArgumentParser(
+        prog='jsv',
+        description='JSON Schema Validator CLI tool'
+    )
+
+    # Create subparsers for different commands
+    subparsers = parser.add_subparsers(dest='command', help='Available commands')
+
+    # Validate command
+    validate_parser = subparsers.add_parser('validate', help='Validate a JSON file against a schema')
+    validate_parser.add_argument('input_file', help='JSON file to validate')
+    validate_parser.add_argument('--schema', required=True, help='JSON schema file')
+    validate_parser.add_argument('--quiet', action='store_true', help='Only return exit codes')
+    validate_parser.add_argument('--output', choices=['text', 'json'], default='text',
+                                help='Output format (default: text)')
+
+    # Batch command
+    batch_parser = subparsers.add_parser('batch', help='Validate multiple JSON files')
+    batch_parser.add_argument('pattern', help='File pattern (e.g., *.json)')
+    batch_parser.add_argument('--schema', required=True, help='JSON schema file')
+    batch_parser.add_argument('--output', choices=['text', 'json', 'csv'], default='text',
+                             help='Output format (default: text)')
+    batch_parser.add_argument('--quiet', action='store_true', help='Only return exit codes')
+
+    # Check command
+    check_parser = subparsers.add_parser('check', help='Verify a JSON schema file')
+    check_parser.add_argument('schema_file', help='JSON schema file to verify')
+    check_parser.add_argument('--quiet', action='store_true', help='Only return exit codes')
+
+    if args_list is None:
+        return parser.parse_args()
+    else:
+        return parser.parse_args(args_list)
 
 
 if __name__ == '__main__':
