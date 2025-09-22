@@ -1,0 +1,8 @@
+{
+  "name": "",
+  "age": -5,
+  "email": "invalid-email",
+  "website": "not-a-uri",
+  "birthdate": "invalid-date",
+  "tags": ["developer", 123]
+}
