@@ -163,6 +163,41 @@ def validate_file(data_file_path: str, schema_file_path: str) -> ValidationResul
     return result
 
 
+def batch_validate(file_paths: List[str], schema_file_path: str) -> List[ValidationResult]:
+    """
+    Validate multiple JSON files against a schema file.
+
+    Args:
+        file_paths: List of paths to JSON data files
+        schema_file_path: Path to the JSON schema file
+
+    Returns:
+        List of ValidationResult objects
+    """
+    results = []
+    for file_path in file_paths:
+        result = validate_file(file_path, schema_file_path)
+        results.append(result)
+    return results
+
+
+def batch_validate_pattern(pattern: str, schema_file_path: str) -> List[ValidationResult]:
+    """
+    Validate multiple JSON files matching a pattern against a schema file.
+
+    Args:
+        pattern: Glob pattern for JSON files (e.g., "*.json")
+        schema_file_path: Path to the JSON schema file
+
+    Returns:
+        List of ValidationResult objects
+    """
+    file_paths = glob.glob(pattern)
+    # Filter out the schema file itself if it matches the pattern
+    file_paths = [fp for fp in file_paths if fp != schema_file_path]
+    return batch_validate(file_paths, schema_file_path)
+
+
 def parse_args(args_list: Optional[List[str]] = None) -> argparse.Namespace:
     """
     Parse command-line arguments for the JSON Schema Validator.
