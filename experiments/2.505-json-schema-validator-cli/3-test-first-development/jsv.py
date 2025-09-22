@@ -93,6 +93,75 @@ def _validate_type(data: Any, expected_type: str) -> bool:
     return isinstance(data, expected_python_type)
 
 
+def validate_file(data_file_path: str, schema_file_path: str) -> ValidationResult:
+    """
+    Validate a JSON file against a schema file.
+
+    Args:
+        data_file_path: Path to the JSON data file
+        schema_file_path: Path to the JSON schema file
+
+    Returns:
+        ValidationResult object with validation status and errors
+    """
+    errors = []
+
+    # Check if data file exists
+    if not os.path.exists(data_file_path):
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Data file not found: {data_file_path}"],
+            file_path=data_file_path
+        )
+
+    # Check if schema file exists
+    if not os.path.exists(schema_file_path):
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Schema file not found: {schema_file_path}"],
+            file_path=data_file_path
+        )
+
+    try:
+        # Load and parse data file
+        with open(data_file_path, 'r') as f:
+            data = json.load(f)
+    except json.JSONDecodeError as e:
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Invalid JSON in data file: {str(e)}"],
+            file_path=data_file_path
+        )
+    except Exception as e:
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Error reading data file: {str(e)}"],
+            file_path=data_file_path
+        )
+
+    try:
+        # Load and parse schema file
+        with open(schema_file_path, 'r') as f:
+            schema = json.load(f)
+    except json.JSONDecodeError as e:
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Invalid JSON in schema file: {str(e)}"],
+            file_path=data_file_path
+        )
+    except Exception as e:
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Error reading schema file: {str(e)}"],
+            file_path=data_file_path
+        )
+
+    # Perform validation
+    result = validate_json(data, schema)
+    result.file_path = data_file_path
+    return result
+
+
 def parse_args(args_list: Optional[List[str]] = None) -> argparse.Namespace:
     """
     Parse command-line arguments for the JSON Schema Validator.
