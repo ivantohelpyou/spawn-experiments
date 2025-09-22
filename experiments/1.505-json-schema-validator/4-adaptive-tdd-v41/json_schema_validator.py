@@ -202,12 +202,44 @@ class JSONSchemaValidator:
             # Unknown format - could be ignored or flagged
             pass
 
+    def _validate_email(self, email: str) -> bool:
+        """Validate email format with strict rules"""
+        # Basic pattern check
+        if not self.EMAIL_PATTERN.match(email):
+            return False
+
+        # Additional checks for edge cases
+        local, domain = email.split('@', 1)
+
+        # Check for consecutive dots
+        if '..' in local or '..' in domain:
+            return False
+
+        # Check for leading/trailing dots in local part
+        if local.startswith('.') or local.endswith('.'):
+            return False
+
+        # Check for leading/trailing dots in domain
+        if domain.startswith('.') or domain.endswith('.'):
+            return False
+
+        return True
+
     def _validate_uri(self, uri: str) -> bool:
         """Validate URI format"""
         try:
             result = urlparse(uri)
-            # A valid URI should have at least a scheme
-            return bool(result.scheme)
+            # A valid URI should have at least a scheme and netloc (for http/https)
+            # or scheme and path (for other schemes like file, mailto)
+            if not result.scheme:
+                return False
+
+            # For http/https URIs, require netloc
+            if result.scheme.lower() in ('http', 'https'):
+                return bool(result.netloc)
+
+            # For other schemes, require either netloc or path
+            return bool(result.netloc or result.path)
         except Exception:
             return False
 
