@@ -364,5 +364,136 @@ class TestOutputFormats(unittest.TestCase):
         self.assertEqual(exit_code, 1)
 
 
+class TestSchemaVerification(unittest.TestCase):
+    """Test cases for schema verification functionality."""
+
+    def setUp(self):
+        """Set up test fixtures."""
+        self.test_dir = tempfile.mkdtemp()
+
+        # Valid JSON Schema
+        self.valid_schema = {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer", "minimum": 0}
+            },
+            "required": ["name"]
+        }
+        self.valid_schema_file = os.path.join(self.test_dir, 'valid_schema.json')
+        with open(self.valid_schema_file, 'w') as f:
+            json.dump(self.valid_schema, f)
+
+        # Invalid JSON Schema (missing type)
+        self.invalid_schema = {
+            "properties": {
+                "name": {"type": "unknown_type"}  # Invalid type
+            }
+        }
+        self.invalid_schema_file = os.path.join(self.test_dir, 'invalid_schema.json')
+        with open(self.invalid_schema_file, 'w') as f:
+            json.dump(self.invalid_schema, f)
+
+    def tearDown(self):
+        """Clean up test fixtures."""
+        shutil.rmtree(self.test_dir)
+
+    def test_verify_valid_schema(self):
+        """Test schema verification with valid schema."""
+        # This test will fail initially (RED) because verify_schema doesn't exist yet
+        from jsv import verify_schema
+
+        result = verify_schema(self.valid_schema_file)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(len(result.errors), 0)
+
+    def test_verify_invalid_schema(self):
+        """Test schema verification with invalid schema."""
+        from jsv import verify_schema
+
+        result = verify_schema(self.invalid_schema_file)
+        self.assertFalse(result.is_valid)
+        self.assertGreater(len(result.errors), 0)
+
+    def test_verify_nonexistent_schema(self):
+        """Test schema verification with non-existent file."""
+        from jsv import verify_schema
+
+        nonexistent_file = os.path.join(self.test_dir, 'nonexistent.json')
+        result = verify_schema(nonexistent_file)
+        self.assertFalse(result.is_valid)
+        self.assertIn("not found", result.errors[0].lower())
+
+
+class TestMainCLI(unittest.TestCase):
+    """Test cases for main CLI functionality."""
+
+    def setUp(self):
+        """Set up test fixtures."""
+        self.test_dir = tempfile.mkdtemp()
+
+        # Create test files
+        self.schema_data = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer", "minimum": 0}
+            },
+            "required": ["name"]
+        }
+        self.schema_file = os.path.join(self.test_dir, 'schema.json')
+        with open(self.schema_file, 'w') as f:
+            json.dump(self.schema_data, f)
+
+        self.valid_data = {"name": "John", "age": 30}
+        self.valid_file = os.path.join(self.test_dir, 'valid.json')
+        with open(self.valid_file, 'w') as f:
+            json.dump(self.valid_data, f)
+
+    def tearDown(self):
+        """Clean up test fixtures."""
+        shutil.rmtree(self.test_dir)
+
+    def test_main_validate_command(self):
+        """Test main CLI with validate command."""
+        # This test will fail initially (RED) because main doesn't exist yet
+        from jsv import main
+
+        # Mock sys.argv for validate command
+        test_args = ['jsv', 'validate', self.valid_file, '--schema', self.schema_file]
+
+        with patch('sys.argv', test_args):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                result = main()
+                self.assertEqual(result, 0)  # Success exit code
+                output = mock_stdout.getvalue()
+                self.assertIn("VALID", output)
+
+    def test_main_check_command(self):
+        """Test main CLI with check command."""
+        from jsv import main
+
+        test_args = ['jsv', 'check', self.schema_file]
+
+        with patch('sys.argv', test_args):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                result = main()
+                self.assertEqual(result, 0)  # Success exit code
+
+    def test_main_quiet_mode(self):
+        """Test main CLI in quiet mode."""
+        from jsv import main
+
+        test_args = ['jsv', 'validate', self.valid_file, '--schema', self.schema_file, '--quiet']
+
+        with patch('sys.argv', test_args):
+            with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                result = main()
+                self.assertEqual(result, 0)  # Success exit code
+                output = mock_stdout.getvalue()
+                self.assertEqual(output, "")  # No output in quiet mode
+
+
 if __name__ == '__main__':
     unittest.main()
