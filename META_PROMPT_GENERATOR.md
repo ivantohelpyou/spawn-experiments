@@ -367,6 +367,81 @@ Task(subagent_type="general-purpose", description="Method 4 Enhanced TDD",
 - Documentation of methodological innovations discovered
 - Clear language suitable for both technical and business audiences
 
+### REQUIRED: Methodology Comparison Demo Script
+
+**After completing the experiment report**, create an interactive comparison demonstration script that highlights methodology differences:
+
+**File name**: `methodology_comparison_demo.py` (or `simple_robustness_demo.py` for validation problems)
+
+**Script Requirements**:
+1. **Import all four implementations** in a single script with proper error handling
+2. **Test edge cases** specifically designed to reveal methodology differences
+3. **Show concrete examples** where one method succeeds/fails while others don't
+4. **Rank implementations** by robustness, performance, or domain-relevant metrics
+5. **Provide clear output** suitable for presentations and technical demonstrations
+6. **Path independence**: Script must work when run from project root or experiment directory
+
+**Comparison Areas by Domain**:
+- **Input validation**: Test malformed inputs, edge cases, security attack vectors
+- **Algorithms**: Test performance boundaries, correctness on edge cases
+- **Data structures**: Test capacity limits, performance characteristics, memory usage
+- **Security tools**: Test against attack patterns, input sanitization effectiveness
+- **Parsing/text**: Test with malformed input, encoding issues, boundary conditions
+
+**Expected Outputs**:
+- **Disagreement analysis**: Cases where validators/implementations differ
+- **Robustness ranking**: Most to least robust/secure implementations
+- **Performance comparison**: Speed/efficiency metrics where applicable
+- **Security implications**: Which methods introduce vulnerabilities
+- **Business recommendations**: When to use each approach based on evidence
+
+**Technical Implementation Notes**:
+- Use `os.path.dirname(os.path.abspath(__file__))` to find script location
+- Support both `python experiments/X.XXX-name/demo_script.py` (from project root) and `python demo_script.py` (from experiment dir)
+- Include clear error messages if method directories not found
+- Use absolute paths for imports to avoid module conflicts
+
+**Example Path Resolution**:
+```python
+import os
+import sys
+
+# Get directory where script is located
+script_dir = os.path.dirname(os.path.abspath(__file__))
+method1_dir = os.path.join(script_dir, "1-immediate-implementation")
+sys.path.insert(0, method1_dir)
+```
+
+**Value**: This script serves as a **living demonstration** of methodology differences, providing concrete evidence for experiment conclusions and interactive material for presentations.
+
+### Retroactive Demo Script Creation
+
+For **existing experiments without demo scripts**, follow this process:
+
+**Priority Experiments for Demo Scripts**:
+1. **Experiments with dramatic differences** (code size, approach, performance)
+2. **Experiments with security implications** (validation, security tools)
+3. **Experiments with interesting architectural differences** (data structures, algorithms)
+
+**Retroactive Script Requirements**:
+- Use same technical implementation as above (path independence, error handling)
+- Focus on **most significant findings** from the experiment report
+- Include **quantitative metrics** (code size, performance, test coverage)
+- Show **concrete examples** of methodology differences
+- Add **presentation context** explaining why differences matter
+
+**Documentation Updates**:
+- Add demo script links to EXPERIMENT_INDEX.md with format: `📺 [Interactive Demo](path/to/script.py)`
+- Update main README.md with featured demos
+- Include demo commands that work from project root
+
+**Example Retroactive Demos**:
+- **Anagram Grouper**: Shows 3X code size difference (TDD vs Specification-driven)
+- **Email Validator**: Shows security vulnerabilities (robustness comparison)
+- **LRU Cache**: Shows performance and feature differences
+
+This retroactive approach ensures **all significant experiments have interactive demonstrations** for presentations and education.
+
 ## Publication Steps (Final Phase)
 
 After completing the experiment report, perform these critical publication steps to maximize research impact:

@@ -4,15 +4,15 @@
 
 ---
 
-## 📰 LATEST EXPERIMENT: TDD Wins Big on Simple Problems - 3X Less Code Than Specs!
+## 📰 LATEST EXPERIMENT: TDD Prevents AI Over-Engineering - 3.6X Code Reduction!
 
-**[Experiment 1.101: Anagram Grouper](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)** *(September 20, 2025)*
+**[Experiment 1.501: Email Validator](experiments/1.501-email-validator/EXPERIMENT_REPORT.md)** *(September 21, 2025)*
 
-**Key Finding**: Test-Driven Development crushed it with just **401 lines** of clean, tested code while Specification-Driven Development bloated to **1,440 lines** for the same simple algorithm. Method 1 (immediate implementation) finished in 1 minute flat but Method 3's TDD approach delivered the best overall value.
+**Key Finding**: When unconstrained, AI spontaneously creates complexity! Method 1 built a **4-level validation framework** with IP addresses, quoted strings, and Unicode support (1,405 lines) while TDD delivered identical core functionality in just **393 lines** - a 3.6X reduction.
 
-**Actionable Principle**: For Tier 1 algorithmic problems, lighter approaches win. Save the heavy specs for complex systems.
+**Actionable Principle**: For input validation, TDD naturally enforces constraints that prevent feature explosion. Immediate implementation without requirements leads to dangerous over-engineering.
 
-Same requirements, radically different code! All four methodologies delivered identical functionality with dramatically different approaches - from single-file pragmatism to comprehensive specifications. [Read the full report →](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)
+Revolutionary insight: AI defaults to complexity when given freedom, but Test-Driven Development acts as a natural constraint system, forcing focus on essential requirements. [Read the full report →](experiments/1.501-email-validator/EXPERIMENT_REPORT.md)
 
 ---
 
@@ -32,9 +32,29 @@ Fastest TDD implementation at 3m 37s! All four methodologies delivered working c
 
 ## 🔬 Research Overview
 
-This repository contains a **mature experimental framework** for studying AI-assisted development methodologies, with **10 completed experiments** and a comprehensive **three-tier research system** (crawl-walk-run). The research provides quantitative evidence that **methodology guidance significantly impacts AI development patterns and outcomes**.
+This repository contains a **mature experimental framework** for studying AI-assisted development methodologies, with **11 completed experiments** and a comprehensive **three-tier research system** (crawl-walk-run). The research provides quantitative evidence that **methodology guidance significantly impacts AI development patterns and outcomes**.
 
-**Key Finding**: Different methodologies produce measurably different approaches to problem-solving, component discovery, and system architecture across complexity levels.
+## 🔬 **Key Research Discoveries**
+
+### 1. **The Complexity-Matching Principle** 🎯
+**Methodology choice should match problem complexity, not follow universal application.**
+- Simple problems: TDD or Immediate Implementation optimal (3-10X efficiency gains)
+- Complex problems: Validated Test Development prevents under-engineering
+- **Mismatch creates dangerous over/under-engineering**
+
+### 2. **AI Over-Engineering Epidemic** 🚨
+**Unconstrained AI spontaneously creates 3-7X more complexity than needed.**
+- Email Validator: Method 1 created 4 validation levels unprompted (1,405 vs 393 lines)
+- Anagram Grouper: Method 2 generated 1,440 lines for 60-line algorithm
+- **TDD acts as natural constraint system** preventing feature explosion
+
+### 3. **Security Through Constraints** 🛡️
+**AI validation without constraints creates security vulnerabilities.**
+- Method 1 accepts 7 invalid email formats that bypass security
+- Methods 2,3,4 properly reject malformed inputs
+- **Immediate implementation risks permissive validation**
+
+**Meta-Finding**: Different methodologies produce measurably different approaches to problem-solving, component discovery, and system architecture across complexity levels.
 
 ## 🚀 Quick Start
 
@@ -62,9 +82,34 @@ You'll receive four complete prompts following bias prevention protocols, ready 
 - **[1.205 - Prime Number Generator](experiments/1.205-prime-number-generator/EXPERIMENT_REPORT.md)** - Math Operations/Algorithms - ✅ **Complete**
 - **[1.302 - LRU Cache with TTL](experiments/1.302-lru-cache-ttl/EXPERIMENT_REPORT.md)** - Data Structures/Performance - ✅ **Method 2 fastest**
 - **[1.402 - Unicode Password Manager](experiments/1.402-unicode-password-manager/)** - Security/Unicode - ✅ **Complete**
+- **[1.501 - Email Validator](experiments/1.501-email-validator/EXPERIMENT_REPORT.md)** - Input Validation/RFC Compliance - ✅ **TDD Winner: 3.6X reduction**
 
 
 📊 **[View Complete Experiment Index with Detailed Results →](EXPERIMENT_INDEX.md)**
+
+## 📺 **Interactive Methodology Demos**
+
+**Experience the differences live!** Try these demo scripts to see methodology comparisons in action:
+
+### 🎯 **Featured Demos:**
+
+**[Anagram Grouper: Code Size Comparison](experiments/1.101-anagram-grouper/methodology_comparison_demo.py)**
+```bash
+python experiments/1.101-anagram-grouper/methodology_comparison_demo.py
+```
+**Shows**: TDD produced 3X less code (401 lines) than specification-driven (1,440 lines) for identical functionality
+
+**[Email Validator: Security Vulnerability Demo](experiments/1.501-email-validator/simple_robustness_demo.py)**
+```bash
+python experiments/1.501-email-validator/simple_robustness_demo.py
+```
+**Shows**: Method 1 accepts 7 invalid email formats that create security vulnerabilities
+
+### 🎤 **Perfect for Presentations**
+- **Live comparisons** of all four methodologies
+- **Concrete evidence** of methodology impact
+- **Interactive output** that demonstrates findings
+- **Run from project root** for easy demo setup
 
 ### 📚 **Research Framework Development**
 - **[DESIGN_OVERVIEW.md](DESIGN_OVERVIEW.md)** - Complete research methodology overview
@@ -72,6 +117,12 @@ You'll receive four complete prompts following bias prevention protocols, ready 
 - **Discovered components research**: Study organic component reuse patterns
 - **Bias prevention protocols**: Comprehensive neutrality enforcement
 - **[SHARING_EXPERIMENTS_GUIDE.md](SHARING_EXPERIMENTS_GUIDE.md)** - How to present your findings to groups/conferences
+
+### 🧠 **[Research Findings](findings/README.md)**
+Evidence-based insights from 11 completed experiments:
+- **[Complexity-Matching Principle](findings/complexity-matching-principle.md)** - Methodology choice should match problem complexity
+- **[AI Over-Engineering Patterns](findings/ai-over-engineering-patterns.md)** - Unconstrained AI creates 3-7X complexity bloat
+- **[Input Validation Patterns](findings/input-validation-patterns.md)** - TDD prevents security vulnerabilities in validation
 
 ## 🧪 Four Development Methodologies
 
@@ -277,7 +328,7 @@ If you use this research in academic work or professional development:
 ```
 AI Development Methodology Research (2025)
 Ivan Schneider, Model Citizen Developer
-GitHub: https://github.com/ivantohelpyou/tdd-demo
+GitHub: https://github.com/ivantohelpyou/spawn-experiments
 Key Finding: Methodology guidance dramatically improves AI-generated code quality
 ```
 

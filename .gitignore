@@ -188,6 +188,9 @@ passwords.json
 /notes/
 notes/
 
+# Academic papers (PDFs can be large and have copyright)
+*.pdf
+
 # Internal research methodology (keep private)
 /design/
 design/

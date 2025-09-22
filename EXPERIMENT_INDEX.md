@@ -5,18 +5,18 @@
 
 ## Latest Experiment
 
-### 🆕 **[1.101 - Anagram Grouper](experiments/1.101-anagram-grouper/EXPERIMENT_REPORT.md)** (September 20, 2025)
-**Tier 1 Function** | String Processing Domain | Python | 8 minutes parallel execution
+### 🆕 **[1.501 - Email Validator](experiments/1.501-email-validator/EXPERIMENT_REPORT.md)** (September 21, 2025)
+**Tier 1 Function** | Input Validation Domain | Python | ~15 minutes parallel execution
 
 **Key Findings:**
-- **Method 3 (TDD)** achieved best code efficiency: 401 lines vs Method 2's 1,440 lines
-- **Method 1** fastest at ~1 minute, naturally discovered useful features
-- **Method 4's test validation** caught subtle bugs early, proving its value
-- **Specification explosion risk**: Method 2 over-engineered a simple problem by 3x
+- **Method 1** spontaneously created 4-level validation framework (1,405 lines) without requirements
+- **Method 3 (TDD)** delivered same functionality in just 393 lines - **3.6X reduction**
+- **Method 4's test validation** created 5.66:1 test-to-code ratio proving test effectiveness
+- **Over-engineering epidemic**: Method 1 added IP addresses, quoted strings, Unicode unprompted
 
-**Winner**: Method 3 (TDD) - Best balance of speed, quality, and maintainability for algorithmic problems
+**Winner**: Method 3 (TDD) - Natural constraint enforcement prevents feature explosion in validation tasks
 
-*Legacy: 012-anagram-grouper*
+*First experiment in Input Validation domain (1.5XX)*
 
 ---
 
@@ -30,6 +30,7 @@
 - **Focus**: Hash key strategy and grouping logic
 - **Best Method**: Method 3 (TDD) - Clean, efficient, well-tested
 - **Surprising Finding**: Method 2 produced 3x more code than necessary
+- **📺 [Interactive Demo](experiments/1.101-anagram-grouper/methodology_comparison_demo.py)** - Shows 3X code difference live
 
 #### [1.102 - Multilingual Word Counter](experiments/1.102-multilingual-word-counter/EXPERIMENT_REPORT.md) *(Legacy: 009)*
 *September 2025 | String Processing*
@@ -85,13 +86,47 @@
 - **Problem**: Full password management application
 - **Status**: ✅ Completed (pre-methodology framework)
 
+#### [1.501 - Email Validator](experiments/1.501-email-validator/EXPERIMENT_REPORT.md)
+*September 21, 2025 | Input Validation*
+- **Problem**: Validate email addresses with RFC compliance
+- **Best Method**: Method 3 (TDD) - 3.6X less code than Method 1
+- **Key Finding**: Unconstrained AI spontaneously over-engineers validation
+- **Surprising**: Method 1 created 4 validation levels unprompted
+- **📺 [Interactive Demo](experiments/1.501-email-validator/simple_robustness_demo.py)** - Shows security vulnerabilities live
+
 ### Summary
 
-**Total Completed Experiments**: 10
+**Total Completed Experiments**: 11
 - **String Processing (1.1XX)**: 4 experiments
 - **Mathematical Operations (1.2XX)**: 4 experiments
 - **Data Structures (1.3XX)**: 1 experiment
 - **Security/Cryptography (1.4XX)**: 1 experiment
+- **Input Validation (1.5XX)**: 1 experiment
+
+---
+
+## 📺 Interactive Demos
+
+Experience methodology differences live! These demo scripts can be run from the project root to see real-time comparisons:
+
+### Available Demos:
+- **[Anagram Grouper Demo](experiments/1.101-anagram-grouper/methodology_comparison_demo.py)**
+  ```bash
+  python experiments/1.101-anagram-grouper/methodology_comparison_demo.py
+  ```
+  Shows dramatic 3X code size difference between TDD and specification-driven approaches
+
+- **[Email Validator Security Demo](experiments/1.501-email-validator/simple_robustness_demo.py)**
+  ```bash
+  python experiments/1.501-email-validator/simple_robustness_demo.py
+  ```
+  Reveals 7 security vulnerabilities in Method 1's permissive validation
+
+### Demo Features:
+- ✅ **Live comparison** of all four methodologies
+- ✅ **Interactive output** perfect for presentations
+- ✅ **Concrete evidence** of methodology differences
+- ✅ **Run from anywhere** - project root or experiment directory
 
 ---
 
@@ -154,7 +189,7 @@
 ### Planned Experiments
 
 #### Tier 1 - Input Validation Domain (1.5XX)
-- **1.501** - Email Validator
+- **1.501** - Email Validator ✅ **Completed** (TDD Winner)
 - **1.502** - URL Validator
 - **1.503** - File Path Validator
 - **1.504** - Date Format Validator
@@ -176,4 +211,4 @@
 
 ---
 
-*Last Updated: September 20, 2025*
+*Last Updated: September 21, 2025*
