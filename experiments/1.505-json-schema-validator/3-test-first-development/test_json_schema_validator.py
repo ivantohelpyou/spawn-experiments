@@ -16,6 +16,14 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertTrue(result.is_valid)
         self.assertEqual(result.errors, [])
 
+    def test_validate_simple_string_type_invalid(self):
+        """Test validating a non-string against string type schema"""
+        schema = {"type": "string"}
+        data = 123
+        result = self.validator.validate(data, schema)
+        self.assertFalse(result.is_valid)
+        self.assertIn("Expected type 'string'", result.errors[0])
+
 
 if __name__ == '__main__':
     unittest.main()

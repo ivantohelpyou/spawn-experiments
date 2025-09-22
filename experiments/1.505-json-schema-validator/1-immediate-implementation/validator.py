@@ -127,7 +127,7 @@ class JSONSchemaValidator:
 
 def main():
     """Command line interface for the validator."""
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         print("Usage: python validator.py <data_file> <schema_file>")
         print("   or: python validator.py --test")
         sys.exit(1)
@@ -135,6 +135,11 @@ def main():
     if sys.argv[1] == "--test":
         run_tests()
         return
+
+    if len(sys.argv) < 3:
+        print("Usage: python validator.py <data_file> <schema_file>")
+        print("   or: python validator.py --test")
+        sys.exit(1)
 
     data_file = sys.argv[1]
     schema_file = sys.argv[2]
