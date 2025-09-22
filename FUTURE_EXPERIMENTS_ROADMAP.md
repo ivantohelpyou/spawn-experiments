@@ -77,12 +77,16 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 - **1.503 - File Path Validator**: ✅ **COMPLETE** - 7.4X complexity with competition injection breakthrough
 - **1.504 - Date Format Validator**: ✅ **COMPLETE** - 6.4X complexity with V4 framework enhancement
 
-##### 📋 **Proposed Input Validation Extensions**
+##### ✅ **Completed Input Validation Experiments**
+- **1.501 - Email Validator**: ✅ **COMPLETE** - 3.6X complexity explosion baseline
+- **1.502 - URL Validator**: ✅ **COMPLETE** - 32.3X complexity explosion peak
+- **1.503 - File Path Validator**: ✅ **COMPLETE** - 7.4X complexity with competition injection breakthrough
+- **1.504 - Date Format Validator**: ✅ **COMPLETE** - 6.4X complexity with V4 framework enhancement
+- **1.505 - JSON Schema Validator**: ✅ **COMPLETE** - 3.1X complexity, V4.1 confirmed optimal
 
-**Tier 1A: Deployable Without Infrastructure**
-- **1.505 - JSON Schema Validator**: Structured data validation with format checking *(HIGH PRIORITY - continues bias detection research)*
-- **1.506 - IPv4/IPv6 Address Validator**: Network address validation *(MEDIUM PRIORITY)*
-- **1.507 - Regular Expression Validator**: Pattern validation with safety checking *(MEDIUM PRIORITY)*
+##### 📋 **Optional Tier 1A Extensions**
+- **1.506 - IPv4/IPv6 Address Validator**: Network address validation *(OPTIONAL - pattern established)*
+- **1.507 - Regular Expression Validator**: Pattern validation with safety checking *(OPTIONAL)*
 
 **Tier 1B: Regulatory/Infrastructure Dependencies**
 - **1.508 - Phone Number Validator**: International formats *(LOWER PRIORITY - regulatory complexity)*
@@ -93,13 +97,16 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 
 **Pattern CONFIRMED**: Consistent over-engineering in Method 2 (avg 12.4X across 4 experiments), V4.1 Adaptive TDD emerges as optimal approach
 
-### **Tier 2: CLI Tools (020-029) - WALK**
+### **Tier 2: CLI Tools (2.XXX) - WALK**
 **Scope**: Command-line utilities, file I/O, composable tools
 **Duration**: 15-30 minutes per approach (60-120 min total parallel)
 **Claude Code Usage**: ⚠️ **Requires >2 hours remaining** (based on 007 resource analysis)
 **Purpose**: Study interface design and component composition
-**Components Available**: Discoverable functions from Tier 1 (010-014)
+**Components Available**: Best-of-breed validators in utils/validation/
 **Innovation**: Component discovery research - natural reuse vs. rebuild patterns
+
+#### 🚀 **Active Tier 2 Experiment**
+- **2.505 - JSON Schema Validator CLI**: Component discovery with utils/validation/ *(READY TO EXECUTE)*
 
 #### Planned Tier 2 Experiments (Strategic Component Alignment)
 - **2.501 - Password Manager CLI**: Natural reuse of 1.401.0 password generation

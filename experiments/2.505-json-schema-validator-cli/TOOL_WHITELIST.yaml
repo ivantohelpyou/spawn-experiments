@@ -1,0 +1,57 @@
+# Tool Whitelist for Experiment 2.505
+# Auto-approve these operations for accurate timing measurement
+
+file_operations:
+  read:
+    - "experiments/2.505-json-schema-validator-cli/**"
+    - "utils/validation/**"
+    - "experiments/1.50*/**/*.py"  # Allow discovery of prior work
+
+  write:
+    - "experiments/2.505-json-schema-validator-cli/**"
+
+  edit:
+    - "experiments/2.505-json-schema-validator-cli/**"
+
+bash_commands:
+  # Development operations
+  - regex: "mkdir -p experiments/2\\.505-.*"
+  - regex: "cd experiments/2\\.505-.*"
+  - regex: "python experiments/2\\.505-.*\\.py"
+  - regex: "python -m pytest experiments/2\\.505-.*"
+  - regex: "python -c.*experiments/2\\.505.*"
+
+  # Git operations
+  - regex: "git checkout -b exp-2505-.*"
+  - regex: "git add experiments/2\\.505-.*"
+  - regex: "git commit -m.*"
+  - regex: "git status"
+  - regex: "git log.*"
+
+  # Discovery operations
+  - regex: "ls utils/.*"
+  - regex: "ls experiments/1\\.50.*"
+  - regex: "find utils -name.*\\.py"
+  - regex: "find experiments/1\\.50.* -name.*\\.py"
+  - regex: "grep -r 'validate' utils/"
+  - regex: "cat utils/validation/__init__\\.py"
+
+  # Analysis operations
+  - regex: "wc -l experiments/2\\.505-.*"
+  - regex: "tree experiments/2\\.505-.*"
+
+python_imports:
+  # Allow importing from utils without approval
+  - "from utils.validation import"
+  - "import utils.validation"
+  - "from utils.validation.*"
+
+glob_patterns:
+  - "utils/**/*.py"
+  - "experiments/1.50*/**/*.py"
+  - "experiments/2.505-*/**/*.py"
+
+grep_patterns:
+  - path: "utils/"
+  - path: "experiments/1.50*/"
+  - path: "experiments/2.505-*/"
