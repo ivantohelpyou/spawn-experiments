@@ -1,7 +1,33 @@
 """Progress tracking utilities for batch operations."""
 
 from typing import Optional, Any
-from tqdm import tqdm
+
+try:
+    from tqdm import tqdm
+    HAS_TQDM = True
+except ImportError:
+    HAS_TQDM = False
+    # Create a simple fallback class
+    class tqdm:
+        def __init__(self, total=None, desc="", unit="", unit_scale=True, leave=True):
+            self.total = total
+            self.desc = desc
+            self.current = 0
+
+        def update(self, n=1):
+            self.current += n
+            if self.total:
+                print(f"\r{self.desc}: {self.current}/{self.total}", end="", flush=True)
+
+        def set_description(self, desc):
+            self.desc = desc
+
+        def set_postfix(self, **kwargs):
+            pass
+
+        def close(self):
+            if self.total:
+                print()  # New line
 
 
 class ProgressTracker:

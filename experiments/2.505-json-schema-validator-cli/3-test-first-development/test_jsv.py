@@ -495,5 +495,82 @@ class TestMainCLI(unittest.TestCase):
                 self.assertEqual(output, "")  # No output in quiet mode
 
 
+class TestStdinOperations(unittest.TestCase):
+    """Test cases for stdin pipeline operations."""
+
+    def setUp(self):
+        """Set up test fixtures."""
+        self.test_dir = tempfile.mkdtemp()
+
+        # Create test schema file
+        self.schema_data = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer", "minimum": 0}
+            },
+            "required": ["name"]
+        }
+        self.schema_file = os.path.join(self.test_dir, 'schema.json')
+        with open(self.schema_file, 'w') as f:
+            json.dump(self.schema_data, f)
+
+    def tearDown(self):
+        """Clean up test fixtures."""
+        shutil.rmtree(self.test_dir)
+
+    def test_validate_from_stdin_valid_data(self):
+        """Test validation from stdin with valid data."""
+        # This test will fail initially (RED) because validate_stdin doesn't exist yet
+        from jsv import validate_stdin
+
+        valid_data = {"name": "John", "age": 30}
+        json_input = json.dumps(valid_data)
+
+        result = validate_stdin(json_input, self.schema_file)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(len(result.errors), 0)
+        self.assertIsNone(result.file_path) or self.assertEqual(result.file_path, "stdin")
+
+    def test_validate_from_stdin_invalid_data(self):
+        """Test validation from stdin with invalid data."""
+        from jsv import validate_stdin
+
+        invalid_data = {"age": -5}  # Missing name, negative age
+        json_input = json.dumps(invalid_data)
+
+        result = validate_stdin(json_input, self.schema_file)
+        self.assertFalse(result.is_valid)
+        self.assertGreater(len(result.errors), 0)
+
+    def test_validate_from_stdin_malformed_json(self):
+        """Test validation from stdin with malformed JSON."""
+        from jsv import validate_stdin
+
+        malformed_input = '{"name": "John", "age":}'
+
+        result = validate_stdin(malformed_input, self.schema_file)
+        self.assertFalse(result.is_valid)
+        self.assertGreater(len(result.errors), 0)
+        self.assertIn("json", result.errors[0].lower())
+
+    def test_main_cli_with_stdin(self):
+        """Test main CLI reading from stdin."""
+        from jsv import main
+
+        valid_data = {"name": "John", "age": 30}
+        json_input = json.dumps(valid_data)
+
+        test_args = ['jsv', 'validate', '-', '--schema', self.schema_file]
+
+        with patch('sys.argv', test_args):
+            with patch('sys.stdin.read', return_value=json_input):
+                with patch('sys.stdout', new=StringIO()) as mock_stdout:
+                    result = main()
+                    self.assertEqual(result, 0)  # Success exit code
+                    output = mock_stdout.getvalue()
+                    self.assertIn("VALID", output)
+
+
 if __name__ == '__main__':
     unittest.main()
