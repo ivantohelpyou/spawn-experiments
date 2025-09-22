@@ -1,3 +1,6 @@
+import re
+
+
 class ValidationResult:
     """Result object for validation operations"""
 
@@ -29,6 +32,11 @@ class JSONSchemaValidator:
                 if not self._validate_type(data, expected_type):
                     errors.append(f"Expected type '{expected_type}', got '{type(data).__name__}'")
                     return ValidationResult(is_valid=False, errors=errors)
+
+            # Validate format for strings
+            if 'format' in schema and isinstance(data, str):
+                if not self._validate_format(data, schema['format']):
+                    errors.append(f"Invalid format '{schema['format']}' for value '{data}'")
 
             # Validate object properties and required fields
             if isinstance(data, dict):
@@ -83,3 +91,30 @@ class JSONSchemaValidator:
                 errors.append(f"Required property '{required_prop}' is missing")
 
         return errors
+
+    def _validate_format(self, data, format_type):
+        """Validate string format"""
+        if format_type == 'email':
+            return self._validate_email(data)
+        elif format_type == 'date':
+            return self._validate_date(data)
+        elif format_type == 'uri':
+            return self._validate_uri(data)
+        else:
+            # Unknown format, assume valid
+            return True
+
+    def _validate_email(self, email):
+        """Validate email format"""
+        email_pattern = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+        return email_pattern.match(email) is not None
+
+    def _validate_date(self, date):
+        """Validate date format (YYYY-MM-DD)"""
+        date_pattern = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+        return date_pattern.match(date) is not None
+
+    def _validate_uri(self, uri):
+        """Validate URI format (basic)"""
+        uri_pattern = re.compile(r'^https?://[^\s/$.?#].[^\s]*$')
+        return uri_pattern.match(uri) is not None
