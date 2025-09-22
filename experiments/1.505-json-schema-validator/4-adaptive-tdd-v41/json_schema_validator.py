@@ -33,7 +33,7 @@ class JSONSchemaValidator:
 
     # Format validators
     EMAIL_PATTERN = re.compile(
-        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        r'^[a-zA-Z0-9][a-zA-Z0-9._%+-]*[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\.[a-zA-Z]{2,}$|^[a-zA-Z0-9]@[a-zA-Z0-9][a-zA-Z0-9.-]*[a-zA-Z0-9]\.[a-zA-Z]{2,}$'
     )
 
     DATE_PATTERN = re.compile(
@@ -179,7 +179,7 @@ class JSONSchemaValidator:
         format_type = schema['format']
 
         if format_type == 'email':
-            if not self.EMAIL_PATTERN.match(data):
+            if not self._validate_email(data):
                 errors.append(f"Format error at {path}: Invalid email format")
 
         elif format_type == 'date':

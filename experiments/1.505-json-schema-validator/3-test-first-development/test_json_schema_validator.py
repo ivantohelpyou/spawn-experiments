@@ -68,6 +68,36 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertFalse(result.is_valid)
         self.assertTrue(len(result.errors) > 0)
 
+    def test_validate_object_with_required_properties_valid(self):
+        """Test validating an object with all required properties"""
+        schema = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer"}
+            },
+            "required": ["name", "age"]
+        }
+        data = {"name": "John", "age": 30}
+        result = self.validator.validate(data, schema)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.errors, [])
+
+    def test_validate_object_with_required_properties_missing(self):
+        """Test validating an object missing required properties"""
+        schema = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer"}
+            },
+            "required": ["name", "age"]
+        }
+        data = {"name": "John"}  # missing required 'age' property
+        result = self.validator.validate(data, schema)
+        self.assertFalse(result.is_valid)
+        self.assertIn("Required property 'age' is missing", result.errors[0])
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -107,7 +107,18 @@ class JSONSchemaValidator:
         Returns:
             ValidationResult: Object containing validation outcome and errors
         """
-        return self.validate(json_string, schema)
+        # Validate schema structure first
+        schema_valid, schema_error = self._validate_schema(schema)
+        if not schema_valid:
+            return ValidationResult(False, [schema_error])
+
+        # Parse JSON string
+        parse_success, parsed_data, parse_error = self._parse_json(json_string)
+        if not parse_success:
+            return ValidationResult(False, [parse_error])
+
+        # Validate parsed data
+        return self.validate(parsed_data, schema)
 
     def _parse_json(self, json_string: str) -> Tuple[bool, Any, Optional[str]]:
         """
