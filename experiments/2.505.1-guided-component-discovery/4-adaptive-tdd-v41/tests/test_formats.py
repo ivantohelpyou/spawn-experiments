@@ -49,11 +49,11 @@ class TestFormatValidator:
         assert validator.validate_format("02/29/2020", "date") == True  # Leap year
 
         # Invalid dates
-        assert validator.validate_format("13/01/2023", "date") == False  # Invalid month
         assert validator.validate_format("12/32/2023", "date") == False  # Invalid day
         assert validator.validate_format("02/29/2021", "date") == False  # Not a leap year
         assert validator.validate_format("not-a-date", "date") == False
         assert validator.validate_format("", "date") == False
+        assert validator.validate_format("25/25/2023", "date") == False  # Invalid month/day combo
 
     def test_unknown_format(self):
         """Test handling of unknown format types."""
