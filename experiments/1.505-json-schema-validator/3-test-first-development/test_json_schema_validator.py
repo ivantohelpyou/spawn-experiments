@@ -130,6 +130,42 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertFalse(result.is_valid)
         self.assertTrue(len(result.errors) > 0)
 
+    def test_validate_with_empty_schema(self):
+        """Test validating data with empty schema"""
+        schema = {}
+        data = "anything"
+        result = self.validator.validate(data, schema)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.errors, [])
+
+    def test_validate_null_data(self):
+        """Test validating null data"""
+        schema = {"type": "null"}
+        data = None
+        result = self.validator.validate(data, schema)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.errors, [])
+
+    def test_validate_boolean_type(self):
+        """Test validating boolean type"""
+        schema = {"type": "boolean"}
+        data = True
+        result = self.validator.validate(data, schema)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.errors, [])
+
+    def test_validate_number_type(self):
+        """Test validating number type (accepts both int and float)"""
+        schema = {"type": "number"}
+
+        # Test integer
+        result1 = self.validator.validate(42, schema)
+        self.assertTrue(result1.is_valid)
+
+        # Test float
+        result2 = self.validator.validate(3.14, schema)
+        self.assertTrue(result2.is_valid)
+
 
 if __name__ == '__main__':
     unittest.main()
