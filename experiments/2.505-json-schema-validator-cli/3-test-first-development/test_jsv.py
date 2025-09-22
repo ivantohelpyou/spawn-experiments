@@ -530,7 +530,7 @@ class TestStdinOperations(unittest.TestCase):
         result = validate_stdin(json_input, self.schema_file)
         self.assertTrue(result.is_valid)
         self.assertEqual(len(result.errors), 0)
-        self.assertIsNone(result.file_path) or self.assertEqual(result.file_path, "stdin")
+        self.assertEqual(result.file_path, "stdin")
 
     def test_validate_from_stdin_invalid_data(self):
         """Test validation from stdin with invalid data."""

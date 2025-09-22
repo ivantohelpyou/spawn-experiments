@@ -347,6 +347,58 @@ def verify_schema(schema_file_path: str) -> ValidationResult:
     )
 
 
+def validate_stdin(json_input: str, schema_file_path: str) -> ValidationResult:
+    """
+    Validate JSON data from stdin against a schema file.
+
+    Args:
+        json_input: JSON string from stdin
+        schema_file_path: Path to the JSON schema file
+
+    Returns:
+        ValidationResult object with validation status and errors
+    """
+    # Check if schema file exists
+    if not os.path.exists(schema_file_path):
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Schema file not found: {schema_file_path}"],
+            file_path="stdin"
+        )
+
+    try:
+        # Parse JSON input
+        data = json.loads(json_input)
+    except json.JSONDecodeError as e:
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Invalid JSON from stdin: {str(e)}"],
+            file_path="stdin"
+        )
+
+    try:
+        # Load and parse schema file
+        with open(schema_file_path, 'r') as f:
+            schema = json.load(f)
+    except json.JSONDecodeError as e:
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Invalid JSON in schema file: {str(e)}"],
+            file_path="stdin"
+        )
+    except Exception as e:
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Error reading schema file: {str(e)}"],
+            file_path="stdin"
+        )
+
+    # Perform validation
+    result = validate_json(data, schema)
+    result.file_path = "stdin"
+    return result
+
+
 def main() -> int:
     """
     Main CLI entry point.
@@ -358,8 +410,13 @@ def main() -> int:
         args = parse_args()
 
         if args.command == 'validate':
-            # Single file validation
-            result = validate_file(args.input_file, args.schema)
+            # Single file validation or stdin
+            if args.input_file == '-':
+                # Read from stdin
+                stdin_content = sys.stdin.read()
+                result = validate_stdin(stdin_content, args.schema)
+            else:
+                result = validate_file(args.input_file, args.schema)
             results = [result]
 
         elif args.command == 'batch':

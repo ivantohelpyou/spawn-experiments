@@ -156,12 +156,14 @@ class TextFormatter:
 
         # Schema errors
         for error in check_result.get('errors', []):
-            error_text = f"  {self.color.error(f\"Error: {error['message']}\")}"
+            error_msg = error['message']
+            error_text = f"  {self.color.error(f'Error: {error_msg}')}"
             lines.append(error_text)
 
         # Schema warnings
         for warning in check_result.get('warnings', []):
-            warning_text = f"  {self.color.warning(f\"Warning: {warning['message']}\")}"
+            warning_msg = warning['message']
+            warning_text = f"  {self.color.warning(f'Warning: {warning_msg}')}"
             lines.append(warning_text)
 
         # Schema information (if valid and detailed output requested)
