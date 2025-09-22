@@ -67,10 +67,10 @@ RESEARCH VALUE:
 - Creates accountability for methodology assumptions
 ```
 
-### **Branch Isolation Protocol** (Add to ALL prompts)
+### **Enhanced Branch Isolation Protocol** (Add to ALL prompts)
 
 ```
-IMPORTANT: Create a dedicated branch for your experiment:
+IMPORTANT: Create a dedicated branch for your experiment with standardized structure:
 
 git checkout -b exp-[EXPERIMENT_NUMBER]-[METHOD_NAME]
 
@@ -78,13 +78,27 @@ Examples:
 - git checkout -b exp-1504-immediate
 - git checkout -b exp-1504-specification
 - git checkout -b exp-1504-tdd
-- git checkout -b exp-1504-validated
+- git checkout -b exp-1504-adaptive-tdd
 
-This enables:
-- Clean experiment isolation
-- Main branch protection
-- Easy comparison between methods
-- Clean integration when complete
+REQUIRED FILE STRUCTURE:
+experiments/[EXPERIMENT_NUMBER]/[METHOD_DIR]/
+├── date_validator.py (or main implementation file)
+├── test_*.py (if applicable)
+├── README.md (brief method summary)
+└── [other method-specific files]
+
+INTEGRATION VERIFICATION:
+Before marking complete, verify your branch contains:
+- Main implementation file with validate_date() function
+- All required dependencies resolved
+- Clean commit history with descriptive messages
+- No references to other methodology implementations
+
+This ensures:
+- Perfect methodology isolation during development
+- Clean integration back to main branch
+- Consistent file structure for comparison scripts
+- Audit trail for scientific rigor
 ```
 
 ### **Atomic Commit Protocol** (Add to ALL prompts)
@@ -103,19 +117,393 @@ Commit at least every 3 minutes or at major milestones.
 This enables progress tracking and clean integration back to main.
 ```
 
-### **Integration Protocol**
+### **Enhanced Integration Protocol**
 
 ```
-EXPERIMENT COMPLETION:
+EXPERIMENT COMPLETION WITH VERIFICATION:
 
-1. Complete work on feature branch
-2. Create comprehensive experiment report
-3. Merge back to main with clean summary commit
-4. Keep branches for historical analysis
+1. PRE-INTEGRATION VERIFICATION on your branch:
+   - Verify main implementation file exists and works
+   - Run basic functionality test
+   - Confirm no cross-method contamination
+   - Clean commit history with atomic commits
 
-git checkout main
-git merge --no-ff exp-[EXPERIMENT_NUMBER]-[METHOD_NAME]
-git commit -m "Complete: [EXPERIMENT_NUMBER] [METHOD_NAME] methodology"
+2. INTEGRATION TO MAIN:
+   git checkout main
+   git merge --no-ff exp-[EXPERIMENT_NUMBER]-[METHOD_NAME]
+
+   If conflicts occur:
+   - DO NOT resolve by copying from other methods
+   - Ensure your method's files take precedence in your directory
+   - Verify post-merge that your implementation is intact
+
+3. POST-INTEGRATION VERIFICATION:
+   - Test that your method's implementation works on main
+   - Verify comparison scripts can find your files
+   - Run methodology_comparison_demo.py to confirm inclusion
+
+4. BRANCH CLEANUP (optional):
+   git branch -d exp-[EXPERIMENT_NUMBER]-[METHOD_NAME]
+
+This ensures:
+- No method implementations lost during integration
+- Comparison scripts work with all methods
+- Scientific integrity maintained through merge process
+```
+
+---
+
+## 🔧 Integration Tooling and Verification
+
+### **Pre-Integration Verification Script**
+
+```bash
+#!/bin/bash
+# verify_experiment_branch.sh - Run before merging to main
+
+EXPERIMENT_NUM=$1
+METHOD_NAME=$2
+BRANCH_NAME="exp-${EXPERIMENT_NUM}-${METHOD_NAME}"
+
+echo "🔍 Verifying experiment branch: $BRANCH_NAME"
+
+# Check we're on the right branch
+current_branch=$(git branch --show-current)
+if [ "$current_branch" != "$BRANCH_NAME" ]; then
+    echo "❌ Not on branch $BRANCH_NAME (currently on $current_branch)"
+    exit 1
+fi
+
+# Check required files exist
+EXPERIMENT_DIR="experiments/$EXPERIMENT_NUM"
+METHOD_DIR_MAP=("immediate:1-immediate-implementation" "specification:2-specification-driven" "tdd:3-test-first-development" "adaptive-tdd:4-adaptive-tdd-v41")
+
+for mapping in "${METHOD_DIR_MAP[@]}"; do
+    method="${mapping%%:*}"
+    dir="${mapping#*:}"
+    if [[ "$METHOD_NAME" == *"$method"* ]]; then
+        IMPL_FILE="$EXPERIMENT_DIR/$dir/date_validator.py"
+        if [ ! -f "$IMPL_FILE" ]; then
+            echo "❌ Missing implementation file: $IMPL_FILE"
+            exit 1
+        fi
+        echo "✅ Found implementation: $IMPL_FILE"
+
+        # Test the implementation works
+        if python -c "
+import sys; sys.path.insert(0, '$EXPERIMENT_DIR/$dir')
+import date_validator
+result = date_validator.validate_date('02/29/2024')
+print('✅ Implementation test passed:', result)
+" 2>/dev/null; then
+            echo "✅ Implementation functional test passed"
+        else
+            echo "❌ Implementation functional test failed"
+            exit 1
+        fi
+        break
+    fi
+done
+
+echo "🎯 Branch verification complete - ready for integration!"
+```
+
+### **Post-Integration Verification Script**
+
+```bash
+#!/bin/bash
+# verify_main_integration.sh - Run after merging to main
+
+EXPERIMENT_NUM=$1
+
+echo "🔍 Verifying main branch integration for experiment $EXPERIMENT_NUM"
+
+cd "experiments/$EXPERIMENT_NUM" || exit 1
+
+# Test all method implementations
+methods=("1-immediate-implementation" "2-specification-driven" "3-test-first-development" "4-adaptive-tdd-v41")
+
+for method_dir in "${methods[@]}"; do
+    if [ -d "$method_dir" ] && [ -f "$method_dir/date_validator.py" ]; then
+        echo "Testing $method_dir..."
+        if python -c "
+import sys; sys.path.insert(0, '$method_dir')
+import date_validator
+result = date_validator.validate_date('02/29/2024')
+print('✅ $method_dir: test passed')
+" 2>/dev/null; then
+            echo "✅ $method_dir integration successful"
+        else
+            echo "❌ $method_dir integration failed"
+        fi
+    else
+        echo "⚠️  $method_dir not implemented"
+    fi
+done
+
+# Test comparison script works
+if [ -f "methodology_comparison_demo.py" ]; then
+    echo "Testing comparison script..."
+    if python methodology_comparison_demo.py >/dev/null 2>&1; then
+        echo "✅ Comparison script working"
+    else
+        echo "❌ Comparison script failed"
+    fi
+fi
+
+echo "🎯 Main branch integration verification complete!"
+```
+
+### **Automated Post-Experiment Demo Generation**
+
+```bash
+#!/bin/bash
+# generate_experiment_demo.sh - Create comprehensive demo for completed experiment
+
+EXPERIMENT_NUM=$1
+EXPERIMENT_NAME=$2
+
+echo "🚀 Generating comprehensive demo for experiment $EXPERIMENT_NUM"
+
+EXPERIMENT_DIR="experiments/$EXPERIMENT_NUM"
+cd "$EXPERIMENT_DIR" || exit 1
+
+# Auto-detect implemented methods
+methods=()
+method_names=()
+if [ -f "1-immediate-implementation/date_validator.py" ]; then
+    methods+=("1-immediate-implementation")
+    method_names+=("Method 1 (Immediate)")
+fi
+if [ -f "2-specification-driven/date_validator.py" ]; then
+    methods+=("2-specification-driven")
+    method_names+=("Method 2 (Specification)")
+fi
+if [ -f "3-test-first-development/date_validator.py" ]; then
+    methods+=("3-test-first-development")
+    method_names+=("Method 3 (Pure TDD)")
+fi
+if [ -f "4-adaptive-tdd-v41/date_validator.py" ]; then
+    methods+=("4-adaptive-tdd-v41")
+    method_names+=("Method 4 (Adaptive TDD)")
+fi
+
+echo "📊 Detected ${#methods[@]} implemented methods: ${method_names[*]}"
+
+# Generate comparison demo script
+cat > methodology_comparison_demo.py << 'EOF'
+#!/usr/bin/env python3
+"""
+Auto-generated Methodology Comparison Demo
+Automatically tests all available method implementations.
+"""
+
+import os
+import sys
+import subprocess
+from pathlib import Path
+
+def find_experiment_directory():
+    """Find the experiment directory from any location."""
+    current_dir = os.getcwd()
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # If running from the experiment directory
+    if os.path.basename(script_dir).startswith("1."):
+        return script_dir
+
+    return script_dir
+
+def get_available_methods(base_dir):
+    """Auto-detect available method implementations."""
+    methods = {}
+
+    method_dirs = {
+        "Method 1 (Immediate)": "1-immediate-implementation",
+        "Method 2 (Specification)": "2-specification-driven",
+        "Method 3 (Pure TDD)": "3-test-first-development",
+        "Method 4 (Adaptive TDD)": "4-adaptive-tdd-v41"
+    }
+
+    for method_name, method_dir in method_dirs.items():
+        impl_file = os.path.join(base_dir, method_dir, "date_validator.py")
+        if os.path.exists(impl_file):
+            methods[method_name] = method_dir
+
+    return methods
+
+def test_functionality_equivalence(base_dir, available_methods):
+    """Test that all available methods provide equivalent functionality."""
+    print("\n" + "="*80)
+    print("🧪 FUNCTIONALITY EQUIVALENCE TEST")
+    print("="*80)
+    print(f"Testing {len(available_methods)} available method implementations...")
+    print()
+
+    test_cases = [
+        ("02/29/2024", "Valid leap year"),
+        ("02/29/2023", "Invalid leap year"),
+        ("13/01/2024", "EU format valid"),
+        ("01/13/2024", "US format valid"),
+        ("", "Empty string"),
+        ("not-a-date", "Invalid format")
+    ]
+
+    # Create header
+    header = f"{'Test Case':<15}"
+    for method_name in available_methods.keys():
+        method_abbrev = "M" + method_name.split()[1][1]  # M1, M2, M3, M4
+        header += f" {method_abbrev:<6}"
+    header += " Description"
+
+    print(header)
+    print("-" * len(header))
+
+    for test_input, description in test_cases:
+        display_input = test_input if test_input else "(empty)"
+        results = {}
+
+        for method_name, method_dir in available_methods.items():
+            method_path = os.path.join(base_dir, method_dir)
+
+            try:
+                test_script = f'''
+import sys
+sys.path.insert(0, "{method_path}")
+
+test_input = """{test_input}"""
+try:
+    import date_validator
+    result = date_validator.validate_date(test_input)
+    print("✓" if result else "✗")
+except Exception as e:
+    print("Error")
+'''
+
+                result = subprocess.run(
+                    [sys.executable, "-c", test_script],
+                    capture_output=True, text=True, timeout=5
+                )
+
+                if result.returncode == 0:
+                    results[method_name] = result.stdout.strip()
+                else:
+                    results[method_name] = "Error"
+
+            except Exception:
+                results[method_name] = "N/A"
+
+        # Print results row
+        row = f"{display_input:<15}"
+        for method_name in available_methods.keys():
+            result = results.get(method_name, "N/A")
+            row += f" {result:<6}"
+        row += f" {description}"
+        print(row)
+
+    print(f"\n📊 Successfully tested {len(available_methods)} method implementations!")
+
+def main():
+    """Run comprehensive methodology comparison."""
+    print("="*80)
+    print("🚀 AUTOMATED METHODOLOGY COMPARISON")
+    print("="*80)
+
+    base_dir = find_experiment_directory()
+    print(f"📂 Experiment directory: {base_dir}")
+
+    available_methods = get_available_methods(base_dir)
+
+    if not available_methods:
+        print("❌ No method implementations found!")
+        return
+
+    print(f"✅ Found {len(available_methods)} implemented methods:")
+    for method_name, method_dir in available_methods.items():
+        print(f"   • {method_name}: {method_dir}/")
+
+    test_functionality_equivalence(base_dir, available_methods)
+
+    print("\n" + "="*80)
+    print("🎯 METHODOLOGY COMPARISON COMPLETE")
+    print("="*80)
+    print("✅ All available methods tested successfully!")
+    print("📊 Comparison data ready for analysis")
+
+if __name__ == "__main__":
+    main()
+EOF
+
+# Test the generated demo
+echo "🧪 Testing generated comparison demo..."
+if python methodology_comparison_demo.py; then
+    echo "✅ Demo generation successful!"
+else
+    echo "❌ Demo generation failed - manual intervention needed"
+    exit 1
+fi
+
+echo "🎯 Post-experiment demo generation complete!"
+```
+
+### **Complete Post-Experiment Protocol**
+
+```
+EXPERIMENT COMPLETION WORKFLOW:
+
+1. INDIVIDUAL METHOD COMPLETION:
+   - Complete work on your method branch
+   - Run pre-integration verification script
+   - Merge to main with enhanced integration protocol
+
+2. AUTOMATED DEMO GENERATION:
+   bash generate_experiment_demo.sh [EXPERIMENT_NUM] [EXPERIMENT_NAME]
+
+   This automatically:
+   - Detects all implemented methods
+   - Generates working comparison demo
+   - Tests functionality equivalence
+   - Validates all methods are accessible
+
+3. EXPERIMENT REPORT ORGANIZATION:
+   - Create reports/ folder for detailed analysis files
+   - Move specialized reports: performance, development time, prediction analysis
+   - Keep main EXPERIMENT_REPORT.md as executive summary
+   - Organize structure:
+     experiments/[NUM]/
+     ├── EXPERIMENT_REPORT.md (executive summary)
+     ├── PRE_EXPERIMENT_PREDICTIONS.md
+     ├── reports/
+     │   ├── PERFORMANCE_ANALYSIS.md
+     │   ├── DEVELOPMENT_TIME_ANALYSIS.md
+     │   ├── PREDICTION_ANALYSIS.md
+     │   └── V4_FRAMEWORK_COMPARISON.md (if applicable)
+     └── [method directories...]
+
+4. FINAL VERIFICATION:
+   - All method implementations working
+   - Comparison demo runs successfully
+   - Complete experiment report generated
+   - Integration scripts validated
+
+This ensures every experiment produces:
+✅ Working implementations for all attempted methods
+✅ Automated comparison and testing
+✅ Comprehensive analysis and insights
+✅ Clean integration without manual file copying
+
+5. SYSTEMATIC DOCUMENTATION UPDATES:
+   - Update findings/ documents with new patterns
+   - Update FUTURE_EXPERIMENTS_ROADMAP.md with results
+   - Update EXPERIMENT_INDEX.md with latest experiment
+   - Update README.md if significant breakthroughs
+   - Update any domain-specific analysis documents
+
+   Framework Integration Updates:
+   - Add experiment to FRAMEWORK_VERSION_LOG.md
+   - Update methodology performance summaries
+   - Document any framework enhancements discovered
+   - Add to methodology selection guidance
 ```
 
 ---
@@ -231,7 +619,7 @@ Technology: [TECH_STACK]
 Show all work including commits.
 ```
 
-### **Method 4: Specification-Guided TDD (NEW)**
+### **Method 4: Adaptive TDD V4.1 (ENHANCED)**
 
 ```
 Build a [APPLICATION_TYPE] using [TECH_STACK].
@@ -239,12 +627,23 @@ Build a [APPLICATION_TYPE] using [TECH_STACK].
 REQUIREMENTS (Baseline Specification):
 [APPROVED_BASELINE_SPECIFICATION]
 
-Follow light planning followed by TDD implementation:
+Follow light planning with adaptive test validation based on complexity:
 
 PROCESS:
 1. Brief requirements analysis (5-10 minutes)
 2. Identify key test scenarios and edge cases
 3. Use TDD to implement against planned requirements
+4. Apply test validation ONLY when you encounter:
+   - Complex edge cases that could be implemented incorrectly
+   - Non-obvious business logic that needs verification
+   - Areas where a wrong implementation might still pass naive tests
+   - Critical functionality where test quality matters most
+
+ADAPTIVE VALIDATION APPROACH:
+- Use your judgment to determine when extra validation adds value
+- For straightforward functionality: standard TDD is sufficient
+- For complex/critical areas: write intentionally wrong implementations to verify test robustness
+- Document your validation decisions in commit messages
 
 CONSTRAINTS:
 - You may not use the web for this project
@@ -253,18 +652,19 @@ CONSTRAINTS:
 
 DIRECTORY STRUCTURE:
 Create your implementation in:
-experiments/[EXPERIMENT_NUMBER]/4-specification-guided-tdd/
+experiments/[EXPERIMENT_NUMBER]/4-adaptive-tdd-v41/
 
 BRANCH ISOLATION:
-git checkout -b exp-[EXPERIMENT_NUMBER]-guided-tdd
+git checkout -b exp-[EXPERIMENT_NUMBER]-adaptive-tdd
 
 ATOMIC COMMIT PROTOCOL:
 - git add -A && git commit -m "Plan: Requirements analysis complete"
 - git add -A && git commit -m "Test: [feature] test written"
 - git add -A && git commit -m "Impl: [feature] implementation"
+- git add -A && git commit -m "Validation: [area] robustness verified" (when applicable)
 - git add -A && git commit -m "COMPLETE: All requirements implemented"
 
-Balance planning efficiency with implementation discipline.
+Strategic efficiency through adaptive complexity matching.
 
 Technology: [TECH_STACK]
 Show all work including commits.
