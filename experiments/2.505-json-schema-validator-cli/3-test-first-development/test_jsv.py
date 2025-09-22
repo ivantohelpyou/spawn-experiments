@@ -186,5 +186,95 @@ class TestFileValidation(unittest.TestCase):
         self.assertIn("json", result.errors[0].lower())
 
 
+class TestBatchValidation(unittest.TestCase):
+    """Test cases for batch validation functionality."""
+
+    def setUp(self):
+        """Set up test fixtures with multiple files."""
+        self.test_dir = tempfile.mkdtemp()
+
+        # Create test schema file
+        self.schema_data = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer", "minimum": 0}
+            },
+            "required": ["name"]
+        }
+        self.schema_file = os.path.join(self.test_dir, 'schema.json')
+        with open(self.schema_file, 'w') as f:
+            json.dump(self.schema_data, f)
+
+        # Create multiple valid test data files
+        self.valid_files = []
+        for i in range(3):
+            valid_data = {"name": f"Person {i}", "age": 20 + i}
+            valid_file = os.path.join(self.test_dir, f'valid_{i}.json')
+            with open(valid_file, 'w') as f:
+                json.dump(valid_data, f)
+            self.valid_files.append(valid_file)
+
+        # Create multiple invalid test data files
+        self.invalid_files = []
+        for i in range(2):
+            invalid_data = {"age": -i}  # Missing name, negative age
+            invalid_file = os.path.join(self.test_dir, f'invalid_{i}.json')
+            with open(invalid_file, 'w') as f:
+                json.dump(invalid_data, f)
+            self.invalid_files.append(invalid_file)
+
+        self.all_files = self.valid_files + self.invalid_files
+
+    def tearDown(self):
+        """Clean up test fixtures."""
+        shutil.rmtree(self.test_dir)
+
+    def test_batch_validate_files_mixed_results(self):
+        """Test batch validation with mixed valid and invalid files."""
+        # This test will fail initially (RED) because batch_validate doesn't exist yet
+        from jsv import batch_validate
+
+        results = batch_validate(self.all_files, self.schema_file)
+        self.assertEqual(len(results), 5)  # 3 valid + 2 invalid
+
+        # Check that we have 3 valid results
+        valid_results = [r for r in results if r.is_valid]
+        self.assertEqual(len(valid_results), 3)
+
+        # Check that we have 2 invalid results
+        invalid_results = [r for r in results if not r.is_valid]
+        self.assertEqual(len(invalid_results), 2)
+
+    def test_batch_validate_with_glob_pattern(self):
+        """Test batch validation using glob pattern."""
+        from jsv import batch_validate_pattern
+
+        results = batch_validate_pattern(os.path.join(self.test_dir, '*.json'), self.schema_file)
+        # Should find 5 JSON files (3 valid + 2 invalid), excluding schema.json
+        data_files = [r for r in results if not r.file_path.endswith('schema.json')]
+        self.assertEqual(len(data_files), 5)
+
+    def test_batch_validate_empty_file_list(self):
+        """Test batch validation with empty file list."""
+        from jsv import batch_validate
+
+        results = batch_validate([], self.schema_file)
+        self.assertEqual(len(results), 0)
+
+    def test_batch_validate_with_nonexistent_files(self):
+        """Test batch validation with some non-existent files."""
+        from jsv import batch_validate
+
+        files_with_missing = self.valid_files + [os.path.join(self.test_dir, 'missing.json')]
+        results = batch_validate(files_with_missing, self.schema_file)
+        self.assertEqual(len(results), 4)
+
+        # Check that missing file result is invalid
+        missing_result = [r for r in results if 'missing.json' in r.file_path][0]
+        self.assertFalse(missing_result.is_valid)
+        self.assertIn("not found", missing_result.errors[0].lower())
+
+
 if __name__ == '__main__':
     unittest.main()
