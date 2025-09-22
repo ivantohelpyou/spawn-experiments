@@ -286,6 +286,119 @@ def format_quiet(results: List[ValidationResult]) -> Tuple[str, int]:
     return "", exit_code
 
 
+def verify_schema(schema_file_path: str) -> ValidationResult:
+    """
+    Verify that a JSON Schema file is valid.
+
+    Args:
+        schema_file_path: Path to the JSON schema file
+
+    Returns:
+        ValidationResult object with verification status and errors
+    """
+    if not os.path.exists(schema_file_path):
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Schema file not found: {schema_file_path}"],
+            file_path=schema_file_path
+        )
+
+    try:
+        with open(schema_file_path, 'r') as f:
+            schema = json.load(f)
+    except json.JSONDecodeError as e:
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Invalid JSON in schema file: {str(e)}"],
+            file_path=schema_file_path
+        )
+    except Exception as e:
+        return ValidationResult(
+            is_valid=False,
+            errors=[f"Error reading schema file: {str(e)}"],
+            file_path=schema_file_path
+        )
+
+    # Basic schema validation - check for valid type definitions
+    errors = []
+    try:
+        if isinstance(schema, dict):
+            # Check for known schema properties and valid types
+            if 'type' in schema:
+                valid_types = {'string', 'integer', 'number', 'boolean', 'object', 'array', 'null'}
+                if schema['type'] not in valid_types:
+                    errors.append(f"Invalid type '{schema['type']}' in schema")
+
+            if 'properties' in schema:
+                for prop_name, prop_def in schema['properties'].items():
+                    if isinstance(prop_def, dict) and 'type' in prop_def:
+                        if prop_def['type'] not in valid_types:
+                            errors.append(f"Invalid type '{prop_def['type']}' for property '{prop_name}'")
+        else:
+            errors.append("Schema must be a JSON object")
+
+    except Exception as e:
+        errors.append(f"Error validating schema structure: {str(e)}")
+
+    return ValidationResult(
+        is_valid=len(errors) == 0,
+        errors=errors,
+        file_path=schema_file_path
+    )
+
+
+def main() -> int:
+    """
+    Main CLI entry point.
+
+    Returns:
+        Exit code (0 for success, 1 for failure)
+    """
+    try:
+        args = parse_args()
+
+        if args.command == 'validate':
+            # Single file validation
+            result = validate_file(args.input_file, args.schema)
+            results = [result]
+
+        elif args.command == 'batch':
+            # Batch validation
+            results = batch_validate_pattern(args.pattern, args.schema)
+
+        elif args.command == 'check':
+            # Schema verification
+            result = verify_schema(args.schema_file)
+            results = [result]
+
+        else:
+            print("Unknown command", file=sys.stderr)
+            return 1
+
+        # Format output based on chosen format and quiet mode
+        if getattr(args, 'quiet', False):
+            output, exit_code = format_quiet(results)
+            if output:
+                print(output, end='')
+            return exit_code
+        else:
+            output_format = getattr(args, 'output', 'text')
+            if output_format == 'json':
+                output = format_json(results)
+            elif output_format == 'csv':
+                output = format_csv(results)
+            else:  # text format
+                output = format_text(results)
+
+            print(output)
+            # Return appropriate exit code
+            return 0 if all(result.is_valid for result in results) else 1
+
+    except Exception as e:
+        print(f"Error: {str(e)}", file=sys.stderr)
+        return 1
+
+
 def parse_args(args_list: Optional[List[str]] = None) -> argparse.Namespace:
     """
     Parse command-line arguments for the JSON Schema Validator.
@@ -332,6 +445,4 @@ def parse_args(args_list: Optional[List[str]] = None) -> argparse.Namespace:
 
 
 if __name__ == '__main__':
-    # Placeholder for CLI functionality
-    print("JSON Schema Validator CLI")
-    sys.exit(0)
+    sys.exit(main())

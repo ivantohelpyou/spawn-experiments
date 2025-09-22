@@ -1,0 +1,11 @@
+{
+  "name": "",
+  "email": "not-an-email",
+  "age": -5,
+  "preferences": {
+    "theme": "blue",
+    "notifications": "yes"
+  },
+  "tags": ["", "too-long-tag-that-violates-length-constraints"],
+  "extra_field": "not allowed"
+}
