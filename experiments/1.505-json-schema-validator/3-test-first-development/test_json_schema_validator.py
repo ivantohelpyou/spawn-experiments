@@ -166,6 +166,48 @@ class TestJSONSchemaValidator(unittest.TestCase):
         result2 = self.validator.validate(3.14, schema)
         self.assertTrue(result2.is_valid)
 
+    def test_validate_complex_schema(self):
+        """Test validating complex schema with multiple features"""
+        schema = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer"},
+                "email": {"type": "string", "format": "email"},
+                "preferences": {
+                    "type": "object",
+                    "properties": {
+                        "newsletter": {"type": "boolean"}
+                    },
+                    "required": ["newsletter"]
+                }
+            },
+            "required": ["name", "email"]
+        }
+
+        # Valid data
+        valid_data = {
+            "name": "John Doe",
+            "age": 30,
+            "email": "john@example.com",
+            "preferences": {
+                "newsletter": True
+            }
+        }
+        result = self.validator.validate(valid_data, schema)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.errors, [])
+
+        # Invalid data (missing required field)
+        invalid_data = {
+            "name": "John Doe",
+            "age": 30
+            # missing required email
+        }
+        result = self.validator.validate(invalid_data, schema)
+        self.assertFalse(result.is_valid)
+        self.assertIn("Required property 'email' is missing", result.errors[0])
+
 
 if __name__ == '__main__':
     unittest.main()
