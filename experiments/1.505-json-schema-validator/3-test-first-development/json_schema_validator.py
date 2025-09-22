@@ -30,9 +30,12 @@ class JSONSchemaValidator:
                     errors.append(f"Expected type '{expected_type}', got '{type(data).__name__}'")
                     return ValidationResult(is_valid=False, errors=errors)
 
-            # Validate object properties
-            if 'properties' in schema and isinstance(data, dict):
-                errors.extend(self._validate_properties(data, schema['properties']))
+            # Validate object properties and required fields
+            if isinstance(data, dict):
+                if 'properties' in schema:
+                    errors.extend(self._validate_properties(data, schema['properties']))
+                if 'required' in schema:
+                    errors.extend(self._validate_required(data, schema['required']))
 
             return ValidationResult(is_valid=len(errors) == 0, errors=errors)
 
@@ -68,5 +71,15 @@ class JSONSchemaValidator:
                 if not property_result.is_valid:
                     for error in property_result.errors:
                         errors.append(f"Property '{property_name}': {error}")
+
+        return errors
+
+    def _validate_required(self, data, required_properties):
+        """Validate that all required properties are present"""
+        errors = []
+
+        for required_prop in required_properties:
+            if required_prop not in data:
+                errors.append(f"Required property '{required_prop}' is missing")
 
         return errors

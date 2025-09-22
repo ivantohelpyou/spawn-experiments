@@ -183,16 +183,8 @@ class JSONSchemaValidator:
                 errors.append(f"Format error at {path}: Invalid email format")
 
         elif format_type == 'date':
-            if not self.DATE_PATTERN.match(data):
+            if not self._validate_date(data):
                 errors.append(f"Format error at {path}: Invalid date format (expected YYYY-MM-DD)")
-            else:
-                # Additional validation for actual date validity
-                try:
-                    year, month, day = map(int, data.split('-'))
-                    if not (1 <= month <= 12 and 1 <= day <= 31):
-                        errors.append(f"Format error at {path}: Invalid date values")
-                except ValueError:
-                    errors.append(f"Format error at {path}: Invalid date format")
 
         elif format_type == 'uri':
             if not self._validate_uri(data):
@@ -224,6 +216,41 @@ class JSONSchemaValidator:
             return False
 
         return True
+
+    def _validate_date(self, date: str) -> bool:
+        """Validate date format with actual date validity checks"""
+        # Basic pattern check
+        if not self.DATE_PATTERN.match(date):
+            return False
+
+        try:
+            year, month, day = map(int, date.split('-'))
+
+            # Basic range checks
+            if not (1 <= month <= 12):
+                return False
+
+            if not (1 <= day <= 31):
+                return False
+
+            # Days per month check
+            days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+            # Check for leap year
+            if month == 2 and self._is_leap_year(year):
+                days_in_month[1] = 29
+
+            if day > days_in_month[month - 1]:
+                return False
+
+            return True
+
+        except (ValueError, IndexError):
+            return False
+
+    def _is_leap_year(self, year: int) -> bool:
+        """Check if year is a leap year"""
+        return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
 
     def _validate_uri(self, uri: str) -> bool:
         """Validate URI format"""
