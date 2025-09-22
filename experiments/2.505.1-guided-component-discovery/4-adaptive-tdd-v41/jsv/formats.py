@@ -7,9 +7,10 @@ import sys
 import os
 from typing import Any
 
-# Add utils path to enable component reuse
-utils_path = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'utils')
-sys.path.insert(0, os.path.abspath(utils_path))
+# Add utils path to enable component reuse - strategic component discovery
+utils_path = '/home/ivan/projects/spawn-experiments/utils'
+if os.path.exists(utils_path):
+    sys.path.insert(0, utils_path)
 
 try:
     # Strategic reuse of research-validated components
