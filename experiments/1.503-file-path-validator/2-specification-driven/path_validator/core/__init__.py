@@ -5,6 +5,7 @@ Core validation components.
 from .validator import ValidationCore, ValidationResult, ExistenceInfo
 from .normalizer import PathNormalizer
 from .rules import ValidationRules
+from .security import SecurityValidator
 
 __all__ = [
     "ValidationCore",
@@ -12,4 +13,5 @@ __all__ = [
     "ExistenceInfo",
     "PathNormalizer",
     "ValidationRules",
+    "SecurityValidator",
 ]
