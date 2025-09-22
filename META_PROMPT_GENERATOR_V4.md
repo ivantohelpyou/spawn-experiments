@@ -37,6 +37,36 @@ EXPERIMENTER DECISION POINT:
 - Create multiple baselines for comparison
 ```
 
+### **Step 1: Pre-Experiment Predictions**
+
+```
+PRE-EXPERIMENT PREDICTION PROTOCOL:
+
+After baseline specification approval, generate methodology predictions:
+
+1. Create experiment folder: experiments/[EXPERIMENT_NUMBER]/
+2. Generate PRE_EXPERIMENT_PREDICTIONS.md with:
+   - Expected outcomes for each methodology
+   - Predicted code volume (lines)
+   - Predicted development time
+   - Anticipated architectural approaches
+   - Methodology winner prediction
+   - Potential surprises or challenges
+
+PREDICTION FORMAT:
+- Method-specific outcome predictions
+- Quantitative estimates (time, lines, complexity)
+- Architectural approach expectations
+- Overall methodology performance ranking
+- Specific areas where methods might struggle/excel
+
+RESEARCH VALUE:
+- Captures AI's initial expectations before execution
+- Enables prediction accuracy analysis
+- Reveals AI biases about methodology effectiveness
+- Creates accountability for methodology assumptions
+```
+
 ### **Branch Isolation Protocol** (Add to ALL prompts)
 
 ```
@@ -358,9 +388,10 @@ EXPERIMENTER: [Approve/Edit this scope before proceeding]
 ### **Standard Experiment Flow**
 1. **Generate baseline**: `spawn-experiments` + APPLICATION_TYPE
 2. **Review/approve scope**: Experimenter edits generated baseline
-3. **Launch parallel execution**: Four methods with identical baseline
-4. **Analyze methodology effectiveness**: Pure process comparison
-5. **Clean integration**: Merge completed work back to main
+3. **Generate predictions**: AI predicts methodology outcomes before execution
+4. **Launch parallel execution**: Four methods with identical baseline
+5. **Analyze methodology effectiveness**: Compare actual vs predicted results
+6. **Clean integration**: Merge completed work back to main
 
 ### **Experimenter Commands**
 ```bash
