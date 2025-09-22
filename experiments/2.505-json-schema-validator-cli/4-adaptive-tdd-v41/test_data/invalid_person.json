@@ -1,0 +1,9 @@
+{
+  "age": -5,
+  "email": "not-an-email",
+  "address": {
+    "street": "123 Main St",
+    "zipcode": "invalid-zip"
+  },
+  "hobbies": []
+}
