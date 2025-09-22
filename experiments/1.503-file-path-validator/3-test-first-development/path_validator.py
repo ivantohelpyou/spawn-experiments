@@ -30,3 +30,25 @@ class PathValidator:
     def is_directory(self, path):
         """Check if a path is a directory using os.path."""
         return os.path.isdir(path)
+
+    def normalize(self, path):
+        """Normalize path using os.path.normpath."""
+        return os.path.normpath(path)
+
+    def is_valid_pathlib(self, path_obj):
+        """Check if a pathlib.Path object is valid."""
+        if not isinstance(path_obj, Path):
+            return False
+        return self.is_valid(str(path_obj))
+
+    def exists_pathlib(self, path_obj):
+        """Check if a pathlib.Path object exists."""
+        return path_obj.exists()
+
+    def get_parent(self, path):
+        """Get parent directory using pathlib."""
+        return str(Path(path).parent)
+
+    def get_extension(self, path):
+        """Get file extension using pathlib."""
+        return Path(path).suffix

@@ -144,16 +144,27 @@ class FilePathValidator:
         Check if path is secure (no path traversal outside base directory).
         """
         try:
-            # Use pathlib for more reliable path resolution
-            base_path = Path(base_directory).resolve()
+            # Normalize path separators for cross-platform compatibility
+            normalized_path = path.replace('\\', '/')
 
-            # For relative paths, resolve them relative to the base directory
-            if os.path.isabs(path):
-                # Absolute paths that don't start with base directory are insecure
-                target_path = Path(path).resolve()
-            else:
-                # Relative paths are resolved relative to base directory
-                target_path = (base_path / path).resolve()
+            # Check for obvious path traversal patterns
+            if '..' in normalized_path:
+                return SecurityResult(
+                    is_secure=False,
+                    error_message="Path traversal detected: contains '..' components"
+                )
+
+            # Check for absolute paths that would escape the base directory
+            if normalized_path.startswith('/') or (len(normalized_path) > 1 and normalized_path[1] == ':'):
+                # This is an absolute path
+                return SecurityResult(
+                    is_secure=False,
+                    error_message="Absolute paths are not allowed for security"
+                )
+
+            # Use pathlib for path resolution
+            base_path = Path(base_directory).resolve()
+            target_path = (base_path / normalized_path).resolve()
 
             # Check if resolved path is within base directory
             try:
