@@ -1,0 +1,7 @@
+{
+  "name": "Test User",
+  "email": "not-an-email",
+  "age": 25,
+  "website": "invalid-url",
+  "birthdate": "13/45/2023"
+}

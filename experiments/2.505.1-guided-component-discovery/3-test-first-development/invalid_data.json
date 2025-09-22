@@ -1,0 +1,6 @@
+{
+  "email": "invalid-email-format",
+  "website": "not-a-url",
+  "birth_date": "invalid-date",
+  "age": -5
+}

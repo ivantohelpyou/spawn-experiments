@@ -1,0 +1,11 @@
+{
+  "name": "",
+  "email": "invalid-email",
+  "age": -5,
+  "website": "not-a-url",
+  "birth_date": "invalid-date",
+  "tags": [],
+  "address": {
+    "street": "123 Main St"
+  }
+}

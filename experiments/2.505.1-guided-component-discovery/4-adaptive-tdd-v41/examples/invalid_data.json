@@ -1,0 +1,10 @@
+{
+  "email": "invalid-email-format",
+  "age": -5,
+  "website": "not-a-valid-url",
+  "birthdate": "32/13/2025",
+  "skills": "should be array not string",
+  "address": {
+    "street": "123 Main St"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "website": "https://johndoe.com",
+  "birthdate": "01/15/1993",
+  "tags": [
+    "developer",
+    "python",
+    "json"
+  ],
+  "settings": {
+    "notifications": true,
+    "theme": "dark"
+  }
+}

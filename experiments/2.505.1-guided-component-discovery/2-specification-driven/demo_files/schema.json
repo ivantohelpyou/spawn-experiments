@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 150
+    },
+    "website": {
+      "type": "string",
+      "format": "uri"
+    },
+    "birthdate": {
+      "type": "string",
+      "format": "date"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "maxItems": 10
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "notifications": {
+          "type": "boolean"
+        },
+        "theme": {
+          "type": "string",
+          "pattern": "^(light|dark)$"
+        }
+      },
+      "required": [
+        "notifications"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "age"
+  ],
+  "additionalProperties": false
+}
