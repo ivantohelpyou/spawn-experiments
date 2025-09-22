@@ -7,6 +7,7 @@ A command-line tool for validating JSON data against JSON Schema.
 import json
 import sys
 import argparse
+import os
 from dataclasses import dataclass
 from typing import List, Dict, Any, Optional
 
