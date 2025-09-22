@@ -177,8 +177,8 @@ Input validation problems have natural boundaries:
 **Solution**: Competitive pressure injection with methodology preservation constraints.
 
 **Results**:
-- **Unconstrained injection**: 91% complexity reduction (4,530→415 lines) but lost documentation
-- **Constrained injection**: 85% complexity reduction (4,530→687 lines) WITH maintained specs
+- **Unconstrained injection**: 78.5% complexity reduction (1,524→327 lines) but lost documentation
+- **Constrained injection**: 54.9% complexity reduction (1,524→687 lines) WITH maintained specs
 - **Enterprise-ready solution**: Fast delivery + right-sized documentation
 
 ### **Breakthrough Implications**

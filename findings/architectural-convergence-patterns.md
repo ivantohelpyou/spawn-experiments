@@ -111,13 +111,13 @@ validator.validate_path(path) → Dict[str, Any]
 ## Constraint Design Impact on Convergence
 
 ### **Unconstrained Pressure: Methodology Abandonment**
-- **Result**: 91% complexity reduction (1,524 → 327 lines)
+- **Result**: 78.5% complexity reduction (1,524 → 327 lines)
 - **API Change**: Dictionary → ValidationResult (simplified structure)
 - **Methodology**: Abandoned specification-driven approach entirely
 - **Documentation**: Eliminated comprehensive specs
 
 ### **Constrained Pressure: Methodology Adaptation**
-- **Result**: 85% complexity reduction (1,524 → 687 lines)
+- **Result**: 54.9% complexity reduction (1,524 → 687 lines)
 - **API Preservation**: Maintained comprehensive dictionary interface
 - **Methodology**: Adapted specification-driven approach to time constraints
 - **Documentation**: Right-sized specs to match delivered functionality

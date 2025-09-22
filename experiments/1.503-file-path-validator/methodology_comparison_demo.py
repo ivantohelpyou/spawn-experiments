@@ -135,7 +135,7 @@ def show_6_way_architecture_comparison(base_dir):
                         print(f"   📊 Reduced to {len(files)} focused files")
                         print("   🚀 Delivered under competitive pressure")
                         print("   ❌ Lost documentation in the rush")
-                        print("   📈 91% complexity reduction from baseline!")
+                        print("   📈 78.5% complexity reduction from baseline!")
 
                     elif method_name == "Method 2 (Constrained Injection)":
                         print("🏆 BREAKTHROUGH: Enterprise-Ready Competition Response:")
@@ -143,7 +143,7 @@ def show_6_way_architecture_comparison(base_dir):
                         print("   🚀 Fast delivery under competitive pressure")
                         print("   ✅ Maintained specification-driven methodology")
                         print("   📚 Documentation matches delivered functionality")
-                        print("   📈 85% complexity reduction WITH enterprise standards!")
+                        print("   📈 54.9% complexity reduction WITH enterprise standards!")
                         print("   🎯 PERFECT: Speed + Quality + Documentation")
 
                     else:
@@ -324,8 +324,8 @@ def main():
     if all(isinstance(x, int) for x in [baseline_count, constrained_count, unconstrained_count]):
         print("\n🚨 COMPETITION INJECTION BREAKTHROUGH:")
         print(f"   Original Baseline: {baseline_count:,} lines (Enterprise Monster)")
-        print(f"   Unconstrained Rescue: {unconstrained_count:,} lines (91% reduction, lost docs)")
-        print(f"   🏆 Constrained Rescue: {constrained_count:,} lines (85% reduction, kept enterprise standards)")
+        print(f"   Unconstrained Rescue: {unconstrained_count:,} lines (78.5% reduction, lost docs)")
+        print(f"   🏆 Constrained Rescue: {constrained_count:,} lines (54.9% reduction, kept enterprise standards)")
         print(f"   📈 Proves: AI can adapt under pressure while maintaining quality!")
 
     # Show architecture comparison
@@ -347,8 +347,8 @@ def main():
     print()
     print("📊 QUANTIFIED RESULTS:")
     print("   • Baseline Method 2: Enterprise framework explosion")
-    print("   • Unconstrained injection: 91% complexity reduction")
-    print("   • Constrained injection: 85% reduction + documentation")
+    print("   • Unconstrained injection: 78.5% complexity reduction")
+    print("   • Constrained injection: 54.9% reduction + documentation")
     print("   • All approaches: Equivalent core functionality")
     print()
     print("🏆 ENTERPRISE IMPLICATIONS:")
