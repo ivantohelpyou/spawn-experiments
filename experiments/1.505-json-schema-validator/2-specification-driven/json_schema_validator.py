@@ -70,7 +70,7 @@ class JSONSchemaValidator:
         Validate data against a JSON schema.
 
         Args:
-            data: The data to validate (can be JSON string or Python object)
+            data: The data to validate (Python object - use validate_json_string for JSON strings)
             schema: JSON Schema Draft 7 specification as a dictionary
 
         Returns:
@@ -80,13 +80,6 @@ class JSONSchemaValidator:
         schema_valid, schema_error = self._validate_schema(schema)
         if not schema_valid:
             return ValidationResult(False, [schema_error])
-
-        # Handle JSON string input
-        if isinstance(data, str):
-            parse_success, parsed_data, parse_error = self._parse_json(data)
-            if not parse_success:
-                return ValidationResult(False, [parse_error])
-            data = parsed_data
 
         # Perform schema validation
         try:
