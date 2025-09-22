@@ -1,0 +1,15 @@
+# JSV (JSON Schema Validator) Dependencies
+# Note: Core functionality only requires Python standard library
+# Additional dependencies are optional and used by inherited utils components
+
+# For URL validation (utils.validation.url_validator)
+requests>=2.25.0
+
+# For robust JSON Schema validation (fallback/comparison)
+jsonschema>=4.0.0
+
+# For CLI enhancements (optional)
+click>=8.0.0
+
+# For colored output (built-in alternative available)
+colorama>=0.4.0

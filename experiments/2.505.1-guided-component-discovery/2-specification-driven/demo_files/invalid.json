@@ -1,0 +1,15 @@
+{
+  "name": "",
+  "email": "invalid-email",
+  "age": -5,
+  "website": "not-a-url",
+  "birthdate": "invalid-date",
+  "tags": [
+    "tag1",
+    "tag1"
+  ],
+  "settings": {
+    "theme": "blue",
+    "extra": "not allowed"
+  }
+}
