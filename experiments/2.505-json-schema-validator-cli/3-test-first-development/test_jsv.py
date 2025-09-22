@@ -276,5 +276,93 @@ class TestBatchValidation(unittest.TestCase):
         self.assertIn("not found", missing_result.errors[0].lower())
 
 
+class TestOutputFormats(unittest.TestCase):
+    """Test cases for output formatting functionality."""
+
+    def setUp(self):
+        """Set up test fixtures."""
+        from jsv import ValidationResult
+
+        self.valid_result = ValidationResult(
+            is_valid=True,
+            errors=[],
+            file_path="/test/valid.json"
+        )
+        self.invalid_result = ValidationResult(
+            is_valid=False,
+            errors=["Required field 'name' is missing", "Value -5 is less than minimum 0"],
+            file_path="/test/invalid.json"
+        )
+        self.results = [self.valid_result, self.invalid_result]
+
+    def test_format_text_output_single_result(self):
+        """Test text output formatting for single result."""
+        # This test will fail initially (RED) because format_text doesn't exist yet
+        from jsv import format_text
+
+        output = format_text([self.valid_result])
+        self.assertIn("valid.json", output)
+        self.assertIn("VALID", output)
+
+        output = format_text([self.invalid_result])
+        self.assertIn("invalid.json", output)
+        self.assertIn("INVALID", output)
+        self.assertIn("Required field 'name' is missing", output)
+
+    def test_format_json_output_multiple_results(self):
+        """Test JSON output formatting for multiple results."""
+        from jsv import format_json
+
+        output = format_json(self.results)
+        parsed = json.loads(output)
+
+        self.assertEqual(len(parsed), 2)
+        self.assertEqual(parsed[0]['file_path'], '/test/valid.json')
+        self.assertTrue(parsed[0]['is_valid'])
+        self.assertEqual(len(parsed[0]['errors']), 0)
+
+        self.assertEqual(parsed[1]['file_path'], '/test/invalid.json')
+        self.assertFalse(parsed[1]['is_valid'])
+        self.assertEqual(len(parsed[1]['errors']), 2)
+
+    def test_format_csv_output_multiple_results(self):
+        """Test CSV output formatting for multiple results."""
+        from jsv import format_csv
+
+        output = format_csv(self.results)
+        lines = output.strip().split('\n')
+
+        # Check header
+        self.assertIn("file_path", lines[0])
+        self.assertIn("is_valid", lines[0])
+        self.assertIn("error_count", lines[0])
+
+        # Check data rows
+        self.assertEqual(len(lines), 3)  # Header + 2 data rows
+        self.assertIn("valid.json", lines[1])
+        self.assertIn("True", lines[1])
+        self.assertIn("invalid.json", lines[2])
+        self.assertIn("False", lines[2])
+
+    def test_format_quiet_output(self):
+        """Test quiet mode formatting (no output, just return codes)."""
+        from jsv import format_quiet
+
+        # Valid results should return empty string and indicate success
+        output, exit_code = format_quiet([self.valid_result])
+        self.assertEqual(output, "")
+        self.assertEqual(exit_code, 0)
+
+        # Invalid results should return empty string and indicate failure
+        output, exit_code = format_quiet([self.invalid_result])
+        self.assertEqual(output, "")
+        self.assertEqual(exit_code, 1)
+
+        # Mixed results should indicate failure
+        output, exit_code = format_quiet(self.results)
+        self.assertEqual(output, "")
+        self.assertEqual(exit_code, 1)
+
+
 if __name__ == '__main__':
     unittest.main()
