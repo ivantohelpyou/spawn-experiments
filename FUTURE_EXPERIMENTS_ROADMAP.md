@@ -19,15 +19,18 @@
 8. **1.101.0** - Anagram Grouper (String Processing) - ✅ **COMPLETE** - TDD won with 3X less code
 9. **1.103.0** - Roman Numeral Converter (String Processing) - ✅ **COMPLETE** - fastest TDD at 3m 37s
 10. **1.104.0** - Balanced Parentheses (String Processing) - ✅ **COMPLETE** - Tier 1 series concluded
+11. **1.501** - Email Validator (Input Validation) - ✅ **COMPLETE** - 3.6X code reduction with TDD
+12. **1.502** - URL Validator (Input Validation) - ✅ **COMPLETE** - 32.3X over-engineering discovered!
 
 *Legacy numbers: 002→1.201.0, 006→1.203.0, 007→1.301(STOPPED), 008→1.302.0, 009→1.102.0, 010→1.401.0, 011→1.205.0, 012→1.101.0, 013→1.103.0, 014→1.104.0*
 
 ### Key Insights Discovered
+- **Escalating Over-Engineering**: URL (32.3X) > Email (3.6X) complexity explosion pattern
 - **Time Convergence**: Most methods complete in 8-14 minutes regardless of approach
 - **Parallel Launch Success**: Simultaneous execution proven feasible (009)
 - **Resource Constraints Impact**: Token limits significantly affected Methods 3&4 in 007
 - **TDD Efficiency on Simple Problems**: Methods 3&4 produce cleaner, more efficient code for Tier 1 algorithms
-- **Specification Explosion Risk**: Method 2 over-engineers simple problems (012: 1,440 vs 401 lines)
+- **Specification Explosion Risk**: Method 2 over-engineers simple problems (URL: 6,036 vs 187 lines!)
 - **Test Validation Innovation**: Method 4's test validation methodology catches subtle bugs early
 - **Methodology Selection Context-Dependent**: Different approaches optimal for different complexity tiers
 - **AI Resource Usage Patterns**: TDD approaches require more tool interactions (54 vs 29 in 007)
@@ -50,13 +53,19 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 - **1.103.0 - Roman Numeral Converter**: ✅ Mapping strategy and edge cases - **Fastest TDD**
 - **1.104.0 - Balanced Parentheses**: ✅ Stack management and character matching
 
-#### Planned Tier 1 Extensions - Input Validation Domain (1.5XX)
+#### Tier 1 Extensions - Input Validation Domain (1.5XX)
 **Purpose**: Bridge gap between pure algorithms and CLI tools for better composability
-- **1.501 - Email Validator**: Email address format validation
-- **1.502 - URL Validator**: URL format and accessibility validation
-- **1.503 - File Path Validator**: Path format and existence validation
+
+##### ✅ **Completed Input Validation Experiments**
+- **1.501 - Email Validator**: ✅ **COMPLETE** - Revolutionary 3.6X code reduction finding, security vulnerability analysis
+- **1.502 - URL Validator**: ✅ **COMPLETE** - **32.3X OVER-ENGINEERING!** Largest complexity explosion documented
+
+##### 📋 **Remaining Input Validation Experiments**
+- **1.503 - File Path Validator**: Path format and existence validation 👈 **RECOMMENDED NEXT**
 - **1.504 - Date Format Validator**: Date parsing and validation patterns
 - **1.505 - Phone Number Validator**: International phone number formats
+
+**Pattern Discovery**: Escalating over-engineering factor (Email 3.6X → URL 32.3X). Will File Path continue trend?
 
 ### **Tier 2: CLI Tools (020-029) - WALK**
 **Scope**: Command-line utilities, file I/O, composable tools

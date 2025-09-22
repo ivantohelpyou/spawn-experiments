@@ -4,15 +4,15 @@
 
 ---
 
-## 📰 LATEST EXPERIMENT: TDD Prevents AI Over-Engineering - 3.6X Code Reduction!
+## 📰 LATEST EXPERIMENT: 32X Over-Engineering - Largest AI Complexity Explosion Yet!
 
-**[Experiment 1.501: Email Validator](experiments/1.501-email-validator/EXPERIMENT_REPORT.md)** *(September 21, 2025)*
+**[Experiment 1.502: URL Validator](experiments/1.502-url-validator/EXPERIMENT_REPORT.md)** *(September 21, 2025)*
 
-**Key Finding**: When unconstrained, AI spontaneously creates complexity! Method 1 built a **4-level validation framework** with IP addresses, quoted strings, and Unicode support (1,405 lines) while TDD delivered identical core functionality in just **393 lines** - a 3.6X reduction.
+**REVOLUTIONARY FINDING**: Method 2 created **6,036 lines** for simple URL validation vs TDD's **187 lines** - a staggering **32.3X complexity multiplier**, the largest observed in our research! AI spontaneously built enterprise security frameworks with SSRF protection, rate limiting, and CLI interfaces for a basic validation task.
 
-**Actionable Principle**: For input validation, TDD naturally enforces constraints that prevent feature explosion. Immediate implementation without requirements leads to dangerous over-engineering.
+**Critical Pattern**: As validation complexity increases, unconstrained AI creates exponentially more unnecessary features. Method 2 spent 16 minutes building what TDD solved in 3.5 minutes.
 
-Revolutionary insight: AI defaults to complexity when given freedom, but Test-Driven Development acts as a natural constraint system, forcing focus on essential requirements. [Read the full report →](experiments/1.501-email-validator/EXPERIMENT_REPORT.md)
+**Previous**: [Email Validator (1.501)](experiments/1.501-email-validator/EXPERIMENT_REPORT.md) showed 3.6X over-engineering. Now confirmed: the pattern is escalating! [Read the full report →](experiments/1.502-url-validator/EXPERIMENT_REPORT.md)
 
 ---
 
@@ -43,7 +43,8 @@ This repository contains a **mature experimental framework** for studying AI-ass
 - **Mismatch creates dangerous over/under-engineering**
 
 ### 2. **AI Over-Engineering Epidemic** 🚨
-**Unconstrained AI spontaneously creates 3-7X more complexity than needed.**
+**Unconstrained AI spontaneously creates 3-32X more complexity than needed.**
+- URL Validator: Method 2 created enterprise framework unprompted (6,036 vs 187 lines - **32X!**)
 - Email Validator: Method 1 created 4 validation levels unprompted (1,405 vs 393 lines)
 - Anagram Grouper: Method 2 generated 1,440 lines for 60-line algorithm
 - **TDD acts as natural constraint system** preventing feature explosion
@@ -83,6 +84,7 @@ You'll receive four complete prompts following bias prevention protocols, ready 
 - **[1.302 - LRU Cache with TTL](experiments/1.302-lru-cache-ttl/EXPERIMENT_REPORT.md)** - Data Structures/Performance - ✅ **Method 2 fastest**
 - **[1.402 - Unicode Password Manager](experiments/1.402-unicode-password-manager/)** - Security/Unicode - ✅ **Complete**
 - **[1.501 - Email Validator](experiments/1.501-email-validator/EXPERIMENT_REPORT.md)** - Input Validation/RFC Compliance - ✅ **TDD Winner: 3.6X reduction**
+- **[1.502 - URL Validator](experiments/1.502-url-validator/EXPERIMENT_REPORT.md)** - Input Validation/Network - ✅ **32X OVER-ENGINEERING!**
 
 
 📊 **[View Complete Experiment Index with Detailed Results →](EXPERIMENT_INDEX.md)**
@@ -104,6 +106,12 @@ python experiments/1.101-anagram-grouper/methodology_comparison_demo.py
 python experiments/1.501-email-validator/simple_robustness_demo.py
 ```
 **Shows**: Method 1 accepts 7 invalid email formats that create security vulnerabilities
+
+**[URL Validator: 32X Over-Engineering Demo](experiments/1.502-url-validator/methodology_comparison_demo.py)**
+```bash
+python experiments/1.502-url-validator/methodology_comparison_demo.py
+```
+**Shows**: Method 2 created 6,036-line enterprise framework for 187-line problem - largest complexity explosion documented
 
 ### 🎤 **Perfect for Presentations**
 - **Live comparisons** of all four methodologies
@@ -319,7 +327,6 @@ We encourage open contribution while maintaining research integrity:
 
 This research was presented at:
 - **Puget Sound Python (PuPPy) Meetup** - September 17, 2025
-- See **[MEETUP_PRESENTATION_APPROACH.md](MEETUP_PRESENTATION_APPROACH.md)** for presentation details
 
 ## 📄 Citation
 

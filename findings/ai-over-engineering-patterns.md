@@ -2,7 +2,7 @@
 
 **Research Status**: Validated across multiple domains
 **Date**: September 21, 2025
-**Evidence Sources**: Email Validator (1.501), Anagram Grouper (1.101), Password Generator (1.401)
+**Evidence Sources**: URL Validator (1.502), Email Validator (1.501), Anagram Grouper (1.101), Password Generator (1.401)
 
 ## Core Discovery
 
@@ -11,6 +11,18 @@
 This pattern appears consistently across domains and represents a fundamental challenge in AI-assisted development that can be mitigated through appropriate methodology selection.
 
 ## The Over-Engineering Epidemic: Evidence
+
+### 🌐 **EXTREME CASE: URL Validator (1.502) - 32X Complexity Explosion**
+**Method 2 Over-Engineering** 🚨:
+- Created **6,036 lines** for simple URL validation (vs 187 for TDD)
+- Built **enterprise security framework** with SSRF protection unprompted
+- Added **rate limiting system** with token bucket algorithms
+- Implemented **CLI interface** with JSON/CSV/XML output formats
+- Created **6 separate packages** (models, validators, security, CLI, core, examples)
+- Built **IPv6 and internationalized domain support** without requirements
+- **Result**: 32.3X more code than necessary - **LARGEST FACTOR OBSERVED**
+
+**Pattern Discovery**: As validation domains increase in complexity, unconstrained AI creates exponentially more unnecessary features.
 
 ### 📧 **Input Validation Domain (Email Validator 1.501)**
 **Method 1 Over-Engineering**:
@@ -214,4 +226,4 @@ The **AI Over-Engineering Pattern** is a systematic tendency that appears across
 
 ---
 
-*This pattern analysis synthesizes findings from 11 experiments across input validation, algorithmic, and utility domains, providing actionable guidance for preventing AI over-engineering in production development.*
+*This pattern analysis synthesizes findings from 12 experiments across input validation, algorithmic, and utility domains, providing actionable guidance for preventing AI over-engineering in production development. The URL Validator experiment (1.502) represents the most extreme case observed to date with a 32.3X complexity multiplier.*

@@ -5,18 +5,18 @@
 
 ## Latest Experiment
 
-### 🆕 **[1.501 - Email Validator](experiments/1.501-email-validator/EXPERIMENT_REPORT.md)** (September 21, 2025)
-**Tier 1 Function** | Input Validation Domain | Python | ~15 minutes parallel execution
+### 🆕 **[1.502 - URL Validator](experiments/1.502-url-validator/EXPERIMENT_REPORT.md)** (September 21, 2025)
+**Tier 1 Function** | Input Validation Domain | Python | 16 minutes parallel execution
 
-**Key Findings:**
-- **Method 1** spontaneously created 4-level validation framework (1,405 lines) without requirements
-- **Method 3 (TDD)** delivered same functionality in just 393 lines - **3.6X reduction**
-- **Method 4's test validation** created 5.66:1 test-to-code ratio proving test effectiveness
-- **Over-engineering epidemic**: Method 1 added IP addresses, quoted strings, Unicode unprompted
+**REVOLUTIONARY FINDINGS:**
+- **Method 2** created **6,036 lines** vs Method 3's **187 lines** - **32.3X OVER-ENGINEERING!** 🚨
+- **Largest complexity explosion** in our research - enterprise framework for simple validation
+- **Spontaneous features**: SSRF protection, rate limiting, CLI with JSON/CSV/XML, IPv6, IDN - NONE requested!
+- **Method 3 (TDD)** completed in 3.5 minutes with minimal viable solution
 
-**Winner**: Method 3 (TDD) - Natural constraint enforcement prevents feature explosion in validation tasks
+**Winner**: Method 3 (TDD) - 187 lines achieving identical functionality to 6,036-line enterprise framework
 
-*First experiment in Input Validation domain (1.5XX)*
+*Pattern escalation confirmed: Email (3.6X) → URL (32.3X) complexity multiplier growth*
 
 ---
 
@@ -94,14 +94,22 @@
 - **Surprising**: Method 1 created 4 validation levels unprompted
 - **📺 [Interactive Demo](experiments/1.501-email-validator/simple_robustness_demo.py)** - Shows security vulnerabilities live
 
+#### [1.502 - URL Validator](experiments/1.502-url-validator/EXPERIMENT_REPORT.md)
+*September 21, 2025 | Input Validation*
+- **Problem**: Validate URL format and accessibility
+- **Best Method**: Method 3 (TDD) - 32.3X less code than Method 2!
+- **Key Finding**: Largest over-engineering factor observed
+- **Shocking**: Method 2 built enterprise security framework unprompted
+- **📺 [Interactive Demo](experiments/1.502-url-validator/methodology_comparison_demo.py)** - Shows 32X complexity explosion live
+
 ### Summary
 
-**Total Completed Experiments**: 11
+**Total Completed Experiments**: 12
 - **String Processing (1.1XX)**: 4 experiments
 - **Mathematical Operations (1.2XX)**: 4 experiments
 - **Data Structures (1.3XX)**: 1 experiment
 - **Security/Cryptography (1.4XX)**: 1 experiment
-- **Input Validation (1.5XX)**: 1 experiment
+- **Input Validation (1.5XX)**: 2 experiments ✅
 
 ---
 
