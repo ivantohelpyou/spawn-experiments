@@ -144,41 +144,26 @@ class FilePathValidator:
         Check if path is secure (no path traversal outside base directory).
         """
         try:
-            # Normalize both paths
-            normalized_path = os.path.normpath(os.path.abspath(path))
-            normalized_base = os.path.normpath(os.path.abspath(base_directory))
+            # Use pathlib for more reliable path resolution
+            base_path = Path(base_directory).resolve()
 
-            # Check if the path is within the base directory
-            common_path = os.path.commonpath([normalized_path, normalized_base])
+            # For relative paths, resolve them relative to the base directory
+            if os.path.isabs(path):
+                # Absolute paths that don't start with base directory are insecure
+                target_path = Path(path).resolve()
+            else:
+                # Relative paths are resolved relative to base directory
+                target_path = (base_path / path).resolve()
 
-            if common_path != normalized_base:
+            # Check if resolved path is within base directory
+            try:
+                target_path.relative_to(base_path)
+                return SecurityResult(is_secure=True)
+            except ValueError:
                 return SecurityResult(
                     is_secure=False,
-                    error_message="Path traversal detected: path escapes base directory"
+                    error_message="Path traversal detected: resolved path outside base directory"
                 )
-
-            # Additional check for explicit path traversal patterns
-            if '..' in path or path.startswith('/'):
-                # Use pathlib for more sophisticated checking
-                try:
-                    resolved_path = Path(base_directory, path).resolve()
-                    base_path = Path(base_directory).resolve()
-
-                    # Check if resolved path is within base directory
-                    try:
-                        resolved_path.relative_to(base_path)
-                    except ValueError:
-                        return SecurityResult(
-                            is_secure=False,
-                            error_message="Path traversal detected: resolved path outside base directory"
-                        )
-                except (OSError, RuntimeError):
-                    return SecurityResult(
-                        is_secure=False,
-                        error_message="Path resolution failed"
-                    )
-
-            return SecurityResult(is_secure=True)
 
         except (ValueError, OSError) as e:
             return SecurityResult(
