@@ -24,6 +24,22 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertFalse(result.is_valid)
         self.assertIn("Expected type 'string'", result.errors[0])
 
+    def test_validate_integer_type_valid(self):
+        """Test validating an integer against integer type schema"""
+        schema = {"type": "integer"}
+        data = 42
+        result = self.validator.validate(data, schema)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(result.errors, [])
+
+    def test_validate_integer_type_invalid_float(self):
+        """Test validating a float against integer type schema"""
+        schema = {"type": "integer"}
+        data = 42.5
+        result = self.validator.validate(data, schema)
+        self.assertFalse(result.is_valid)
+        self.assertIn("Expected type 'integer'", result.errors[0])
+
 
 if __name__ == '__main__':
     unittest.main()
