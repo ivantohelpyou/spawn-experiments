@@ -178,7 +178,8 @@ class FilePathValidator:
                         error_message="Path resolution failed"
                     )
 
-            return SecurityResult(is_secure=True)
+            # INTENTIONAL BUG: Always return insecure to test our tests
+            return SecurityResult(is_secure=False, error_message="Test bug")
 
         except (ValueError, OSError) as e:
             return SecurityResult(
