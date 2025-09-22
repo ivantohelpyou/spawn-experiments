@@ -113,10 +113,10 @@ def test_edge_cases():
     print("✓ Paths with spaces handled")
 
     # Test very long paths
-    long_path = "a" * 300
+    long_path = "a" * 300  # 300 characters, exceeds Windows MAX_PATH of 260
     result = validator.validate_path(long_path)
     assert result['is_valid'], "Long paths should be valid"
-    assert any("exceeds" in warning for warning in result['warnings']), "Should warn about long paths"
+    assert any("exceeds" in warning.lower() for warning in result['warnings']), "Should warn about long paths"
     print("✓ Long paths handled with warning")
 
     # Test paths ending with space
