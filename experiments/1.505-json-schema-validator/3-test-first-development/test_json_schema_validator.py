@@ -54,6 +54,20 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertTrue(result.is_valid)
         self.assertEqual(result.errors, [])
 
+    def test_validate_object_with_properties_invalid(self):
+        """Test validating an object with invalid property types"""
+        schema = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer"}
+            }
+        }
+        data = {"name": "John", "age": "thirty"}  # age should be integer, not string
+        result = self.validator.validate(data, schema)
+        self.assertFalse(result.is_valid)
+        self.assertTrue(len(result.errors) > 0)
+
 
 if __name__ == '__main__':
     unittest.main()
