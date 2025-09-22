@@ -79,7 +79,7 @@ class TestJSONSchemaValidator:
         data = {
             "email": "test@example.com",
             "website": "https://example.com",
-            "birth_date": "1990-01-01"
+            "birth_date": "01/01/1990"
         }
 
         # Create temporary files
