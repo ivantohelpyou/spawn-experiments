@@ -16,6 +16,7 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertTrue(result.is_valid)
         self.assertEqual(result.errors, [])
 
+<<<<<<< HEAD
     def test_validate_simple_string_type_invalid(self):
         """Test validating a non-string against string type schema"""
         schema = {"type": "string"}
@@ -208,6 +209,8 @@ class TestJSONSchemaValidator(unittest.TestCase):
         self.assertFalse(result.is_valid)
         self.assertIn("Required property 'email' is missing", result.errors[0])
 
+=======
+>>>>>>> exp-1505-adaptive-tdd
 
 if __name__ == '__main__':
     unittest.main()
