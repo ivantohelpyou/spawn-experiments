@@ -1,14 +1,15 @@
-# TDD in the AI Era: Spawn-Experiments System v4.0 - Baseline Specification Edition
+# TDD in the AI Era: Spawn-Experiments System v4.2 - Mechanical Rabbit Edition
 
-**Purpose**: Enhanced prompting system with baseline specification control for practical methodology comparisons.
+**Purpose**: Optimized 4-method racing framework with Method 3 as the "mechanical rabbit" baseline for competitive methodology improvement.
 
-**Key Innovation**: Shared baseline specification eliminates requirement interpretation variance, enabling pure methodology effectiveness measurement.
+**Key Innovation**: Method 3 (Pure TDD) serves as consistent baseline that other methodologies race against, driving continuous optimization through competitive dynamics.
 
-**Version 4.0 Changes**:
-- Baseline specification protocol for scope control
-- Experimenter approval step before method execution
-- Branch isolation with clean main integration
-- Focus shift from pathology study to practical workflows
+**Version 4.2 Enhancements**:
+- Method 3 established as "mechanical rabbit" baseline (consistent 6-8min, ~200 lines)
+- Method 4 V4.1 Adaptive TDD as innovation leader (4m dev, 1M+ val/sec, strategic validation)
+- Enhanced branch protocol with automated verification and demo generation
+- Prediction accountability system reveals AI biases and improves calibration
+- Competitive racing framework drives methodology evolution
 
 ---
 
@@ -508,9 +509,22 @@ This ensures every experiment produces:
 
 ---
 
-## Enhanced Method Prompts
+## 🎯 **Benchmark Framework: The Constraint-Driven Baseline**
 
-### **Method 1: Immediate Implementation (Enhanced)**
+### **🔧 The Natural Constraint Baseline**
+**Method 3 (Pure TDD)** serves as the consistent baseline standard for post-experiment comparison:
+- **Benchmark Performance**: 6-8 minutes development time
+- **Benchmark Efficiency**: ~200 lines for input validation tasks
+- **Benchmark Reliability**: 100% implementation success rate
+- **Natural Mechanism**: Tests prevent over-engineering automatically
+
+**Framework Objective**: Methods are measured against this consistent baseline to reveal their effectiveness patterns.
+
+---
+
+## 🏆 **Optimized Method Prompts**
+
+### **⚡ Method 1: Immediate Implementation** (Speed-Focused)
 
 ```
 Build a [APPLICATION_TYPE] using [TECH_STACK].
@@ -545,7 +559,40 @@ Technology: [TECH_STACK]
 Show all work including commits.
 ```
 
-### **Method 2: Human-Reviewed Specification (NEW)**
+```
+Build a [APPLICATION_TYPE] using [TECH_STACK].
+
+REQUIREMENTS (Baseline Specification):
+[APPROVED_BASELINE_SPECIFICATION]
+
+Start coding immediately with minimal planning. Focus on getting something working quickly.
+
+CONSTRAINTS:
+- You may not use the web for this project
+- Use only standard library and built-in capabilities
+- Work from your existing knowledge
+
+DIRECTORY STRUCTURE:
+Create your implementation in:
+experiments/[EXPERIMENT_NUMBER]/1-immediate-implementation/
+
+BRANCH ISOLATION:
+git checkout -b exp-[EXPERIMENT_NUMBER]-immediate
+
+ATOMIC COMMIT PROTOCOL:
+Commit your progress frequently:
+- git add -A && git commit -m "Initial: Starting implementation"
+- git add -A && git commit -m "Core: Basic functionality working"
+- git add -A && git commit -m "Feature: [specific feature added]"
+- git add -A && git commit -m "COMPLETE: Working solution"
+
+Commit every 2-3 minutes or when you complete any working functionality.
+
+Technology: [TECH_STACK]
+Show all work including commits.
+```
+
+### **📚 Method 2: Specification-Driven** (Enterprise-Focused)
 
 ```
 Build a [APPLICATION_TYPE] using [TECH_STACK].
@@ -584,7 +631,7 @@ Technology: [TECH_STACK]
 Show all work including commits.
 ```
 
-### **Method 3: Test-First Development (Enhanced)**
+### **🔧 Method 3: Test-First Development** (Constraint-Driven Baseline)
 
 ```
 Build a [APPLICATION_TYPE] using [TECH_STACK] using strict TDD.
@@ -592,7 +639,7 @@ Build a [APPLICATION_TYPE] using [TECH_STACK] using strict TDD.
 REQUIREMENTS (Baseline Specification):
 [APPROVED_BASELINE_SPECIFICATION]
 
-Follow Red-Green-Refactor with atomic commits:
+Follow Red-Green-Refactor with atomic commits - natural constraint mechanism:
 
 CONSTRAINTS:
 - You may not use the web for this project
@@ -619,7 +666,7 @@ Technology: [TECH_STACK]
 Show all work including commits.
 ```
 
-### **Method 4: Adaptive TDD V4.1 (ENHANCED)**
+### **🏆 Method 4: Adaptive TDD V4.1** (Strategic Innovation)
 
 ```
 Build a [APPLICATION_TYPE] using [TECH_STACK].
