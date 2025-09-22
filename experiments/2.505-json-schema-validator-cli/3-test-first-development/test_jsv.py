@@ -10,6 +10,7 @@ import os
 import tempfile
 import subprocess
 import sys
+import shutil
 from unittest.mock import patch, mock_open
 from io import StringIO
 
@@ -93,6 +94,96 @@ class TestCLIArgumentParsing(unittest.TestCase):
         args = parse_args(['validate', 'data.json', '--schema', 'schema.json', '--quiet'])
         self.assertEqual(args.command, 'validate')
         self.assertTrue(args.quiet)
+
+
+class TestFileValidation(unittest.TestCase):
+    """Test cases for file-based validation functionality."""
+
+    def setUp(self):
+        """Set up test fixtures with temporary files."""
+        self.test_dir = tempfile.mkdtemp()
+
+        # Create test schema file
+        self.schema_data = {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "age": {"type": "integer", "minimum": 0}
+            },
+            "required": ["name"]
+        }
+        self.schema_file = os.path.join(self.test_dir, 'schema.json')
+        with open(self.schema_file, 'w') as f:
+            json.dump(self.schema_data, f)
+
+        # Create valid test data file
+        self.valid_data = {"name": "John Doe", "age": 30}
+        self.valid_file = os.path.join(self.test_dir, 'valid.json')
+        with open(self.valid_file, 'w') as f:
+            json.dump(self.valid_data, f)
+
+        # Create invalid test data file
+        self.invalid_data = {"age": -5}  # Missing name, negative age
+        self.invalid_file = os.path.join(self.test_dir, 'invalid.json')
+        with open(self.invalid_file, 'w') as f:
+            json.dump(self.invalid_data, f)
+
+    def tearDown(self):
+        """Clean up test fixtures."""
+        import shutil
+        shutil.rmtree(self.test_dir)
+
+    def test_validate_file_with_valid_data(self):
+        """Test file validation with valid data."""
+        # This test will fail initially (RED) because validate_file doesn't exist yet
+        from jsv import validate_file
+
+        result = validate_file(self.valid_file, self.schema_file)
+        self.assertTrue(result.is_valid)
+        self.assertEqual(len(result.errors), 0)
+        self.assertEqual(result.file_path, self.valid_file)
+
+    def test_validate_file_with_invalid_data(self):
+        """Test file validation with invalid data."""
+        from jsv import validate_file
+
+        result = validate_file(self.invalid_file, self.schema_file)
+        self.assertFalse(result.is_valid)
+        self.assertGreater(len(result.errors), 0)
+        self.assertEqual(result.file_path, self.invalid_file)
+
+    def test_validate_file_with_nonexistent_data_file(self):
+        """Test file validation with non-existent data file."""
+        from jsv import validate_file
+
+        nonexistent_file = os.path.join(self.test_dir, 'nonexistent.json')
+        result = validate_file(nonexistent_file, self.schema_file)
+        self.assertFalse(result.is_valid)
+        self.assertGreater(len(result.errors), 0)
+        self.assertIn("not found", result.errors[0].lower())
+
+    def test_validate_file_with_nonexistent_schema_file(self):
+        """Test file validation with non-existent schema file."""
+        from jsv import validate_file
+
+        nonexistent_schema = os.path.join(self.test_dir, 'nonexistent_schema.json')
+        result = validate_file(self.valid_file, nonexistent_schema)
+        self.assertFalse(result.is_valid)
+        self.assertGreater(len(result.errors), 0)
+        self.assertIn("schema", result.errors[0].lower())
+
+    def test_validate_file_with_malformed_json(self):
+        """Test file validation with malformed JSON."""
+        from jsv import validate_file
+
+        malformed_file = os.path.join(self.test_dir, 'malformed.json')
+        with open(malformed_file, 'w') as f:
+            f.write('{"name": "John", "age":}')  # Invalid JSON
+
+        result = validate_file(malformed_file, self.schema_file)
+        self.assertFalse(result.is_valid)
+        self.assertGreater(len(result.errors), 0)
+        self.assertIn("json", result.errors[0].lower())
 
 
 if __name__ == '__main__':
