@@ -70,14 +70,51 @@ class FilePathValidator:
         """
         Validate a file path using comprehensive checks.
         """
-        # Convert to string if Path object
-        if isinstance(path, Path):
-            original_type = "pathlib.Path"
-            path_str = str(path)
-        else:
-            original_type = "str"
-            path_str = path
+        # Convert to string and determine original type
+        original_type, path_str = self._normalize_input(path)
 
+        # Basic validation checks
+        basic_validation = self._validate_basic_properties(path_str, original_type)
+        if not basic_validation.is_valid:
+            return basic_validation
+
+        # Determine path type
+        is_absolute = os.path.isabs(path_str)
+        path_type = "absolute" if is_absolute else "relative"
+
+        # Check path type restrictions
+        if not is_absolute and not self.allow_relative:
+            return self._create_error_result(
+                "Relative paths are not allowed",
+                path_type, original_type
+            )
+
+        # Character validation
+        char_validation = self._validate_characters(path_str, path_type, original_type)
+        if not char_validation.is_valid:
+            return char_validation
+
+        # Platform-specific validation
+        platform_validation = self._validate_platform_specific(path_str, path_type, original_type)
+        if not platform_validation.is_valid:
+            return platform_validation
+
+        # Path is valid
+        return ValidationResult(
+            is_valid=True,
+            path_type=path_type,
+            original_input_type=original_type
+        )
+
+    def _normalize_input(self, path: Union[str, Path]) -> tuple[str, str]:
+        """Convert input to string and return original type."""
+        if isinstance(path, Path):
+            return "pathlib.Path", str(path)
+        else:
+            return "str", path
+
+    def _validate_basic_properties(self, path_str: str, original_type: str) -> ValidationResult:
+        """Validate basic path properties like emptiness and length."""
         # Check if path is empty or only whitespace
         if not path_str or path_str.isspace():
             return ValidationResult(
@@ -94,48 +131,39 @@ class FilePathValidator:
                 original_input_type=original_type
             )
 
-        # Determine path type
-        is_absolute = os.path.isabs(path_str)
-        path_type = "absolute" if is_absolute else "relative"
+        return ValidationResult(is_valid=True, original_input_type=original_type)
 
-        # Check if relative paths are allowed
-        if not is_absolute and not self.allow_relative:
-            return ValidationResult(
-                is_valid=False,
-                path_type=path_type,
-                error_message="Relative paths are not allowed",
-                original_input_type=original_type
-            )
-
-        # Check for invalid characters
+    def _validate_characters(self, path_str: str, path_type: str, original_type: str) -> ValidationResult:
+        """Validate characters in the path."""
         invalid_chars = self._get_invalid_characters()
         for char in path_str:
             if char in invalid_chars:
-                return ValidationResult(
-                    is_valid=False,
-                    path_type=path_type,
-                    error_message=f"Path contains invalid character: {repr(char)}",
-                    original_input_type=original_type
+                return self._create_error_result(
+                    f"Path contains invalid character: {repr(char)}",
+                    path_type, original_type
                 )
+        return ValidationResult(is_valid=True, path_type=path_type, original_input_type=original_type)
 
-        # Check for Windows reserved names
+    def _validate_platform_specific(self, path_str: str, path_type: str, original_type: str) -> ValidationResult:
+        """Validate platform-specific rules like Windows reserved names."""
         if os.name == 'nt':
             parts = Path(path_str).parts
             for part in parts:
                 # Remove extension for checking
                 name_only = part.split('.')[0].upper()
                 if name_only in self.WINDOWS_RESERVED_NAMES:
-                    return ValidationResult(
-                        is_valid=False,
-                        path_type=path_type,
-                        error_message=f"Path contains reserved name: {part}",
-                        original_input_type=original_type
+                    return self._create_error_result(
+                        f"Path contains reserved name: {part}",
+                        path_type, original_type
                     )
+        return ValidationResult(is_valid=True, path_type=path_type, original_input_type=original_type)
 
-        # Path is valid
+    def _create_error_result(self, error_message: str, path_type: str, original_type: str) -> ValidationResult:
+        """Create a standardized error result."""
         return ValidationResult(
-            is_valid=True,
+            is_valid=False,
             path_type=path_type,
+            error_message=error_message,
             original_input_type=original_type
         )
 
@@ -144,42 +172,61 @@ class FilePathValidator:
         Check if path is secure (no path traversal outside base directory).
         """
         try:
-            # Normalize path separators for cross-platform compatibility
-            normalized_path = path.replace('\\', '/')
+            normalized_path = self._normalize_path_separators(path)
 
-            # Check for obvious path traversal patterns
-            if '..' in normalized_path:
-                return SecurityResult(
-                    is_secure=False,
-                    error_message="Path traversal detected: contains '..' components"
-                )
+            # Check for path traversal patterns
+            traversal_check = self._check_path_traversal_patterns(normalized_path)
+            if not traversal_check.is_secure:
+                return traversal_check
 
-            # Check for absolute paths that would escape the base directory
-            if normalized_path.startswith('/') or (len(normalized_path) > 1 and normalized_path[1] == ':'):
-                # This is an absolute path
-                return SecurityResult(
-                    is_secure=False,
-                    error_message="Absolute paths are not allowed for security"
-                )
+            # Check for absolute paths
+            absolute_check = self._check_absolute_path_security(normalized_path)
+            if not absolute_check.is_secure:
+                return absolute_check
 
-            # Use pathlib for path resolution
-            base_path = Path(base_directory).resolve()
-            target_path = (base_path / normalized_path).resolve()
-
-            # Check if resolved path is within base directory
-            try:
-                target_path.relative_to(base_path)
-                return SecurityResult(is_secure=True)
-            except ValueError:
-                return SecurityResult(
-                    is_secure=False,
-                    error_message="Path traversal detected: resolved path outside base directory"
-                )
+            # Perform final path resolution check
+            return self._check_path_resolution_security(normalized_path, base_directory)
 
         except (ValueError, OSError) as e:
             return SecurityResult(
                 is_secure=False,
                 error_message=f"Security check failed: {str(e)}"
+            )
+
+    def _normalize_path_separators(self, path: str) -> str:
+        """Normalize path separators for cross-platform compatibility."""
+        return path.replace('\\', '/')
+
+    def _check_path_traversal_patterns(self, path: str) -> SecurityResult:
+        """Check for obvious path traversal patterns."""
+        if '..' in path:
+            return SecurityResult(
+                is_secure=False,
+                error_message="Path traversal detected: contains '..' components"
+            )
+        return SecurityResult(is_secure=True)
+
+    def _check_absolute_path_security(self, path: str) -> SecurityResult:
+        """Check if absolute paths are secure."""
+        if path.startswith('/') or (len(path) > 1 and path[1] == ':'):
+            return SecurityResult(
+                is_secure=False,
+                error_message="Absolute paths are not allowed for security"
+            )
+        return SecurityResult(is_secure=True)
+
+    def _check_path_resolution_security(self, path: str, base_directory: str) -> SecurityResult:
+        """Perform final path resolution security check using pathlib."""
+        base_path = Path(base_directory).resolve()
+        target_path = (base_path / path).resolve()
+
+        try:
+            target_path.relative_to(base_path)
+            return SecurityResult(is_secure=True)
+        except ValueError:
+            return SecurityResult(
+                is_secure=False,
+                error_message="Path traversal detected: resolved path outside base directory"
             )
 
     def path_exists(self, path: Union[str, Path]) -> ExistenceResult:

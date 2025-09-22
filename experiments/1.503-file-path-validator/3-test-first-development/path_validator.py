@@ -52,3 +52,18 @@ class PathValidator:
     def get_extension(self, path):
         """Get file extension using pathlib."""
         return Path(path).suffix
+
+    def validate_comprehensive(self, path):
+        """Perform comprehensive path validation and return detailed information."""
+        result = {
+            'is_valid': self.is_valid(path),
+            'exists': self.exists(path),
+            'is_file': self.is_file(path),
+            'is_directory': self.is_directory(path),
+            'is_absolute': self.is_absolute(path),
+            'is_relative': self.is_relative(path),
+            'normalized_path': self.normalize(path),
+            'parent': self.get_parent(path),
+            'extension': self.get_extension(path)
+        }
+        return result

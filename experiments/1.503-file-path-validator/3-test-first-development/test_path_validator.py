@@ -102,6 +102,22 @@ class TestPathValidator(unittest.TestCase):
         result = self.validator.get_extension("file_without_extension")
         self.assertEqual(result, "")
 
+    def test_comprehensive_validation(self):
+        """Test comprehensive path validation method."""
+        # Test with valid existing file
+        result = self.validator.validate_comprehensive("test_path_validator.py")
+        self.assertTrue(result['is_valid'])
+        self.assertTrue(result['exists'])
+        self.assertTrue(result['is_file'])
+        self.assertFalse(result['is_directory'])
+
+        # Test with directory
+        result = self.validator.validate_comprehensive(".")
+        self.assertTrue(result['is_valid'])
+        self.assertTrue(result['exists'])
+        self.assertFalse(result['is_file'])
+        self.assertTrue(result['is_directory'])
+
 
 if __name__ == '__main__':
     unittest.main()
