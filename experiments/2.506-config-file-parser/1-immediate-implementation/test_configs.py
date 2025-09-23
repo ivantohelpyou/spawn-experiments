@@ -5,7 +5,6 @@ Test configuration files and basic functionality test.
 
 import os
 import tempfile
-import pytest
 from config_parser import ConfigParser
 
 

@@ -44,5 +44,138 @@ class TestConfigParser(unittest.TestCase):
             self.parser.detect_format("config.txt")
 
 
+    def test_parse_yaml_file(self):
+        """Test parsing a valid YAML file."""
+        yaml_content = """
+database:
+  host: localhost
+  port: 5432
+  credentials:
+    username: admin
+    password: secret
+app:
+  name: myapp
+  debug: true
+"""
+        # Create temporary YAML file
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.yaml', delete=False) as f:
+            f.write(yaml_content)
+            yaml_file = f.name
+
+        try:
+            result = self.parser.parse_file(yaml_file)
+
+            # Verify structure
+            self.assertIn('database', result)
+            self.assertIn('app', result)
+            self.assertEqual(result['database']['host'], 'localhost')
+            self.assertEqual(result['database']['port'], 5432)
+            self.assertEqual(result['database']['credentials']['username'], 'admin')
+            self.assertEqual(result['app']['name'], 'myapp')
+            self.assertTrue(result['app']['debug'])
+        finally:
+            os.unlink(yaml_file)
+
+    def test_parse_json_file(self):
+        """Test parsing a valid JSON file."""
+        json_content = """{
+    "database": {
+        "host": "localhost",
+        "port": 5432,
+        "credentials": {
+            "username": "admin",
+            "password": "secret"
+        }
+    },
+    "app": {
+        "name": "myapp",
+        "debug": true
+    }
+}"""
+        # Create temporary JSON file
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
+            f.write(json_content)
+            json_file = f.name
+
+        try:
+            result = self.parser.parse_file(json_file)
+
+            # Verify structure
+            self.assertIn('database', result)
+            self.assertIn('app', result)
+            self.assertEqual(result['database']['host'], 'localhost')
+            self.assertEqual(result['database']['port'], 5432)
+            self.assertEqual(result['database']['credentials']['username'], 'admin')
+            self.assertEqual(result['app']['name'], 'myapp')
+            self.assertTrue(result['app']['debug'])
+        finally:
+            os.unlink(json_file)
+
+    def test_parse_ini_file(self):
+        """Test parsing a valid INI file."""
+        ini_content = """[database]
+host = localhost
+port = 5432
+
+[database.credentials]
+username = admin
+password = secret
+
+[app]
+name = myapp
+debug = true
+"""
+        # Create temporary INI file
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.ini', delete=False) as f:
+            f.write(ini_content)
+            ini_file = f.name
+
+        try:
+            result = self.parser.parse_file(ini_file)
+
+            # Verify structure (INI files are flatter)
+            self.assertIn('database', result)
+            self.assertIn('app', result)
+            self.assertEqual(result['database']['host'], 'localhost')
+            self.assertEqual(result['database']['port'], '5432')  # INI values are strings
+            self.assertEqual(result['app']['name'], 'myapp')
+            self.assertEqual(result['app']['debug'], 'true')  # INI values are strings
+        finally:
+            os.unlink(ini_file)
+
+    def test_parse_toml_file(self):
+        """Test parsing a valid TOML file."""
+        toml_content = """[database]
+host = "localhost"
+port = 5432
+
+[database.credentials]
+username = "admin"
+password = "secret"
+
+[app]
+name = "myapp"
+debug = true
+"""
+        # Create temporary TOML file
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.toml', delete=False) as f:
+            f.write(toml_content)
+            toml_file = f.name
+
+        try:
+            result = self.parser.parse_file(toml_file)
+
+            # Verify structure
+            self.assertIn('database', result)
+            self.assertIn('app', result)
+            self.assertEqual(result['database']['host'], 'localhost')
+            self.assertEqual(result['database']['port'], 5432)
+            self.assertEqual(result['database']['credentials']['username'], 'admin')
+            self.assertEqual(result['app']['name'], 'myapp')
+            self.assertTrue(result['app']['debug'])
+        finally:
+            os.unlink(toml_file)
+
+
 if __name__ == '__main__':
     unittest.main()
