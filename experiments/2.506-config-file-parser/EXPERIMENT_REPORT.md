@@ -24,19 +24,51 @@ This experiment tested how different AI development methodologies approach build
 
 ## 📊 Implementation Results
 
+### **Development Timing Analysis**
+
+| Method | Duration | Tool Uses | Tokens | Lines of Code | Efficiency |
+|--------|----------|-----------|--------|---------------|------------|
+| **Method 1** | **8m 1.8s** | 67 | 59.9k | 262 | **33 LOC/min** |
+| **Method 2** | **8m 9.9s** | 49 | 67.1k | 543 | 67 LOC/min |
+| **Method 3** | **7m 58.2s** | 81 | 74.2k | 37 | **5 LOC/min** |
+| **Method 4** | **11m 33.8s** | 76 | 88.7k | 324 | 28 LOC/min |
+
+**Key Timing Insights**:
+- **Method 3 fastest**: 7m 58s despite 81 tool uses (TDD overhead)
+- **Method 4 slowest**: 11m 34s with highest token usage (strategic analysis)
+- **Methods 1 & 2 similar**: ~8 minutes despite vastly different complexity
+
 ### **Library Selection Analysis**
 
-| Method | Libraries Used | Commonalities | Unique Choices |
-|--------|----------------|---------------|----------------|
-| **Method 1** | pyyaml, toml, click, json, configparser | ✅ Core trio | Sample files |
-| **Method 2** | pyyaml, toml, click, configparser, json | ✅ Core trio | Comprehensive spec |
-| **Method 3** | pyyaml, toml, click, configparser, json | ✅ Core trio | CLI separation |
-| **Method 4** | pyyaml, toml, click, json, configparser | ✅ Core trio | Strategic testing |
+| Method | Libraries Used | Reasoning Approach | Decision Criteria |
+|--------|----------------|-------------------|-------------------|
+| **Method 1** | pyyaml, toml, click, json, configparser | **Pragmatic**: "standard ecosystem choice" | Popular, reliable, quick to implement |
+| **Method 2** | pyyaml, toml, click, configparser, json | **Analytical**: Considered alternatives | Stability, minimal dependencies, production-ready |
+| **Method 3** | pyyaml, toml, click, configparser, json | **Test-focused**: "clear APIs, easy to test" | Testability, minimal dependencies, predictable |
+| **Method 4** | pyyaml, toml, click, json, configparser | **Strategic**: "established libraries reduce complexity" | Risk mitigation, testing support, maintainability |
 
 **Universal Convergence**: All methods selected the same **core trio**:
 - **pyyaml** (YAML parsing)
 - **toml** (TOML parsing)
 - **click** (CLI framework)
+
+### **Post-Hoc Library Reasoning Captured**
+
+**Method 1 (Immediate)**: Direct, practical choices
+- "De facto standard", "no need for external dependency", "reliable and fast"
+- Focus on getting working solution quickly
+
+**Method 2 (Specification)**: Comprehensive evaluation
+- Considered alternatives like ruamel.yaml, typer, ujson
+- "Conservative, production-ready approach" with "ecosystem consensus"
+
+**Method 3 (TDD)**: Test-driven selection
+- "Clear, predictable APIs easy to test", "minimal dependencies reduce test complexity"
+- Avoided complex libraries for simpler testing
+
+**Method 4 (Adaptive)**: Strategic risk assessment
+- "Strategic testing capabilities", "round-trip conversion tests"
+- Balanced features vs complexity with explicit validation strategy
 
 ### **Architecture Comparison**
 
@@ -77,11 +109,12 @@ This experiment tested how different AI development methodologies approach build
 
 ## 🎯 Key Findings
 
-### **1. Library Selection Convergence**
-**All methods converged on identical library choices**, suggesting:
+### **1. Library Selection Convergence with Distinct Reasoning**
+**All methods converged on identical library choices** but with **methodology-specific reasoning patterns**:
 - **Training data dominance** over methodology preferences
 - **Obvious choices** for well-defined problem domains
 - **Standard ecosystem patterns** in Python config parsing
+- **Different evaluation depth**: Method 2 considered alternatives, Method 1 chose quickly, Method 3 focused on testability, Method 4 used strategic analysis
 
 ### **2. Architecture Methodology Differences**
 Despite identical libraries, **architecture patterns varied significantly**:
