@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User Profile",
+  "type": "object",
+  "required": ["name", "email", "age"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 150
+    },
+    "website": {
+      "type": "string",
+      "format": "uri"
+    },
+    "birthdate": {
+      "type": "string",
+      "format": "date"
+    },
+    "preferences": {
+      "type": "object",
+      "properties": {
+        "notifications": {
+          "type": "boolean"
+        },
+        "theme": {
+          "type": "string",
+          "enum": ["light", "dark", "auto"]
+        }
+      }
+    }
+  }
+}

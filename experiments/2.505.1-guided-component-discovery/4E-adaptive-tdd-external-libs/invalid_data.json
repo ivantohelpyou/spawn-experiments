@@ -1,0 +1,11 @@
+{
+  "name": "",
+  "email": "not-an-email",
+  "age": -5,
+  "website": "not-a-url",
+  "birthdate": "invalid-date",
+  "preferences": {
+    "notifications": "yes",
+    "theme": "purple"
+  }
+}

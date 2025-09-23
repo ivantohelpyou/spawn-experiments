@@ -1,0 +1,7 @@
+{
+  "name": "Format Test User",
+  "email": "test@valid-domain.com",
+  "age": 25,
+  "website": "https://www.example.org/path?query=value#fragment",
+  "birthdate": "2000-12-31"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Bob Smith",
+  "email": "not-a-valid-email",
+  "age": -5,
+  "website": "not-a-valid-url"
+}

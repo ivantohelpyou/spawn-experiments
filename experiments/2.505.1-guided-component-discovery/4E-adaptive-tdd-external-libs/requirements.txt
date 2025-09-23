@@ -1,0 +1,6 @@
+jsonschema>=4.17.0
+click>=8.1.0
+rich>=13.0.0
+colorama>=0.4.6
+python-dateutil>=2.8.2
+email-validator>=2.0.0

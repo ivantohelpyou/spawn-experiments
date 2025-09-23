@@ -1,0 +1,11 @@
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "website": "https://johndoe.com",
+  "birthdate": "1993-05-15",
+  "preferences": {
+    "notifications": true,
+    "theme": "dark"
+  }
+}
