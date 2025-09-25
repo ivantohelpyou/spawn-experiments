@@ -186,24 +186,26 @@ Study **organic component discovery** patterns without explicit guidance:
 
 **Problem Identified**: Experiment 1.501.1 successfully validated severed branch acceleration hypothesis (3-4x universal speedup) but compared against 1.501's complexity metrics instead of precise timing data. We need clean timing comparison.
 
-**Required Experiment**: **X.X.X - Severed Branch vs Normal Timing Study**
-- **Scope**: Use experiment with FULL TIMING DATA (e.g., 1.507.3, 2.505.1, or 2.505.2)
-- **Method**: Run same experiment both ways: normal context vs severed branch isolation
+**Required Experiment**: **1.502.1 - URL Validator Severed Branch Timing Study**
+- **Scope**: Rerun 1.502 URL Validator under severed branch isolation
+- **Baseline**: Perfect timing data (Method 1: 53s, Method 3: 3m29s, Method 4: 8m10s, Method 2: 16m6s)
+- **Expected**: If hypothesis holds, should see ~15-60s across all methods (3-4x acceleration)
+- **Bonus**: Test if severed branch prevents 32.3X over-engineering in Method 2
 - **Variable**: Single variable - development context isolation only
-- **Baseline**: Must have precise timing measurements for direct comparison
-- **Priority**: HIGH - validates core acceleration technique
+- **Priority**: HIGH - validates core acceleration technique with ideal baseline
 
 **Candidate Experiments for Timing Comparison**:
-1. **1.507.3 QR Code Generator** - Has precise timing logs for all 4 methods
-2. **2.505.1 Guided Component Discovery** - Has timing data + component discovery patterns
-3. **2.505.2 Severed Branch Complex** - Already has severed branch data, run normal context version
+1. **🎯 1.502 URL Validator** - PERFECT CANDIDATE: Full timing data (53s, 3m29s, 8m10s, 16m6s) + largest over-engineering gap (32.3X)
+2. **1.507.3 QR Code Generator** - Has precise timing logs for all 4 methods
+3. **2.505.1 Guided Component Discovery** - Has timing data + component discovery patterns
+4. **2.505.2 Severed Branch Complex** - Already has severed branch data, run normal context version
 
 **Research Question**: Does severed branch isolation maintain 3-4x acceleration when compared against actual timing data (not complexity metrics)?
 
 ### Priority Execution Plan
 
 ### Phase 0: DATA GAP RESOLUTION (IMMEDIATE)
-**CRITICAL**: Execute proper severed branch timing validation using experiment with existing precise timing data.
+**CRITICAL**: Execute **1.502.1 - URL Validator Severed Branch** to validate 3-4x acceleration against Method 2's 16m6s baseline (longest recorded timing). This will definitively prove/disprove severed branch universal acceleration with clean single-variable design.
 
 ### Phase 1: Tier 1 Foundation (Next 2-3 months)
 Execute experiments 010-014 to build function library and establish baseline methodology patterns.
