@@ -89,7 +89,17 @@ def test_functionality_equivalence(base_dir, available_methods):
     header = f"{'Test Case':<35}"
     method_headers = []
     for method_name in available_methods.keys():
-        abbrev = "M" + method_name.split()[1][1]  # M1, M2, M3, M4
+        # Extract method number more safely
+        if "1" in method_name:
+            abbrev = "M1"
+        elif "2" in method_name:
+            abbrev = "M2"
+        elif "3" in method_name:
+            abbrev = "M3"
+        elif "4" in method_name:
+            abbrev = "M4"
+        else:
+            abbrev = "M?"
         method_headers.append(abbrev)
         header += f" {abbrev:<6}"
     header += " Description"
