@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Person",
+  "description": "A person object with basic information",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Full name of the person"
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address"
+    },
+    "age": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 120,
+      "description": "Age in years"
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "street": {
+          "type": "string",
+          "description": "Street address"
+        },
+        "city": {
+          "type": "string",
+          "description": "City name"
+        },
+        "zipcode": {
+          "type": "string",
+          "pattern": "^[0-9]{5}(-[0-9]{4})?$",
+          "description": "ZIP code (5 digits or 5+4 format)"
+        },
+        "country": {
+          "type": "string",
+          "default": "USA"
+        }
+      },
+      "required": ["street", "city"],
+      "additionalProperties": false
+    },
+    "phoneNumbers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["home", "work", "mobile"]
+          },
+          "number": {
+            "type": "string",
+            "pattern": "^\\+?[1-9][\\d\\-]{1,20}$"
+          }
+        },
+        "required": ["type", "number"]
+      },
+      "minItems": 0,
+      "maxItems": 5
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "registrationDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": ["name", "email", "age"],
+  "additionalProperties": false
+}

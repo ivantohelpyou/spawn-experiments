@@ -1,0 +1,23 @@
+{
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "age": 30,
+  "address": {
+    "street": "123 Main Street",
+    "city": "Anytown",
+    "zipcode": "12345",
+    "country": "USA"
+  },
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "+1-555-123-4567"
+    },
+    {
+      "type": "mobile",
+      "number": "+1-555-987-6543"
+    }
+  ],
+  "isActive": true,
+  "registrationDate": "2023-12-01T10:30:45Z"
+}

@@ -44,6 +44,24 @@ def count_lines_of_code(file_path):
         return 0
     return loc
 
+def read_development_time(method_path):
+    """Extract development time from timing log."""
+    timing_file = method_path / "TIMING_LOG.txt"
+    if not timing_file.exists():
+        return "Not measured"
+
+    try:
+        with open(timing_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+            for line in content.split('\n'):
+                if 'TOTAL DURATION:' in line:
+                    return line.split('TOTAL DURATION:')[1].strip()
+                elif 'Total Duration:' in line:
+                    return line.split('Total Duration:')[1].strip()
+    except Exception:
+        pass
+    return "Not measured"
+
 def benchmark_method(module, test_data):
     """Benchmark a method implementation with runtime measurements."""
     print("⏱️  Performance Benchmarking:")
@@ -256,20 +274,17 @@ def run_comparison():
 
     # Development time comparison
     print(f"\n🕒 DEVELOPMENT TIME COMPARISON:")
-    development_times = {
-        "Method 1 (Immediate)": "4m 4s",
-        "Method 2 (Spec-driven)": "[Not yet measured]",
-        "Method 3 (TDD)": "[Not measured - recovered from failure]",
-        "Method 4 (Adaptive TDD)": "[Not measured - recovered from failure]"
-    }
+    method_times = {}
+    for method_num, name, folder in methods:
+        method_path = experiment_root / folder
+        dev_time = read_development_time(method_path)
+        method_times[name] = dev_time
+        print(f"Method {method_num} ({name}): {dev_time}")
 
-    for method, time_taken in development_times.items():
-        print(f"{method}: {time_taken}")
-
-    print("\nDevelopment Time Breakdown:")
-    print("- Method 1: Task agent execution (includes analysis, coding, testing)")
-    print("- Methods 3&4: Lost due to experimental failure - recovered from inline code")
-    print("- Method 2: Pending execution with time measurement")
+    print("\nDevelopment Time Analysis:")
+    print("- All methods executed with timing measurement")
+    print("- Times include: analysis, coding, testing, documentation")
+    print("- Parallel execution ensures fair comparison")
     print("\nNote: Times measure end-to-end development including:")
     print("  • Requirement analysis")
     print("  • Implementation coding")

@@ -1,0 +1,19 @@
+{
+  "name": "",
+  "email": "invalid-email",
+  "age": -5,
+  "address": {
+    "street": "456 Oak Avenue",
+    "zipcode": "invalid-zip",
+    "extraField": "not allowed"
+  },
+  "phoneNumbers": [
+    {
+      "type": "invalid-type",
+      "number": "invalid-phone"
+    }
+  ],
+  "isActive": "not-a-boolean",
+  "registrationDate": "not-a-date",
+  "unexpectedField": "should not be here"
+}
