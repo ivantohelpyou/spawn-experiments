@@ -11,11 +11,31 @@
 
 ## 🔬 Core Experimental Enhancement
 
+### **Public/Private Branch Decision Protocol** (Add to ALL prompts - PHASE 0)
+
+```
+CRITICAL FIRST STEP: Before starting any experiment, ask user:
+
+"Should this experiment be public (main branch) or private (private-main branch)?"
+
+Based on response:
+- Public: Work and commit to main branch - results will be visible publicly
+- Private: Work and commit to private-main branch - results remain private
+
+NEVER assume - always ask first!
+```
+
 ### **Branch Naming Protocol** (Add to ALL prompts)
 
 ```
-IMPORTANT: Create a dedicated branch for your experiment:
+IMPORTANT: Create a dedicated branch for your experiment from the TARGET BRANCH:
 
+# For PUBLIC experiments:
+git checkout main
+git checkout -b exp-[EXPERIMENT_NUMBER]-[METHOD_NAME]
+
+# For PRIVATE experiments:
+git checkout private-main
 git checkout -b exp-[EXPERIMENT_NUMBER]-[METHOD_NAME]
 
 Examples:
@@ -24,7 +44,7 @@ Examples:
 - git checkout -b exp-1504-tdd
 - git checkout -b exp-1504-validated
 
-This enables clean experiment isolation and competition injection testing.
+This enables clean experiment isolation and proper public/private separation.
 ```
 
 ### **Atomic Commit Protocol** (Add to ALL prompts)
