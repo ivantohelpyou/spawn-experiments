@@ -128,13 +128,18 @@
 - **Surprising**: Method 1 created 4 validation levels unprompted
 - **📺 [Interactive Demo](experiments/1.501-email-validator/simple_robustness_demo.py)** - Shows security vulnerabilities live
 
-#### [1.502 - URL Validator](experiments/1.502-url-validator/EXPERIMENT_REPORT.md)
-*September 21, 2025 | Input Validation*
-- **Problem**: Validate URL format and accessibility
-- **Best Method**: Method 3 (TDD) - 32.3X less code than Method 2!
-- **Key Finding**: Largest over-engineering factor observed
-- **Shocking**: Method 2 built enterprise security framework unprompted
-- **📺 [Interactive Demo](experiments/1.502-url-validator/methodology_comparison_demo.py)** - Shows 32X complexity explosion live
+#### 🚀 [1.502 - URL Validator Multi-Run Study](experiments/1.502-url-validator/EXPERIMENT_NOTE.md)
+*September 21-25, 2025 | Input Validation | Multi-Run Analysis*
+- **Problem**: URL validation across baseline, clean room, and tool-constrained conditions
+- **🎯 BREAKTHROUGH**: **Context-dependent methodology optimization patterns discovered**
+
+**Run 1 (Baseline)**: 32.3X over-engineering - Method 2 created 6,036 lines vs Method 3's 187-line baseline
+**Run 2 (Clean Room)**: ⚠️ *Samples lost* - **78% code reduction** + **2X acceleration** in Method 2
+**Run 3 (Tool-Constrained)**: Method 1 optimal (8m47s) for simple external tool integration
+
+- **Revolutionary Discovery**: **No universal methodology winner** - context determines effectiveness
+- **📺 [Interactive Demo](experiments/1.502-url-validator/1-original/methodology_comparison_demo.py)**
+- **⚠️ Protocol Improvement**: Data loss led to Clean Room Protocol V2 development
 
 #### [1.503 - File Path Validator](experiments/1.503-file-path-validator/EXPERIMENT_REPORT.md)
 *September 21, 2025 | Input Validation + Competition Injection*
