@@ -65,7 +65,7 @@ This repository contains a **mature experimental framework** for studying AI-ass
 ### Public Research (GitHub: tdd-demo)
 - **`experiments/`** - 10 completed methodology comparisons
 - **`EXPERIMENT_INDEX.md`** - Complete experiment catalog
-- **`EXPERIMENT_NUMBERING_SYSTEM.md`** - Hierarchical organization guide
+- **`docs/EXPERIMENT_NUMBERING_SYSTEM.md`** - Hierarchical organization guide
 - **`META_PROMPT_GENERATOR.md`** - Parallel execution protocols
 - **`FUTURE_EXPERIMENTS_ROADMAP.md`** - Strategic research roadmap
 - **`utils/`** - Research-validated component library

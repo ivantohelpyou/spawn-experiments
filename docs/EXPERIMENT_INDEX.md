@@ -29,6 +29,17 @@
 
 *Framework breakthrough: Component-aware research now enabled, Tier 2+ composition studies unlocked*
 
+### **[2.506 - Config File Parser CLI](experiments/2.506-config-file-parser/EXPERIMENT_REPORT.md)** (September 22, 2025)
+**Tier 2 CLI Tool** | Multi-format Parser | Python | Checkpoint Protocol Failure | 4-method comparison
+
+**❌ PROTOCOL FAILURE FINDINGS:**
+- **Checkpoint Protocol Bypassed**: All methods skipped mid-task interaction
+- **Universal Library Convergence**: pyyaml + toml + click across all methodologies
+- **Method 3 Minimal Winner**: 37 lines core + CLI separation (vs Method 2's 543 lines)
+- **Timing Consistency**: 8-11 minutes across all approaches despite complexity differences
+
+**Insight**: Autonomous Task execution doesn't support interactive checkpoints - methodology reasoning captured post-hoc
+
 ### 🆕 **[2.505 - JSON Schema Validator CLI](experiments/2.505-json-schema-validator/EXPERIMENT_REPORT.md)** (September 22, 2025)
 **Tier 2 CLI Tool** | Component Discovery Baseline | Python | 4-method comparison
 
@@ -40,17 +51,17 @@
 **Conclusion**: AI systems require explicit awareness for component discovery - established need for 2.505.1 guided experiment
 
 ### 🔮 **[1.504 - Date Format Validator](experiments/1.504-date-format-validator/EXPERIMENT_REPORT.md)** (September 21, 2025)
-**Tier 1 Function** | Input Validation Domain | Python | V4 Framework Enhancement | 4-7 minutes parallel execution
+**Tier 1 Function** | Input Validation Domain | Python | Adaptive TDD Enhancement | 4-7 minutes parallel execution
 
 **🔮 BREAKTHROUGH FINDINGS:**
-- **V4.1 Framework Enhancement**: AI bias detection through pre-experiment predictions!
-- **Method 4 V4.1 (Adaptive TDD)** achieved **optimal balance**: 4m 1s dev, 1,008,877 val/sec, strategic validation
+- **Adaptive TDD Enhancement**: AI bias detection through pre-experiment predictions!
+- **Method 4 (Adaptive TDD)** achieved **optimal balance**: 4m 1s dev, 1,008,877 val/sec, strategic validation
 - **AI Prediction Bias Discovery**: Systematically underestimates simple approaches, overestimates specification complexity
 - **Method 2** over-engineered by **6.4X** (646 vs 101 lines) - pattern confirmed across input validation domain
 
-**Winner**: Method 4 V4.1 (Adaptive TDD) - near-immediate speed with superior performance + strategic quality
+**Winner**: Method 4 (Adaptive TDD) - near-immediate speed with superior performance + strategic quality
 
-*V4 Framework evolution: Enhanced framework with prediction accountability and adaptive validation*
+*Framework evolution: Enhanced with prediction accountability and adaptive validation*
 
 ---
 
@@ -150,19 +161,25 @@
 - **📺 [Interactive Demo](experiments/1.503-file-path-validator/6_way_comparison_demo.py)** - Shows 6-way methodology comparison
 
 #### [1.504 - Date Format Validator](experiments/1.504-date-format-validator/EXPERIMENT_REPORT.md)
-*September 21, 2025 | Input Validation + V4 Framework Enhancement*
+*September 21, 2025 | Input Validation + Adaptive TDD Enhancement*
 - **Problem**: Validate MM/DD/YYYY and DD/MM/YYYY formats with leap year logic
-- **V4.1 Framework**: Adaptive TDD with AI bias detection through predictions
-- **Revolutionary Finding**: Method 4 V4.1 achieves optimal balance (4m 1s dev, 1M+ val/sec)
+- **Adaptive TDD**: Strategic validation with AI bias detection through predictions
+- **Revolutionary Finding**: Method 4 achieves optimal balance (4m 1s dev, 1M+ val/sec)
 - **AI Bias Discovery**: Systematic underestimation of simple approaches revealed
 - **📺 [Interactive Demo](experiments/1.504-date-format-validator/methodology_comparison_demo.py)** - Shows V4 framework enhancement
 
 #### [1.505 - JSON Schema Validator](experiments/1.505-json-schema-validator/EXPERIMENT_REPORT.md)
 *September 21, 2025 | Input Validation*
 - **Problem**: Validate JSON data against JSON Schema specifications
-- **Best Method**: Method 4 V4.1 (Adaptive TDD) - Optimal balance of speed and performance
-- **Key Finding**: V4.1 confirmed as optimal methodology across input validation domain
+- **Best Method**: Method 4 (Adaptive TDD) - Optimal balance of speed and performance
+- **Key Finding**: Adaptive TDD confirmed as optimal methodology across input validation domain
 - **Pattern**: Method 2 over-engineering (3.1X complexity) continues consistently
+
+#### [1.507 - QR Code Generator with Segno](experiments/1.507-qr-code-generator-segno/)
+*September 25, 2025 | QR Code Generation*
+- **Status**: Implementation attempts with segno library
+- **Multiple Runs**: Failed Task run, retry attempts, parallel timing study
+- **Challenge**: Library integration and error handling complexities
 
 #### ⚠️ [1.501.1 - Email Validator Severed Branch](experiments/1.501.1-email-validator-severed-branch/TIMING_COMPARISON_ANALYSIS.md)
 *September 25, 2025 | Severed Branch Timing Study*
@@ -173,15 +190,33 @@
 - **Quality Confirmed**: All 4 implementations working (demo verified)
 - **📺 [Working Demo](experiments/1.501.1-email-validator-severed-branch/demo_1501_1.py)** - Verifies all implementations pass validation
 
+#### ⚠️ [2.505.2 - Severed Branch Timing Study](experiments/2.505.2-severed-branch-timing/)
+*Component discovery timing analysis*
+- **Focus**: Timing comparison for component discovery patterns
+- **Related to**: 2.505 and 2.505.1 experiments
+
+### Discovery Experiments
+
+#### [5.001 - Roman Numeral Discovery](experiments/5.001-roman-numeral-discovery/)
+*Discovery pattern analysis for algorithmic problems*
+- **Multiple Analysis Reports**: Discovery patterns, MPSE framework validation, recommendations
+- **Focus**: How AI discovers solution approaches for classic algorithms
+
+#### [5.002 - Authentication System Discovery](experiments/5.002-authentication-system-discovery/)
+*Discovery patterns for security systems*
+- **Complex System**: Authentication and authorization discovery
+- **Security Focus**: How AI approaches security-critical components
+
 ### Summary
 
-**Total Completed Experiments**: 17
+**Total Completed Experiments**: 24+
 - **String Processing (1.1XX)**: 4 experiments
 - **Mathematical Operations (1.2XX)**: 4 experiments
 - **Data Structures (1.3XX)**: 1 experiment
 - **Security/Cryptography (1.4XX)**: 1 experiment
-- **Input Validation (1.5XX)**: 6 experiments ✅ **DOMAIN + SEVERED BRANCH**
-- **CLI Tools (2.5XX)**: 2 experiments ✅ **COMPONENT DISCOVERY BREAKTHROUGH**
+- **Input Validation (1.5XX)**: 7+ experiments ✅ **DOMAIN + SEVERED BRANCH**
+- **CLI Tools (2.5XX)**: 4+ experiments ✅ **COMPONENT DISCOVERY BREAKTHROUGH**
+- **Discovery Studies (5.XXX)**: 2 experiments ✅ **PATTERN ANALYSIS**
 
 ---
 
