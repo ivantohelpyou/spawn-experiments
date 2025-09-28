@@ -195,28 +195,16 @@
 - **Focus**: Timing comparison for component discovery patterns
 - **Related to**: 2.505 and 2.505.1 experiments
 
-### Discovery Experiments
-
-#### [5.001 - Roman Numeral Discovery](experiments/5.001-roman-numeral-discovery/)
-*Discovery pattern analysis for algorithmic problems*
-- **Multiple Analysis Reports**: Discovery patterns, MPSE framework validation, recommendations
-- **Focus**: How AI discovers solution approaches for classic algorithms
-
-#### [5.002 - Authentication System Discovery](experiments/5.002-authentication-system-discovery/)
-*Discovery patterns for security systems*
-- **Complex System**: Authentication and authorization discovery
-- **Security Focus**: How AI approaches security-critical components
 
 ### Summary
 
-**Total Completed Experiments**: 24+
+**Total Completed Experiments**: 20+
 - **String Processing (1.1XX)**: 4 experiments
 - **Mathematical Operations (1.2XX)**: 4 experiments
 - **Data Structures (1.3XX)**: 1 experiment
 - **Security/Cryptography (1.4XX)**: 1 experiment
 - **Input Validation (1.5XX)**: 7+ experiments ✅ **DOMAIN + SEVERED BRANCH**
 - **CLI Tools (2.5XX)**: 4+ experiments ✅ **COMPONENT DISCOVERY BREAKTHROUGH**
-- **Discovery Studies (5.XXX)**: 2 experiments ✅ **PATTERN ANALYSIS**
 
 ---
 
