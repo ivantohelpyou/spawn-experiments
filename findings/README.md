@@ -1,6 +1,6 @@
 # Research Findings: AI Development Methodology Patterns
 
-**Evidence Base**: 11 completed experiments across 4 domains
+**Evidence Base**: 12+ completed experiments across 5 domains (includes 1.608 with 4 runs)
 **Research Period**: 2025
 **Framework**: Spawn-Experiments methodology comparison system
 
@@ -51,6 +51,30 @@ All three findings point to the same underlying mechanism:
 ```
 Problem Assessment → Methodology Selection → Constraint Application → Validation
 ```
+
+### 🚀 **[Prompt Engineering as Force Multiplier](prompt-engineering-force-multiplier-1608.md)**
+**Status**: ✅ Validated (Experiment 1.608, 4 runs, 17 implementations)
+**Key Insight**: Optimized prompts improve development speed and code quality across all methodologies
+
+**Evidence Summary**:
+- Development speed improved 22-36% with optimized prompts
+- Code quality increased +1 to +7 points across all methods
+- TDD benefits most from concrete examples (+7 points)
+- Validation amplifies benefits (Method 4 proves prompt quality)
+- Clearer requirements accelerate all development phases
+
+### 🎨 **[The Creative Simplicity Paradox](creative-simplicity-paradox-1608.md)** ⚠️
+**Status**: ⚠️ **PRELIMINARY - Requires validation** (N=1 story, insufficient sample size)
+**Key Insight**: *Hypothesis* - For creative tasks, simpler methodologies *may* produce better aesthetic output despite lower code quality
+
+**Evidence Summary** (Single story only):
+- Method 1 (78/100 code quality) produced best haiku (9.00/10 aesthetic) for one story
+- Method 4 (93/100 code quality) produced worst haiku (6.00/10 aesthetic) for one story
+- Pattern could be random variation or story-specific effect
+- **Needs replication**: 20+ stories, 5+ runs per story, statistical testing
+- **Cannot yet conclude** causation - correlation only from one data point
+
+---
 
 ## Domain-Specific Patterns
 

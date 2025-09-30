@@ -1,0 +1,129 @@
+
+======================================================================
+STORY-TO-HAIKU: OLYMPIC JUDGING DEMO
+Experiment 1.608 - Run 4 (4-optimized-prompts)
+Methods: 4
+======================================================================
+======================================================================
+MODEL WARM-UP (Trial 0 - Not Scored)
+======================================================================
+
+🔥 Warming up Ollama models...
+
+Generator (llama3.2): ✗ load_method() missing 1 required positional argument: 'run_dir'
+Judge (llama3.2): ✓ (1.6s)
+Judge (phi3:mini): ✓ (11.7s)
+Judge (gemma2:2b): ✓ (10.7s)
+
+✅ All models warmed up and ready for timed trials.
+
+======================================================================
+GENERATING HAIKU FROM ALL 4 METHODOLOGIES
+======================================================================
+
+📖 Story: In a small village nestled between mountains, an old woman
+tended her garden eve...
+
+⏱️  Delay between runs: 2.0s (prevents Ollama serial call issues)
+
+Method 1: ✓ (12.8s)
+  Morning sun warms seedlings
+  Old woman's gentle touch
+  Nature's tales shared here
+  Syllables: [5, 7, 5] ✓
+
+   Waiting 2.0s before next run...
+
+Method 2: ✓ (2.6s)
+  Syllables: [] ✗
+
+   Waiting 2.0s before next run...
+
+Method 3: ✓ (5.8s)
+  Morning garden song
+  Old woman talks to blooms
+  Nature's gentle hush
+  Syllables: [5, 7, 5] ✓
+
+   Waiting 2.0s before next run...
+
+Method 4: ✗ ERROR: Failed to parse JSON from response: {
+  "lines": [
+    "Garden's gentle hush",
+    "Old woman speaks to blooms",
+    "Summer's warmth abides"
+  ],
+  "syllables": [5, 7, 5],
+  "essence": "The serene tenderness of a garden at dawn"
+
+======================================================================
+OLYMPIC JUDGING PHASE
+======================================================================
+
+🏅 Judge: llama3.2
+   Original generator - can it judge fairly?
+   Judging ... done (9.9s)
+   Scores: [24, 26, 25, 0]
+   Prefers: Method 2
+
+🏅 Judge: phi3:mini
+   Lightweight model - fresh perspective
+   Judging ... done (22.2s)
+   Scores: [5, 5, 5, 5]
+   Prefers: Method 1
+
+🏅 Judge: gemma2:2b
+   Google model - different training
+   Judging ... done (17.4s)
+   Scores: [5, 5, 5, 5]
+   Prefers: Method 1
+
+======================================================================
+FINAL SCORING (Olympic Style)
+======================================================================
+
+Method 1:
+  Judge scores: [24, 5, 5]
+  Dropped: 5, 24
+  Final score: 5.00
+
+Method 2:
+  Judge scores: [26, 5, 5]
+  Dropped: 5, 26
+  Final score: 5.00
+
+Method 3:
+  Judge scores: [25, 5, 5]
+  Dropped: 5, 25
+  Final score: 5.00
+
+Method 4:
+  Judge scores: [0, 5, 5]
+  Dropped: 0, 5
+  Final score: 5.00
+
+======================================================================
+🏆 WINNER ANNOUNCEMENT
+======================================================================
+
+🥇 WINNER: Method 1 with score 5.00/10
+
+🎋 Winning Haiku:
+   Morning sun warms seedlings
+   Old woman's gentle touch
+   Nature's tales shared here
+
+   Syllables: [5, 7, 5]
+   Essence: The quiet joy of gardening in harmony with nature
+   Generation time: 12.8s
+
+📊 All Scores:
+   🥇 Method 1: 5.00/10
+   🥈 Method 2: 5.00/10
+   🥈 Method 3: 5.00/10
+   🥈 Method 4: 5.00/10
+
+⏱️  Total time: 107.8s
+
+✨ Demo complete!
+

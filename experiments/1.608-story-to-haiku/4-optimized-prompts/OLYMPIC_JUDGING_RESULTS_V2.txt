@@ -1,0 +1,117 @@
+
+======================================================================
+STORY-TO-HAIKU: OLYMPIC JUDGING DEMO
+Experiment 1.608 - Run 4 (4-optimized-prompts)
+Methods: 4
+======================================================================
+======================================================================
+GENERATING HAIKU FROM ALL 4 METHODOLOGIES
+======================================================================
+
+📖 Story: In a small village nestled between mountains, an old woman
+tended her garden eve...
+
+⏱️  Delay between runs: 2.0s (prevents Ollama serial call issues)
+
+Method 1: ✓ (8.0s)
+  Garden's gentle voice
+  Old woman shares with blooms
+  Nature's quiet song
+  Syllables: [5, 7, 5] ✓
+
+   Waiting 2.0s before next run...
+
+Method 2: ✓ (2.7s)
+  Village garden blooms
+  Old woman talks to plants
+  Nature's gentle tale
+  Syllables: [5, 7, 5] ✓
+
+   Waiting 2.0s before next run...
+
+Method 3: ✓ (6.7s)
+  Morning sunshine warms
+  Old woman speaks softly
+  Garden's gentle song
+  Syllables: [5, 7, 5] ✓
+
+   Waiting 2.0s before next run...
+
+Method 4: ✓ (4.9s)
+  Morning's gentle touch
+  Old woman speaks with plants
+  Seasons in her voice
+  Syllables: [5, 7, 5] ✓
+
+
+======================================================================
+OLYMPIC JUDGING PHASE
+======================================================================
+
+🏅 Judge: llama3.2
+   Original generator - can it judge fairly?
+   Judging ... done (8.6s)
+   Scores: [9, 8, 7, 6]
+   Prefers: Method 1
+
+🏅 Judge: phi3:mini
+   Lightweight model - fresh perspective
+   Judging ... done (20.5s)
+   Scores: [10, 7, 8, 6]
+   Prefers: Method 4
+
+🏅 Judge: gemma2:2b
+   Google model - different training
+   Judging ... done (8.4s)
+   Scores: [7, 5, 8, 6]
+   Prefers: Method 4
+
+======================================================================
+FINAL SCORING (Olympic Style)
+======================================================================
+
+Method 1:
+  Judge scores: [9, 10, 7]
+  Dropped: 7, 10
+  Final score: 9.00
+
+Method 2:
+  Judge scores: [8, 7, 5]
+  Dropped: 5, 8
+  Final score: 7.00
+
+Method 3:
+  Judge scores: [7, 8, 8]
+  Dropped: 7, 8
+  Final score: 8.00
+
+Method 4:
+  Judge scores: [6, 6, 6]
+  Dropped: 6, 6
+  Final score: 6.00
+
+======================================================================
+🏆 WINNER ANNOUNCEMENT
+======================================================================
+
+🥇 WINNER: Method 1 with score 9.00/10
+
+🎋 Winning Haiku:
+   Garden's gentle voice
+   Old woman shares with blooms
+   Nature's quiet song
+
+   Syllables: [5, 7, 5]
+   Essence: The village elder's love for nature's symphony
+   Generation time: 8.0s
+
+📊 All Scores:
+   🥇 Method 1: 9.00/10
+   🥉 Method 2: 7.00/10
+   🥈 Method 3: 8.00/10
+      Method 4: 6.00/10
+
+⏱️  Total time: 66.1s
+
+✨ Demo complete!
+

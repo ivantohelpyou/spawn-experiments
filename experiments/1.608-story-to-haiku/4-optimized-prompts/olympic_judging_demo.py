@@ -30,27 +30,15 @@ were old friends, sharing stories of seasons past."""
 
 def load_method(method_num, run_dir):
     """Load a method's haiku_converter module from specified run directory."""
-    # Check run structure - Run 3 has 5 methods, Run 4 has 4 methods
-    if (run_dir / "5-adaptive-tdd").exists():
-        # Run 3 structure
-        method_dirs = {
-            1: "1-immediate-implementation",
-            2: "2-specification-driven",
-            3: "3-test-first-development",
-            4: "4-selective-tdd",
-            5: "5-adaptive-tdd"
-        }
-    else:
-        # Run 4 and other structures
-        method_dirs = {
-            1: "1-immediate-implementation",
-            2: "2-specification-driven",
-            3: "3-test-first-development",
-            4: "4-adaptive-tdd"
-        }
+    method_dirs = {
+        1: "1-immediate-implementation",
+        2: "2-specification-driven",
+        3: "3-test-first-development",
+        4: "4-adaptive-tdd"  # Adaptive/Validated TDD
+    }
 
     # Look in specified run directory
-    method_dir = run_dir / method_dirs.get(method_num, f"{method_num}-unknown")
+    method_dir = run_dir / method_dirs[method_num]
     module_path = method_dir / "haiku_converter.py"
 
     if not module_path.exists():
@@ -182,51 +170,41 @@ def judge_haiku(story, all_results, judge_model='phi3:mini'):
 
     prompt = f"""You are a distinguished poetry critic judging {num_haiku} haiku poems.
 
-⚠️ CRITICAL REQUIREMENT - READ CAREFULLY:
-You MUST assign DIFFERENT scores to each haiku. DO NOT give them all the same score.
-Even if they are similar, find differences and rank them. Use the full scale 1-10.
-
-MANDATORY: At least 2 points difference between highest and lowest scores.
-
-Score based on:
+CRITICAL REQUIREMENT: Your scores MUST be differentiated. Look carefully for subtle differences in:
 - Adherence to 5-7-5 syllable structure (worth 3 points)
 - Poetic quality and imagery (worth 4 points)
 - Emotional resonance and depth (worth 3 points)
 
-Be discerning and critical - identify which haiku is truly best, which is weakest.
+The scores should vary - not all haiku are equally good. Be discerning and critical.
 
-{chr(10).join(f"Haiku {i+1}:{chr(10)}{haiku_texts[i]}{chr(10)}" for i in range(num_haiku))}
+Haiku 1:
+{haiku_texts[0]}
 
-Return ONLY valid JSON in this exact format (no extra text before or after):
+Haiku 2:
+{haiku_texts[1]}
+
+Haiku 3:
+{haiku_texts[2]}
+
+{chr(10).join(f"Haiku {i+1}:{chr(10)}{haiku}" for i, haiku in enumerate(haiku_texts))}
+
+Return ONLY valid JSON in this format:
 {{
-  "scores": [score1, score2, score3, ...],
+  "scores": [{', '.join(f'score{i+1}' for i in range(num_haiku))}],
   "winner": N,
-  "reasoning": "brief explanation"
+  "reasoning": "why this haiku is best"
 }}
-
-Example: {{"scores": [8, 6, 9, 5], "winner": 3, "reasoning": "Best imagery and emotional depth"}}
 """
 
     try:
         response = ollama.generate(model=judge_model, prompt=prompt)
-        response_text = response['response'].strip()
-
-        # Try to extract JSON from response (handle case where LLM adds text)
-        import re
-        json_match = re.search(r'\{[^}]+\}', response_text, re.DOTALL)
-        if json_match:
-            judgment = json.loads(json_match.group(0))
-        else:
-            judgment = json.loads(response_text)
-
+        judgment = json.loads(response['response'].strip())
         return judgment
     except Exception as e:
-        # Fallback: differentiated scores
+        # Fallback: equal scores for all haiku
         num_haiku = len(haiku_texts)
-        # Give slightly different scores to force differentiation
-        scores = list(range(5, 5 + num_haiku))  # 5, 6, 7, 8...
         return {
-            'scores': scores,
+            'scores': [5] * num_haiku,
             'winner': 1,
             'reasoning': f'Error in judging: {e}'
         }
@@ -352,7 +330,7 @@ def main():
         1: "1-initial-run",
         2: "2-structured-output",
         3: "3-clean-room",
-        4: "4-optimized-prompts"
+        4: "4-next-run"  # Add as needed
     }
 
     if args.run not in run_dirs:

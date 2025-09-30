@@ -1,0 +1,39 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-7.4.3, pluggy-1.6.0 -- /home/ivanadamin/spawn-experiments/experiments/1.608-story-to-haiku/4-optimized-prompts/4-adaptive-tdd/venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/ivanadamin/spawn-experiments/experiments/1.608-story-to-haiku/4-optimized-prompts/4-adaptive-tdd
+plugins: anyio-4.11.0
+collecting ... collected 30 items
+
+test_haiku_converter.py::TestBasicFunctionality::test_valid_haiku_conversion PASSED [  3%]
+test_haiku_converter.py::TestBasicFunctionality::test_llm_called_with_correct_parameters PASSED [  6%]
+test_haiku_converter.py::TestBasicFunctionality::test_prompt_contains_optimized_elements PASSED [ 10%]
+test_haiku_converter.py::TestSyllableValidation::test_valid_syllable_structure PASSED [ 13%]
+test_haiku_converter.py::TestSyllableValidation::test_invalid_syllable_structure_first_line PASSED [ 16%]
+test_haiku_converter.py::TestSyllableValidation::test_invalid_syllable_structure_second_line PASSED [ 20%]
+test_haiku_converter.py::TestSyllableValidation::test_invalid_syllable_structure_third_line PASSED [ 23%]
+test_haiku_converter.py::TestJSONParsing::test_malformed_json_handling PASSED [ 26%]
+test_haiku_converter.py::TestJSONParsing::test_json_with_extra_text PASSED [ 30%]
+test_haiku_converter.py::TestJSONParsing::test_missing_required_keys PASSED [ 33%]
+test_haiku_converter.py::TestJSONParsing::test_wrong_number_of_lines PASSED [ 36%]
+test_haiku_converter.py::TestJSONParsing::test_wrong_number_of_syllable_counts PASSED [ 40%]
+test_haiku_converter.py::TestEdgeCases::test_empty_input PASSED          [ 43%]
+test_haiku_converter.py::TestEdgeCases::test_none_input PASSED           [ 46%]
+test_haiku_converter.py::TestEdgeCases::test_whitespace_only_input PASSED [ 50%]
+test_haiku_converter.py::TestEdgeCases::test_very_long_input PASSED      [ 53%]
+test_haiku_converter.py::TestEdgeCases::test_special_characters_in_input PASSED [ 56%]
+test_haiku_converter.py::TestReturnStructure::test_all_required_keys_present PASSED [ 60%]
+test_haiku_converter.py::TestReturnStructure::test_haiku_string_format PASSED [ 63%]
+test_haiku_converter.py::TestReturnStructure::test_types_of_return_values PASSED [ 66%]
+test_haiku_converter.py::TestDefaultLLMClient::test_uses_ollama_by_default PASSED [ 70%]
+test_haiku_converter.py::TestValidationCycle2EdgeCases::test_non_integer_syllable_counts PASSED [ 73%]
+test_haiku_converter.py::TestValidationCycle2EdgeCases::test_unicode_text_input PASSED [ 76%]
+test_haiku_converter.py::TestValidationCycle2EdgeCases::test_extremely_short_input PASSED [ 80%]
+test_haiku_converter.py::TestValidationCycle2EdgeCases::test_json_with_additional_fields PASSED [ 83%]
+test_haiku_converter.py::TestValidationCycle3PromptQuality::test_prompt_includes_example_haiku PASSED [ 86%]
+test_haiku_converter.py::TestValidationCycle3PromptQuality::test_prompt_includes_syllable_rules PASSED [ 90%]
+test_haiku_converter.py::TestValidationCycle3PromptQuality::test_prompt_includes_verification_instruction PASSED [ 93%]
+test_haiku_converter.py::TestValidationCycle3PromptQuality::test_prompt_includes_essence_guidance PASSED [ 96%]
+test_haiku_converter.py::TestValidationCycle3PromptQuality::test_prompt_requests_json_format PASSED [100%]
+
+============================== 30 passed in 0.07s ==============================

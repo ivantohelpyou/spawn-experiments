@@ -1,0 +1,302 @@
+#!/home/ivanadamin/spawn-experiments/experiments/1.608-story-to-haiku/venv/bin/python3
+"""
+Generate Haiku - Post-Experiment CLI Tool
+Experiment 1.608: Story-to-Haiku Converter
+
+Runs the top implementations from a specific run and returns ranked results.
+
+Usage:
+    generate-haiku "Your story text here"
+    generate-haiku "Your story text here" --run 3
+    generate-haiku "Your story text here" --run 3 --top 3
+    generate-haiku "Your story text here" --run 3 --all
+
+Based on code quality rankings, generates haiku from best implementations
+and displays results with medal rankings (🥇 Gold, 🥈 Silver, 🥉 Bronze).
+"""
+
+import sys
+import time
+import argparse
+from pathlib import Path
+import importlib.util
+
+
+# Default rankings based on comprehensive code quality analysis
+# Override with --rankings if your run has different results
+DEFAULT_RANKINGS = {
+    3: {  # Run 3 (Clean Room) rankings
+        'rankings': [2, 5, 3, 4, 1],  # Method numbers in quality order
+        'scores': [95, 88, 78, 80, 73],
+        'labels': ['Specification-Driven', 'Adaptive/Validated TDD', 'Pure TDD', 'Selective TDD', 'Immediate Implementation']
+    },
+    4: {  # Run 4 (Optimized Prompts) rankings
+        'rankings': [2, 4, 3, 1],  # Method numbers in quality order (4 methods only)
+        'scores': [96, 93, 85, 78],
+        'labels': ['Specification-Driven', 'Adaptive/Validated TDD', 'Pure TDD', 'Immediate Implementation']
+    }
+}
+
+
+def load_method(method_num, run_dir):
+    """Load a method's haiku_converter module from specified run directory."""
+    method_dirs = {
+        1: "1-immediate-implementation",
+        2: "2-specification-driven",
+        3: "3-test-first-development",
+        4: "4-adaptive-tdd"
+    }
+
+    method_dir = run_dir / method_dirs[method_num]
+    module_path = method_dir / "haiku_converter.py"
+
+    if not module_path.exists():
+        return None
+
+    spec = importlib.util.spec_from_file_location(f"method{method_num}", module_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+
+    return module
+
+
+def generate_ranked_haiku(story, run_dir, rankings, num_methods=3):
+    """
+    Generate haiku from top N methods and return ranked results.
+
+    Args:
+        story: Input story text
+        run_dir: Path to run directory
+        rankings: List of method numbers in quality order
+        num_methods: How many top methods to run (default 3 for medals)
+
+    Returns:
+        List of dicts with method info and results
+    """
+    results = []
+    medals = ['🥇 Gold', '🥈 Silver', '🥉 Bronze', '🏅 Runner-up']
+
+    for i, method_num in enumerate(rankings[:num_methods]):
+        medal = medals[i] if i < len(medals) else f"#{i+1}"
+
+        try:
+            module = load_method(method_num, run_dir)
+            if module is None:
+                results.append({
+                    'rank': i + 1,
+                    'medal': medal,
+                    'method': method_num,
+                    'error': f"Method {method_num} not found"
+                })
+                continue
+
+            start = time.time()
+            result = module.story_to_haiku(story)
+            elapsed = time.time() - start
+
+            results.append({
+                'rank': i + 1,
+                'medal': medal,
+                'method': method_num,
+                'result': result,
+                'time': elapsed,
+                'success': True
+            })
+
+        except Exception as e:
+            error_msg = str(e)
+            # Provide helpful error messages for common issues
+            if "'NoneType' object has no attribute 'chat'" in error_msg:
+                error_msg = "Ollama not running. Start with: ollama serve"
+
+            results.append({
+                'rank': i + 1,
+                'medal': medal,
+                'method': method_num,
+                'error': error_msg,
+                'success': False
+            })
+
+    return results
+
+
+def display_results(results, run_info, verbose=False):
+    """Display ranked haiku results in a beautiful format."""
+    print("\n" + "="*70)
+    print(f"🎋 HAIKU GENERATION RESULTS")
+    print(f"   Run: {run_info['run_name']} (#{run_info['run_num']})")
+    if verbose:
+        print(f"   Mode: Verbose (detailed)")
+    print("="*70)
+
+    for r in results:
+        print(f"\n{r['medal']} - Method {r['method']}")
+        print("-" * 70)
+
+        if r.get('success'):
+            result = r['result']
+
+            # Display haiku
+            for line in result['lines']:
+                print(f"   {line}")
+
+            # Display metadata
+            print(f"\n   Syllables: {result['syllables']} {'✓' if result['valid'] else '✗'}")
+            print(f"   Essence: {result['essence']}")
+            print(f"   Generation time: {r['time']:.2f}s")
+
+            # Verbose mode: Show additional details
+            if verbose:
+                print(f"\n   📊 Verbose Details:")
+                print(f"      Valid structure: {result['valid']}")
+                print(f"      Line count: {len(result['lines'])}")
+                print(f"      Syllable counts: {result['syllables']}")
+                print(f"      Total syllables: {sum(result['syllables']) if result['syllables'] else 0}")
+                print(f"      Full haiku text:\n{result['haiku']}")
+        else:
+            print(f"   ✗ ERROR: {r.get('error', 'Unknown error')}")
+
+    print("\n" + "="*70)
+
+    # Show successful haiku side by side for comparison
+    successful = [r for r in results if r.get('success')]
+    if len(successful) > 1:
+        print("\n📊 COMPARISON (Top Haiku)")
+        print("="*70)
+
+        for r in successful:
+            result = r['result']
+            print(f"\n{r['medal']}:")
+            for line in result['lines']:
+                print(f"  {line}")
+
+
+def main():
+    """Run the CLI tool."""
+    parser = argparse.ArgumentParser(
+        description='Generate haiku using top-ranked implementations',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  generate-haiku "The old pond, a frog jumps in, splash"
+  generate-haiku "Mountains rise high" --run 3 --top 4
+  generate-haiku "Cherry blossoms" --run 3 --all
+
+Rankings are based on comprehensive code quality analysis.
+Default run is 3 (Clean Room), default top methods is 3 (medals).
+        """
+    )
+
+    parser.add_argument('story', type=str, help='Story text to convert to haiku')
+    parser.add_argument('--run', type=int, default=4,
+                       help='Run number to use (default: 4)')
+    parser.add_argument('--top', type=int, default=3,
+                       help='Number of top methods to run (default: 3 for medals)')
+    parser.add_argument('--all', action='store_true',
+                       help='Run all available methods')
+    parser.add_argument('--rankings', type=str,
+                       help='Custom rankings as comma-separated method numbers (e.g., "2,5,3,4,1")')
+    parser.add_argument('--dry-run', action='store_true',
+                       help='Show which methods would be run without actually generating haiku')
+    parser.add_argument('--verbose', '-v', action='store_true',
+                       help='Show detailed information including prompts and intermediate steps')
+
+    args = parser.parse_args()
+
+    # Determine run directory
+    run_dirs = {
+        1: "1-initial-run",
+        2: "2-structured-output",
+        3: "3-clean-room",
+        4: "4-optimized-prompts"
+    }
+
+    if args.run not in run_dirs:
+        print(f"❌ Error: Run {args.run} not found. Available runs: {list(run_dirs.keys())}")
+        return 1
+
+    # Get experiment root (parent of tools directory)
+    script_path = Path(__file__).resolve()
+    experiment_root = script_path.parent.parent
+    run_dir = experiment_root / run_dirs[args.run]
+
+    if not run_dir.exists():
+        print(f"❌ Error: Run directory not found: {run_dir}")
+        return 1
+
+    # Get rankings
+    if args.rankings:
+        # Custom rankings provided
+        rankings = [int(x.strip()) for x in args.rankings.split(',')]
+    elif args.run in DEFAULT_RANKINGS:
+        # Use default rankings for this run
+        rankings = DEFAULT_RANKINGS[args.run]['rankings']
+    else:
+        # Fallback: try methods in order
+        print(f"⚠️  Warning: No rankings defined for run {args.run}, trying methods in order")
+        rankings = [1, 2, 3, 4, 5]
+
+    # Determine how many methods to run
+    if args.all:
+        num_methods = len(rankings)
+    else:
+        num_methods = min(args.top, len(rankings))
+
+    # Dry run mode
+    if args.dry_run:
+        print(f"\n📖 Story: {args.story[:80]}{'...' if len(args.story) > 80 else ''}")
+        print(f"\n🎯 DRY RUN - Would execute top {num_methods} implementations:")
+        print("="*70)
+
+        medals = ['🥇 Gold', '🥈 Silver', '🥉 Bronze', '🏅 Runner-up']
+        labels = DEFAULT_RANKINGS.get(args.run, {}).get('labels', [''] * 5)
+        scores = DEFAULT_RANKINGS.get(args.run, {}).get('scores', [0] * 5)
+
+        for i, method_num in enumerate(rankings[:num_methods]):
+            medal = medals[i] if i < len(medals) else f"#{i+1}"
+            label = labels[i] if i < len(labels) else "Unknown"
+            score = scores[i] if i < len(scores) else "?"
+
+            method_path = run_dir / {
+                1: "1-immediate-implementation",
+                2: "2-specification-driven",
+                3: "3-test-first-development",
+                4: "4-selective-tdd",
+                5: "5-adaptive-tdd"
+            }.get(method_num, f"{method_num}-unknown")
+
+            exists = "✓" if (method_path / "haiku_converter.py").exists() else "✗"
+
+            print(f"\n{medal} - Method {method_num}: {label}")
+            print(f"   Quality Score: {score}/100")
+            print(f"   Implementation: {exists} {method_path.name}")
+
+        print("\n" + "="*70)
+        print("\n💡 To generate actual haiku, run without --dry-run")
+        print("   (Note: Requires Ollama to be running)\n")
+        return 0
+
+    # Generate haiku
+    print(f"\n📖 Story: {args.story[:80]}{'...' if len(args.story) > 80 else ''}")
+    print(f"🏃 Running top {num_methods} implementations...")
+
+    results = generate_ranked_haiku(args.story, run_dir, rankings, num_methods)
+
+    # Display results
+    display_results(results, {
+        'run_num': args.run,
+        'run_name': run_dirs[args.run]
+    }, verbose=args.verbose)
+
+    # Return success if at least one succeeded
+    successful = [r for r in results if r.get('success')]
+    if successful:
+        print(f"\n✨ Generated {len(successful)}/{len(results)} haiku successfully\n")
+        return 0
+    else:
+        print(f"\n❌ All methods failed\n")
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
