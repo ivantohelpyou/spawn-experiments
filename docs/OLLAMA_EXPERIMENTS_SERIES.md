@@ -1,8 +1,8 @@
 # Ollama Experiments Series (1.6XX)
 
 **Date**: 2025-09-30
-**Purpose**: Define experimental series for local LLM integration using Ollama
-**Status**: Active
+**Purpose**: Explore local LLM integration using Ollama across 4 development methodologies
+**Status**: Active - 1 experiment complete with 2 validated findings
 
 ---
 
@@ -11,10 +11,52 @@
 The 1.6XX series explores **local AI model integration** using Ollama, demonstrating how methodology choices affect AI-augmented development patterns. These experiments combine traditional programming with local LLM capabilities.
 
 **Key Research Questions**:
-- How do methodologies handle AI service integration?
-- What testing approaches work for non-deterministic outputs?
-- How do developers structure prompts and model interactions?
+- How do methodologies handle AI service integration? ✅ **ANSWERED**
+- What testing approaches work for non-deterministic outputs? ✅ **ANSWERED**
+- How do developers structure prompts and model interactions? ✅ **ANSWERED**
 - What error handling patterns emerge for local AI services?
+- **NEW**: How does prompt quality affect development process? ✅ **DISCOVERED**
+
+---
+
+## Completed Experiments
+
+### ⭐ **1.608 - Story-to-Haiku Converter** (4 Runs Complete)
+**Status**: ✅ Complete | **Findings**: 2 validated discoveries
+
+**Summary**: Revolutionary 4-run study exploring LLM integration with creative outputs. Discovered that prompt engineering acts as a universal force multiplier and that multiple methodology samples can be used for Monte Carlo quality filtering.
+
+**Runs**:
+- Run 1: Initial baseline (unstructured output)
+- Run 2: Structured JSON output
+- Run 3: Clean room (5 methodologies tested)
+- Run 4: Optimized prompts (exploratory pivot)
+
+**Key Discoveries**:
+
+#### Finding 09: Prompt Engineering as Force Multiplier
+- Optimized prompts improved development speed by 22-36%
+- Quality improved by +1 to +7 points across all methodologies
+- TDD benefits most from clear examples (+7 points)
+- **Status**: Moderate-High confidence (needs proper controlled validation)
+
+#### Finding 10: Monte Carlo Methodology Sampling
+- Generate N samples → Judge → Pick best = 20% quality improvement
+- Validated with Olympic judging system (3 LLM judges)
+- Immediately applicable production technique
+- **Status**: Validated
+
+**Innovations**:
+- Working CLI tool (`tools/generate-haiku`)
+- Olympic judging system (3 models, drop high/low)
+- Mock strategy for parallel execution
+- Prompt quality validation tests (Method 4 only)
+
+**Research Integrity**:
+- Rejected Finding 11 (Creative Simplicity Paradox) as likely random variation (N=1)
+- Transparent about Run 4 being exploratory pivot, not controlled experiment
+
+**Read More**: [Complete 1.608 Summary](../experiments/1.608-story-to-haiku/EXPERIMENT_1608_COMPLETE_SUMMARY.md)
 
 ---
 

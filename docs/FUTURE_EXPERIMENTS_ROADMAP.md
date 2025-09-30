@@ -1,7 +1,11 @@
 # Future Experiments Roadmap - Hierarchical System (T.DCC)
 
-> **LATEST**: Experiment 010-password-generator completed with 4-method comparison
-> **Results**: Method timing validated - 1m17s (immediate) to 9m20s (validated TDD)
+> **LATEST**: Experiment 1.608 (Story-to-Haiku) completed with **2 validated findings**
+> **Results**: Prompt engineering = 22-36% speed gain; Monte Carlo sampling = 20% quality gain
+> **Research Integrity**: Rejected invalid Finding 11 (N=1, random variation)
+
+> **NEXT**: Experiment 1.609 (Progressive Prompt Enhancement) - Proper validation study
+> **Goal**: Validate prompt engineering finding with controlled design (4 prompt levels × 4 methods)
 
 > **NEW**: Reorganized with hierarchical numbering system (T.DCC format)
 > See [EXPERIMENT_NUMBERING_SYSTEM.md](EXPERIMENT_NUMBERING_SYSTEM.md) for complete mapping
