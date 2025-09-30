@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
 """
-Olympic Judging Demo - Story-to-Haiku Converter Run 2
+Olympic Judging Demo - Story-to-Haiku Converter
 Experiment 1.608
 
 This script:
-1. Runs all 4 methodology implementations with REAL Ollama
-2. Collects the 4 haiku outputs
+1. Runs all methodology implementations with REAL Ollama for a specific run
+2. Collects the haiku outputs
 3. Has 3 judge models evaluate them (Olympic style)
 4. Drops highest/lowest scores and averages
 5. Declares a winner
 
 Judge models: llama3.2, phi3:mini, gemma2:2b
+
+Usage:
+    python olympic_judging_demo.py --run 3
+    python olympic_judging_demo.py --run 3 --methods 5  # For runs with 5 methods
 """
 
 import sys
@@ -24,17 +28,18 @@ DEMO_STORY = """In a small village nestled between mountains, an old woman
 tended her garden every morning. She spoke to each plant as if they
 were old friends, sharing stories of seasons past."""
 
-def load_method(method_num):
-    """Load a method's haiku_converter module."""
+def load_method(method_num, run_dir):
+    """Load a method's haiku_converter module from specified run directory."""
     method_dirs = {
         1: "1-immediate-implementation",
         2: "2-specification-driven",
         3: "3-test-first-development",
-        4: "4-adaptive-tdd"
+        4: "4-selective-tdd",  # Updated name after methodology correction
+        5: "5-adaptive-tdd"    # Correct Adaptive/Validated TDD
     }
 
-    # Look in current directory (2-structured-output)
-    method_dir = Path(__file__).parent / method_dirs[method_num]
+    # Look in specified run directory
+    method_dir = run_dir / method_dirs[method_num]
     module_path = method_dir / "haiku_converter.py"
 
     if not module_path.exists():
@@ -85,12 +90,14 @@ def warmup_models(warmup_story="The sun rises over the mountains.", judge_models
 
     print(f"\n✅ All models warmed up and ready for timed trials.\n")
 
-def generate_all_haiku(story, skip_warmup=False, delay_between_runs=2.0):
+def generate_all_haiku(story, run_dir, num_methods=4, skip_warmup=False, delay_between_runs=2.0):
     """
-    Generate haiku from all 4 methods.
+    Generate haiku from all methods in specified run.
 
     Args:
         story: The story to convert to haiku
+        run_dir: Path to the run directory (e.g., 3-clean-room)
+        num_methods: Number of methods to test (4 or 5)
         skip_warmup: If True, skip model warm-up
         delay_between_runs: Seconds to wait between method calls (default 2.0)
     """
@@ -100,7 +107,7 @@ def generate_all_haiku(story, skip_warmup=False, delay_between_runs=2.0):
         warmup_models()
 
     print("="*70)
-    print("GENERATING HAIKU FROM ALL 4 METHODOLOGIES")
+    print(f"GENERATING HAIKU FROM ALL {num_methods} METHODOLOGIES")
     print("="*70)
     print(f"\n📖 Story: {story[:80]}...\n")
     if delay_between_runs > 0:
@@ -108,11 +115,11 @@ def generate_all_haiku(story, skip_warmup=False, delay_between_runs=2.0):
 
     results = []
 
-    for method_num in [1, 2, 3, 4]:
+    for method_num in range(1, num_methods + 1):
         print(f"Method {method_num}: ", end="", flush=True)
 
         try:
-            module = load_method(method_num)
+            module = load_method(method_num, run_dir)
             start = time.time()
             result = module.story_to_haiku(story)
             elapsed = time.time() - start
@@ -138,7 +145,7 @@ def generate_all_haiku(story, skip_warmup=False, delay_between_runs=2.0):
             })
 
         # Add delay between runs (except after last run)
-        if delay_between_runs > 0 and method_num < 4:
+        if delay_between_runs > 0 and method_num < num_methods:
             print(f"   Waiting {delay_between_runs}s before next run...\n")
             time.sleep(delay_between_runs)
 
@@ -160,12 +167,16 @@ def judge_haiku(story, all_results, judge_model='phi3:mini'):
         else:
             haiku_texts.append(r['result']['haiku'])
 
-    prompt = f"""You are a distinguished poetry critic judging 4 haiku poems.
+    num_haiku = len(haiku_texts)
 
-Rate each haiku with a score from 1-10 based on:
+    prompt = f"""You are a distinguished poetry critic judging {num_haiku} haiku poems.
+
+CRITICAL REQUIREMENT: Your scores MUST be differentiated. Look carefully for subtle differences in:
 - Adherence to 5-7-5 syllable structure (worth 3 points)
 - Poetic quality and imagery (worth 4 points)
 - Emotional resonance and depth (worth 3 points)
+
+The scores should vary - not all haiku are equally good. Be discerning and critical.
 
 Haiku 1:
 {haiku_texts[0]}
@@ -176,12 +187,11 @@ Haiku 2:
 Haiku 3:
 {haiku_texts[2]}
 
-Haiku 4:
-{haiku_texts[3]}
+{chr(10).join(f"Haiku {i+1}:{chr(10)}{haiku}" for i, haiku in enumerate(haiku_texts))}
 
 Return ONLY valid JSON in this format:
 {{
-  "scores": [score1, score2, score3, score4],
+  "scores": [{', '.join(f'score{i+1}' for i in range(num_haiku))}],
   "winner": N,
   "reasoning": "why this haiku is best"
 }}
@@ -192,9 +202,10 @@ Return ONLY valid JSON in this format:
         judgment = json.loads(response['response'].strip())
         return judgment
     except Exception as e:
-        # Fallback: equal scores
+        # Fallback: equal scores for all haiku
+        num_haiku = len(haiku_texts)
         return {
-            'scores': [5, 5, 5, 5],
+            'scores': [5] * num_haiku,
             'winner': 1,
             'reasoning': f'Error in judging: {e}'
         }
@@ -232,7 +243,7 @@ def olympic_judging(story, all_results):
 
     return all_judgments
 
-def calculate_final_scores(all_judgments):
+def calculate_final_scores(all_judgments, num_methods):
     """
     Olympic scoring: for each method, drop highest/lowest judge score, average the rest.
     """
@@ -240,7 +251,6 @@ def calculate_final_scores(all_judgments):
     print("FINAL SCORING (Olympic Style)")
     print("="*70)
 
-    num_methods = 4
     final_scores = []
 
     for method_idx in range(num_methods):
@@ -301,7 +311,11 @@ def main():
     """Run the complete olympic judging demo."""
     import argparse
 
-    parser = argparse.ArgumentParser(description='Olympic judging demo')
+    parser = argparse.ArgumentParser(description='Olympic judging demo for haiku quality')
+    parser.add_argument('--run', type=int, required=True,
+                       help='Run number to judge (e.g., 3 for 3-clean-room)')
+    parser.add_argument('--methods', type=int, default=4, choices=[4, 5],
+                       help='Number of methods to judge (4 or 5)')
     parser.add_argument('--story', type=str, help='Custom story text')
     parser.add_argument('--no-judging', action='store_true',
                        help='Generate haiku only, skip judging')
@@ -312,16 +326,37 @@ def main():
 
     args = parser.parse_args()
 
+    # Determine run directory
+    run_dirs = {
+        1: "1-initial-run",
+        2: "2-structured-output",
+        3: "3-clean-room",
+        4: "4-next-run"  # Add as needed
+    }
+
+    if args.run not in run_dirs:
+        print(f"❌ Error: Run {args.run} not found. Available runs: {list(run_dirs.keys())}")
+        return
+
+    run_dir = Path(__file__).parent / run_dirs[args.run]
+
+    if not run_dir.exists():
+        print(f"❌ Error: Run directory not found: {run_dir}")
+        return
+
     story = args.story if args.story else DEMO_STORY
 
     print("\n" + "="*70)
     print("STORY-TO-HAIKU: OLYMPIC JUDGING DEMO")
-    print("Experiment 1.608 - Run 2 (Structured Output)")
+    print(f"Experiment 1.608 - Run {args.run} ({run_dirs[args.run]})")
+    print(f"Methods: {args.methods}")
     print("="*70)
 
     # Phase 1: Generate all haiku
     start_total = time.time()
-    all_results = generate_all_haiku(story, skip_warmup=args.skip_warmup, delay_between_runs=args.delay)
+    all_results = generate_all_haiku(story, run_dir, num_methods=args.methods,
+                                     skip_warmup=args.skip_warmup,
+                                     delay_between_runs=args.delay)
 
     # Check if any succeeded
     successful = [r for r in all_results if 'error' not in r]
@@ -337,7 +372,7 @@ def main():
     all_judgments = olympic_judging(story, all_results)
 
     # Phase 3: Calculate final scores
-    final_scores = calculate_final_scores(all_judgments)
+    final_scores = calculate_final_scores(all_judgments, args.methods)
 
     # Phase 4: Announce winner
     announce_winner(all_results, final_scores)
