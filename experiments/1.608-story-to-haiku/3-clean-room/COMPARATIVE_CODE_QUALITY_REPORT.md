@@ -184,6 +184,46 @@ def story_to_haiku(text: str, llm_client=None) -> dict:
 
 ---
 
+#### Method 5: Adaptive/Validated TDD (18/20)
+**Grade: A**
+
+```python
+# haiku_converter.py - 141 lines (with validation comments)
+def story_to_haiku(text: str, llm_client=None) -> dict:
+    """Comprehensive docstring with all exceptions..."""
+
+    # VALIDATION TEST 1: Empty input validation
+    # BUGGY VERSION: pass  # No validation
+    # TEST RESULT: ✓ Tests failed as expected
+    # CONCLUSION: Input validation tests are robust
+    if not text or not text.strip():
+        raise ValueError("Input text cannot be empty...")
+
+    # VALIDATION TEST 2: JSON parsing
+    # [validation documentation...]
+    response_text = response['message']['content']
+    data = json.loads(response_text)
+
+    # VALIDATION TEST 3: Missing keys
+    # VALIDATION TEST 4: Type checking
+    # [all validated with documented buggy versions]
+```
+
+**Strengths:**
+- ✅ **Validation documentation** embedded in code
+- ✅ **Scientific approach** - tests proven, not assumed
+- ✅ **Clean structure** with clear validation markers
+- ✅ **Comprehensive comments** explaining validation decisions
+- ✅ **Permanent record** of test quality verification
+
+**Weaknesses:**
+- ⚠️ More verbose due to validation comments
+- ⚠️ Could extract validation examples to separate file
+
+**Score: 18/20** - Clean with exceptional documentation
+
+---
+
 ### 2. Error Handling & Robustness
 
 #### Method 1: Immediate Implementation (13/20)
@@ -318,6 +358,52 @@ return {
 - ⚠️ Generic error messages
 
 **Score: 15/20** - Good pragmatic approach
+
+---
+
+#### Method 5: Adaptive/Validated TDD (17/20)
+**Grade: A**
+
+**Error Types Handled: 6** (validated)
+1. Empty input → ValueError (✓ validated)
+2. LLM invocation failure → RuntimeError
+3. JSON parsing error → JSONDecodeError (✓ validated)
+4. Missing keys → KeyError (✓ validated)
+5. Wrong types → TypeError (✓ validated)
+6. Wrong lengths → ValueError
+
+**Validated Error Handling:**
+```python
+# Validation Test 2: JSON parsing
+# BUGGY VERSION (tested):
+# response_text = "hardcoded"
+# data = json.loads(response_text)  # Should fail!
+#
+# TEST RESULT: ✓ Tests failed with JSONDecodeError
+# CONCLUSION: JSON parsing tests are robust
+
+# Correct implementation:
+response_text = response['message']['content']
+data = json.loads(response_text)
+```
+
+**Key Innovation:**
+- All critical error paths were validated with intentional bugs
+- Proof that tests catch errors, not just assumption
+- Permanent documentation of validation in code
+
+**Strengths:**
+- ✅ **Proven error handling** - validated with buggy code
+- ✅ **Scientific verification** of error detection
+- ✅ **Clear error messages** with context
+- ✅ **4 validation cycles** documented
+- ✅ **High confidence** in error handling robustness
+
+**Weaknesses:**
+- ⚠️ Not as comprehensive as Method 2 (6 vs 8 types)
+- ⚠️ No exception chaining in all cases
+
+**Score: 17/20** - Good and validated
 
 ---
 
@@ -484,6 +570,56 @@ class TestHaikuFormatting (1 test) - Simple but important
 
 ---
 
+#### Method 5: Adaptive/Validated TDD (19/20)
+**Grade: A+**
+
+**Test Suite:**
+- 9 test cases (comprehensive with validation)
+- 185 lines of test code
+- Test-to-code ratio: 1.3:1
+- **4 validation cycles** documented
+
+**Unique Feature - Test Validation:**
+```python
+def test_malformed_json(self):
+    """Test handling of malformed JSON from LLM.
+
+    VALIDATION CANDIDATE: JSON parsing is error-prone
+    Will validate this test catches bugs properly.
+    """
+    # Test with malformed JSON
+    with self.assertRaises(json.JSONDecodeError):
+        story_to_haiku("Test text", mock_client)
+```
+
+**Validation Process:**
+- RED: Write test
+- **VALIDATE**: Write buggy code, verify test fails
+- GREEN: Write correct code, verify test passes
+- Document validation in code comments
+
+**Validated Tests:**
+- ✅ Empty input validation (proven robust)
+- ✅ JSON parsing (proven catches malformed JSON)
+- ✅ Missing keys validation (proven catches silent failures)
+- ✅ Type checking (proven catches wrong types)
+
+**Strengths:**
+- ✅ **Proven test quality** - validated, not assumed
+- ✅ **Scientific method** - tests are experiments
+- ✅ **Comprehensive coverage** (9 tests for all code)
+- ✅ **Validation documentation** in code permanently
+- ✅ **Highest confidence** for refactoring
+- ✅ **Fast execution** (<10ms)
+
+**Weaknesses:**
+- ⚠️ Fewer tests than Method 2 (9 vs 37) but each validated
+- ⚠️ Validation adds time overhead (50%)
+
+**Score: 19/20** - Exceptional with proven quality
+
+---
+
 ### 4. Documentation Quality
 
 #### Method 1: Immediate Implementation (8/20)
@@ -622,6 +758,50 @@ def story_to_haiku(text: str, llm_client=None) -> dict:
 
 ---
 
+#### Method 5: Adaptive/Validated TDD (18/20)
+**Grade: A**
+
+**Documentation:**
+- Comprehensive docstring with all exceptions
+- Extensive README (documentation of validation methodology)
+- **Validation comments** embedded in code
+- Total: ~350 lines
+
+**Unique Documentation - Validation Records:**
+```python
+# VALIDATION TEST 1: Empty input validation
+# BUGGY VERSION (to test):
+# pass  # No validation - should fail tests
+#
+# TEST RESULT: ✓ Tests failed as expected
+# CONCLUSION: Input validation tests are robust
+if not text or not text.strip():
+    raise ValueError("Input text cannot be empty...")
+```
+
+**README Includes:**
+- Adaptive TDD methodology explanation
+- Validation decisions matrix
+- Examples of buggy code tested
+- Comparison with Pure TDD
+- When validation added value
+- Scientific rigor approach
+
+**Strengths:**
+- ✅ **Permanent validation record** in code
+- ✅ **Scientific documentation** of test quality
+- ✅ **Clear methodology** explanation
+- ✅ **Decision rationale** for each validation
+- ✅ **Exceptional detail** on validation process
+
+**Weaknesses:**
+- ⚠️ More verbose than other methods
+- ⚠️ Validation comments could be extracted
+
+**Score: 18/20** - Excellent with validation documentation
+
+---
+
 ### 5. Maintainability
 
 #### Method 1: Immediate Implementation (13/20)
@@ -693,6 +873,29 @@ def story_to_haiku(text: str, llm_client=None) -> dict:
 **Refactoring Risk:** Low to Moderate
 
 **Score: 16/20** - Good pragmatic maintainability
+
+---
+
+#### Method 5: Adaptive/Validated TDD (18/20)
+**Grade: A**
+
+**Maintainability Factors:**
+- ✅ **Proven test quality** - validated, not assumed
+- ✅ **Comprehensive tests** (all code covered)
+- ✅ **Excellent documentation** (validation records)
+- ✅ **High confidence for changes** (tests proven robust)
+- ✅ **Clear validation decisions** documented
+- ⚠️ Validation comments add verbosity
+
+**Refactoring Risk:** Very Low
+
+**Future Developer Experience:** Exceptional
+- Know tests will catch regressions (proven)
+- Validation history shows test quality
+- Can confidently refactor complex areas
+- Clear methodology documentation
+
+**Score: 18/20** - Excellent maintainability with proven quality
 
 ---
 
@@ -780,18 +983,48 @@ def story_to_haiku(text: str, llm_client=None) -> dict:
 
 ---
 
+#### Method 5: Adaptive/Validated TDD (18/20)
+**Grade: A**
+
+**Time Metrics:**
+- Implementation: ~6 minutes
+- Total LOC: 326
+- Efficiency: 54 LOC/minute
+- **4 validation cycles** added ~2 minutes
+
+**Validation Overhead:**
+- 50% more time than Pure TDD (6 min vs 4 min)
+- Each validation cycle: ~30 seconds
+- Worth it for proven test quality
+
+**Runtime:**
+- ✅ Efficient LLM usage
+- ✅ Fast tests (<10ms)
+- ✅ Minimal memory overhead
+- ✅ Validation adds zero runtime cost
+
+**ROI:**
+- Validation time: 2 minutes
+- Benefit: Proven test robustness
+- Perfect for critical systems
+- Justifies 50% overhead
+
+**Score: 18/20** - Excellent efficiency with proven quality
+
+---
+
 ## Comprehensive Score Summary
 
 ### Detailed Scoring
 
-| Category | Weight | M1 | M2 | M3 | M4 |
-|----------|--------|----|----|----|----|
-| **Code Structure** | 20% | 15/20 | 19/20 | 17/20 | 17/20 |
-| **Error Handling** | 20% | 13/20 | 20/20 | 15/20 | 15/20 |
-| **Testing** | 20% | 12/20 | 20/20 | 17/20 | 16/20 |
-| **Documentation** | 15% | 8/20 | 19/20 | 14/20 | 15/20 |
-| **Maintainability** | 15% | 13/20 | 18/20 | 16/20 | 16/20 |
-| **Performance** | 10% | 16/20 | 19/20 | 15/20 | 18/20 |
+| Category | Weight | M1 | M2 | M3 | M4 | M5 |
+|----------|--------|----|----|----|----|---|
+| **Code Structure** | 20% | 15/20 | 19/20 | 17/20 | 17/20 | 18/20 |
+| **Error Handling** | 20% | 13/20 | 20/20 | 15/20 | 15/20 | 17/20 |
+| **Testing** | 20% | 12/20 | 20/20 | 17/20 | 16/20 | 19/20 |
+| **Documentation** | 15% | 8/20 | 19/20 | 14/20 | 15/20 | 18/20 |
+| **Maintainability** | 15% | 13/20 | 18/20 | 16/20 | 16/20 | 18/20 |
+| **Performance** | 10% | 16/20 | 19/20 | 15/20 | 18/20 | 18/20 |
 
 ### Weighted Final Scores
 
@@ -801,15 +1034,17 @@ def story_to_haiku(text: str, llm_client=None) -> dict:
 | **Method 2** | (19×0.2)+(20×0.2)+(20×0.2)+(19×0.15)+(18×0.15)+(19×0.1) | **19.00/20 = 95/100** | **A+** |
 | **Method 3** | (17×0.2)+(15×0.2)+(17×0.2)+(14×0.15)+(16×0.15)+(15×0.1) | **15.60/20 = 78/100** | **B+** |
 | **Method 4** | (17×0.2)+(15×0.2)+(16×0.2)+(15×0.15)+(16×0.15)+(18×0.1) | **16.05/20 = 80/100** | **A-** |
+| **Method 5** | (18×0.2)+(17×0.2)+(19×0.2)+(18×0.15)+(18×0.15)+(18×0.1) | **17.60/20 = 88/100** | **A** |
 
-**Corrected rankings after proper weighting:**
+**Final Rankings:**
 
 | Rank | Method | Score | Grade |
 |------|--------|-------|-------|
 | 🥇 1 | **Method 2: Specification-Driven** | 95/100 | A+ |
-| 🥈 2 | **Method 4: Adaptive TDD** | 80/100 | A- |
-| 🥉 3 | **Method 3: Test-First Development** | 78/100 | B+ |
-| 4 | **Method 1: Immediate Implementation** | 73/100 | B |
+| 🥈 2 | **Method 5: Adaptive/Validated TDD** | 88/100 | A |
+| 🥉 3 | **Method 4: Selective TDD** | 80/100 | A- |
+| 4 | **Method 3: Pure TDD** | 78/100 | B+ |
+| 5 | **Method 1: Immediate** | 73/100 | B |
 
 ---
 
