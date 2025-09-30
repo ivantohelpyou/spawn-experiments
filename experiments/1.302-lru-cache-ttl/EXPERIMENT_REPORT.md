@@ -3,6 +3,7 @@
 ## Experiment Overview
 
 **Objective**: Compare four software development methodologies for implementing an LRU Cache with TTL
+
 **Duration**: September 17, 2025 (09:05 - 09:19 PDT)
 **Technology Stack**: Python
 **Application**: LRU Cache with Time-To-Live functionality

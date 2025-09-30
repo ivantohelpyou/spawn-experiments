@@ -1,7 +1,9 @@
 # Ollama Experiments Series (1.6XX)
 
 **Date**: 2025-09-30
+
 **Purpose**: Explore local LLM integration using Ollama across 4 development methodologies
+
 **Status**: Active - 1 experiment complete with 2 validated findings
 
 ---
@@ -82,6 +84,7 @@ Each experiment specifies which models to pull before starting.
 
 ### 1.601 - Sentiment Analyzer
 **Description**: Function that analyzes text sentiment (positive/negative/neutral) using local LLM
+
 **Complexity**: Simple - single-turn prompt, clear output format
 **Demo Value**: Shows basic Ollama integration, prompt engineering
 **Time Estimate**: 3-4 minutes
@@ -92,6 +95,7 @@ ollama pull llama3.2:latest  # 2GB - fast, efficient
 ```
 
 **Input**: Text string
+
 **Output**: Sentiment label + confidence score
 **Key Challenges**: Prompt design, output parsing, error handling
 
@@ -99,6 +103,7 @@ ollama pull llama3.2:latest  # 2GB - fast, efficient
 
 ### 1.602 - Code Comment Generator
 **Description**: Function that generates docstring comments for Python functions
+
 **Complexity**: Simple - code understanding, structured output
 **Demo Value**: Practical developer tool, shows code analysis
 **Time Estimate**: 3-4 minutes
@@ -111,6 +116,7 @@ ollama pull qwen2.5-coder:7b  # 4.7GB - excellent for code
 ```
 
 **Input**: Python function source code
+
 **Output**: Formatted docstring with description, params, returns
 **Key Challenges**: Code parsing, docstring formatting, edge cases
 
@@ -118,6 +124,7 @@ ollama pull qwen2.5-coder:7b  # 4.7GB - excellent for code
 
 ### 1.603 - Smart Text Summarizer
 **Description**: Function that summarizes text to specified length with quality metrics
+
 **Complexity**: Moderate - length control, quality assessment
 **Demo Value**: Shows constraint handling, multi-step processing
 **Time Estimate**: 4-5 minutes
@@ -128,6 +135,7 @@ ollama pull llama3.2:latest  # 2GB
 ```
 
 **Input**: Long text + target length (words/sentences)
+
 **Output**: Summary + metrics (compression ratio, key points preserved)
 **Key Challenges**: Length constraints, quality measurement, testing
 
@@ -135,6 +143,7 @@ ollama pull llama3.2:latest  # 2GB
 
 ### 1.604 - Multi-Language Translator
 **Description**: Function that translates text between languages with confidence scoring
+
 **Complexity**: Moderate - language detection, quality validation
 **Demo Value**: Shows practical utility, testing non-deterministic outputs
 **Time Estimate**: 4-5 minutes
@@ -145,6 +154,7 @@ ollama pull llama3.2:latest  # 2GB - good multilingual support
 ```
 
 **Input**: Text + target language
+
 **Output**: Translation + confidence score + detected source language
 **Key Challenges**: Quality validation, language detection, error cases
 
@@ -152,6 +162,7 @@ ollama pull llama3.2:latest  # 2GB - good multilingual support
 
 ### 1.605 - Image Caption Generator
 **Description**: Function that generates descriptive captions for images
+
 **Complexity**: Moderate - vision model integration, multi-modal processing
 **Demo Value**: **EXCELLENT for AI Tinkerers** - visual, multi-modal, impressive
 **Time Estimate**: 4-5 minutes
@@ -162,6 +173,7 @@ ollama pull llava:7b  # 4.7GB - vision-language model
 ```
 
 **Input**: Image file path
+
 **Output**: Descriptive caption + detected objects/themes
 **Key Challenges**: Image loading, vision model integration, quality assessment
 **Demo Appeal**: Visual results are engaging and immediately understandable
@@ -170,6 +182,7 @@ ollama pull llava:7b  # 4.7GB - vision-language model
 
 ### 1.606 - JSON Schema Generator
 **Description**: Function that generates JSON schemas from example data
+
 **Complexity**: Moderate - structured output, schema validation
 **Demo Value**: Developer tool, shows structured generation
 **Time Estimate**: 4-5 minutes
@@ -182,6 +195,7 @@ ollama pull llama3.2:latest  # 2GB - lighter alternative
 ```
 
 **Input**: JSON example data
+
 **Output**: Valid JSON Schema with types, constraints
 **Key Challenges**: Schema correctness, validation, edge cases
 
@@ -189,6 +203,7 @@ ollama pull llama3.2:latest  # 2GB - lighter alternative
 
 ### 1.607 - Regex Pattern Generator
 **Description**: Function that generates regex patterns from natural language descriptions
+
 **Complexity**: Moderate - pattern validation, test case generation
 **Demo Value**: Practical utility, shows technical pattern generation
 **Time Estimate**: 3-4 minutes
@@ -199,6 +214,7 @@ ollama pull codellama:7b  # 3.8GB - good for technical patterns
 ```
 
 **Input**: Natural language description of pattern to match
+
 **Output**: Regex pattern + test cases + explanation
 **Key Challenges**: Pattern correctness, testing, complexity management
 
@@ -206,6 +222,7 @@ ollama pull codellama:7b  # 3.8GB - good for technical patterns
 
 ### 1.608 - Story-to-Haiku Converter
 **Description**: Function that distills a story/paragraph into a haiku poem
+
 **Complexity**: Simple - creative transformation, syllable counting
 **Demo Value**: **EXCELLENT for AI Tinkerers** - creative, poetic, impressive output
 **Time Estimate**: 3-4 minutes
@@ -216,6 +233,7 @@ ollama pull llama3.2:latest  # 2GB
 ```
 
 **Input**: Story text (any length)
+
 **Output**: Haiku (5-7-5 syllables) + syllable count validation
 **Key Challenges**: Syllable counting accuracy, poetic quality, testing creativity
 **Demo Appeal**: Beautiful output, shows AI creativity, easy to evaluate
@@ -224,6 +242,7 @@ ollama pull llama3.2:latest  # 2GB
 
 ### 1.609 - Intent Classifier
 **Description**: Function that classifies user intent from natural language queries
+
 **Complexity**: Moderate - classification taxonomy, confidence scoring
 **Demo Value**: Shows practical chatbot/CLI component
 **Time Estimate**: 4-5 minutes
@@ -234,6 +253,7 @@ ollama pull llama3.2:latest  # 2GB
 ```
 
 **Input**: User query string + list of possible intents
+
 **Output**: Classified intent + confidence + extracted entities
 **Key Challenges**: Taxonomy design, accuracy testing, edge cases
 
@@ -241,6 +261,7 @@ ollama pull llama3.2:latest  # 2GB
 
 ### 1.610 - Fact Checker with Citations
 **Description**: Function that verifies claims and identifies potential issues
+
 **Complexity**: Complex - reasoning, citation format, uncertainty handling
 **Demo Value**: Shows advanced reasoning capabilities
 **Time Estimate**: 5-6 minutes
@@ -253,6 +274,7 @@ ollama pull llama3.1:8b  # 4.7GB
 ```
 
 **Input**: Factual claim
+
 **Output**: Verification result + reasoning + confidence + caveats
 **Key Challenges**: Hallucination handling, confidence calibration, testing
 

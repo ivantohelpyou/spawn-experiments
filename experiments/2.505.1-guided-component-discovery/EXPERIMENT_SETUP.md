@@ -1,10 +1,15 @@
 # Experiment 2.505.1: Guided Component Discovery Protocol
 
 **Tier**: 2 (CLI Tools with Guided Discovery)
+
 **Domain**: 5 (Input Validation)
+
 **Sequence**: 05 (JSON Schema Validator CLI)
+
 **Version**: 1 (Guided Component Discovery Variant)
+
 **Date**: September 22, 2025
+
 **Technology**: Python CLI with guided component awareness
 
 ---

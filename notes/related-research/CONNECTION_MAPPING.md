@@ -114,6 +114,7 @@
 
 ### **Theme 1: Evolution of TDD Research**
 **Papers**: Williams (2003) → Nagappan (2008) → Our Work (2025)
+
 **Progression**: Early evidence → Industry validation → AI-era adaptation
 **Synthesis Questions**:
 - How has TDD evidence evolved over 20+ years?
@@ -122,6 +123,7 @@
 
 ### **Theme 2: Code Quality Measurement Evolution**
 **Papers**: Hindle (2012) statistical measures → Chen (2021) AI evaluation → Our complexity analysis
+
 **Progression**: Pattern analysis → AI capability → Methodology impact
 **Synthesis Questions**:
 - How should we measure "quality" in AI-assisted development?
@@ -130,6 +132,7 @@
 
 ### **Theme 3: Empirical Software Engineering Methodology**
 **Papers**: All four papers use different empirical approaches
+
 **Opportunity**: Compare and contrast experimental designs
 **Synthesis Questions**:
 - What makes a strong empirical study in this domain?

@@ -4,6 +4,7 @@
 **Experiment**: 1.608.4 (Story-to-Haiku Converter, Run 4)
 **Discovery Date**: 2025-09-30
 **Status**: ✅ **VALIDATED - Practical technique**
+
 **Domain**: LLM Integration, Creative Outputs
 **Key Insight**: Multiple methodologies calling same LLM = Monte Carlo sampling → Pick best output
 
@@ -635,7 +636,11 @@ return samples[scores.index(max(scores))]
 ---
 
 **Experiment**: 1.608.4 (Story-to-Haiku Converter, Run 4)
+
 **Finding**: Monte Carlo Methodology Sampling
+
 **Status**: ✅ Validated (empirical evidence from Olympic judging)
+
 **Date**: 2025-09-30
+
 **Impact**: High - immediately applicable production technique

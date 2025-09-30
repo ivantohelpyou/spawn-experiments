@@ -128,18 +128,22 @@ Problem Assessment → Methodology Selection → Constraint Application → Vali
 
 ### 🔬 **Tier 2 Validation (CLI Tools)**
 **Hypothesis**: Component reuse will reveal new complexity patterns
+
 **Questions**: How does component discovery affect methodology selection?
 
 ### 🏗️ **Tier 3 Validation (Applications)**
 **Hypothesis**: Integration complexity will favor comprehensive methodologies
+
 **Questions**: At what scale do lightweight approaches break down?
 
 ### 🤖 **AI Model Evolution**
 **Hypothesis**: More capable models may reduce over-engineering tendency
+
 **Questions**: How does model capability affect constraint requirements?
 
 ### 🎯 **Automated Assessment**
 **Hypothesis**: Problem characteristics can predict optimal methodology
+
 **Questions**: Can we build tools for automatic methodology recommendation?
 
 ## Research Impact

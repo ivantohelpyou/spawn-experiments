@@ -1,6 +1,7 @@
 # Critique: Why Tool Discovery Framework Misses the Mark
 
 **Date**: September 22, 2025
+
 **Status**: Critical Analysis of Proposed Framework
 
 ---

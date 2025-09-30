@@ -1,7 +1,9 @@
 # Spawn Experiments Documentation
 
 **Purpose**: Knowledge base for spawn methodology experiments and research
+
 **Approach**: Documentation-heavy development following proven QRCards patterns
+
 **Rationale**: Complex research requires comprehensive documentation for knowledge preservation
 
 ---
@@ -50,7 +52,9 @@ docs/
 # Document Title
 
 **Date**: YYYY-MM-DD
+
 **Purpose**: Clear statement of document purpose
+
 **Status**: [Draft|Active|Archived|Superseded]
 
 ---

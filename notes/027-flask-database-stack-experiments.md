@@ -1,7 +1,9 @@
 # Flask + Database Stack Experiments Design
 
 **Date**: September 22, 2025
+
 **Stack**: Flask + SQLAlchemy + Alembic + sqlite3
+
 **Purpose**: Bridge Tier 1/2 to Tier 3 with database-backed application components
 
 ---

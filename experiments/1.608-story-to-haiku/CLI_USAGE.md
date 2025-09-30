@@ -2,7 +2,9 @@
 ## `generate-haiku` - Story-to-Haiku Generator
 
 **Tool**: Convenience wrapper for running top haiku implementations
+
 **Location**: `tools/generate-haiku`
+
 **Requires**: Ollama running with llama3.2 model
 
 ---
@@ -220,7 +222,9 @@ With `--verbose` flag, also shows:
 
 **Best for**: Most recent, optimized prompt engineering
 **Methods**: 4 (Immediate, Specification-Driven, Pure TDD, Adaptive TDD)
+
 **Speed**: Fastest (22-36% improvement over Run 3)
+
 **Quality**: Highest (all methods improved)
 
 ```bash
@@ -231,6 +235,7 @@ tools/generate-haiku "Story" --run 4
 
 **Best for**: Maximum method diversity
 **Methods**: 5 (includes Selective TDD)
+
 **Quality**: Good baseline
 
 ```bash
@@ -469,6 +474,9 @@ For issues or questions:
 ---
 
 **Tool**: `generate-haiku`
+
 **Version**: 1.1
+
 **Date**: 2025-09-30
+
 **Experiment**: 1.608 - Story-to-Haiku Converter

@@ -2,7 +2,9 @@
 
 **Experiment Date**: September 21, 2025
 **Tier**: 1 (Function-level)
+
 **Category**: Input Validation (1.5XX)
+
 **Focus**: Email validation with RFC compliance
 
 ## Executive Summary

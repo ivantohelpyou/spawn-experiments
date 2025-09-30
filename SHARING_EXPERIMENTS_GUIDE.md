@@ -7,7 +7,9 @@ This guide helps you present your TDD methodology experiments to technical group
 
 ### **Format 1: Live Coding Demonstration**
 **Duration**: 30-45 minutes
+
 **Audience**: Developer meetups, conference talks
+
 **Approach**: Live comparison of methodologies
 
 #### Structure
@@ -24,7 +26,9 @@ This guide helps you present your TDD methodology experiments to technical group
 
 ### **Format 2: Research Results Presentation**
 **Duration**: 20-30 minutes
+
 **Audience**: Technical teams, research groups
+
 **Approach**: Present completed experimental findings
 
 #### Structure
@@ -41,7 +45,9 @@ This guide helps you present your TDD methodology experiments to technical group
 
 ### **Format 3: Workshop Format**
 **Duration**: 2-3 hours
+
 **Audience**: Teams wanting hands-on experience
+
 **Approach**: Participants run their own experiments
 
 #### Structure

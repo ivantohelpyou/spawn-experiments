@@ -1,6 +1,7 @@
 # Experiment 014: Balanced Parentheses - Methodology Comparison
 
 **Date**: September 20, 2025
+
 **Model**: Claude 3.5 Sonnet (Anthropic)
 **Experiment Type**: Tier 1 - Function Level (Crawl)
 **Problem Domain**: Stack management, character matching, algorithm design

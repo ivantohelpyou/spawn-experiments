@@ -1,7 +1,9 @@
 # Documentation Classification System
 
 **Purpose**: Automated categorization and concept extraction for large documentation repositories
+
 **Context**: Phase 1.1 of QRCards documentation archaeology
+
 **Status**: Development - Documentation First Approach
 
 ---
@@ -37,6 +39,7 @@ Manual categorization of 3,000+ files is impractical. The classifier provides:
 
 #### 1. Document Classifier (`DocumentClassifier` class)
 **Purpose**: Main classification engine
+
 **Responsibilities**:
 - File content analysis and categorization
 - Confidence scoring for classifications
@@ -89,6 +92,7 @@ confidence = category_score / total_all_scores
 
 #### 1. Repository Archaeology
 **Scenario**: Understanding large, organically grown documentation
+
 **Process**:
 1. Run classifier on entire repository
 2. Review category distribution for organizational insights
@@ -97,6 +101,7 @@ confidence = category_score / total_all_scores
 
 #### 2. Intent Discovery
 **Scenario**: Finding architectural decisions buried in documentation
+
 **Process**:
 1. Extract files mentioning "Convention City" for requirements context
 2. Find "environment matrix" references for infrastructure decisions
@@ -105,6 +110,7 @@ confidence = category_score / total_all_scores
 
 #### 3. Documentation Consolidation
 **Scenario**: Reducing 3,000 files to manageable structure
+
 **Process**:
 1. Classify all files by content type
 2. Identify high-confidence technical vs. business content

@@ -1,6 +1,8 @@
 # PRE-EXPERIMENT PREDICTIONS
 **Experiment**: 1.608 Story-to-Haiku Converter
+
 **Date**: September 30, 2025
+
 **Baseline**: LLM-powered function that converts stories to haiku using Ollama (llama3.2), with dependency injection for testing
 
 ## Methodology Predictions
@@ -11,7 +13,9 @@
 **Predicted Time**: 2-3 minutes
 **Predicted Issues**: May skip syllable validation, minimal error handling, might not use dependency injection
 **Architecture**: Single function with direct ollama import, basic string splitting
+
 **Strengths**: Fast to implement, gets working quickly
+
 **Weaknesses**: Likely hardcoded ollama dependency (hard to test), minimal validation, weak error handling
 
 ### Method 2 (Specification-Driven)
@@ -20,7 +24,9 @@
 **Predicted Time**: 5-7 minutes
 **Predicted Issues**: Will likely create abstract LLM client interface, multiple validation layers, extensive configuration
 **Architecture**: Multiple classes (HaikuGenerator, SyllableCounter, PromptBuilder, LLMClient interface), configuration files
+
 **Strengths**: Well-documented, highly testable, production-ready architecture
+
 **Weaknesses**: Massive over-engineering for a simple function, scope creep
 
 ### Method 3 (Test-First Development)
@@ -29,7 +35,9 @@
 **Predicted Time**: 3-4 minutes
 **Predicted Issues**: May discover prompt engineering challenges through test failures, iterative refinement
 **Architecture**: Function with dependency injection, clear separation of LLM call vs parsing logic
+
 **Strengths**: Good test coverage with mocks, discovers edge cases naturally
+
 **Weaknesses**: May not optimize prompt on first pass
 
 ### Method 4 (Adaptive TDD)
@@ -38,7 +46,9 @@
 **Predicted Time**: 3-4 minutes
 **Predicted Issues**: Will balance between testing structure vs testing LLM output quality
 **Architecture**: Clean function with dependency injection, focused tests on structure not content
+
 **Strengths**: Pragmatic testing strategy, good balance of speed and quality
+
 **Weaknesses**: May defer some edge case handling
 
 ## Overall Predictions

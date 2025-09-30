@@ -1,7 +1,9 @@
 # Story-to-Haiku Converter - Method 1: Immediate Implementation
 
 **Method**: Jump straight into coding with minimal planning
+
 **Time**: ~3 minutes
+
 **Approach**: Get it working FAST
 
 ## Usage

@@ -1,6 +1,7 @@
 # Experimental Failure: File Persistence Issue
 
 **Date**: 2025-09-25
+
 **Experiment**: 1.507-qr-code-generator-segno
 
 ## Issue Description

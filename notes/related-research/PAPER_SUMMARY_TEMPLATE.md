@@ -7,9 +7,13 @@
 ## 📄 **Paper Metadata**
 
 **Title**: [Full paper title]
+
 **Authors**: [Author names and institutions]
+
 **Year**: [Publication year]
+
 **Venue**: [Conference/Journal name]
+
 **Status**: [ ] First Pass [ ] Second Pass [ ] Deep Analysis
 
 ---
@@ -178,14 +182,17 @@
 
 ### **Impact on Our Research** (1-5 scale)
 **Score**: [X]/5
+
 **Reasoning**: [Why this rating?]
 
 ### **Quality of Study** (1-5 scale)
 **Score**: [X]/5
+
 **Reasoning**: [Methodological rigor, sample size, etc.]
 
 ### **Relevance to Methodology Comparison** (1-5 scale)
 **Score**: [X]/5
+
 **Reasoning**: [How directly applicable to our work?]
 
 ---

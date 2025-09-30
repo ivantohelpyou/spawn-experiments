@@ -3,7 +3,9 @@
 ## Experiment 1.608 - Run 2: Story-to-Haiku with Structured Output
 
 **Date**: 2025-09-30
+
 **Time**: Specification-driven implementation
+
 **Status**: ✅ Complete and tested
 
 ---
@@ -169,18 +171,22 @@ Story: {text}
 
 ### 1. JSON Output Format
 **Decision**: Require structured JSON instead of plain text
+
 **Rationale**: Eliminates parsing ambiguity, enables richer metadata, forces LLM to commit to syllable counts
 
 ### 2. LLM Self-Reporting
 **Decision**: Trust LLM's syllable counts over Python calculation
+
 **Rationale**: LLMs have better syllable awareness (~95% vs 85%), simpler code, more accurate in practice
 
 ### 3. Validity Flag
 **Decision**: Return `valid: bool` instead of raising exception
+
 **Rationale**: Syllable counting is subjective, allows caller flexibility, better UX
 
 ### 4. No Syllable Counting Code
 **Decision**: Remove all syllable counting helpers from Run 1
+
 **Rationale**: Not needed with JSON output, simpler codebase, more reliable
 
 ---

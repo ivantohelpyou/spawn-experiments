@@ -169,7 +169,9 @@ Continue with remaining papers using established foundation
 ```markdown
 # Paper: [Title]
 **Authors**: [Names and Institutions]
+
 **Year**: [Publication Year]
+
 **Venue**: [Conference/Journal]
 
 ## Key Findings (1-3 sentences)

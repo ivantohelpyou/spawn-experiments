@@ -52,25 +52,36 @@ These weren't caught by comprehensive test suites written by experienced develop
 
 ### Approach 1: Manual Testing and Debugging
 **Era**: 1950s-1970s
+
 **Method**: Write code, test manually, debug when problems are found
+
 **Result**: High defect rates, unpredictable quality, debugging-heavy workflows
 
 ### Approach 2: Automated Unit Testing
 **Era**: 1990s-2000s
+
 **Method**: Write automated tests to verify expected behavior
+
 **Result**: Improved confidence, but tests only as good as developer assumptions
+
 **Limitation**: No validation of test effectiveness
 
 ### Approach 3: Test-Driven Development (TDD)
 **Era**: 2000s-present
+
 **Method**: Write tests first, implement to make tests pass, refactor
+
 **Result**: Better design, higher coverage, but same fundamental flaw
+
 **Limitation**: Still assumes tests correctly capture requirements
 
 ### Approach 4: Comprehensive Testing Strategies
 **Era**: 2010s-present
+
 **Method**: Unit tests + integration tests + property-based testing + mutation testing
+
 **Result**: Higher coverage, more confidence, but exponentially more complex
+
 **Limitation**: Complexity overhead often outweighs benefits for simple problems
 
 ### The Pattern: More Tests, Same Assumptions
@@ -271,8 +282,11 @@ T2D2 can be implemented with existing tools:
 
 **Financial Services**: Mathematical correctness for trading algorithms, risk calculations
 **Healthcare**: Life-critical device software, patient data processing
+
 **Automotive**: Safety-critical autonomous vehicle systems
+
 **Aerospace**: Mission-critical flight control systems
+
 **Cryptography**: Security algorithm implementations
 
 ## Call to Action: The Time is Now

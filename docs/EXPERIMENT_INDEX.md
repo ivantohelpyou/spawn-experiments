@@ -18,6 +18,7 @@
 - **Method 4**: Added prompt validation cycle (scientific rigor)
 
 **Mechanism**: Clearer prompts → Clearer requirements → Faster + Higher quality
+
 **Status**: Moderate-High confidence (exploratory pivot, needs controlled replication)
 
 #### Finding 10: Monte Carlo Methodology Sampling

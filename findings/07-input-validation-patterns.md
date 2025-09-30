@@ -56,6 +56,7 @@
 - Prevents feature creep through upfront constraints
 
 **Strength**: Clear limitations prevent scope expansion
+
 **Output**: 872 lines - moderate complexity with good documentation
 
 ### Method 3: Test-First Development (TDD)

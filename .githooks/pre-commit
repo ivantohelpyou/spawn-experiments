@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+"""
+Pre-commit hook to check markdown formatting.
+Ensures blank lines between consecutive bold metadata lines (**Key**: value format).
+"""
+
+import re
+import sys
+from pathlib import Path
+
+def check_markdown_formatting(file_path):
+    """Check for consecutive bold metadata lines without blank lines between."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+    except:
+        return []
+
+    issues = []
+    for i in range(len(lines) - 1):
+        # Check if current line and next line are both bold metadata lines
+        current_is_bold = re.match(r'^\*\*[A-Za-z]+\*\*:', lines[i])
+        next_is_bold = re.match(r'^\*\*[A-Za-z]+\*\*:', lines[i+1])
+
+        if current_is_bold and next_is_bold:
+            issues.append((i+1, lines[i].strip(), lines[i+1].strip()))
+
+    return issues
+
+def main():
+    # Get staged .md files
+    import subprocess
+    result = subprocess.run(
+        ['git', 'diff', '--cached', '--name-only', '--diff-filter=ACM'],
+        capture_output=True,
+        text=True
+    )
+
+    staged_files = [f for f in result.stdout.strip().split('\n') if f.endswith('.md')]
+
+    if not staged_files:
+        return 0
+
+    errors_found = False
+
+    for file_path in staged_files:
+        if not Path(file_path).exists():
+            continue
+
+        issues = check_markdown_formatting(file_path)
+        if issues:
+            if not errors_found:
+                print("⚠️  Markdown formatting issues found:")
+                print("   Missing blank lines between consecutive bold metadata lines\n")
+            errors_found = True
+
+            print(f"📄 {file_path}:")
+            for line_num, current, next_line in issues[:3]:  # Show first 3
+                print(f"   Line {line_num}: {current}")
+                print(f"   Line {line_num+1}: {next_line}")
+                print(f"   → Add blank line between them\n")
+
+    if errors_found:
+        print("💡 To fix automatically, run:")
+        print("   python3 .githooks/fix-markdown-formatting.py")
+        print("\n❌ Commit aborted. Fix formatting issues and try again.")
+        return 1
+
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())

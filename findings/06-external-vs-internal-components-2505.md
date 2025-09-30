@@ -1,8 +1,11 @@
 # External vs Internal Components: Strategic Framework Guidance
 
 **Date**: September 22, 2025
+
 **Source**: Experiment 2.505.1 Method 1E Analysis
+
 **Domain**: Component Selection Strategy
+
 **Significance**: Framework design for multi-source component experiments
 
 ---
@@ -24,22 +27,30 @@
 
 ### **Scenario 1: Feature Richness Research**
 **When**: Studying how methodologies handle feature-rich requirements
+
 **Example**: CLI tools requiring progress bars, colored output, complex table formatting
+
 **Rationale**: Internal utils may lack sophisticated UI/UX capabilities
 
 ### **Scenario 2: Real-World Modeling**
 **When**: Simulating actual development environments where teams have access to PyPI
+
 **Example**: Web applications, data processing pipelines, API services
+
 **Rationale**: Most real development leverages external ecosystems
 
 ### **Scenario 3: Dependency Management Research**
 **When**: Studying how methodologies handle dependency complexity
+
 **Example**: Version conflicts, security updates, supply chain management
+
 **Rationale**: External dependencies introduce real-world complexity
 
 ### **Scenario 4: Scale Testing**
 **When**: Large applications where building everything from scratch is impractical
+
 **Example**: ML pipelines, microservices, enterprise applications
+
 **Rationale**: Internal utils insufficient for complex domain requirements
 
 ---
@@ -48,18 +59,22 @@
 
 ### **Scenario 1: Pure Methodology Comparison**
 **When**: Testing methodology characteristics without external variables
+
 **Rationale**: External libraries introduce setup overhead that masks methodology differences
 
 ### **Scenario 2: Component Discovery Research**
 **When**: Studying how methodologies find and integrate existing internal components
+
 **Rationale**: External access creates alternative path that bypasses discovery behavior
 
 ### **Scenario 3: Rapid Prototyping Studies**
 **When**: Measuring pure development speed for simple requirements
+
 **Rationale**: External library setup overhead dominates timing measurements
 
 ### **Scenario 4: Educational/Learning Research**
 **When**: Studying how methodologies approach problems from first principles
+
 **Rationale**: External libraries provide "magic" solutions that skip learning/understanding
 
 ---

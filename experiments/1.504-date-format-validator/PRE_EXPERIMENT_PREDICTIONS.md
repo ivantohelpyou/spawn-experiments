@@ -1,6 +1,8 @@
 # PRE-EXPERIMENT PREDICTIONS
 **Experiment**: 1.504 Date Format Validator
+
 **Date**: September 21, 2025
+
 **Baseline**: Configurable date validation (MM/DD vs DD/MM, parameterized year range, boolean return)
 
 ## Methodology Predictions
@@ -11,7 +13,9 @@
 **Predicted Time**: 4-6 minutes
 **Predicted Issues**: May miss leap year edge cases initially, basic error handling
 **Architecture**: Single function or simple class with regex patterns and basic date logic
+
 **Strengths**: Fast implementation, straightforward approach
+
 **Weaknesses**: Likely to have validation gaps, minimal configurability
 
 ### Method 2 (Human-Reviewed Specification)
@@ -20,7 +24,9 @@
 **Predicted Time**: 8-12 minutes
 **Predicted Issues**: May over-specify edge case handling, could add unnecessary complexity
 **Architecture**: Class-based design with clear separation of concerns, configuration management
+
 **Strengths**: Thorough documentation, comprehensive parameter handling
+
 **Weaknesses**: Potential scope creep during specification phase
 
 ### Method 3 (Pure TDD)
@@ -29,7 +35,9 @@
 **Predicted Time**: 7-10 minutes
 **Predicted Issues**: May discover edge cases through test failures, iterative refinement needed
 **Architecture**: Minimal class focused on test requirements, clean API design
+
 **Strengths**: Comprehensive test coverage, reliable validation logic
+
 **Weaknesses**: May take longer due to test-first discipline
 
 ### Method 4 (Specification-Guided TDD)
@@ -38,7 +46,9 @@
 **Predicted Time**: 8-11 minutes
 **Predicted Issues**: Balance between upfront planning and test discipline
 **Architecture**: Structured class with planned test scenarios and clear parameter handling
+
 **Strengths**: Good planning + test coverage combination
+
 **Weaknesses**: Potential overhead from dual planning approaches
 
 ## Overall Predictions

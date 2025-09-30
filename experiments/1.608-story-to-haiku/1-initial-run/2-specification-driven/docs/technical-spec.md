@@ -2,7 +2,9 @@
 ## Method 2: Specification-Driven Implementation
 
 **Date**: 2025-09-30
+
 **Version**: 1.0
+
 **Status**: Design Complete
 
 ---
@@ -445,6 +447,7 @@ def count_syllables_in_line(line: str) -> int:
 
 ### 10.1 Why Dependency Injection?
 **Decision**: Accept optional `llm_client` parameter
+
 **Rationale**:
 - Enables fast, parallel development with mocks
 - Allows testing without running Ollama
@@ -453,6 +456,7 @@ def count_syllables_in_line(line: str) -> int:
 
 ### 10.2 Why Truncate at 500 Characters?
 **Decision**: Limit input to 500 chars before LLM
+
 **Rationale**:
 - Haiku captures essence, not full details
 - Prevents token limits
@@ -461,6 +465,7 @@ def count_syllables_in_line(line: str) -> int:
 
 ### 10.3 Why Not Enforce Strict Syllable Validation?
 **Decision**: Return counts but don't raise error
+
 **Rationale**:
 - Syllable counting is inherently imperfect (~85% accurate)
 - LLM may be more accurate than our algorithm
@@ -469,6 +474,7 @@ def count_syllables_in_line(line: str) -> int:
 
 ### 10.4 Why Simple Syllable Algorithm?
 **Decision**: Vowel-cluster method vs. dictionary lookup
+
 **Rationale**:
 - No external dependencies
 - Fast execution
@@ -477,6 +483,7 @@ def count_syllables_in_line(line: str) -> int:
 
 ### 10.5 Why Extract Essence?
 **Decision**: Include essence field in return dict
+
 **Rationale**:
 - Provides context for the haiku
 - Useful for logging/debugging

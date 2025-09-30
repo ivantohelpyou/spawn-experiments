@@ -4,17 +4,23 @@
 
 ### Stage 1: Initial → Library List
 **Start**: When prompt is given
+
 **End**: When they list libraries and pause
+
 **Captures**: Time to analyze requirements and select libraries
 
 ### Stage 2: "Why?" → Reasoning
 **Start**: When "Why?" is asked
+
 **End**: When explanation is complete
+
 **Captures**: Reasoning generation time (unprepared response)
 
 ### Stage 3: "Ok go" → Implementation
 **Start**: When "Ok go" is given
+
 **End**: When implementation is complete
+
 **Captures**: Actual development time
 
 ## Recording Format

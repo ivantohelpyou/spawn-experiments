@@ -1,6 +1,7 @@
 # Competition Interruption Experiment Design
 
 **Date**: September 21, 2025
+
 **Purpose**: Test how existing methodologies respond to unexpected competition notification
 **Key Insight**: We're testing methodology response to pressure, not creating pressure-aware methodologies
 

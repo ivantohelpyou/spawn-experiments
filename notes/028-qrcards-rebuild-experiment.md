@@ -1,7 +1,9 @@
 # QRCards Rebuild Experiment: Real-World Flask + Database Research
 
 **Date**: September 22, 2025
+
 **Project**: ~/projects/qrcards rebuild using methodology research
+
 **Stack**: Flask + SQLAlchemy + Alembic + segno + sqlite3
 **Dual Purpose**: Research experiment + production QRCards application
 

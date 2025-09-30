@@ -42,6 +42,7 @@
 
 ##### `get_user_input(prompt: str) -> float`
 **Purpose**: Get and validate numeric input from user
+
 **Parameters**:
 - `prompt (str)`: The message to display to the user
 **Returns**:
@@ -55,6 +56,7 @@
 
 ##### `validate_positive_number(value: str) -> tuple[bool, float]`
 **Purpose**: Validate that input string is a positive number
+
 **Parameters**:
 - `value (str)`: String input to validate
 **Returns**:
@@ -68,6 +70,7 @@
 
 ##### `calculate_simple_interest(principal: float, rate: float, time: float) -> float`
 **Purpose**: Calculate simple interest using the standard formula
+
 **Parameters**:
 - `principal (float)`: Principal amount in dollars
 - `rate (float)`: Interest rate as percentage
@@ -80,6 +83,7 @@
 
 ##### `format_currency(amount: float) -> str`
 **Purpose**: Format numeric amount as currency string
+
 **Parameters**:
 - `amount (float)`: Numeric amount to format
 **Returns**:
@@ -91,9 +95,11 @@
 
 ##### `display_result(interest: float) -> None`
 **Purpose**: Display the calculated result to user
+
 **Parameters**:
 - `interest (float)`: Calculated simple interest amount
 **Returns**: None
+
 **Behavior**:
 - Formats interest as currency
 - Displays result with "Simple Interest: " prefix
@@ -102,8 +108,11 @@
 
 ##### `main() -> None`
 **Purpose**: Main application entry point and controller
+
 **Parameters**: None
+
 **Returns**: None
+
 **Behavior**:
 - Orchestrates the complete user interaction flow
 - Calls input functions to gather user data

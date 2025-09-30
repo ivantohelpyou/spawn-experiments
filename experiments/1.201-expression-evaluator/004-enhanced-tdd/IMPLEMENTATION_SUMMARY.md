@@ -2,8 +2,11 @@
 
 ## Project Overview
 **Duration**: Phase 1: 47 seconds, Phase 2: 11 minutes 26 seconds
+
 **Method**: Enhanced Test-Driven Development with Test Validation
+
 **Technology**: Python
+
 **Project**: Expression Evaluator
 
 ## Key Innovation: Test Validation Step

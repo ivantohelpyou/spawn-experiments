@@ -1,6 +1,7 @@
 # Experimental Constraint Mechanisms for Preventing AI Over-Engineering
 
 **Date**: September 21, 2025
+
 **Context**: After URL Validator showed 32.3X over-engineering, need new constraint approaches
 **Key Insight**: Current prompts may inadvertently encourage over-engineering
 

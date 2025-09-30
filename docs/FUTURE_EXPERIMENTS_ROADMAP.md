@@ -59,9 +59,11 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 
 ### **Tier 1: Functions (010-019) - CRAWL**
 **Scope**: Pure algorithmic problems, single functions, stdlib only
+
 **Duration**: 5-15 minutes per approach (30-60 min total parallel)
 **Claude Code Usage**: ✅ **Safe for any usage window**
 **Purpose**: Isolate methodology differences without architectural complexity
+
 **Status**: ✅ **COMPLETE** - Series 010-014 finished
 
 #### Completed Tier 1 Experiments
@@ -111,6 +113,7 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 
 ### **Tier 2: CLI Tools (2.XXX) - WALK**
 **Scope**: Command-line utilities, file I/O, composable tools
+
 **Duration**: 15-30 minutes per approach (60-120 min total parallel)
 **Claude Code Usage**: ⚠️ **Requires >2 hours remaining** (based on 007 resource analysis)
 **Purpose**: Study interface design and component composition
@@ -142,6 +145,7 @@ Based on lessons learned, future experiments follow a **crawl-walk-run** progres
 
 ### **Tier 3: Applications (030-039) - RUN**
 **Scope**: Full applications with GUIs, APIs, persistence
+
 **Duration**: 45-90 minutes per approach (180-360 min total parallel)
 **Claude Code Usage**: ❌ **Requires >4 hours remaining** (based on 007 token analysis)
 **Purpose**: Study complex system architecture and integration
@@ -240,6 +244,7 @@ This tiered approach addresses the scope ambiguity problem while providing unpre
 
 ### Hierarchical Numbering System (Proposed)
 **Problem**: Current sequential numbering (010, 011, 012...) requires renumbering when inserting experiments
+
 **Solution**: Dewey Decimal-inspired system allowing infinite extensions without renumbering
 
 #### Proposed Structure

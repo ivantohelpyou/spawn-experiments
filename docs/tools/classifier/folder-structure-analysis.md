@@ -1,6 +1,7 @@
 # Folder Structure Analysis for Documentation Classification
 
 **Purpose**: Leverage directory hierarchy as primary classification signal
+
 **Context**: QRCards repository has intentional organizational patterns
 **Key Insight**: Folder structure reflects creator intent more reliably than content analysis
 

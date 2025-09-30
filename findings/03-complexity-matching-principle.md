@@ -77,6 +77,7 @@ Simple problems benefit from lightweight methodologies. Complex problems justify
 
 ### ⚠️ **Over-Engineering Anti-Pattern**
 **Symptom**: Using comprehensive methodologies for simple problems
+
 **Evidence**:
 - Email Validator Method 1: Created 4-level validation framework unprompted
 - Anagram Grouper Method 2: 5 configurable parameters for basic hash function
@@ -90,6 +91,7 @@ Simple problems benefit from lightweight methodologies. Complex problems justify
 
 ### 🔓 **Under-Engineering Anti-Pattern**
 **Symptom**: Using immediate implementation for complex/security problems
+
 **Evidence**: Email Validator Method 1 accepted malformed emails
 
 **Consequences**:

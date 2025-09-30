@@ -82,6 +82,7 @@ This pattern appears consistently across domains and represents a fundamental ch
 
 ### 🎯 **Pattern 1: Anticipatory Feature Creep**
 **Manifestation**: AI adds features "just in case" without requirements
+
 **Examples**:
 - Email validator IP address support (nobody asked for this)
 - Anagram grouper Unicode normalization (ASCII problem)
@@ -91,6 +92,7 @@ This pattern appears consistently across domains and represents a fundamental ch
 
 ### 🏗️ **Pattern 2: Framework Escalation**
 **Manifestation**: AI builds frameworks instead of solving specific problems
+
 **Examples**:
 - Email validator: 4-level validation system for single use case
 - Anagram grouper: Configurable grouping engine for hash function
@@ -100,6 +102,7 @@ This pattern appears consistently across domains and represents a fundamental ch
 
 ### 🧪 **Pattern 3: Specification Explosion**
 **Manifestation**: AI generates massive specifications for simple problems
+
 **Examples**:
 - Anagram grouper: 196-line spec for 60-line algorithm
 - Password generator: 74 requirements for basic CLI tool
@@ -109,6 +112,7 @@ This pattern appears consistently across domains and represents a fundamental ch
 
 ### 🔧 **Pattern 4: Premature Abstraction**
 **Manifestation**: AI creates abstractions before understanding constraints
+
 **Examples**:
 - Email validator: Multiple validation levels without use cases
 - Anagram grouper: Configurable parameters without requirements
@@ -120,6 +124,7 @@ This pattern appears consistently across domains and represents a fundamental ch
 
 ### 🔬 **TDD as Constraint System** ✅ **MOST EFFECTIVE**
 **Mechanism**: Tests define exact requirements, preventing feature expansion
+
 **Evidence**:
 - Email Validator: 393 lines (3.6X reduction)
 - Anagram Grouper: 401 lines (3.6X reduction)
@@ -129,6 +134,7 @@ This pattern appears consistently across domains and represents a fundamental ch
 
 ### 📋 **Specification-Driven Boundaries** ⚠️ **MIXED RESULTS**
 **Mechanism**: Explicit "will NOT support" statements prevent scope creep
+
 **Evidence**:
 - Can prevent over-engineering when properly constrained
 - But also prone to specification explosion (Anagram Grouper 196-line spec)
@@ -138,6 +144,7 @@ This pattern appears consistently across domains and represents a fundamental ch
 
 ### ⚡ **Time Pressure Constraints** ✅ **EFFECTIVE FOR SIMPLE PROBLEMS**
 **Mechanism**: Immediate implementation forces focus on essentials
+
 **Evidence**:
 - Password Generator: 1m17s optimal result
 - Forces "good enough" mentality that prevents gold-plating
@@ -146,6 +153,7 @@ This pattern appears consistently across domains and represents a fundamental ch
 
 ### 🛡️ **Test Validation Overhead** ✅ **PREVENTS OVER-ENGINEERING**
 **Mechanism**: Test validation requirements make features expensive
+
 **Evidence**: Method 4 produces focused implementations due to test validation cost
 
 ## Business Impact of Over-Engineering
@@ -188,17 +196,23 @@ This pattern appears consistently across domains and represents a fundamental ch
 
 ### 🎯 **For Simple Problems (Tier 1 Functions)**
 **Strategy**: Use TDD to enforce constraints
+
 **Evidence**: Consistently produces 3-4X reduction in code size
+
 **Application**: Input validation, algorithms, utilities
 
 ### 📏 **For Medium Problems (Tier 2 Tools)**
 **Strategy**: Use specification-driven with explicit boundaries
+
 **Evidence**: Works when specifications include "will NOT support" sections
+
 **Application**: CLI tools, data structures, parsers
 
 ### 🔬 **For Complex Problems (Tier 3 Applications)**
 **Strategy**: Use validated test development for quality gates
+
 **Evidence**: Test validation prevents feature creep through overhead
+
 **Application**: Security systems, business applications, integration tools
 
 ## Research Questions for Future Investigation

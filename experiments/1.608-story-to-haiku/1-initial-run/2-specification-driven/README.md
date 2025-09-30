@@ -2,7 +2,9 @@
 ## Method 2: Specification-Driven Implementation
 
 **Experiment**: 1.608 - Story-to-Haiku Converter
+
 **Methodology**: Specification-Driven (Design-First)
+
 **Date**: 2025-09-30
 
 ---
@@ -405,5 +407,7 @@ Part of the spawn-experiments project demonstrating development methodologies.
 ---
 
 **Implementation**: Claude (Specification-Driven Methodology)
+
 **Date**: 2025-09-30
+
 **Version**: 1.0.0

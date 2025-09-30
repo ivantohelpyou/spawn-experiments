@@ -1,7 +1,9 @@
 # External Tool Constrained Experiments Design
 
 **Purpose**: Continue original methodology research while constraining to external tools
+
 **Date**: September 22, 2025
+
 **Approach**: Specify external tools + requirements to study implementation differences
 
 ---
