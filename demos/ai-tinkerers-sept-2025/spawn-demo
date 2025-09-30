@@ -1,0 +1,82 @@
+#!/bin/bash
+# spawn-demo - Launch AI Tinkerers poetry experiment demos
+# Usage: spawn-demo {limerick,terza,terza-rima,iambic,iambic-pentameter} [--dry-run]
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROMPT_FILE="$SCRIPT_DIR/1.608-poetry-series.md"
+DRY_RUN=false
+
+# Parse arguments
+EXPERIMENT=""
+for arg in "$@"; do
+    case "$arg" in
+        --dry-run)
+            DRY_RUN=true
+            ;;
+        *)
+            EXPERIMENT="$arg"
+            ;;
+    esac
+done
+
+if [ -z "$EXPERIMENT" ]; then
+    echo "Usage: spawn-demo {limerick,terza,terza-rima,iambic,iambic-pentameter} [--dry-run]"
+    exit 1
+fi
+
+case "$EXPERIMENT" in
+    iambic|iambic-pentameter)
+        echo "🎭 Launching Experiment 1.608.A - Iambic Pentameter Converter"
+        SECTION="1.608.A"
+        ;;
+    limerick)
+        echo "📖 Launching Experiment 1.608.B - Limerick Converter"
+        SECTION="1.608.B"
+        ;;
+    terza|terza-rima)
+        echo "🏛️ Launching Experiment 1.608.C - Terza Rima Converter"
+        SECTION="1.608.C"
+        ;;
+    *)
+        echo "❌ Unknown experiment: $EXPERIMENT"
+        echo "Valid options: limerick, terza, terza-rima, iambic, iambic-pentameter"
+        exit 1
+        ;;
+esac
+
+# Extract the prompt from the markdown file
+# Find the section, extract the claude command content
+PROMPT=$(sed -n "/## $SECTION/,/^---$/p" "$PROMPT_FILE" | \
+         sed -n '/```bash/,/```/p' | \
+         sed '1d;$d' | \
+         grep -A 100 '^claude' | \
+         sed 's/^claude //' | \
+         sed 's/^"//' | \
+         sed 's/"$//')
+
+if [ -z "$PROMPT" ]; then
+    echo "❌ Failed to extract prompt for $SECTION"
+    exit 1
+fi
+
+if [ "$DRY_RUN" = true ]; then
+    echo ""
+    echo "🔍 DRY RUN MODE - Full prompt extracted:"
+    echo "═══════════════════════════════════════════════════════════════════"
+    echo "$PROMPT"
+    echo "═══════════════════════════════════════════════════════════════════"
+    echo ""
+    echo "✅ Prompt extraction successful. Run without --dry-run to execute."
+else
+    echo ""
+    echo "📋 Extracted prompt (first 200 chars):"
+    echo "${PROMPT:0:200}..."
+    echo ""
+    echo "🚀 Launching experiment..."
+    echo ""
+
+    # Execute the prompt
+    claude "$PROMPT"
+fi
