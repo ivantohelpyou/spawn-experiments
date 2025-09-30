@@ -89,6 +89,29 @@ git commit -m "Add: Experiment {ID} - {description}
 Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
 
+### Phase 5: Post-Experiment Cleanup
+After experiment completion, clean up build artifacts and development dependencies:
+
+```bash
+# Run cleanup script (removes __pycache__, .pytest_cache, nested venvs, etc.)
+./scripts/post-experiment-cleanup.sh experiments/{ID}-{name}
+
+# Or clean entire experiments directory:
+./scripts/post-experiment-cleanup.sh
+```
+
+**What gets cleaned:**
+- Python cache (`__pycache__`, `.pyc`, `.pyo`)
+- Test artifacts (`.pytest_cache`, `.coverage`, `htmlcov`)
+- Nested venvs (keeps only top-level experiment venvs)
+- Editor artifacts (`.vscode`, `.idea`, swap files)
+- OS artifacts (`.DS_Store`, `Thumbs.db`)
+
+**What gets preserved:**
+- Top-level venvs for active tools/scripts
+- Source code and experiment results
+- Documentation and reports
+
 ## Example Usage
 
 ### Public Experiment:
