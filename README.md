@@ -60,7 +60,7 @@ A research framework testing how different development methodologies affect AI c
 Same AI model, same task, different methodology = **32.3X code bloat** (URL validator: 6,036 lines vs 187 lines)
 
 **Finding:** HOW you prompt matters more than WHICH model you use
-- [32X Over-Engineering Discovery](experiments/1.502-url-validator/EXPERIMENT_NOTE.md)
+- [32X Over-Engineering Discovery](experiments/1.502-url-validator/EXPERIMENT_REPORT.md)
 
 ### 2. **Context Flips Methodology Performance**
 Revolutionary finding from multi-run experiments:
@@ -188,9 +188,9 @@ All experiments follow rigorous protocols:
 
 **Notable Experiments:**
 - [1.608 Story-to-Haiku](experiments/1.608-story-to-haiku/) - LLM integration showcase ⭐
-- [1.502 URL Validator Multi-Run](experiments/1.502-url-validator/) - 32X methodology differences
-- [2.505.1 Component Discovery](experiments/2.505.1-guided-component-discovery/) - 0% → 100% with guidance
-- [1.504 Date Format Validator](experiments/1.504-date-format-validator/) - Adaptive TDD optimal balance
+- [1.502 URL Validator Multi-Run](experiments/1.502-url-validator/EXPERIMENT_REPORT.md) - 32X methodology differences
+- [2.505.1 Component Discovery](experiments/2.505.1-guided-component-discovery/EXPERIMENT_REPORT.md) - 0% → 100% with guidance
+- [1.504 Date Format Validator](experiments/1.504-date-format-validator/EXPERIMENT_REPORT.md) - Adaptive TDD optimal balance
 
 ---
 
