@@ -34,29 +34,25 @@ tools/generate-haiku "In a small village, an old woman tended her garden every d
 
 ---
 
-## Part 2: Play Video + Explain (4-5 min)
+## Part 2: Play Video + Explain (2-3 min)
 
-**YouTube:** Play 4-minute time-lapse
+**YouTube:** Play 1-2 minute time-lapse
 
 ### While video plays:
-**First 60 seconds:**
-- "This is the actual build - sped up 12x"
+**First 30 seconds:**
+- "This is the actual build - sped up 12x from 48 minutes to under 2 minutes"
 - "I ran 4 methodologies in parallel: Immediate Implementation, Specification-Driven, Pure TDD, Adaptive TDD"
 - "Same AI model, same task, same me - only difference is HOW I prompted"
 
-**Middle 2 minutes:**
-- "Each method gets isolated branch, clean environment"
-- "Watch the code quality differences emerge"
-- "Specification-Driven writes 3x more code but gets highest quality score"
-- "Immediate Implementation is fastest but lowest quality"
+**Next 30-60 seconds:**
+- "Each method gets isolated branch, clean environment - no cross-contamination"
+- "Watch the code quality differences emerge in real-time"
+- "Specification-Driven writes more code but gets highest quality score"
+- "Olympic judging system: 3 LLM judges score each output"
 
-**Final minute:**
-- "Olympic judging system: 3 LLM judges score each haiku"
-- "This let me validate which methodology produces best creative output"
+**Final 30 seconds / After video:**
 - "Result: Methodology matters more than model choice"
-
-**After video ends:**
-- "That took 48 minutes. Key findings: Optimized prompts improve BOTH speed (22-36%) AND quality (+1 to +7 points)"
+- "Key finding: Optimized prompts improve BOTH speed (22-36%) AND quality (+1 to +7 points)"
 
 ---
 

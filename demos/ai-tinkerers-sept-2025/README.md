@@ -5,8 +5,8 @@
 ## Demo Materials
 
 ### 1. Video Walkthrough
-**1.608.4 Story-to-Haiku Converter Build** (4-minute time-lapse)
-- Full implementation from start to finish
+**1.608.4 Story-to-Haiku Converter Build** (1-2 minute time-lapse)
+- Full implementation from start to finish (48min → 1-2min)
 - Shows all 4 methodologies in parallel
 - Olympic judging system demonstration
 
