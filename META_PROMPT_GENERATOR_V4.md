@@ -6,7 +6,7 @@
 
 **Version 4.2 Enhancements**:
 - Method 3 established as "mechanical rabbit" baseline (consistent 6-8min, ~200 lines)
-- Method 4 V4.1 Adaptive TDD as innovation leader (4m dev, 1M+ val/sec, strategic validation)
+- Method 4 Adaptive TDD as innovation leader (4m dev, 1M+ val/sec, strategic validation)
 - Enhanced branch protocol with automated verification and demo generation
 - Prediction accountability system reveals AI biases and improves calibration
 - Competitive racing framework drives methodology evolution
@@ -111,6 +111,41 @@ This ensures:
 - Audit trail for scientific rigor
 ```
 
+### **Python Environment Setup Protocol** (Add to ALL Python prompts)
+
+```
+IMPORTANT: Use standard venv for Python environment isolation:
+
+SETUP:
+1. Create virtual environment:
+   python3 -m venv .venv
+
+2. Activate environment:
+   source .venv/bin/activate  # Linux/Mac
+   .venv\Scripts\activate     # Windows
+
+3. Install dependencies:
+   pip install -r requirements.txt
+
+REQUIREMENTS FILE:
+- Create requirements.txt with pinned versions
+- Include only necessary dependencies
+- Example:
+  pytest==7.4.3
+  ollama==0.1.6
+
+WHY venv NOT uv:
+- Universal compatibility - no extra tools to install
+- Standard Python tooling everyone knows
+- Simpler for public repos and contributors
+- Clear, well-understood dependency management
+
+IMPORTANT:
+- Do NOT use pip install without venv activated
+- Do NOT use uv, poetry, or other non-standard tools
+- Keep dependencies minimal and well-documented
+```
+
 ### **Atomic Commit Protocol** (Add to ALL prompts)
 
 ```
@@ -186,7 +221,7 @@ fi
 
 # Check required files exist
 EXPERIMENT_DIR="experiments/$EXPERIMENT_NUM"
-METHOD_DIR_MAP=("immediate:1-immediate-implementation" "specification:2-specification-driven" "tdd:3-test-first-development" "adaptive-tdd:4-adaptive-tdd-v41")
+METHOD_DIR_MAP=("immediate:1-immediate-implementation" "specification:2-specification-driven" "tdd:3-test-first-development" "adaptive-tdd:4-adaptive-tdd")
 
 for mapping in "${METHOD_DIR_MAP[@]}"; do
     method="${mapping%%:*}"
@@ -231,7 +266,7 @@ echo "🔍 Verifying main branch integration for experiment $EXPERIMENT_NUM"
 cd "experiments/$EXPERIMENT_NUM" || exit 1
 
 # Test all method implementations
-methods=("1-immediate-implementation" "2-specification-driven" "3-test-first-development" "4-adaptive-tdd-v41")
+methods=("1-immediate-implementation" "2-specification-driven" "3-test-first-development" "4-adaptive-tdd")
 
 for method_dir in "${methods[@]}"; do
     if [ -d "$method_dir" ] && [ -f "$method_dir/date_validator.py" ]; then
@@ -293,8 +328,8 @@ if [ -f "3-test-first-development/date_validator.py" ]; then
     methods+=("3-test-first-development")
     method_names+=("Method 3 (Pure TDD)")
 fi
-if [ -f "4-adaptive-tdd-v41/date_validator.py" ]; then
-    methods+=("4-adaptive-tdd-v41")
+if [ -f "4-adaptive-tdd/date_validator.py" ]; then
+    methods+=("4-adaptive-tdd")
     method_names+=("Method 4 (Adaptive TDD)")
 fi
 
@@ -332,7 +367,7 @@ def get_available_methods(base_dir):
         "Method 1 (Immediate)": "1-immediate-implementation",
         "Method 2 (Specification)": "2-specification-driven",
         "Method 3 (Pure TDD)": "3-test-first-development",
-        "Method 4 (Adaptive TDD)": "4-adaptive-tdd-v41"
+        "Method 4 (Adaptive TDD)": "4-adaptive-tdd"
     }
 
     for method_name, method_dir in method_dirs.items():
@@ -675,7 +710,7 @@ Technology: [TECH_STACK]
 Show all work including commits.
 ```
 
-### **🏆 Method 4: Adaptive TDD V4.1** (Strategic Innovation)
+### **🏆 Method 4: Adaptive/Validated TDD** (Test Quality Verification)
 
 ```
 Build a [APPLICATION_TYPE] using [TECH_STACK].
@@ -683,23 +718,61 @@ Build a [APPLICATION_TYPE] using [TECH_STACK].
 REQUIREMENTS (Baseline Specification):
 [APPROVED_BASELINE_SPECIFICATION]
 
-Follow light planning with adaptive test validation based on complexity:
+Use FULL TDD (test everything) with ADAPTIVE VALIDATION (verify test quality strategically):
 
-PROCESS:
-1. Brief requirements analysis (5-10 minutes)
-2. Identify key test scenarios and edge cases
-3. Use TDD to implement against planned requirements
-4. Apply test validation ONLY when you encounter:
-   - Complex edge cases that could be implemented incorrectly
-   - Non-obvious business logic that needs verification
-   - Areas where a wrong implementation might still pass naive tests
-   - Critical functionality where test quality matters most
+⚠️ CRITICAL: This is NOT selective testing - you must test ALL code.
+The "adaptive" part is about VALIDATING your tests, not skipping them.
 
-ADAPTIVE VALIDATION APPROACH:
-- Use your judgment to determine when extra validation adds value
-- For straightforward functionality: standard TDD is sufficient
-- For complex/critical areas: write intentionally wrong implementations to verify test robustness
-- Document your validation decisions in commit messages
+TDD PROCESS (applies to ALL code):
+1. RED: Write failing test
+2. VALIDATE (adaptive - see below): Verify test catches bugs
+3. GREEN: Write correct implementation
+4. REFACTOR: Clean up
+
+ADAPTIVE VALIDATION (the key innovation):
+Apply extra validation step when you encounter:
+- Complex edge cases that could be implemented incorrectly
+- Non-obvious business logic that needs verification
+- Areas where a wrong implementation might still pass naive tests
+- Critical functionality where test quality matters most
+
+VALIDATION TECHNIQUE:
+1. After writing test (RED phase)
+2. Write intentionally buggy implementation
+3. Run test - it MUST fail
+4. If test passes buggy code → test is inadequate, fix test
+5. Once test fails buggy code → write correct implementation
+
+EXAMPLE:
+```python
+# Step 1: Write test (RED)
+def test_leap_year_validation():
+    assert is_leap_year(2024) == True
+    assert is_leap_year(2023) == False
+
+# Step 2: VALIDATE test (for complex logic)
+def is_leap_year(year):
+    return True  # Intentionally wrong!
+
+# Run test → should FAIL
+# If test passes, your test is inadequate
+
+# Step 3: Write correct implementation (GREEN)
+def is_leap_year(year):
+    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+```
+
+WHEN TO VALIDATE:
+- Complex algorithms → YES (validate test quality)
+- Business logic → YES (validate test quality)
+- Error handling → YES (validate test quality)
+- Simple assignment → NO (standard TDD sufficient)
+- Trivial string ops → NO (standard TDD sufficient)
+
+IMPORTANT:
+- You MUST write tests for ALL code (this is TDD)
+- You SELECTIVELY validate test quality (this is adaptive)
+- Document validation decisions in commit messages
 
 CONSTRAINTS:
 - You may not use the web for this project
@@ -708,7 +781,7 @@ CONSTRAINTS:
 
 DIRECTORY STRUCTURE:
 Create your implementation in:
-experiments/[EXPERIMENT_NUMBER]/4-adaptive-tdd-v41/
+experiments/[EXPERIMENT_NUMBER]/4-adaptive-tdd/
 
 BRANCH ISOLATION:
 git checkout -b exp-[EXPERIMENT_NUMBER]-adaptive-tdd
