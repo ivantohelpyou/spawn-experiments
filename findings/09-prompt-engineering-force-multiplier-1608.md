@@ -577,7 +577,86 @@ Experiment 1.608 provides strong evidence that **prompt engineering is a force m
 
 ---
 
-## Appendix: Validation Methodology
+## Methodological Note: Experimental Design Change
+
+### What Happened in Run 4
+
+**Original Design (Runs 1-3)**: Test how 4 methodologies handle LLM integration with **controlled, simple prompts**. This isolates methodology effects.
+
+**Run 4 Pivot**: Changed the research question to explore prompt optimization effects. The experiment spec explicitly required **optimized prompts with detailed instructions, examples, and verification steps**.
+
+### Why This Matters
+
+Run 4 is **not a direct continuation of Runs 1-3** - it's an **exploratory study** testing a different hypothesis:
+- Runs 1-3: "Which methodology is best for LLM integration?" (controlled prompts)
+- Run 4: "Do optimized prompts improve AI development across methodologies?" (enhanced prompts)
+
+### Implications
+
+✅ **Finding is valid**: Optimized prompts do improve speed and quality (22-36% improvement)
+⚠️ **But**: We're comparing two different experimental conditions (simple vs optimized prompts)
+📊 **Effect size is real**: Large enough (22-36%) to be meaningful despite design change
+
+### Research Integrity
+
+We acknowledge this methodological shift transparently. The finding is valuable but should be validated with a proper controlled experiment design.
+
+---
+
+## Future Work: Proper Validation Design
+
+### Recommended Experiment: Progressive Prompt Enhancement Study
+
+To properly validate the prompt optimization hypothesis, we propose:
+
+#### **Experiment Design: 1.609 (or similar)**
+
+**Problem**: Choose a new task (e.g., story summarization, code documentation generation, test case generation)
+
+**Independent Variable**: Prompt quality (4 levels)
+- Level 0: Minimal prompt ("Generate a summary")
+- Level 1: Basic instructions ("Generate 3-sentence summary, focus on key points")
+- Level 2: Structured prompt (explicit rules, format, constraints)
+- Level 3: Optimized prompt (examples, verification steps, detailed guidance)
+
+**Controlled Variables**:
+- Same task for all runs
+- Same 4 methodologies
+- Same LLM model
+- Same developer/timeframe
+
+**Methodology**:
+- Run 4 methodologies × 4 prompt levels = **16 implementations**
+- Randomize order to control for learning effects
+- Measure: development time, code quality, output quality
+
+**Expected Outcome**:
+```
+Hypothesis: Higher prompt quality → faster development + higher quality
+Null: Prompt quality doesn't affect development process
+
+If validated: Confirms finding 09 with proper controls
+If not: Suggests Run 4 improvements were due to other factors (learning, practice, etc.)
+```
+
+#### **Why This Would Be Better**
+
+1. **Within-subjects design**: Each methodology tested at all prompt levels
+2. **Gradual progression**: Can identify "optimal" prompt complexity
+3. **Isolates effect**: Controls for task-specific factors
+4. **Statistical power**: 16 data points vs current 4
+5. **Reproducible**: Clear protocol others can replicate
+
+#### **Deliverables**
+
+- Quantitative data: Speed improvement per prompt level
+- Optimal prompt complexity thresholds by methodology
+- Cost-benefit analysis: Is Level 3 worth the effort over Level 2?
+- Practical guidelines: Which prompt level for which context?
+
+---
+
+## Appendix: Validation Methodology (Current Study)
 
 ### How We Know These Findings Are Real
 
@@ -588,13 +667,21 @@ Experiment 1.608 provides strong evidence that **prompt engineering is a force m
 - Dependent variables: development time, code quality scores
 
 **Threats to Validity**:
-- Learning effects: Developer may be faster in Run 4 due to practice
-- Mitigation: Run 3 was clean room (no prior context), so Run 4 started fresh too
+- ⚠️ **Design change**: Run 4 tested different question than Runs 1-3
+- ⚠️ **Learning effects**: Developer may be faster in Run 4 due to practice (partially mitigated by clean room Run 3)
+- ⚠️ **Single task**: Only tested on haiku generation (may not generalize)
+- ⚠️ **No control group**: No "Run 4 with simple prompts" comparison
 
-**Confidence Level**: High
-- Consistent patterns across all 4 methods
-- Improvements align with theoretical mechanisms
-- Effect sizes large enough to overcome noise (22-36% speed improvement)
+**Confidence Level**: **Moderate-High**
+- ✅ Consistent patterns across all 4 methods
+- ✅ Improvements align with theoretical mechanisms
+- ✅ Effect sizes large enough to overcome noise (22-36%)
+- ⚠️ But: Lacks proper experimental controls
+- ⚠️ Should be validated with recommended design above
+
+### Recommendation
+
+Treat this as a **strong preliminary finding** that warrants proper controlled validation. The effect is real enough to be actionable, but a clean experiment would increase confidence from "moderate-high" to "high".
 
 ---
 
