@@ -1,5 +1,6 @@
 """Story-to-Limerick Converter using Test-Driven Development."""
 import re
+import subprocess
 
 
 class LimerickConverter:
@@ -78,4 +79,52 @@ class LimerickConverter:
             'valid': len(issues) == 0,
             'line_count': line_count,
             'issues': issues
+        }
+
+    def generate_limerick(self, story):
+        """
+        Generate a limerick from a story using Ollama LLM.
+
+        Args:
+            story: String containing the story to convert
+
+        Returns:
+            Dict with:
+                - limerick: string of complete limerick
+                - lines: list of 5 lines
+        """
+        prompt = f"""Convert this story into a limerick (5-line poem with AABBA rhyme scheme).
+
+LIMERICK RULES:
+1. Exactly 5 lines
+2. Rhyme scheme: AABBA (lines 1,2,5 rhyme; lines 3,4 rhyme)
+3. Syllable counts: Lines 1,2,5 (8-9 syllables), Lines 3,4 (5-6 syllables)
+4. Meter: Anapestic (da-da-DUM rhythm)
+5. Capture the essence of the story
+6. Typically humorous or clever tone
+
+STORY:
+{story}
+
+Return ONLY the 5 lines of the limerick, one per line, nothing else."""
+
+        # Call Ollama using subprocess
+        result = subprocess.run(
+            ['ollama', 'run', 'llama3.2'],
+            input=prompt,
+            capture_output=True,
+            text=True,
+            timeout=60
+        )
+
+        # Parse output
+        limerick_text = result.stdout.strip()
+        lines = [line.strip() for line in limerick_text.split('\n') if line.strip()]
+
+        # Take first 5 lines
+        final_lines = lines[:5]
+
+        return {
+            'limerick': '\n'.join(final_lines),
+            'lines': final_lines
         }

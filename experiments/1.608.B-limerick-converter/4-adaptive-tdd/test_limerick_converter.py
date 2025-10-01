@@ -168,7 +168,7 @@ class TestLimerickStructureValidation:
         """Valid limerick should pass all checks."""
         lines = [
             "A programmer stayed up at night",  # 9 syllables, A
-            "Debugging code was their fight",    # 8 syllables, A
+            "With coffee keeping spirits bright",   # 8 syllables, A
             "Found one missing mark",            # 5 syllables, B
             "A semicolon stark",                 # 6 syllables, B
             "Then slept with relief and delight" # 9 syllables, A
@@ -182,7 +182,7 @@ class TestLimerickStructureValidation:
         """Lines 1, 2, 5 should have 8-9 syllables."""
         lines = [
             "A cat",  # Too few syllables (2)
-            "Debugging code was their fight",
+            "With coffee keeping spirits bright",
             "Found one missing mark",
             "A semicolon stark",
             "Then slept with relief and delight"
@@ -195,7 +195,7 @@ class TestLimerickStructureValidation:
         """Lines 3, 4 should have 5-6 syllables."""
         lines = [
             "A programmer stayed up at night",
-            "Debugging code was their fight",
+            "With coffee keeping spirits bright",
             "Found",  # Too few syllables (1)
             "A semicolon stark",
             "Then slept with relief and delight"
@@ -208,7 +208,7 @@ class TestLimerickStructureValidation:
         """AABBA rhyme scheme must be validated."""
         lines = [
             "A programmer stayed up at night",
-            "Debugging code was their fight",
+            "With coffee keeping spirits bright",
             "Found one missing mark",
             "A semicolon stark",
             "Then slept with relief and delight"
@@ -219,7 +219,7 @@ class TestLimerickStructureValidation:
         # Break the rhyme scheme
         lines_bad = [
             "A programmer stayed up at night",
-            "Debugging code was their day",  # Doesn't rhyme with night
+            "Debugging code during the day",  # Doesn't rhyme with night
             "Found one missing mark",
             "A semicolon stark",
             "Then slept with relief and delight"
@@ -314,7 +314,7 @@ Hope you like it!"""
         converter = LimerickConverter()
         lines = [
             "A programmer stayed up at night",
-            "Debugging code was their fight",
+            "With coffee keeping spirits bright",
             "Found one missing mark",
             "A semicolon stark",
             "Then slept with relief and delight"
