@@ -1,0 +1,10 @@
+# Story-to-Limerick Converter - Requirements
+# Method 1: Immediate Implementation
+
+# No external Python packages required
+# Uses only Python standard library
+
+# System Requirements:
+# - Python 3.7+
+# - Ollama (https://ollama.ai) - installed and running
+# - llama3.2 model pulled: `ollama pull llama3.2`
