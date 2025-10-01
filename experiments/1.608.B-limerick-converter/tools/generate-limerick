@@ -1,0 +1,222 @@
+#!/usr/bin/env python3
+"""
+CLI Tool: generate-limerick
+
+Generate limericks from stories using ranked methodology implementations.
+
+Usage:
+  generate-limerick "Your story here" [--run 1] [--top 3] [--all] [--verbose] [--dry-run]
+
+Examples:
+  generate-limerick "A clever fox outsmarted hunters" --run 1
+  generate-limerick "Once upon a time..." --run 1 --all --verbose
+  generate-limerick "Story here" --run 1 --dry-run
+"""
+
+import argparse
+import json
+import sys
+import time
+from pathlib import Path
+
+
+# Rankings based on code quality (from experiment results)
+METHOD_RANKINGS = {
+    1: [
+        ("Method 2: Specification-Driven", "2-specification-driven"),
+        ("Method 4: Adaptive/Validated TDD", "4-adaptive-tdd"),
+        ("Method 3: Pure TDD", "3-test-first-development"),
+        ("Method 1: Immediate Implementation", "1-immediate-implementation"),
+    ]
+}
+
+MEDALS = ["🥇", "🥈", "🥉", "4️⃣"]
+
+
+def load_converter(method_dir: str):
+    """Load a limerick converter from a method directory."""
+    experiment_dir = Path(__file__).parent.parent
+    method_path = experiment_dir / method_dir
+
+    if not method_path.exists():
+        raise FileNotFoundError(f"Method directory not found: {method_path}")
+
+    # Add method directory to path
+    sys.path.insert(0, str(method_path))
+
+    # Import based on method
+    if "1-immediate" in method_dir or "2-specification" in method_dir or "4-adaptive" in method_dir:
+        from limerick_converter import LimerickConverter
+        converter = LimerickConverter()
+        return lambda story: converter.convert(story, validate=True)
+    elif "3-test-first" in method_dir:
+        from limerick_converter import generate_limerick
+        return generate_limerick
+    else:
+        raise ValueError(f"Unknown method directory: {method_dir}")
+
+
+def generate_limerick_with_method(story: str, method_name: str, method_dir: str, verbose: bool = False):
+    """Generate a limerick using a specific method."""
+    if verbose:
+        print(f"\n{'='*60}")
+        print(f"Method: {method_name}")
+        print(f"{'='*60}")
+
+    try:
+        start_time = time.time()
+
+        # Load and call converter
+        converter_func = load_converter(method_dir)
+        result = converter_func(story)
+
+        generation_time = time.time() - start_time
+
+        # Extract limerick text
+        if isinstance(result, dict):
+            limerick = result.get("limerick", "")
+            lines = result.get("lines", [])
+            validation = result.get("validation")
+        else:
+            limerick = str(result)
+            lines = limerick.split('\n')
+            validation = None
+
+        if verbose:
+            print(f"Generation Time: {generation_time:.2f}s")
+            print()
+            print("Limerick:")
+            print("-" * 60)
+
+        print(limerick)
+
+        if verbose and validation:
+            print("-" * 60)
+            print(f"Valid: {validation.get('valid', 'N/A')}")
+            if validation.get('syllable_counts'):
+                print(f"Syllable Counts: {validation['syllable_counts']}")
+            if validation.get('issues'):
+                print("Issues:")
+                for issue in validation['issues']:
+                    print(f"  - {issue}")
+
+        return {
+            "method": method_name,
+            "limerick": limerick,
+            "lines": lines,
+            "generation_time": generation_time,
+            "validation": validation
+        }
+
+    except Exception as e:
+        if verbose:
+            print(f"Error: {e}")
+        return None
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Generate limericks from stories using ranked methodology implementations.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  generate-limerick "A clever fox outsmarted hunters" --run 1
+  generate-limerick "Once upon a time..." --run 1 --all --verbose
+  generate-limerick "Story here" --run 1 --top 2
+        """
+    )
+
+    parser.add_argument("story", help="The story to convert into a limerick")
+    parser.add_argument("--run", type=int, default=1, help="Experiment run number (default: 1)")
+    parser.add_argument("--top", type=int, default=3, help="Number of top methods to run (default: 3)")
+    parser.add_argument("--all", action="store_true", help="Run all 4 methods")
+    parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
+    parser.add_argument("--dry-run", action="store_true", help="Show what would be executed without running")
+
+    args = parser.parse_args()
+
+    # Get rankings for the specified run
+    if args.run not in METHOD_RANKINGS:
+        print(f"Error: Run {args.run} not found. Available runs: {list(METHOD_RANKINGS.keys())}")
+        sys.exit(1)
+
+    rankings = METHOD_RANKINGS[args.run]
+
+    # Determine which methods to run
+    if args.all:
+        methods_to_run = rankings
+    else:
+        methods_to_run = rankings[:args.top]
+
+    print("=" * 70)
+    print("LIMERICK GENERATOR - Experiment 1.608.B")
+    print("=" * 70)
+    print()
+
+    if args.dry_run:
+        print("DRY RUN - Would execute:")
+        print(f"  Story: {args.story[:50]}...")
+        print(f"  Run: {args.run}")
+        print(f"  Methods: {len(methods_to_run)}")
+        print()
+        print("Methods to run:")
+        for i, (method_name, method_dir) in enumerate(methods_to_run):
+            medal = MEDALS[i] if i < len(MEDALS) else f"{i+1}."
+            print(f"  {medal} {method_name}")
+        print()
+        print("Use without --dry-run to execute.")
+        return
+
+    print("Story:")
+    print("-" * 70)
+    print(args.story)
+    print("-" * 70)
+    print()
+
+    print(f"Running top {len(methods_to_run)} method(s)...")
+    print()
+
+    results = []
+
+    for i, (method_name, method_dir) in enumerate(methods_to_run):
+        medal = MEDALS[i] if i < len(MEDALS) else f"{i+1}."
+        print(f"{medal} {method_name}")
+
+        if not args.verbose:
+            print("   Generating...", end=" ", flush=True)
+
+        result = generate_limerick_with_method(args.story, method_name, method_dir, args.verbose)
+
+        if result:
+            results.append(result)
+            if not args.verbose:
+                print(f"✓ ({result['generation_time']:.2f}s)")
+        else:
+            if not args.verbose:
+                print("✗ Failed")
+
+        print()
+
+    # Summary
+    if len(results) > 1:
+        print("=" * 70)
+        print("SUMMARY")
+        print("=" * 70)
+        print()
+
+        for i, result in enumerate(results):
+            medal = MEDALS[i] if i < len(MEDALS) else f"{i+1}."
+            print(f"{medal} {result['method']} ({result['generation_time']:.2f}s)")
+            if result['validation']:
+                val = result['validation']
+                status = "✓" if val.get('valid') else "⚠"
+                print(f"    {status} Valid: {val.get('valid', 'N/A')}")
+            print()
+
+    print("=" * 70)
+    print("COMPLETE")
+    print("=" * 70)
+
+
+if __name__ == "__main__":
+    main()
