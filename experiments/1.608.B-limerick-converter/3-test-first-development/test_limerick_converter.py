@@ -37,10 +37,6 @@ class TestLimerickConverter(unittest.TestCase):
         self.assertFalse(result['valid'])
         self.assertIn('Must have exactly 5 lines', str(result['issues']))
 
-
-if __name__ == '__main__':
-    unittest.main()
-
     def test_count_syllables_simple_words(self):
         """Test syllable counting for simple words."""
         test_cases = [
@@ -62,3 +58,7 @@ if __name__ == '__main__':
         # Should be 8-9 syllables
         self.assertGreaterEqual(count, 8)
         self.assertLessEqual(count, 9)
+
+
+if __name__ == '__main__':
+    unittest.main()
