@@ -23,7 +23,7 @@ Successfully built a complete story-to-iambic-pentameter converter using 4 diffe
 - ✅ **Method 4: Adaptive TDD** - 8 min, 248 LOC, Grade: B+ (83/100)
 
 ### Tooling
-- ✅ **olympic_judging_demo.py** - 3 LLM judges, Olympic scoring system
+- ✅ **olympic_judging_demo.py** - 3 diverse LLM judges (llama3.2, phi3:mini, gemma2:2b), Olympic scoring system
 - ✅ **tools/generate-iambic** - CLI tool for ranked conversions
 
 ### Documentation

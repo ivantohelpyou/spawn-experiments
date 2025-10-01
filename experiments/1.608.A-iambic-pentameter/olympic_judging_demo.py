@@ -2,6 +2,8 @@
 """
 Olympic Judging System for Iambic Pentameter Converter
 Uses 3 LLM judges to score outputs, drops high/low, averages remaining scores
+
+Judge models: llama3.2 (Meta), phi3:mini (Microsoft), gemma2:2b (Google)
 """
 
 import sys
@@ -14,7 +16,7 @@ from pathlib import Path
 class OlympicJudge:
     """Single LLM judge for scoring iambic pentameter quality"""
 
-    def __init__(self, judge_id, model="llama3.2"):
+    def __init__(self, judge_id, model):
         self.judge_id = judge_id
         self.model = model
 
@@ -41,7 +43,7 @@ Provide ONLY a score from 0-10 (one number). No explanation."""
                 ["ollama", "run", self.model, prompt],
                 capture_output=True,
                 text=True,
-                timeout=30
+                timeout=60  # Increased for slower models (phi3, gemma2)
             )
 
             # Extract number from output
@@ -62,8 +64,14 @@ Provide ONLY a score from 0-10 (one number). No explanation."""
 class OlympicJudgingSystem:
     """Olympic-style judging with 3 judges, drop high/low, average middle"""
 
-    def __init__(self, num_judges=3):
-        self.judges = [OlympicJudge(i+1) for i in range(num_judges)]
+    def __init__(self, judge_models=['llama3.2', 'phi3:mini', 'gemma2:2b']):
+        """
+        Initialize with diverse judge models to reduce bias.
+
+        Args:
+            judge_models: List of model names for judges (default: Meta, Microsoft, Google)
+        """
+        self.judges = [OlympicJudge(i+1, model) for i, model in enumerate(judge_models)]
 
     def judge(self, original_prose, iambic_output, method_name):
         """Get Olympic score for an output"""
@@ -73,7 +81,7 @@ class OlympicJudgingSystem:
         for judge in self.judges:
             score = judge.score(original_prose, iambic_output)
             scores.append(score)
-            print(f"  Judge {judge.judge_id}: {score:.1f}")
+            print(f"  Judge {judge.judge_id} ({judge.model}): {score:.1f}")
 
         # Drop high and low
         sorted_scores = sorted(scores)
@@ -158,7 +166,8 @@ def main():
     print("🏆 OLYMPIC JUDGING SYSTEM - Iambic Pentameter Converter")
     print("="*80)
     print(f"\nOriginal Prose: {test_prose}")
-    print(f"Judges: 3 LLM judges (drop high/low, average remaining)")
+    print(f"Judges: llama3.2 (Meta), phi3:mini (Microsoft), gemma2:2b (Google)")
+    print(f"Scoring: Drop high/low, average remaining")
     print(f"Methods to judge: {len(methods)}\n")
 
     # Run conversions and collect outputs

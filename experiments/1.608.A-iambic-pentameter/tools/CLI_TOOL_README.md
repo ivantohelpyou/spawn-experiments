@@ -31,6 +31,13 @@ After completing Experiment 1.608.A with 4 implementation methodologies, this CL
 - **Ollama must be running**: `ollama serve`
 - **Model must be pulled**: `ollama pull llama3.2`
 
+**For Olympic judging (optional):**
+```bash
+ollama pull llama3.2  # Meta (generator + judge)
+ollama pull phi3:mini # Microsoft (judge)
+ollama pull gemma2:2b # Google (judge)
+```
+
 ## How Rankings Are Determined
 
 Rankings are based on comprehensive code quality analysis from CODE_QUALITY_REPORT.md:
