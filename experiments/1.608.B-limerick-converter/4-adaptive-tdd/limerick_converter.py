@@ -22,26 +22,29 @@ def validate_story_input(story: str) -> str:
     Raises:
         ValueError: If story is invalid
     """
-    # BUGGY IMPLEMENTATION FOR VALIDATION - Test should catch this!
-    # Bug: Not checking for whitespace-only strings
-    if not story:
+    # Check for empty or whitespace-only strings
+    if not story or not story.strip():
         raise ValueError("Story cannot be empty")
 
-    # Bug: Wrong minimum length check (should be 10, using 5)
-    if len(story) < 5:
+    cleaned = story.strip()
+
+    # Check minimum length (after cleaning)
+    if len(cleaned) < 10:
         raise ValueError("Story too short (minimum 10 characters)")
 
-    # This part is intentionally correct to see if tests catch the bugs above
-    return story.strip()
+    return cleaned
 
 
 def count_syllables(text: str) -> int:
     """
-    BUGGY IMPLEMENTATION FOR ADAPTIVE VALIDATION.
-    This intentionally has bugs to test if our tests catch them.
+    Count syllables in text using improved algorithm.
+    Handles silent 'e' and consecutive vowels.
 
-    Bug 1: Doesn't handle silent 'e' correctly
-    Bug 2: Doesn't count consecutive vowels properly
+    Args:
+        text: Text to count syllables in
+
+    Returns:
+        Number of syllables
     """
     if not text:
         return 0
@@ -54,20 +57,41 @@ def count_syllables(text: str) -> int:
     total = 0
 
     for word in words:
-        # BUG: Simple vowel count - doesn't handle silent e or consecutive vowels
-        vowel_count = sum(1 for char in word if char in 'aeiou')
-        # At least 1 syllable per word
-        total += max(1, vowel_count)
+        if not word:
+            continue
+
+        # Count vowel groups (consecutive vowels = 1 syllable)
+        syllables = 0
+        previous_was_vowel = False
+
+        for char in word:
+            is_vowel = char in 'aeiou'
+            if is_vowel and not previous_was_vowel:
+                syllables += 1
+            previous_was_vowel = is_vowel
+
+        # Handle silent 'e' at end of word
+        if word.endswith('e') and syllables > 1:
+            syllables -= 1
+
+        # Every word has at least 1 syllable
+        syllables = max(1, syllables)
+
+        total += syllables
 
     return total
 
 
 def extract_rhyme_sounds(text: str) -> str:
     """
-    BUGGY IMPLEMENTATION FOR ADAPTIVE VALIDATION.
     Extract rhyme sound from text (last word's ending).
+    Takes the vowel sound and everything after it from the last syllable.
 
-    Bug: Doesn't extract enough of the rhyme sound
+    Args:
+        text: Text to extract rhyme from
+
+    Returns:
+        Rhyme sound (lowercase)
     """
     # Get last word
     words = re.sub(r'[^a-zA-Z\s]', '', text).split()
@@ -76,22 +100,32 @@ def extract_rhyme_sounds(text: str) -> str:
 
     last_word = words[-1].lower()
 
-    # BUG: Only taking last 2 characters instead of proper rhyme sound
-    return last_word[-2:] if len(last_word) >= 2 else last_word
+    # Find the last vowel and take from there to end
+    # This captures the rhyming portion
+    for i in range(len(last_word) - 1, -1, -1):
+        if last_word[i] in 'aeiou':
+            return last_word[i:]
+
+    # If no vowel found, return last 2-3 chars
+    return last_word[-3:] if len(last_word) >= 3 else last_word
 
 
 def check_rhyme_scheme(text1: str, text2: str) -> bool:
     """
-    BUGGY IMPLEMENTATION FOR ADAPTIVE VALIDATION.
-    Check if two texts rhyme.
+    Check if two texts rhyme (case-insensitive).
 
-    Bug: Case sensitivity not handled
+    Args:
+        text1: First text
+        text2: Second text
+
+    Returns:
+        True if they rhyme, False otherwise
     """
-    rhyme1 = extract_rhyme_sounds(text1)
-    rhyme2 = extract_rhyme_sounds(text2)
+    rhyme1 = extract_rhyme_sounds(text1).lower()
+    rhyme2 = extract_rhyme_sounds(text2).lower()
 
-    # BUG: Case-sensitive comparison
-    return rhyme1 == rhyme2
+    # Check if they match (case-insensitive)
+    return rhyme1 == rhyme2 and rhyme1 != ""
 
 
 def validate_limerick_structure(lines: List[str]) -> Dict[str, Any]:
