@@ -47,6 +47,26 @@
 - Not random: Same methodology consistently produces superior creative results
 - Breaking discovery: Code quality impacts LLM output quality even with identical model calls
 
+### 📊 **[LLM Integration Specification Advantage](11-llm-integration-specification-advantage.md)**
+**Status**: ✅ Validated (1.608 Haiku + 1.608.A Iambic)
+**Key Insight**: Specification-Driven methodology consistently achieves highest quality for LLM integration projects
+
+**Evidence Summary**:
+- Method 2 scores 88-96/100 across LLM integration experiments
+- 10-18 point advantage over faster methodologies
+- LLM projects benefit disproportionately from upfront design
+- Domain-specific advantage: Complex failure modes require comprehensive error handling
+
+### 🎯 **[Methodology Performance by Problem Type](12-methodology-performance-by-problem-type.md)**
+**Status**: ✅ Validated (Cross-experiment synthesis)
+**Key Insight**: No universal methodology winner - problem complexity profile determines optimal choice
+
+**Evidence Summary**:
+- Method 2 paradox: Best for LLM integration (92/100), worst for simple validation (32X bloat)
+- Method 4 optimal for input validation (1M+ validations/sec)
+- Context-dependent optimization patterns
+- Problem characteristics, not difficulty, drive methodology selection
+
 ## Synthesis: Unified Theory of AI-Assisted Development
 
 ### 🧠 **The Constraint Necessity Principle**
