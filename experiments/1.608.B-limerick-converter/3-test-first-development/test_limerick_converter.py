@@ -40,3 +40,25 @@ class TestLimerickConverter(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+    def test_count_syllables_simple_words(self):
+        """Test syllable counting for simple words."""
+        test_cases = [
+            ("cat", 1),
+            ("happy", 2),
+            ("beautiful", 3),
+            ("night", 1),
+        ]
+
+        for word, expected_count in test_cases:
+            with self.subTest(word=word):
+                count = self.converter.count_syllables(word)
+                self.assertEqual(count, expected_count)
+
+    def test_count_syllables_in_line(self):
+        """Test counting syllables in a full line."""
+        line = "A programmer stayed up at night,"
+        count = self.converter.count_syllables_in_line(line)
+        # Should be 8-9 syllables
+        self.assertGreaterEqual(count, 8)
+        self.assertLessEqual(count, 9)
