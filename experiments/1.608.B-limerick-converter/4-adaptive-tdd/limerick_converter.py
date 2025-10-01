@@ -72,10 +72,11 @@ def count_syllables(text: str) -> int:
                 syllables += 1
             previous_was_vowel = is_vowel
 
-        # Handle silent 'e' at end of word (but not for words like "the")
+        # Handle silent 'e' at end of word (but not for words ending in 'le' after consonant)
         if len(word) > 2 and word.endswith('e') and syllables > 1:
-            # Check if the 'e' is truly silent (preceded by consonant)
-            if word[-2] not in 'aeiou':
+            # Check if the 'e' is truly silent
+            # Don't subtract for consonant + 'le' patterns (table, little, etc.)
+            if word[-2] not in 'aeiou' and not (word.endswith('le') and len(word) > 2 and word[-3] not in 'aeiou'):
                 syllables -= 1
 
         # Every word has at least 1 syllable

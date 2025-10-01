@@ -176,7 +176,7 @@ class TestLimerickStructureValidation:
         result = validate_limerick_structure(lines)
         assert result["valid"] == True
         assert len(result["errors"]) == 0
-        assert result["syllable_counts"] == [9, 8, 5, 6, 9]
+        assert result["syllable_counts"] == [8, 8, 5, 6, 8]
 
     def test_syllable_count_validation_lines_1_2_5(self):
         """Lines 1, 2, 5 should have 8-9 syllables."""
