@@ -44,16 +44,10 @@ def load_converter(method_dir: str):
     # Add method directory to path
     sys.path.insert(0, str(method_path))
 
-    # Import based on method
-    if "1-immediate" in method_dir or "2-specification" in method_dir or "4-adaptive" in method_dir:
-        from limerick_converter import LimerickConverter
-        converter = LimerickConverter()
-        return lambda story: converter.convert(story, validate=True)
-    elif "3-test-first" in method_dir:
-        from limerick_converter import generate_limerick
-        return generate_limerick
-    else:
-        raise ValueError(f"Unknown method directory: {method_dir}")
+    # All methods use LimerickConverter class
+    from limerick_converter import LimerickConverter
+    converter = LimerickConverter()
+    return lambda story: converter.convert(story)
 
 
 def generate_limerick_with_method(story: str, method_name: str, method_dir: str, verbose: bool = False):
@@ -74,9 +68,31 @@ def generate_limerick_with_method(story: str, method_name: str, method_dir: str,
 
         # Extract limerick text
         if isinstance(result, dict):
-            limerick = result.get("limerick", "")
-            lines = result.get("lines", [])
+            # Handle nested limerick structure (Method 2 format)
+            if "limerick" in result and isinstance(result["limerick"], dict):
+                limerick_obj = result["limerick"]
+                limerick = limerick_obj.get("text", "")
+                lines = limerick_obj.get("lines", limerick.split('\n') if limerick else [])
+            # Handle flat text field
+            elif "text" in result:
+                limerick = result["text"]
+                lines = result.get("lines", limerick.split('\n'))
+            # Handle flat lines field
+            elif "lines" in result:
+                lines = result["lines"]
+                limerick = "\n".join(lines)
+            else:
+                # Fallback: convert whole dict to string
+                limerick = str(result)
+                lines = limerick.split('\n')
+
+            # Check if validation is embedded in result
             validation = result.get("validation")
+            if not validation and "syllable_counts" in result:
+                validation = {
+                    "syllable_counts": result.get("syllable_counts"),
+                    "valid": result.get("valid", "N/A")
+                }
         else:
             limerick = str(result)
             lines = limerick.split('\n')
@@ -88,11 +104,17 @@ def generate_limerick_with_method(story: str, method_name: str, method_dir: str,
             print("Limerick:")
             print("-" * 60)
 
-        print(limerick)
+        if not verbose:
+            # In non-verbose mode, show limerick indented
+            for line in limerick.split('\n'):
+                print(f"   {line}")
+        else:
+            print(limerick)
 
         if verbose and validation:
             print("-" * 60)
-            print(f"Valid: {validation.get('valid', 'N/A')}")
+            is_valid = validation.get('is_valid', validation.get('valid', 'N/A'))
+            print(f"Valid: {is_valid}")
             if validation.get('syllable_counts'):
                 print(f"Syllable Counts: {validation['syllable_counts']}")
             if validation.get('issues'):
@@ -183,17 +205,19 @@ Examples:
         print(f"{medal} {method_name}")
 
         if not args.verbose:
-            print("   Generating...", end=" ", flush=True)
+            print("   Generating...")
+            print()
 
         result = generate_limerick_with_method(args.story, method_name, method_dir, args.verbose)
 
         if result:
             results.append(result)
             if not args.verbose:
-                print(f"✓ ({result['generation_time']:.2f}s)")
+                print()
+                print(f"   ✓ ({result['generation_time']:.2f}s)")
         else:
             if not args.verbose:
-                print("✗ Failed")
+                print("   ✗ Failed")
 
         print()
 
@@ -209,8 +233,11 @@ Examples:
             print(f"{medal} {result['method']} ({result['generation_time']:.2f}s)")
             if result['validation']:
                 val = result['validation']
-                status = "✓" if val.get('valid') else "⚠"
-                print(f"    {status} Valid: {val.get('valid', 'N/A')}")
+                is_valid = val.get('is_valid', val.get('valid', 'N/A'))
+                status = "✓" if is_valid is True else "⚠"
+                print(f"    {status} Valid: {is_valid}")
+                if val.get('syllable_counts'):
+                    print(f"    Syllables: {val['syllable_counts']}")
             print()
 
     print("=" * 70)

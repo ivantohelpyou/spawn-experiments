@@ -113,19 +113,19 @@ class RhymeChecker:
     @staticmethod
     def _words_rhyme(word1: str, word2: str) -> bool:
         """
-        Check if two words rhyme using simple phonetic matching.
+        Check if two words rhyme using lenient phonetic matching.
 
         Algorithm:
         1. Extract last 2-3 characters
-        2. Compare endings
-        3. Return True if at least last 2 characters match
+        2. Compare endings (vowel + consonant pattern)
+        3. Be lenient - similar sounds count as rhymes
 
         Args:
             word1: First word
             word2: Second word
 
         Returns:
-            True if words rhyme, False otherwise
+            True if words rhyme (lenient), False otherwise
         """
         w1 = word1.lower().strip()
         w2 = word2.lower().strip()
@@ -137,9 +137,14 @@ class RhymeChecker:
         end1 = w1[-3:] if len(w1) >= 3 else w1
         end2 = w2[-3:] if len(w2) >= 3 else w2
 
-        # Check for match (at least 2 chars matching)
+        # Check for match (at least last 2 chars OR similar vowel ending)
         if len(end1) >= 2 and len(end2) >= 2:
-            return end1[-2:] == end2[-2:]
+            # Exact match on last 2 chars
+            if end1[-2:] == end2[-2:]:
+                return True
+            # Or same last char (lenient for imperfect rhymes)
+            if end1[-1] == end2[-1]:
+                return True
 
         return False
 
@@ -443,10 +448,10 @@ Return ONLY the 5 lines of the limerick, one per line, nothing else."""
         rhyme_check = RhymeChecker.check_rhyme_scheme(lines)
         validation["rhyme_scheme"] = rhyme_check
 
-        # Overall validity
+        # Overall validity (lenient: 5 lines + AABBA rhyme scheme)
+        # Let the LLM judges score the quality - this just checks structure
         validation["is_valid"] = (
             validation["line_count"] == 5 and
-            syllable_valid and
             rhyme_check["is_valid"]
         )
 

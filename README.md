@@ -10,7 +10,7 @@ Which path will you choose?
 
 ---
 
-## 🎯 Latest: Poetry Generator Series (1.608 + 1.608.A)
+## 🎯 Latest: Poetry Generator Series (1.608.X)
 
 **NEW:** LLM-powered poetry generators demonstrating methodology impact on creative AI features
 
@@ -23,22 +23,29 @@ tools/generate-haiku "Your story here" --run 4
 ### Story-to-Iambic-Pentameter Converter (1.608.A)
 ```bash
 cd experiments/1.608.A-iambic-pentameter
-tools/generate-iambic "Your story here" --run 4
+tools/generate-iambic "Your story here" --run 1
 ```
-**[📹 Watch the demo](https://youtu.be/DJv20yyvSqY)**
+
+### Story-to-Limerick Converter (1.608.B)
+```bash
+cd experiments/1.608.B-limerick-converter
+tools/generate-limerick "Your story here" --run 1 --all
+```
+
+**[📹 Watch the demo](https://youtu.be/DJv20yyvSqY)** (Haiku & Iambic)
 
 **What we built:**
-- Story → Poetry converters (Haiku + Iambic Pentameter) using LLMs (llama3.2)
-- Olympic judging system (3 LLM judges evaluate quality)
+- Story → Poetry converters (Haiku, Iambic Pentameter, Limericks) using LLMs (llama3.2)
+- Olympic judging system (3 diverse LLM judges: llama3.2, phi3:mini, gemma2:2b)
 - Working CLI tools with ranked output
-- 8 complete implementations (4 methodologies × 2 poetry types)
+- 12 complete implementations (4 methodologies × 3 poetry types)
 
 **Key discoveries from this series:**
 1. **[LLM Integration: Specification-Driven Advantage](findings/11-llm-integration-specification-advantage.md)** - Method 2 consistently wins for LLM projects (92/100 avg), outperforming faster methods by 10-18 points
 2. **[Prompt Engineering as Force Multiplier](findings/09-prompt-engineering-force-multiplier-1608.md)** - Optimized prompts improved speed by 22-36% AND quality by 1-7 points across ALL methodologies
 3. **[Monte Carlo Methodology Sampling](findings/10-monte-carlo-methodology-sampling-1608.md)** - Generate N samples, pick best → 20% quality improvement (applicable production technique)
 
-**[→ Read 1.608 Summary](experiments/1.608-story-to-haiku/EXPERIMENT_1608_COMPLETE_SUMMARY.md)** | **[→ Read 1.608.A Summary](experiments/1.608.A-iambic-pentameter/EXPERIMENT_1608A_COMPLETE_SUMMARY.md)**
+**[→ Read 1.608 Summary](experiments/1.608-story-to-haiku/EXPERIMENT_1608_COMPLETE_SUMMARY.md)** | **[→ Read 1.608.A Summary](experiments/1.608.A-iambic-pentameter/EXPERIMENT_1608A_COMPLETE_SUMMARY.md)** | **[→ Read 1.608.B Summary](experiments/1.608.B-limerick-converter/EXPERIMENT_1608B_COMPLETE_SUMMARY.md)**
 
 ---
 
