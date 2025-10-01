@@ -42,6 +42,38 @@
 
 ---
 
+### ⭐ **[1.608.A - Story-to-Iambic-Pentameter Converter](../experiments/1.608.A-iambic-pentameter/EXPERIMENT_1608A_COMPLETE_SUMMARY.md)** (September 30, 2025)
+**Tier 1 LLM Integration** | Python + Ollama | Shakespearean Verse | Olympic Judging System
+
+**🎯 FINDINGS:**
+- **Method 2 Winner**: 88/100 (Grade A) - Production-ready architecture
+- **16-point quality spread**: 72-88 across methodologies shows significant impact
+- **Diverse Judge Innovation**: 3 different LLM models (llama3.2, phi3:mini, gemma2:2b) for unbiased scoring
+- **Time vs Quality**: 60% more dev time → 22% quality improvement (Method 3: 5min/72pts vs Method 2: 8min/88pts)
+
+**🔧 Innovation**: Working CLI tool (`tools/generate-iambic`) with ranked output and accuracy scoring
+
+**Winner**: Method 2 (Specification-Driven) - Exceptional error handling, comprehensive tests, best maintainability
+
+---
+
+### ⭐ **[1.608.B - Story-to-Limerick Converter](../experiments/1.608.B-limerick-converter/EXPERIMENT_1608B_COMPLETE_SUMMARY.md)** (September 30, 2025)
+**Tier 1 LLM Integration** | Python + Ollama | AABBA Rhyme Scheme | Olympic Judging System
+
+**🎯 FINDINGS:**
+- **Method 2 Winner**: 92/100 (Grade A+) - Highest quality in poetry series
+- **Poetry Competition Breakthrough**: Method 2 won 12/12 limericks (100% win rate)
+- **18-point quality spread**: 74-92 shows methodology's dramatic impact on creative output
+- **Code Quality → Output Quality**: Better error handling and validation produces better poetry
+
+**🔧 Innovation**: Working CLI tool (`tools/generate-limerick`) with AABBA rhyme validation
+
+**Winner**: Method 2 (Specification-Driven) - Sophisticated prompt engineering, rhyme validation, comprehensive error handling
+
+**Related Finding**: [Finding #13: Wrapper Quality Affects LLM Output](../findings/13-wrapper-quality-affects-llm-output.md)
+
+---
+
 ### ✅ **[1.506 - IPv4/IPv6 Address Validator](../experiments/1.506-ipv4-ipv6-address-validator/EXPERIMENT_REPORT.md)** (September 25, 2025)
 **Tier 1A Extension** | **Framework Validation** | Python | Network Address Validation | 4-method comparison
 
@@ -235,12 +267,16 @@
 
 ### Summary
 
-**Total Completed Experiments**: 20+
+**Total Completed Experiments**: 23+
 - **String Processing (1.1XX)**: 4 experiments
 - **Mathematical Operations (1.2XX)**: 4 experiments
 - **Data Structures (1.3XX)**: 1 experiment
 - **Security/Cryptography (1.4XX)**: 1 experiment
 - **Input Validation (1.5XX)**: 7+ experiments ✅ **DOMAIN + SEVERED BRANCH**
+- **LLM Integration (1.6XX)**: 3 experiments ✅ **POETRY GENERATOR SERIES**
+  - 1.608: Haiku (4 runs, Findings #09 & #10)
+  - 1.608.A: Iambic Pentameter (88/100 quality)
+  - 1.608.B: Limerick (92/100 quality, Finding #13)
 - **CLI Tools (2.5XX)**: 4+ experiments ✅ **COMPONENT DISCOVERY BREAKTHROUGH**
 
 ---
@@ -351,4 +387,4 @@ Experience methodology differences live! These demo scripts can be run from the 
 
 ---
 
-*Last Updated: September 21, 2025*
+*Last Updated: October 1, 2025*
