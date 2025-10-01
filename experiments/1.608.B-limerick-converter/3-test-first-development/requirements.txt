@@ -1,0 +1,7 @@
+# No external Python packages required
+# Only standard library is used
+# 
+# System requirements:
+# - Python 3.8+
+# - Ollama installed and running
+# - llama3.2 model pulled (ollama pull llama3.2)
