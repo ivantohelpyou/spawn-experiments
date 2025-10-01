@@ -59,6 +59,18 @@ class TestLimerickConverter(unittest.TestCase):
         self.assertGreaterEqual(count, 8)
         self.assertLessEqual(count, 9)
 
+    def test_generate_limerick_from_story(self):
+        """Test that we can generate a limerick from a story using LLM."""
+        story = "A young programmer stayed up all night debugging code, finally finding a missing semicolon at 3am."
+
+        result = self.converter.generate_limerick(story)
+
+        # Check result structure
+        self.assertIn('limerick', result)
+        self.assertIn('lines', result)
+        self.assertIsInstance(result['lines'], list)
+        self.assertEqual(len(result['lines']), 5)
+
 
 if __name__ == '__main__':
     unittest.main()

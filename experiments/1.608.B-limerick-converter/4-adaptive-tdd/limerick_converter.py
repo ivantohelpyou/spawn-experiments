@@ -130,14 +130,17 @@ def check_rhyme_scheme(text1: str, text2: str) -> bool:
 
 def validate_limerick_structure(lines: List[str]) -> Dict[str, Any]:
     """
-    BUGGY IMPLEMENTATION FOR ADAPTIVE VALIDATION.
     Validate limerick structure (5 lines, AABBA rhyme, syllable counts).
 
-    Bugs to be caught by tests
+    Args:
+        lines: List of limerick lines
+
+    Returns:
+        Dictionary with validation results
     """
     errors = []
 
-    # Check line count - THIS PART IS CORRECT
+    # Check line count
     if len(lines) != 5:
         errors.append(f"Limerick must have exactly 5 lines (got {len(lines)})")
         return {
@@ -149,21 +152,29 @@ def validate_limerick_structure(lines: List[str]) -> Dict[str, Any]:
     # Count syllables for each line
     syllable_counts = [count_syllables(line) for line in lines]
 
-    # BUG: Wrong syllable requirements (should be 8-9 for lines 1,2,5 and 5-6 for lines 3,4)
-    # Using 7-10 and 4-7 instead
-    if not (7 <= syllable_counts[0] <= 10):
+    # Check syllable requirements
+    # Lines 1, 2, 5 should have 8-9 syllables
+    # Lines 3, 4 should have 5-6 syllables
+    if not (8 <= syllable_counts[0] <= 9):
         errors.append(f"Line 1 should have 8-9 syllables (got {syllable_counts[0]})")
-    if not (7 <= syllable_counts[1] <= 10):
+    if not (8 <= syllable_counts[1] <= 9):
         errors.append(f"Line 2 should have 8-9 syllables (got {syllable_counts[1]})")
-    if not (4 <= syllable_counts[2] <= 7):
+    if not (5 <= syllable_counts[2] <= 6):
         errors.append(f"Line 3 should have 5-6 syllables (got {syllable_counts[2]})")
-    if not (4 <= syllable_counts[3] <= 7):
+    if not (5 <= syllable_counts[3] <= 6):
         errors.append(f"Line 4 should have 5-6 syllables (got {syllable_counts[3]})")
-    if not (7 <= syllable_counts[4] <= 10):
+    if not (8 <= syllable_counts[4] <= 9):
         errors.append(f"Line 5 should have 8-9 syllables (got {syllable_counts[4]})")
 
-    # Check AABBA rhyme scheme - BUG: Not checking rhymes at all!
-    # Just returning empty for now
+    # Check AABBA rhyme scheme
+    # Lines 1, 2, 5 should rhyme (A)
+    # Lines 3, 4 should rhyme (B)
+    if not check_rhyme_scheme(lines[0], lines[1]):
+        errors.append("Lines 1 and 2 must rhyme (A rhyme)")
+    if not check_rhyme_scheme(lines[0], lines[4]):
+        errors.append("Lines 1 and 5 must rhyme (A rhyme)")
+    if not check_rhyme_scheme(lines[2], lines[3]):
+        errors.append("Lines 3 and 4 must rhyme (B rhyme)")
 
     return {
         "valid": len(errors) == 0,
