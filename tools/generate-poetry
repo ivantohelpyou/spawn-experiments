@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+"""
+Generate Poetry - Unified CLI wrapper for all three poetry converters
+
+Converts any text into Haiku, Iambic Pentameter, and Limerick formats.
+Shows gold medal (Method 2: Specification-Driven) outputs.
+
+Usage:
+  generate-poetry "Your text here"
+  generate-poetry "Your text here" --verbose
+"""
+
+import subprocess
+import sys
+from pathlib import Path
+
+def run_tool(tool_path, text, run_arg):
+    """Run a poetry tool and return output."""
+    try:
+        result = subprocess.run(
+            [str(tool_path), text, "--run", run_arg, "--top", "1"],
+            capture_output=True,
+            text=True,
+            timeout=60,
+            cwd=tool_path.parent.parent
+        )
+        return result.stdout, result.returncode
+    except subprocess.TimeoutExpired:
+        return "ERROR: Timeout after 60s", 1
+    except Exception as e:
+        return f"ERROR: {e}", 1
+
+def extract_gold_poem(output, poetry_type):
+    """Extract the gold medal poem from tool output."""
+    lines = output.split('\n')
+    poem_lines = []
+
+    if poetry_type == "haiku":
+        capturing = False
+        for i, line in enumerate(lines):
+            if "Gold" in line and "Method" in line:
+                capturing = True
+                continue
+            if capturing:
+                stripped = line.strip()
+                if stripped and not stripped.startswith('-') and not stripped.startswith('Syllables') and not stripped.startswith('Essence') and not stripped.startswith('Generation'):
+                    poem_lines.append(stripped)
+                if "Syllables:" in line or len(poem_lines) >= 3:
+                    break
+
+    elif poetry_type == "iambic":
+        for i, line in enumerate(lines):
+            if "GOLD:" in line and "Specification" in line:
+                for j in range(i+2, len(lines)):
+                    stripped = lines[j].strip()
+                    if not stripped or stripped.startswith('='):
+                        break
+                    poem_lines.append(stripped)
+                break
+
+    elif poetry_type == "limerick":
+        capturing = False
+        for line in lines:
+            if "Generating..." in line:
+                capturing = True
+                continue
+            if capturing:
+                if '✓' in line or 'SUMMARY' in line:
+                    break
+                stripped = line.strip()
+                if stripped and not stripped.startswith('='):
+                    poem_lines.append(stripped)
+
+    return '\n'.join(poem_lines) if poem_lines else None
+
+def main():
+    if len(sys.argv) < 2 or sys.argv[1] in ['-h', '--help']:
+        print(__doc__)
+        sys.exit(0)
+
+    text = sys.argv[1]
+    verbose = '--verbose' in sys.argv or '-v' in sys.argv
+
+    # Tool paths
+    root = Path(__file__).parent.parent / "experiments"
+    haiku_tool = root / "1.608-story-to-haiku/tools/generate-haiku"
+    iambic_tool = root / "1.608.A-iambic-pentameter/tools/generate-iambic"
+    limerick_tool = root / "1.608.B-limerick-converter/tools/generate-limerick"
+
+    print("=" * 80)
+    print("🎭 POETRY GENERATOR - Gold Medal Outputs")
+    print("=" * 80)
+    print()
+    print(f"Input: {text[:70]}{'...' if len(text) > 70 else ''}")
+    print()
+    print("Generating three poetry formats...")
+    print()
+
+    results = {}
+
+    # Generate Haiku
+    print("🎋 Haiku (5-7-5 syllables)...")
+    haiku_output, haiku_code = run_tool(haiku_tool, text, "4")
+    if haiku_code == 0:
+        haiku_poem = extract_gold_poem(haiku_output, "haiku")
+        if haiku_poem:
+            results['haiku'] = haiku_poem
+            print("   ✓ Generated")
+        else:
+            print("   ⚠ Could not extract poem")
+            if verbose:
+                print(haiku_output)
+    else:
+        print("   ✗ Failed")
+        if verbose:
+            print(haiku_output)
+
+    # Generate Iambic Pentameter
+    print("📜 Iambic Pentameter (10 syllables/line)...")
+    iambic_output, iambic_code = run_tool(iambic_tool, text, "1")
+    if iambic_code == 0:
+        iambic_poem = extract_gold_poem(iambic_output, "iambic")
+        if iambic_poem:
+            results['iambic'] = iambic_poem
+            print("   ✓ Generated")
+        else:
+            print("   ⚠ Could not extract poem")
+            if verbose:
+                print(iambic_output)
+    else:
+        print("   ✗ Failed")
+        if verbose:
+            print(iambic_output)
+
+    # Generate Limerick
+    print("🎪 Limerick (AABBA rhyme)...")
+    limerick_output, limerick_code = run_tool(limerick_tool, text, "1")
+    if limerick_code == 0:
+        limerick_poem = extract_gold_poem(limerick_output, "limerick")
+        if limerick_poem:
+            results['limerick'] = limerick_poem
+            print("   ✓ Generated")
+        else:
+            print("   ⚠ Could not extract poem")
+            if verbose:
+                print(limerick_output)
+    else:
+        print("   ✗ Failed")
+        if verbose:
+            print(limerick_output)
+
+    # Display results
+    print()
+    print("=" * 80)
+    print("🥇 GOLD MEDAL RESULTS (Method 2: Specification-Driven)")
+    print("=" * 80)
+
+    if 'haiku' in results:
+        print()
+        print("🎋 Haiku")
+        print("-" * 80)
+        for line in results['haiku'].split('\n'):
+            print(f"   {line}")
+
+    if 'iambic' in results:
+        print()
+        print("📜 Iambic Pentameter")
+        print("-" * 80)
+        for line in results['iambic'].split('\n'):
+            print(f"   {line}")
+
+    if 'limerick' in results:
+        print()
+        print("🎪 Limerick")
+        print("-" * 80)
+        for line in results['limerick'].split('\n'):
+            print(f"   {line}")
+
+    print()
+    print("=" * 80)
+    print(f"✨ Generated {len(results)}/3 poetry formats successfully")
+    print("=" * 80)
+
+if __name__ == "__main__":
+    main()
