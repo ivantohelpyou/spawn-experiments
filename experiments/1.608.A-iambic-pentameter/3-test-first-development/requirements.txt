@@ -1,0 +1,13 @@
+# Iambic Pentameter Converter - Pure TDD Implementation
+# Requirements: Python 3.7+ and Ollama with llama3.2 model
+
+# No external Python dependencies required
+# Using only Python standard library:
+# - unittest (testing)
+# - subprocess (Ollama communication)
+# - re (text processing)
+
+# External system requirement:
+# - Ollama CLI with llama3.2 model installed
+# Install from: https://ollama.ai
+# Then run: ollama pull llama3.2

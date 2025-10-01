@@ -1,0 +1,14 @@
+# Iambic Pentameter Converter - Requirements
+#
+# This project uses only Python standard library
+# External dependency: Ollama (installed separately via https://ollama.ai)
+#
+# To install Ollama:
+# - Linux: curl -fsSL https://ollama.com/install.sh | sh
+# - macOS: brew install ollama
+# - Windows: Download from https://ollama.com/download
+#
+# After installing Ollama, pull the model:
+# ollama pull llama3.2
+
+# No Python package dependencies required - using only stdlib

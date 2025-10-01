@@ -17,7 +17,22 @@
 
 ---
 
-## Part 1: Show the Completed Tool (2-3 min)
+## Part 1: The Hook (30 seconds)
+
+**Opening line:**
+> "Quick question: If I give Claude the same task twice, how different can the results be?"
+>
+> **[Pause for effect]**
+>
+> "Answer: **32 times different.** Same model, same task, just different prompting methodology."
+>
+> "6,036 lines of code versus 187 lines - for a URL validator."
+>
+> "Today I'm going to show you why **HOW you prompt matters more than WHICH model you use.**"
+
+---
+
+## Part 2: Show the Completed Tool (2 min)
 
 **Terminal:** `cd experiments/1.608-story-to-haiku`
 
@@ -27,82 +42,78 @@ tools/generate-haiku "In a small village, an old woman tended her garden every d
 ```
 
 ### Talking Points:
-- "This is a story-to-haiku converter I built using 4 different AI development methodologies"
-- "It ranks the implementations by code quality and generates haiku from the top 3"
-- **[Wait for output]** "Gold, Silver, Bronze - all from the same story, different methodologies"
-- "How different can the same task be? Let's find out..."
+- "Story-to-haiku converter built with 4 different methodologies"
+- "All use the same LLM (llama3.2) for generation"
+- **[Wait for output]** "Similar outputs - but radically different CODE underneath"
+- "Let me show you how different..."
 
 ---
 
-## Part 2: Play Video + Explain (2-3 min)
+## Part 3: Play Video + The Paradox (2-3 min)
 
 **YouTube:** Play 1-2 minute time-lapse
 
 ### While video plays:
 **First 30 seconds:**
-- "This is the actual build - sped up 12x from 48 minutes to under 2 minutes"
-- "I ran 4 methodologies in parallel: Immediate Implementation, Specification-Driven, Pure TDD, Adaptive TDD"
-- "Same AI model, same task, same me - only difference is HOW I prompted"
+> "This is 4 methodologies running in parallel on the same task - haiku generation.
+>
+> Watch what happens when I change ONLY the methodology:
+> - Method 1 (Immediate): 'Just build it' → 334 lines, 2 minutes
+> - Method 2 (Spec-first): 'Plan then build' → 961 lines, 8 minutes
+> - Method 3 (TDD): 'Tests first' → 600 lines, 4 minutes
+> - Method 4 (Adaptive): 'Strategic testing' → 706 lines, 9 minutes
+>
+> Same AI. Same me. **Different code volume, different structure, different approaches.**"
 
-**Next 30-60 seconds:**
-- "Each method gets isolated branch, clean environment - no cross-contamination"
-- "Watch the code quality differences emerge in real-time"
-- "Specification-Driven writes more code but gets highest quality score"
-- "Olympic judging system: 3 LLM judges score each output"
-
-**Final 30 seconds / After video:**
-- "Result: Methodology matters more than model choice"
-- "Key finding: Optimized prompts improve BOTH speed (22-36%) AND quality (+1 to +7 points)"
+**Next 60 seconds:**
+> "Now here's where it gets interesting. LLM projects? Method 2 wins every time.
+>
+> But simple validation tasks? Method 2 creates **enterprise frameworks nobody asked for**.
+>
+> That URL validator? Method 2 spontaneously created:
+> - Rate limiting system
+> - Security scanning framework
+> - CLI with JSON/CSV/XML output
+> - 25 files across 6 packages
+>
+> **Nobody asked for ANY of this.** The prompt said 'validate URL format.'
+>
+> Result: 16 minutes and 6,036 lines of over-engineering.
+>
+> Method 1 did it in 53 seconds with 398 lines. Both work perfectly.
+>
+> **The finding: Context determines optimal methodology. There's no universal 'best'.**"
 
 ---
 
-## Part 3: Live Build - Limerick Generator (3-4 min)
-
-### Clone the repo:
-```bash
-# Terminal in fresh directory
-git clone https://github.com/ivantohelpyou/spawn-experiments.git
-cd spawn-experiments
-```
+## Part 4: Live Build - Limerick Generator (3-4 min)
 
 **Talking points:**
 - "It's all open source - you can replicate any experiment"
 - "Let's build a limerick generator from scratch right now"
+- "I have a demo launcher that handles the entire build"
 
 ### Start the build:
 ```bash
-claude "Run Experiment 1.608.B - Limerick Converter on PRIVATE branch.
-
-TASK: Build a story-to-limerick converter that converts prose into limericks (AABBA rhyme scheme, specific meter). Use llama3.2 via Ollama. Include Olympic judging system (3 LLM judges score each output).
-
-Use META_PROMPT_GENERATOR_V4.md with these methods:
-1. Immediate Implementation
-2. Specification-Driven
-3. Pure TDD
-4. Adaptive/Validated TDD
-
-Use optimized prompts (lessons from 1.608 Run 4).
-
-DELIVERABLES:
-- 4 complete implementations with tests
-- Olympic judging system (3 judges, scoring criteria)
-- Working CLI tool: tools/generate-limerick \"Your story\" --run 1 --top 3
-- Code quality report
-- EXPERIMENT_1608B_COMPLETE_SUMMARY.md
-
-EXECUTE COMPLETELY: Run all 4 methods in parallel, build CLI tool, test with sample story, generate final report. Commit to private-main when complete.
-
-DO NOT STOP for confirmations. Execute the entire experiment end-to-end."
+# One command - complete experiment
+demos/ai-tinkerers-sept-2025/spawn-demo limerick
 ```
+
+**What this does:**
+- Reads the experiment prompt from `1.608-poetry-series.md`
+- Executes the full methodology framework
+- Runs 4 methods in parallel (Immediate, Spec-Driven, TDD, Adaptive)
+- Builds working CLI tool
+- Generates test suites
+- Creates quality report
+- Auto-commits to git
 
 **Talking points:**
 - "Single command. No manual intervention."
 - "It reads META_PROMPT_GENERATOR_V4.md - my methodology framework"
 - "Spawns 4 parallel implementations"
-- "Builds working CLI tool"
-- "Runs test suite"
-- "Generates quality report"
-- **[It starts running]** "This will take about 15 minutes, so let's look at the code structure while it cooks..."
+- **[It starts running]** "This will take about 15 minutes"
+- "While it builds, let's look at how the haiku code is structured..."
 
 ---
 
@@ -232,14 +243,28 @@ tools/generate-limerick "There once was a coder named Claude..." --top 3
 
 ## Closing (30 sec)
 
-**Talking points:**
-- "Key takeaway: HOW you prompt matters more than WHICH model"
-- "Documentation-first approach: Write spec, generate code, validate automatically"
-- "Open source: github.com/ivantohelpyou/spawn-experiments"
-- "Try it yourself - single command to replicate any experiment"
+**Final message:**
+> "Here's the thing: I didn't run these experiments across different models.
+>
+> I don't chase model releases. I chase **methodology improvements**.
+>
+> Because you can't control when Anthropic ships the next version.
+>
+> But you CAN control how you prompt. Today.
+>
+> And it turns out? That's where the 32X gains are hiding."
+
+**Three takeaways:**
+1. **Methodology beats model** - 32X difference from prompting strategy alone
+2. **Context matters** - Same methodology wins OR loses depending on problem type
+3. **Measure everything** - Test multiple approaches in parallel to know what actually works
+
+**Resources:**
+- "All code, all data, all methodology: github.com/ivantohelpyou/spawn-experiments"
+- "Try it yourself. Test your assumptions. **You might be surprised.**"
 
 **Final line:**
-- "Questions?"
+> "Questions?"
 
 ---
 

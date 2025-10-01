@@ -1,0 +1,150 @@
+#!/usr/bin/env python3
+"""
+CLI Tool: Generate Iambic Pentameter
+Runs top N implementations and shows ranked results with medals
+"""
+
+import sys
+import subprocess
+import argparse
+from pathlib import Path
+
+
+def run_method(method_dir, prose):
+    """Run a single method implementation"""
+    # Import dynamically
+    import importlib.util
+    impl_path = method_dir / "iambic_converter.py"
+
+    if not impl_path.exists():
+        return None
+
+    try:
+        spec = importlib.util.spec_from_file_location("iambic_converter", impl_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+
+        # Try different APIs
+        if hasattr(module, 'IambicConverter'):
+            converter = module.IambicConverter()
+            return converter.convert(prose)
+        elif hasattr(module, 'convert_story_to_iambic'):
+            return module.convert_story_to_iambic(prose)
+        elif hasattr(module, 'convert_prose_to_iambic'):
+            return module.convert_prose_to_iambic(prose)
+    except Exception as e:
+        return None
+
+    return None
+
+
+def count_syllables_in_line(line):
+    """Quick syllable count for ranking"""
+    import re
+    words = re.findall(r'\b\w+\b', line.lower())
+    count = 0
+    for word in words:
+        # Simple vowel group counting
+        vowels = 'aeiouy'
+        prev_vowel = False
+        for char in word:
+            is_vowel = char in vowels
+            if is_vowel and not prev_vowel:
+                count += 1
+            prev_vowel = is_vowel
+        # Silent e
+        if word.endswith('e') and count > 0:
+            count -= 1
+        count = max(count, 1 if word else 0)
+    return count
+
+
+def score_output(output):
+    """Score output based on iambic pentameter accuracy"""
+    lines = [l.strip() for l in output.split('\n') if l.strip() and not l.startswith('[')]
+    if not lines:
+        return 0.0
+
+    valid_count = 0
+    for line in lines:
+        syllables = count_syllables_in_line(line)
+        if 9 <= syllables <= 11:  # Allow some flexibility
+            valid_count += 1
+
+    accuracy = (valid_count / len(lines)) * 100 if lines else 0
+    return accuracy
+
+
+def main():
+    parser = argparse.ArgumentParser(description='Generate Iambic Pentameter from Prose')
+    parser.add_argument('prose', nargs='+', help='Prose text to convert')
+    parser.add_argument('--run', type=int, default=1, help='Run number')
+    parser.add_argument('--top', type=int, default=3, help='Show top N results')
+    args = parser.parse_args()
+
+    prose = ' '.join(args.prose)
+
+    # Find experiment directory (script is in experiments/1.608.A-iambic-pentameter/tools/)
+    script_dir = Path(__file__).parent
+    exp_dir = script_dir.parent  # Go up from tools/ to experiment directory
+
+    if not exp_dir.exists():
+        print(f"❌ Experiment directory not found: {exp_dir}")
+        return 1
+
+    # Method directories (in quality order based on CODE_QUALITY_REPORT.md)
+    # Method 2: 88/100, Method 4: 83/100, Method 1: 78/100, Method 3: 72/100
+    methods = [
+        ('2-specification-driven', 'Specification-Driven'),
+        ('4-adaptive-tdd', 'Adaptive TDD'),
+        ('1-immediate-implementation', 'Immediate Implementation'),
+        ('3-test-first-development', 'Pure TDD')
+    ]
+
+    print("="*80)
+    print("📝 IAMBIC PENTAMETER GENERATOR")
+    print("="*80)
+    print(f"\nInput: {prose}\n")
+    print(f"Running top {args.top} implementations...\n")
+
+    results = []
+
+    for method_dir, method_name in methods[:args.top]:
+        full_path = exp_dir / method_dir
+        print(f"🔧 {method_name}... ", end='', flush=True)
+
+        output = run_method(full_path, prose)
+
+        if output:
+            score = score_output(output)
+            results.append((method_name, output, score))
+            print(f"✓ ({score:.0f}% accuracy)")
+        else:
+            print("✗ (failed)")
+
+    if not results:
+        print("\n❌ No implementations succeeded!")
+        return 1
+
+    # Sort by score
+    results.sort(key=lambda x: x[2], reverse=True)
+
+    # Display ranked results
+    print("\n" + "="*80)
+    print("🏅 RANKED RESULTS")
+    print("="*80)
+
+    medals = ['🥇 GOLD', '🥈 SILVER', '🥉 BRONZE']
+
+    for i, (method_name, output, score) in enumerate(results):
+        medal = medals[i] if i < len(medals) else f'#{i+1}'
+        print(f"\n{medal}: {method_name} ({score:.0f}% accuracy)")
+        print("-"*80)
+        print(output)
+        print()
+
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())

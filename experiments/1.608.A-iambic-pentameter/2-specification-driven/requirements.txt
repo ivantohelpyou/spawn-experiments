@@ -1,0 +1,7 @@
+# Story-to-Iambic-Pentameter Converter
+# No external dependencies required - uses only Python standard library
+# Requires Ollama to be installed separately (not a Python package)
+
+# To install Ollama:
+# Visit https://ollama.ai
+# Then run: ollama pull llama3.2
