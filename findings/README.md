@@ -6,7 +6,7 @@
 
 ## Core Research Findings
 
-### 🎯 **[The Complexity-Matching Principle](complexity-matching-principle.md)**
+### 🎯 **[The Complexity-Matching Principle](03-complexity-matching-principle.md)**
 **Status**: ✅ Validated across 11 experiments
 **Key Insight**: Methodology choice should match problem complexity, not follow universal application
 
@@ -16,7 +16,7 @@
 - Complex problems: Validated Test Development optimal
 - Mismatched complexity creates dangerous over/under-engineering
 
-### 🚨 **[AI Over-Engineering Patterns](ai-over-engineering-patterns.md)**
+### 🚨 **[AI Over-Engineering Patterns](01-ai-over-engineering-patterns.md)**
 **Status**: ✅ Validated across multiple domains
 **Key Insight**: Unconstrained AI spontaneously creates unnecessary complexity
 
@@ -26,7 +26,7 @@
 - Generates massive specifications for simple problems
 - TDD acts as most effective constraint mechanism
 
-### 🔐 **[Input Validation Patterns](input-validation-patterns.md)**
+### 🔐 **[Input Validation Patterns](07-input-validation-patterns.md)**
 **Status**: ✅ Validated (Email Validator 1.501)
 **Key Insight**: AI validation without constraints creates security vulnerabilities
 
@@ -52,7 +52,7 @@ All three findings point to the same underlying mechanism:
 Problem Assessment → Methodology Selection → Constraint Application → Validation
 ```
 
-### 🚀 **[Prompt Engineering as Force Multiplier](prompt-engineering-force-multiplier-1608.md)**
+### 🚀 **[Prompt Engineering as Force Multiplier](09-prompt-engineering-force-multiplier-1608.md)**
 **Status**: ✅ Validated (Experiment 1.608, 4 runs, 17 implementations)
 **Key Insight**: Optimized prompts improve development speed and code quality across all methodologies
 
@@ -166,9 +166,9 @@ Problem Assessment → Methodology Selection → Constraint Application → Vali
 ## Using This Research
 
 ### 📖 **For Developers**
-1. Read [Complexity-Matching Principle](complexity-matching-principle.md) for methodology selection framework
-2. Study [AI Over-Engineering Patterns](ai-over-engineering-patterns.md) to recognize and prevent complexity bloat
-3. Apply domain-specific insights from [Input Validation Patterns](input-validation-patterns.md)
+1. Read [Complexity-Matching Principle](03-complexity-matching-principle.md) for methodology selection framework
+2. Study [AI Over-Engineering Patterns](01-ai-over-engineering-patterns.md) to recognize and prevent complexity bloat
+3. Apply domain-specific insights from [Input Validation Patterns](07-input-validation-patterns.md)
 
 ### 🎯 **For Managers**
 1. Use complexity assessment framework for project planning
